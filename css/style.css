@@ -73,6 +73,7 @@ padding-top: 20px;
     height: 100vh;
     background-size: cover;
     background-position: center;
+    opacity: 0.5;
   }
 
   .carousel-caption {
@@ -82,3 +83,29 @@ padding-top: 20px;
     color: #fff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
   }
+
+  .container-shop {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 70px 20px 20px 20px;
+}
+
+.product {
+    border: 3px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.cart-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    background-color: azure;
+}
+
+.cart-total {
+    margin-top: 10px;
+    font-weight: bold;
+    background-color: black;
+    color: beige;
+    padding: 10px;
+}
