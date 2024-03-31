@@ -5,34 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<link rel="stylesheet" href="/css/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/bootstrap/css/bootstrap.css" />
 <link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-/>
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
 
 <body>
-    <div w3-include-html="pages/navbar.html"></div>
+    <div w3-include-html="/pages/navbar.html"></div>
 
-    <form>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
-        </div>
+
+    <div class="container-shop"></div>
+    <form id="form">
+      
+      <div class="container col-3">
+        <h1>Login</h1>
+        <label for="exampleInputEmail1" class="form-label">Username</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp" required
+        />
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1" required
+        />
+        <label for="exampleInputPassword1" class="form-label">User</label>
+        <select class="form-select" aria-label="Default select example" required>
+          <option value="">Select Option</option>
+          <option value="1">Admin</option>
+          <option value="2">Staff</option>
+          <option value="3">Parent</option>
+        </select>
         <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+          <input type="checkbox" class="form-check-input" id="remember">
+          <label class="form-check-label" for="exampleCheck1">Remember me</label>
+          <span class="psw"><a href="#">Forgot password?</a></span>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-
-      <script src="css/bootstrap/js/bootstrap.bundle.js"></script>
-      <script src="js/add.js"></script>
+          <button type="submit" class="btn btn-primary col-12">Login</button>
+          <!-- <button type="submit" class="btn btn-primary btn-block">Sign Up</button> -->
+      </div>
   
+    </form>
+
+
+
+    
+    
+    <div w3-include-html="/pages/footer.html"></div>
+    <script src="/js/shop.js"></script>
+    <script src="/css/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/js/add.js"></script>
+
 </body>
 </html>

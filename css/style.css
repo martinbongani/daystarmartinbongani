@@ -9,10 +9,15 @@ margin: auto;
 text-align: center;
 }
 
-#login-cred {
+#form {
 text-align: left;
-padding-top: 20px;
+padding: 0 0 70px 0;
 
+}
+
+span.psw {
+  display: block;
+  float: right;
 }
 
 .button-container {
@@ -87,7 +92,7 @@ padding-top: 20px;
   .container-shop {
     max-width: 800px;
     margin: auto;
-    padding: 70px 20px;
+    padding: 70px 0 5px 0;
 }
 
 #products {
