@@ -15,14 +15,41 @@
 
 <body>
     <div w3-include-html="/pages/navbar.html"></div>
-
-
-    <div class="container-shop"><h1>Director</h1></div>
-
+    <div class="container-shop"></div>
+    <header>
+      <h1>Daycare Director Dashboard</h1>
+    </header>
+    <nav class="dirdash">
+      <ul>
+        <li><a href="#applications">Applications</a></li>
+        <li><a href="#financial">Financial Records</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#dashboard">Dashboard</a></li>
+      </ul>
+    </nav>
+    <main>
+      <section id="applications">
+        <h2>Applications from Babies</h2>
+        <!-- Content for approving applications -->
+      </section>
+      <section id="financial">
+        <h2>Financial Records</h2>
+        <!-- Content for checking financial records -->
+      </section>
+      <section id="programs">
+        <h2>Programs at the Center</h2>
+        <!-- Content for checking programs -->
+      </section>
+      <section id="dashboard">
+        <h2>Dashboard for Announcements and Updates</h2>
+        <!-- Content for dashboard -->
+      </section>
+    </main>
 
     
     
     <div w3-include-html="/pages/footer.html"></div>
+    <script src="/js/director.js"></script>
     <script src="/js/shop.js"></script>
     <script src="/css/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/js/add.js"></script>
