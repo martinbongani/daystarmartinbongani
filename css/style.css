@@ -197,19 +197,19 @@ header, footer {
   padding: 10px 0;
 }
 
-.dirdash ul {
+.dash ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
   text-align: center;
 }
 
-.dirdash ul li {
+.dash ul li {
   display: inline;
   margin-right: 20px;
 }
 
-.dirdash ul li a {
+.dash ul li a {
   text-decoration: none;
   color: #333;
 }

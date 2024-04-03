@@ -15,9 +15,9 @@
 <div class="container-shop"></div>
 
 
-<div class="container">
+<div class="container col-5">
     <h2>Employment Application Form</h2>
-    <form id="applicationForm" action="#" method="post" enctype="multipart/form-data">
+    <form id="form">
         <!-- Personal Information -->
         <fieldset>
             <legend>Personal Information</legend>
@@ -33,38 +33,38 @@
             <label for="phone">Phone Number:</label>
             <input type="tel" id="phone" name="phone" required>
             <br>
-            <label for="dob">Date of Birth:</label>
-            <input type="date" id="dob" name="dob" required>
+            <label class="birthday" for="exampleCheck1">Date of Birth:</label>
+            <input type="date" class="form-control" id="exampleDOB" required>
+   
             <br>
             <label for="nationalId">National ID:</label>
             <input type="text" id="nationalId" name="nationalId" required>
             <br>
-            <label for="religion">Religion:</label>
-            <select id="religion" name="religion">
-                <option value="islam">Islam</option>
-                <option value="christianity">Christianity</option>
-                <option value="hinduism">Hinduism</option>
-                <option value="buddhism">Buddhism</option>
-                <option value="judaism">Judaism</option>
-                <option value="other">Other</option>
+            <label for="religion" class="form-label">Religion</label>
+            <select class="form-select" aria-label="Default select example" required>
+              <option value="">Select Religion</option>
+              <option value="1">Christianity</option>
+              <option value="2">Islam</option>
+              <option value="3">Others</option>
             </select>
-            <br>
-            <label for="sex">Sex:</label>
-            <select id="sex" name="sex">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
-            <br>
-            <label for="maritalStatus">Marital Status:</label>
-            <select id="maritalStatus" name="maritalStatus">
-                <option value="single">Single</option>
-                <option value="married">Married</option>
-                <option value="divorced">Divorced</option>
-                <option value="widowed">Widowed</option>
-                <option value="other">Other</option>
-            </select>
-            <br>
+                  <br>
+                  <label for="sex" class="form-label">Sex</label>
+                  <select class="form-select" aria-label="Default select example" required>
+                    <option value="">Select Sex</option>
+                    <option value="1">Female</option>
+                    <option value="2">Male</option>
+                  </select>
+                      <br>
+                      <label for="maritalStatus" class="form-label">Marital Status</label>
+                      <select class="form-select" aria-label="Default select example" required>
+                        <option value="">Select Marital Status</option>
+                        <option value="single">Single</option>
+                        <option value="married">Married</option>
+                        <option value="divorced">Divorced</option>
+                        <option value="widowed">Widowed</option>
+                        <option value="other">Other</option>
+                </select>
+                            <br>
             <label for="position">Position Applying For:</label>
             <input type="text" id="position" name="position" required>
             <br>
@@ -88,7 +88,7 @@
                     <button type="button" class="removeEducation">Remove</button>
                 </div>
             </div>
-            <button type="button" id="addEducation">Add Education</button>
+            <button type="button" id="addEducation" class="btn btn-primary">Add Education</button>
         </fieldset>
 
         <!-- Employment History -->
@@ -176,7 +176,7 @@
         </fieldset>
 
         <!-- Submit Button -->
-        <input type="submit" value="Submit">
+        <button type="submit" class="btn btn-primary col-12">Submit Application</button>
     </form>
 </div>
 
