@@ -17,33 +17,31 @@
     <div w3-include-html="/pages/navbar.html"></div>
     <div class="container-shop"></div>
     <header>
-      <h1>Daycare Director Dashboard</h1>
-    </header>
+      <!-- <h1>Director Dashboard</h1> -->
+   
     <nav class="dirdash">
       <ul>
-        <li><a href="#applications">Applications</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Applications
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#applications">Baby Applications</a></li>
+            <li><a href="#applications">Job Applications</a></li>
+          </ul>
+        </li>
+
         <li><a href="#financial">Financial Records</a></li>
         <li><a href="#programs">Programs</a></li>
-        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#dashboard">Announcements and Updates</a></li>
       </ul>
     </nav>
+  </header>
     <main>
-      <section id="applications">
-        <h2>Applications from Babies</h2>
-        <!-- Content for approving applications -->
-      </section>
-      <section id="financial">
-        <h2>Financial Records</h2>
-        <!-- Content for checking financial records -->
-      </section>
-      <section id="programs">
-        <h2>Programs at the Center</h2>
-        <!-- Content for checking programs -->
-      </section>
-      <section id="dashboard">
-        <h2>Dashboard for Announcements and Updates</h2>
-        <!-- Content for dashboard -->
-      </section>
+      <div class="card container-fluid" style="width: 50rem; height: 20rem;">
+        <div class="card-body">
+        </div>
+      </div>
     </main>
 
     

@@ -61,6 +61,16 @@ const applicationsData = [
     // You can populate dashboard content here
   }
   
+  function displayContent(type) {
+    var displayDiv = document.getElementById("display-content");
+    if (type === "baby") {
+        displayDiv.innerHTML = "<p>This is where you can display content related to Baby Applications.</p>";
+    } else if (type === "job") {
+        displayDiv.innerHTML = "<p>This is where you can display content related to Job Applications.</p>";
+    } else {
+        displayDiv.innerHTML = "<p>No content available for the selected option.</p>";
+    }
+}
   // Call functions to display initial data
   displayApplications();
   displayFinancialRecords();
