@@ -1,0 +1,21 @@
+{
+  "name": "daystar-martin-bongani",
+  "version": "1.0.0",
+  "description": "This is my Daystar Daycare project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "My",
+    "Daystar",
+    "Daycare",
+    "project"
+  ],
+  "author": "Martin Bongani",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
