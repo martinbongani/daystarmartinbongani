@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // login data
     const users = [
       { username: "admin", password: "123", userType: "admin" },
-      { username: "parent", password: "test123", userType: "parent" },
+      { username: "baby", password: "test123", userType: "baby" },
       { username: "director", password: "test123", userType: "staff" },
       { username: "accounts", password: "test123", userType: "staff" },
       { username: "procurement", password: "test123", userType: "staff" },
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
         case "admin":
           window.location.href = "/pages/admin.html";
           break;
-        case "parent":
+        case "baby":
           window.location.href = "/pages/baby.html";
           break;
         case "director":

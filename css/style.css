@@ -218,6 +218,11 @@ header, footer {
   color: orange;
 }
 
+.dash .dropdown-menu {
+  text-align: left;
+  padding: 5px;
+}
+
 main {
   padding: 20px;
 }
