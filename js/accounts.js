@@ -50,3 +50,4 @@ document.getElementById("accountsInventory").addEventListener("click", function(
 
 // Event listener for dropdown toggle button
 document.getElementById("dropdownToggle").addEventListener("click", toggleDropdown);
+

@@ -2,6 +2,10 @@ body {
     background-color: peachpuff;
 }
 
+main {
+  background: linear-gradient(to top, peachpuff, #F6DDD6,  white);
+}
+
 #welcome {
 padding: 70px 1px 1px 1px;
 background: linear-gradient(to right, #FFD500, #FFC94F, #FFC281, #FFC3AD);
@@ -227,6 +231,10 @@ header, footer {
 }
 
 .dash ul li a:hover {
+  color: orange;
+}
+
+.dash ul li:hover {
   color: orange;
 }
 

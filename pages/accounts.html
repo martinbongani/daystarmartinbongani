@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accounts General Ledger</title>
+    <title>Accounts Dashboard</title>
 </head>
 <link rel="stylesheet" href="/css/style.css" />
 <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.css" />
@@ -21,21 +21,24 @@
     <header>
    
       <nav class="dash">
-          <button id="accountsDashboard" class="btn" onclick="navigateTo('accounts.html')">Dashboard</button>
-          <button id="accountsRegister" class="btn" onclick="navigateTo('accounts-register.html')">Register</button>
-          <button id="accountsDataEntry" class="btn" onclick="navigateTo('accounts-dataentry')">Data Entry</button>
-          <button id="accountsBudget" class="btn" onclick="navigateTo('accounts-budget')">Budget</button>
-          <button id="accountsGeneralLedger" class="btn" onclick="navigateTo('accounts-genledger')">General Ledger</button>
-          <button id="accountsInventory" class="btn" onclick="navigateTo('accountsInventory')">Inventory</button>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Accountant
-            </button>
+        <ul>
+          <li><button id="accountsDashboard" class="btn" onclick="navigateTo('accounts.html')">Dashboard</button></li>
+          <li><button id="accountsRegister" class="btn" onclick="navigateTo('accounts-register.html')">Register</button></li>
+          <li><button id="accountsDataEntry" class="btn" onclick="navigateTo('accounts-dataentry')">Data Entry</button></li>
+          <li><button id="accountsBudget" class="btn" onclick="navigateTo('accounts-budget')">Budget</button></li>
+          <li><button id="accountsGeneralLedger" class="btn" onclick="navigateTo('accounts-genledger')">General Ledger</button></li>
+          <li><button id="accountsInventory" class="btn" onclick="navigateTo('accountsInventory')">Inventory</button></li>
+          <li class="dropdown"><button class="btn">
+            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Accounts
+            </a>
             <ul class="dropdown-menu">
-              <button id="#" class="btn" onclick="navigateTo('')"><li><a class="dropdown-item" href="#">Your Profile</a></li></button>
-              <button id="logout" class="btn" onclick="navigateTo('login')"><li><a class="dropdown-item" href="#">Logout</a></li></button>
-            </ul>
-      </nav>
+              <li><a href="#yourProfile">Your Profile</a></li>
+              <li><a href="/pages/login.html">Logout</a></li>
+            </ul></button>
+          </li>
+        </ul>
+        </nav>
     </header>
       <main>
         <div class="card container-fluid" style="width: 50rem; height: 20rem;">
