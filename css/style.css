@@ -4,7 +4,7 @@ body {
 
 #welcome {
 padding: 70px 1px 1px 1px;
-background-color:rgb(255, 213, 0);
+background: linear-gradient(to right, #FFD500, #FFC94F, #FFC281, #FFC3AD);
 margin: auto;
 text-align: center;
 }
