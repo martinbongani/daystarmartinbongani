@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accounts</title>
+    <title>Accounts General Ledger</title>
 </head>
 <link rel="stylesheet" href="/css/style.css" />
 <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.css" />
@@ -21,24 +21,20 @@
     <header>
    
       <nav class="dash">
-        <ul>
-          <li><a href="#dashboard">Dashboard</a></li>
-          <li><a href="#register">Register</a></li>
-          <li><a href="#dataEntry">Data Entry</a></li>
-          <li><a href="#budget">Budget</a></li>
-          <li><a href="#generalLedger">General Ledger</a></li>
-          <li><a href="#inventory">Inventory</a></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <button id="accountsDashboard" class="btn" onclick="navigateTo('accounts.html')">Dashboard</button>
+          <button id="accountsRegister" class="btn" onclick="navigateTo('accounts-register.html')">Register</button>
+          <button id="accountsDataEntry" class="btn" onclick="navigateTo('accounts-dataentry')">Data Entry</button>
+          <button id="accountsBudget" class="btn" onclick="navigateTo('accounts-budget')">Budget</button>
+          <button id="accountsGeneralLedger" class="btn" onclick="navigateTo('accounts-genledger')">General Ledger</button>
+          <button id="accountsInventory" class="btn" onclick="navigateTo('accountsInventory')">Inventory</button>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               Accountant
-            </a>
+            </button>
             <ul class="dropdown-menu">
-              <li><a href="#yourProfile">Your Profile</a></li>
-              <li><a href="/pages/login.html">Logout</a></li>
+              <button id="#" class="btn" onclick="navigateTo('')"><li><a class="dropdown-item" href="#">Your Profile</a></li></button>
+              <button id="logout" class="btn" onclick="navigateTo('login')"><li><a class="dropdown-item" href="#">Logout</a></li></button>
             </ul>
-          </li>
-  
-        </ul>
       </nav>
     </header>
       <main>

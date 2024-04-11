@@ -30,6 +30,18 @@ span.psw {
 
 }
 
+.fade.show {
+  opacity: 0;
+  transition: all 0.5s ease;
+  transform: translateZ(50px);
+  display: inline-block;
+}
+
+.fade {
+  opacity: 1;
+  transform: translateZ(0px);
+}
+
   /* Icons */
   .fa {
     padding: 20px;

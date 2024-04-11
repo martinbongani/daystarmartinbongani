@@ -1,28 +1,52 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Get all dashboard links by their IDs
-    const dashboardLink = document.getElementById('dashboard-link');
-    const registerLink = document.getElementById('register-link');
-    const dataEntryLink = document.getElementById('dataEntry-link');
-    const budgetLink = document.getElementById('budget-link');
-    const generalLedgerLink = document.getElementById('generalLedger-link');
-    const inventoryLink = document.getElementById('inventory-link');
-    
-    // Function to handle navigation based on clicked link
-    function navigateToSection(event, sectionId) {
-        event.preventDefault(); // Prevent default link behavior
-        
-        const section = document.querySelector(sectionId);
-        
-        if (section) {
-            section.scrollIntoView({ behavior: 'smooth' }); // Scroll to section smoothly
+// Function to handle navigation
+function navigateTo(page) {
+    console.log("Navigating to: " + page);
+    // Redirect to the specified page
+    window.location.href = page;
+}
+
+// Function to toggle dropdown menu
+function toggleDropdown() {
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    dropdownMenu.classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.dropdown-toggle')) {
+        const dropdowns = document.getElementsByClassName("dropdown-menu");
+        for (let dropdown of dropdowns) {
+            if (dropdown.classList.contains('show')) {
+                dropdown.classList.remove('show');
+            }
         }
     }
-    
-    // Add event listeners to dashboard links
-    dashboardLink.addEventListener('click', (event) => navigateToSection(event, '#dashboard'));
-    registerLink.addEventListener('click', (event) => navigateToSection(event, '#register'));
-    dataEntryLink.addEventListener('click', (event) => navigateToSection(event, '#dataEntry'));
-    budgetLink.addEventListener('click', (event) => navigateToSection(event, '#budget'));
-    generalLedgerLink.addEventListener('click', (event) => navigateToSection(event, '#generalLedger'));
-    inventoryLink.addEventListener('click', (event) => navigateToSection(event, '#inventory'));
+}
+
+// Event listeners for navigation buttons
+document.getElementById("accountsDashboard").addEventListener("click", function() {
+    navigateTo('accounts.html');
 });
+
+document.getElementById("accountsRegister").addEventListener("click", function() {
+    navigateTo('accounts-register.html');
+});
+
+document.getElementById("accountsDataEntry").addEventListener("click", function() {
+    navigateTo('accounts-dataentry.html');
+});
+
+document.getElementById("accountsBudget").addEventListener("click", function() {
+    navigateTo('accounts-budget.html');
+});
+
+document.getElementById("accountsGeneralLedger").addEventListener("click", function() {
+    navigateTo('accounts-genledger.html');
+});
+
+document.getElementById("accountsInventory").addEventListener("click", function() {
+    navigateTo('accounts-inventory.html');
+});
+
+// Event listener for dropdown toggle button
+document.getElementById("dropdownToggle").addEventListener("click", toggleDropdown);
