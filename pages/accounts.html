@@ -1,25 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+
+.users-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.users-sidebar {
+    width: 250px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+.users-sidebar h2 {
+    text-align: center;
+}
+
+.users-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.users-sidebar ul li a {
+    display: block;
+    padding: 10px 0;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+}
+
+.users-sidebar ul li a:hover {
+    background-color: #555;
+}
+
+.users-main {
+    flex: 1;
+    padding: 20px;
+}
+
+.users-tabcontent {
+    display: none;
+}
+
+.users-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.users-card {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.users-tasks-container {
+    margin-top: 20px;
+}
+
+.users-graphical-reports-container {
+    margin-top: 20px;
+    max-width: 800px;
+    width: 100%;
+    height: 400px;
+    position: relative; 
+}
+
+.users-report-chart {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+/* .users-main {
+    padding: 20px;
+}
+
+.users-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.users-section {
+    flex: 1 1 30%;
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.users-active {
+    display: block;
+}
+
+.users-list {
+    margin-top: 10px;
+}
+
+.users-item {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="number"],
+button {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+} */
+    </style>
+    
     <title>Accounts Dashboard</title>
 </head>
 <link rel="stylesheet" href="/css/style.css" />
 <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.css" />
 <link
-  rel="stylesheet"
+rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-
-
-
-<body>
+  
+  
+  
+  <body>
     <div w3-include-html="/pages/navbar.html"></div>
-
-
+    
+    
     <div class="container-shop"></div>
     <header>
-   
+      
       <nav class="dash">
         <ul>
           <li><button id="accountsDashboard" class="btn" onclick="navigateTo('accounts.html')">Dashboard</button></li>
@@ -41,17 +186,121 @@
         </nav>
     </header>
       <main>
-        <div class="card container-fluid" style="width: 50rem; height: 20rem;">
+        <!-- <div class="card container-fluid" style="width: 50rem; height: 20rem;">
           <div class="card-body">
           </div>
+        </div> -->
+        
+            <div class="users-container">
+                <div class="users-sidebar">
+                    <!-- <h2>Users Dashboard</h2> -->
+                    <ul>
+                        <li><a href="#realtime-updates">Updates</a></li>
+                        <li><a href="#daily-tasks">Daily Tasks</a></li>
+                        <li><a href="#graphical-reports">Graphical Reports</a></li>
+                    </ul>
+                </div>
+                <div class="users-main">
+                    <div id="realtime-updates" class="users-tabcontent">
+                        <h2>Updates</h2>
+                        <div class="users-cards-container" id="realtime-cards-container"></div>
+                    </div>
+                    <div id="daily-tasks" class="users-tabcontent">
+                        <h2>Daily Tasks</h2>
+                        <div class="users-tasks-container" id="tasks-container"></div>
+                    </div>
+                    <div id="graphical-reports" class="users-tabcontent">
+                        <h2>Graphical Reports</h2>
+                        <div class="users-graphical-reports-container">
+                            <select id="report-type-select">
+                                <option value="bar">Bar Chart</option>
+                                <option value="line">Line Chart</option>
+                                <option value="pie">Pie Chart</option>
+                            </select>
+                            <canvas class="users-report-chart" id="graphical-report-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+    <!-- Main Content -->
+    <main class="users-main">
+        <div class="users-container">
+            <!-- Dashboard Section -->
+            <div id="users-dashboard" class="users-section users-active">
+                <h1>Dashboard</h1>
+                <!-- Dashboard Content Goes Here -->
+            </div>
+
+            <!-- Register Section -->
+            <div id="users-register" class="users-section">
+                <h1>Register</h1>
+                <div id="users-registerList" class="users-list">
+                    <!-- Editable list of items -->
+                    <div class="users-item">Assets</div>
+                    <div class="users-item">Suppliers</div>
+                    <div class="users-item">Trade Creditors</div>
+                    <div class="users-item">Trade Debtors</div>
+                </div>
+            </div>
+
+            <!-- Data Entry Section -->
+            <div id="users-dataEntry" class="users-section">
+                <h1>Data Entry</h1>
+                <form id="users-dataEntryForm">
+                    <!-- Form for accounting information entry -->
+                    <label for="transactionType">Transaction Type:</label>
+                    <input type="text" id="transactionType" name="transactionType" required>
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" name="amount" required>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+
+            <!-- Budget Section -->
+            <div id="users-budget" class="users-section">
+                <h1>Budget</h1>
+                <div id="users-projectedBudget">
+                    <!-- Display projected budgets -->
+                    <p>Projected Budget: $100,000</p>
+                </div>
+            </div>
+
+            <!-- General Ledger Section -->
+            <div id="users-generalLedger" class="users-section">
+                <h1>General Ledger</h1>
+                <div id="users-ledgerOptions">
+                    <!-- Select accounting ledger options -->
+                    <select id="ledgerType">
+                        <option value="incomeStatement">Income Statement</option>
+                        <option value="balanceSheet">Balance Sheet</option>
+                        <option value="cashFlowStatement">Cash Flow Statement</option>
+                    </select>
+                    <button onclick="runLedger()">Run Ledger</button>
+                </div>
+            </div>
+
+            <!-- Inventory Section -->
+            <div id="users-inventory" class="users-section">
+                <h1>Inventory</h1>
+                <div id="users-inventoryList" class="users-list">
+                    <!-- Display all inventory items -->
+                    <div class="users-item">Item 1</div>
+                    <div class="users-item">Item 2</div>
+                    <div class="users-item">Item 3</div>
+                </div>
+            </div>
         </div>
-      </main>
+  </main>
   
-    
-    
-    <div w3-include-html="/pages/footer.html"></div>
-    <script src="/js/accounts.js"></script>
-    <script src="/css/bootstrap/js/bootstrap.bundle.js"></script>
+  
+  
+  <div w3-include-html="/pages/footer.html"></div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/js/accts.js"></script>
+  <script src="/js/accounts.js"></script>
+  <script src="/css/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/js/add.js"></script>
 
 </body>
