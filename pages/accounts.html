@@ -90,72 +90,86 @@
     display: flex;
 }
 
-/* .users-main {
-    padding: 20px;
-}
-
-.users-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.users-section {
-    flex: 1 1 30%;
+.container {
+    max-width: 600px;
+    margin: 50px auto;
     background-color: #fff;
     padding: 20px;
-    margin-bottom: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.users-active {
-    display: block;
+h1 {
+    text-align: center;
+    color: #007bff;
 }
 
-.users-list {
-    margin-top: 10px;
-}
-
-.users-item {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 5px;
-}
-
-
-form {
+#dataEntryForm-users {
     display: flex;
     flex-direction: column;
-    max-width: 300px;
 }
 
-label {
+#dataEntryForm-users label {
     margin-bottom: 8px;
 }
 
+input[type="date"],
 input[type="text"],
 input[type="number"],
-button {
+select {
+    width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
-button {
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="6"><polygon points="0,0 12,0 6,6" style="fill:#555"/></svg>');
+    background-repeat: no-repeat;
+    background-position-x: calc(100% - 12px);
+    background-position-y: center;
+    padding-right: 30px;
+}
+
+button[type="submit"] {
     background-color: #007bff;
     color: #fff;
     border: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
+button[type="submit"]:hover {
     background-color: #0056b3;
-} */
-    </style>
+}
+
+.transaction-details {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+}
+
+.transaction-details h3 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.transaction-details p {
+    margin-bottom: 8px;
+}
+
+.transaction-details strong {
+    font-weight: bold;
+    margin-right: 5px;
+}    
+</style>
     
     <title>Accounts Dashboard</title>
 </head>
@@ -261,12 +275,45 @@ rel="stylesheet"
                 <form id="dataEntryForm-users">
                     <h1>Data Entry</h1>
                     <!-- Form for accounting information entry -->
-                    <label for="transactionType">Transaction Type:</label>
-                    <input type="text" id="transactionType" name="transactionType" required>
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required>
+        
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description" required>
+        
+                    <label for="costCenter">Cost Center (Department):</label>
+                    <select id="costCenter" name="costCenter" required>
+                        <option value="" disabled selected>Select Cost Center</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Sales">Sales</option>
+                        <option value="Operations">Operations</option>
+                        <!-- Add more options as needed -->
+                    </select>
+        
                     <label for="amount">Amount:</label>
-                    <input type="number" id="amount" name="amount" required>
-                    <button type="submit">Submit</button>
+                    <input type="number" id="amount" name="amount" step="0.01" min="0" required>
+        
+                    <label for="transactionType">Transaction Type:</label>
+                    <select id="transactionType" name="transactionType" required>
+                        <option value="debit">Debit</option>
+                        <option value="credit">Credit</option>
+                    </select>
+        
+                    <label for="ledgerAllocation">General Ledger Allocation:</label>
+                    <select id="ledgerAllocation" name="ledgerAllocation" required>
+                        <option value="" disabled selected>Select Ledger Allocation</option>
+                        <option value="Allocation A">Allocation A</option>
+                        <option value="Allocation B">Allocation B</option>
+                        <option value="Allocation C">Allocation C</option>
+                        <!-- Add more options as needed -->
+                    </select>
+        
+                    <button type="submit">Submit</button>                
                 </form>
+                <div class="transaction-display" id="transactionDisplay">
+                    <!-- Transaction details will be displayed here -->
+                </div>
             </div>
 
             <!-- Budget Section -->

@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const usersTasksContainer = document.getElementById('tasks-container');
     const usersReportTypeSelect = document.getElementById('report-type-select');
     const usersGraphicalReportChart = document.getElementById('graphical-report-chart').getContext('2d');
+    const form = document.getElementById('dataEntryForm-users');
+    const ledgerAllocationSelect = document.getElementById('ledgerAllocation');
+    const generalLedgerSection = document.getElementById('generalLedgerSection');
+    const transactionDisplay = document.getElementById('transactionDisplay');
+
 
     // Function to fetch and display real-time updates in cards
     function fetchUsersRealTimeUpdates() {
@@ -132,7 +137,135 @@ document.addEventListener('DOMContentLoaded', function() {
         const defaultTabId = defaultTab.getAttribute('href').substring(1);
         showUsersTab(defaultTabId);
     }
+
+
+
+      // Event listener for changes in ledger allocation selection
+      ledgerAllocationSelect.addEventListener('change', () => {
+        const selectedAllocation = ledgerAllocationSelect.value;
+
+        // Update the general ledger section based on the selected allocation
+        updateGeneralLedgerSection(selectedAllocation);
+    });
+
+    // Function to update the general ledger section based on the selected allocation
+    function updateGeneralLedgerSection(allocation) {
+        let ledgerDetails = '';
+
+        switch (allocation) {
+            case 'Allocation A':
+                ledgerDetails = `
+                    <h2>General Ledger Details for Allocation A</h2>
+                    <p>Details specific to Allocation A...</p>
+                `;
+                break;
+            case 'Allocation B':
+                ledgerDetails = `
+                    <h2>General Ledger Details for Allocation B</h2>
+                    <p>Details specific to Allocation B...</p>
+                `;
+                break;
+            case 'Allocation C':
+                ledgerDetails = `
+                    <h2>General Ledger Details for Allocation C</h2>
+                    <p>Details specific to Allocation C...</p>
+                `;
+                break;
+            default:
+                // Clear the section if no allocation is selected
+                generalLedgerSection.innerHTML = '';
+                return;
+        }
+
+        // Display the ledger details in the general ledger section
+        generalLedgerSection.innerHTML = ledgerDetails;
+    }
+
+    // Function to handle form submission
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (validateForm()) {
+            const formData = new FormData(form);
+            const transactionData = {};
+
+            formData.forEach((value, key) => {
+                transactionData[key] = value;
+            });
+
+            try {
+                // Simulate processing the transaction (replace with actual processing logic)
+                const processedTransaction = await processTransaction(transactionData);
+
+                // Clear form inputs after successful submission
+                form.reset();
+
+                // Display the submitted transaction details
+                displayTransaction(processedTransaction);
+            } catch (error) {
+                console.error('Error processing transaction:', error);
+                alert('An error occurred while submitting the transaction.');
+            }
+        } else {
+            alert('Please fill out all required fields before submitting.');
+        }
+    });
+
+    // Function to validate the form fields
+    function validateForm() {
+        const requiredFields = ['date', 'description', 'costCenter', 'amount', 'transactionType', 'ledgerAllocation'];
+        let isValid = true;
+
+        requiredFields.forEach((fieldName) => {
+            const fieldValue = form.elements[fieldName].value.trim();
+
+            if (!fieldValue) {
+                isValid = false;
+            }
+        });
+
+        return isValid;
+    }
+
+    // Simulated function to process the transaction (replace with actual backend logic)
+    function processTransaction(transactionData) {
+        return new Promise((resolve, reject) => {
+            // Simulate processing time (1 second delay)
+            setTimeout(() => {
+                // Simulate response (processed transaction)
+                const processedTransaction = {
+                    ...transactionData,
+                    status: 'processed',
+                    timestamp: new Date().toISOString()
+                };
+                resolve(processedTransaction);
+            }, 1000); // Simulate 1 second processing delay
+        });
+    }
+
+    // Function to display the transaction details in the display window
+    function displayTransaction(transaction) {
+        const transactionDetails = `
+            <h2>Transaction Details</h2>
+            <p><strong>Date:</strong> ${transaction.date}</p>
+            <p><strong>Description:</strong> ${transaction.description}</p>
+            <p><strong>Cost Center:</strong> ${transaction.costCenter}</p>
+            <p><strong>Amount:</strong> ${transaction.amount}</p>
+            <p><strong>Transaction Type:</strong> ${transaction.transactionType}</p>
+            <p><strong>Ledger Allocation:</strong> ${transaction.ledgerAllocation}</p>
+            <p><strong>Status:</strong> ${transaction.status}</p>
+            <p><strong>Timestamp:</strong> ${transaction.timestamp}</p>
+        `;
+
+        transactionDisplay.innerHTML = transactionDetails;
+    }
+
+    function formatTimestamp(timestamp) {
+        const date = new Date(timestamp);
+        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+    }
 });
+
 
 
 
