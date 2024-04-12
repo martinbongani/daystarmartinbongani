@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         mockUpdates.forEach(update => {
             const card = document.createElement('div');
-            card.classList.add('users-card');
+            card.classList.add('card-users');
             if (update.amount) {
                 card.innerHTML = `
                     <h3>${update.type}</h3>
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         mockTasks.forEach(task => {
             const taskElement = document.createElement('div');
-            taskElement.classList.add('users-task');
+            taskElement.classList.add('task-users');
             taskElement.textContent = task;
             usersTasksContainer.appendChild(taskElement);
         });
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Event listener for tab navigation and content loading
-    document.querySelectorAll('.users-sidebar ul li a').forEach(tabLink => {
+    document.querySelectorAll('.sidebar-users ul li a').forEach(tabLink => {
         tabLink.addEventListener('click', function(e) {
             e.preventDefault();
             const tabId = this.getAttribute('href').substring(1);
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to display selected tab content
     function showUsersTab(tabId) {
-        const tabContents = document.querySelectorAll('.users-tabcontent');
+        const tabContents = document.querySelectorAll('.tabcontent-users');
         tabContents.forEach(content => {
             content.style.display = 'none';
         });
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Show default tab on page load
-    const defaultTab = document.querySelector('.users-sidebar ul li a');
+    const defaultTab = document.querySelector('.sidebar-users ul li a');
     if (defaultTab) {
         const defaultTabId = defaultTab.getAttribute('href').substring(1);
         showUsersTab(defaultTabId);

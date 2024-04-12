@@ -6,28 +6,28 @@
     
     <style>
 
-.users-container {
+.container-users {
     display: flex;
     min-height: 100vh;
 }
 
-.users-sidebar {
+.sidebar-users {
     width: 250px;
     background-color: #333;
     color: #fff;
     padding: 20px;
 }
 
-.users-sidebar h2 {
+.sidebar-users h2 {
     text-align: center;
 }
 
-.users-sidebar ul {
+.sidebar-users ul {
     list-style-type: none;
     padding: 0;
 }
 
-.users-sidebar ul li a {
+.sidebar-users ul li a {
     display: block;
     padding: 10px 0;
     color: #fff;
@@ -35,26 +35,27 @@
     text-align: center;
 }
 
-.users-sidebar ul li a:hover {
+.sidebar-users ul li a:hover {
     background-color: #555;
 }
 
-.users-main {
+.main-users {
     flex: 1;
     padding: 20px;
+    display: inline;
 }
 
-.users-tabcontent {
+.tabcontent-users {
     display: none;
 }
 
-.users-cards-container {
+.cards-container-users {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.users-card {
+.card-users {
     width: calc(33.33% - 20px);
     margin-bottom: 20px;
     padding: 20px;
@@ -63,11 +64,11 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.users-tasks-container {
+.tasks-container-users {
     margin-top: 20px;
 }
 
-.users-graphical-reports-container {
+.graphical-reports-container-users {
     margin-top: 20px;
     max-width: 800px;
     width: 100%;
@@ -75,10 +76,18 @@
     position: relative; 
 }
 
-.users-report-chart {
+.report-chart-users {
     width: 100%;
     max-width: 600px;
     margin-top: 20px;
+}
+
+/* Add your CSS styles here */
+.section-users {
+    display: none;
+}
+.active-users {
+    display: flex;
 }
 
 /* .users-main {
@@ -164,35 +173,46 @@ rel="stylesheet"
     
     <div class="container-shop"></div>
     <header>
-      
-      <nav class="dash">
-        <ul>
-          <li><button id="accountsDashboard" class="btn" onclick="navigateTo('accounts.html')">Dashboard</button></li>
-          <li><button id="accountsRegister" class="btn" onclick="navigateTo('accounts-register.html')">Register</button></li>
-          <li><button id="accountsDataEntry" class="btn" onclick="navigateTo('accounts-dataentry')">Data Entry</button></li>
-          <li><button id="accountsBudget" class="btn" onclick="navigateTo('accounts-budget')">Budget</button></li>
-          <li><button id="accountsGeneralLedger" class="btn" onclick="navigateTo('accounts-genledger')">General Ledger</button></li>
-          <li><button id="accountsInventory" class="btn" onclick="navigateTo('accountsInventory')">Inventory</button></li>
-          <li class="dropdown"><button class="btn">
-            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Accounts
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#yourProfile">Your Profile</a></li>
-              <li><a href="/pages/login.html">Logout</a></li>
-            </ul></button>
-          </li>
-        </ul>
+   
+        <nav class="dash">
+          <ul>
+            <li><a href="#dashboard-users">Dashboard</a></li>
+            <li><a href="#register-users">Register</a></li>
+            <li><a href="#dataEntry-users">Data Entry</a></li>
+            <li><a href="#budget-users">Budget</a></li>
+            <li><a href="#generalLedger-users">General Ledger</a></li>
+            <li><a href="#inventory-users">Inventory</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Accountant
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#yourProfile">Your Profile</a></li>
+                <li><a href="/pages/login.html">Logout</a></li>
+              </ul>
+            </li>
+    
+          </ul>
         </nav>
-    </header>
-      <main>
+      </header>
+        <main>
         <!-- <div class="card container-fluid" style="width: 50rem; height: 20rem;">
           <div class="card-body">
           </div>
         </div> -->
         
-            <div class="users-container">
-                <div class="users-sidebar">
+            <!-- <div class="container-users">
+            </div> -->
+        
+
+    <!-- Main Content -->
+    <main>
+        <div class="container-users">
+            <!-- Dashboard Section -->
+            <div id="dashboard-users" class="section-users active-users">
+                <!-- <h1>Dashboard</h1> -->
+                <!-- Dashboard Content Goes Here -->
+                <div class="sidebar-users">
                     <!-- <h2>Users Dashboard</h2> -->
                     <ul>
                         <li><a href="#realtime-updates">Updates</a></li>
@@ -200,43 +220,34 @@ rel="stylesheet"
                         <li><a href="#graphical-reports">Graphical Reports</a></li>
                     </ul>
                 </div>
-                <div class="users-main">
-                    <div id="realtime-updates" class="users-tabcontent">
+                <div class="main-users">
+                    <div id="realtime-updates" class="tabcontent-users">
                         <h2>Updates</h2>
-                        <div class="users-cards-container" id="realtime-cards-container"></div>
+                        <div class="cards-container-users" id="realtime-cards-container"></div>
                     </div>
-                    <div id="daily-tasks" class="users-tabcontent">
+                    <div id="daily-tasks" class="tabcontent-users">
                         <h2>Daily Tasks</h2>
-                        <div class="users-tasks-container" id="tasks-container"></div>
+                        <div class="tasks-container-users" id="tasks-container"></div>
                     </div>
-                    <div id="graphical-reports" class="users-tabcontent">
+                    <div id="graphical-reports" class="tabcontent-users">
                         <h2>Graphical Reports</h2>
-                        <div class="users-graphical-reports-container">
+                        <div class="graphical-reports-container-users">
                             <select id="report-type-select">
                                 <option value="bar">Bar Chart</option>
                                 <option value="line">Line Chart</option>
                                 <option value="pie">Pie Chart</option>
                             </select>
-                            <canvas class="users-report-chart" id="graphical-report-chart"></canvas>
+                            <canvas class="report-chart-users" id="graphical-report-chart"></canvas>
                         </div>
                     </div>
                 </div>
-            </div>
-        
 
-    <!-- Main Content -->
-    <main class="users-main">
-        <div class="users-container">
-            <!-- Dashboard Section -->
-            <div id="users-dashboard" class="users-section users-active">
-                <h1>Dashboard</h1>
-                <!-- Dashboard Content Goes Here -->
             </div>
 
             <!-- Register Section -->
-            <div id="users-register" class="users-section">
-                <h1>Register</h1>
-                <div id="users-registerList" class="users-list">
+            <div id="register-users" class="section-users">
+                <div id="registerList-users" class="list-users">
+                    <h1>Register</h1>
                     <!-- Editable list of items -->
                     <div class="users-item">Assets</div>
                     <div class="users-item">Suppliers</div>
@@ -246,9 +257,9 @@ rel="stylesheet"
             </div>
 
             <!-- Data Entry Section -->
-            <div id="users-dataEntry" class="users-section">
-                <h1>Data Entry</h1>
-                <form id="users-dataEntryForm">
+            <div id="dataEntry-users" class="section-users">
+                <form id="dataEntryForm-users">
+                    <h1>Data Entry</h1>
                     <!-- Form for accounting information entry -->
                     <label for="transactionType">Transaction Type:</label>
                     <input type="text" id="transactionType" name="transactionType" required>
@@ -259,18 +270,18 @@ rel="stylesheet"
             </div>
 
             <!-- Budget Section -->
-            <div id="users-budget" class="users-section">
+            <div id="budget-users" class="section-users">
                 <h1>Budget</h1>
-                <div id="users-projectedBudget">
+                <div id="projectedBudget-users">
                     <!-- Display projected budgets -->
                     <p>Projected Budget: $100,000</p>
                 </div>
             </div>
 
             <!-- General Ledger Section -->
-            <div id="users-generalLedger" class="users-section">
+            <div id="generalLedger-users" class="section-users">
                 <h1>General Ledger</h1>
-                <div id="users-ledgerOptions">
+                <div id="ledgerOptions-users">
                     <!-- Select accounting ledger options -->
                     <select id="ledgerType">
                         <option value="incomeStatement">Income Statement</option>
@@ -282,13 +293,13 @@ rel="stylesheet"
             </div>
 
             <!-- Inventory Section -->
-            <div id="users-inventory" class="users-section">
+            <div id="inventory-users" class="section-users">
                 <h1>Inventory</h1>
-                <div id="users-inventoryList" class="users-list">
+                <div id="inventoryList-users" class="list-users">
                     <!-- Display all inventory items -->
-                    <div class="users-item">Item 1</div>
-                    <div class="users-item">Item 2</div>
-                    <div class="users-item">Item 3</div>
+                    <div class="item-users">Item 1</div>
+                    <div class="item-users">Item 2</div>
+                    <div class="item-users">Item 3</div>
                 </div>
             </div>
         </div>
