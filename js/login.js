@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // login data
     const users = [
-      { username: "admin", password: "123", userType: "admin" },
+      { username: "techadmin", password: "123", userType: "techadmin" },
       { username: "baby", password: "test123", userType: "baby" },
       { username: "director", password: "test123", userType: "staff" },
       { username: "accounts", password: "test123", userType: "staff" },
@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const user = users.find(user => user.username === username && user.password === password);
     if (user) {
       switch (user.username) {
-        case "admin":
-          window.location.href = "/pages/admin.html";
+        case "techadmin":
+          window.location.href = "/pages/techadmin.html";
           break;
         case "baby":
           window.location.href = "/pages/baby.html";

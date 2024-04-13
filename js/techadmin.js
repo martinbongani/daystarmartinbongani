@@ -3,12 +3,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const usersTasksContainer = document.getElementById('tasks-container');
     const usersReportTypeSelect = document.getElementById('report-type-select');
     const usersGraphicalReportChart = document.getElementById('graphical-report-chart').getContext('2d');
-    const form = document.getElementById('dataEntryForm-users');
-    const ledgerAllocationSelect = document.getElementById('ledgerAllocation');
-    const generalLedgerSection = document.getElementById('generalLedgerSection');
-    const transactionDisplay = document.getElementById('transactionDisplay');
-    const inventoryList = document.getElementById('inventoryList-users');
-    const addItemForm = document.getElementById('addItemForm');
+    const form = document.getElementById('babyProfileForm');
+    const firstNameInput = document.getElementById('firstNameBabyProfile');
+    const lastNameInput = document.getElementById('lastNameBabyProfile');
+    const emailInput = document.getElementById('email');
 
     // Function to switch active section
 function switchSection(sectionId) {
@@ -37,10 +35,14 @@ function switchSection(sectionId) {
     function fetchUsersRealTimeUpdates() {
         // Simulate AJAX request to fetch real-time updates (replace with actual API call)
         const mockUpdates = [
-            { type: 'Pending Tasks', count: 5 },
-            { type: 'Completed Tasks', count: 12 },
-            { type: 'Total Revenue', amount: 'Shs 15,356,000' },
-            { type: 'Expenses', amount: 'Shs 9,635,500' }
+            { type: 'Pending Tasks', count: 33 },
+            { type: 'Completed Tasks', count: 18 },
+            { type: 'Users', count: 132 },
+            { type: 'Active Users', count: 98 },
+            { type: 'Attacks', count: 3 },
+            { type: 'Zero Day Attacks', count: 1 },
+            { type: 'System Updates', count: 7 }
+
         ];
 
         usersRealtimeCardsContainer.innerHTML = ''; // Clear existing content
@@ -67,11 +69,13 @@ function switchSection(sectionId) {
     function fetchUsersDailyTasks() {
         // Simulate AJAX request to fetch daily tasks (replace with actual API call)
         const mockTasks = [
-            'Prepare monthly financial report',
-            'Review budget allocations',
-            'Follow up with vendors',
-            'Generate payroll',
-            'Update inventory records'
+            'System Updates',
+            'Configurations',
+            'User Profile Updates',
+            'Debugging',
+            'Firewall checks',
+            'Registering Users'
+
         ];
 
         usersTasksContainer.innerHTML = ''; // Clear existing content
@@ -115,7 +119,7 @@ function switchSection(sectionId) {
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Financial Data',
+                    label: 'System Performance',
                     data: data,
                     backgroundColor: 'rgba(54, 162, 235, 0.5)',
                     borderColor: 'rgba(54, 162, 235, 1)',
@@ -202,144 +206,47 @@ renderUsersGraphicalReport(selectedReportType);
     }
 
 
-    // Data Entry
- // Event listener for changes in ledger allocation selection
- ledgerAllocationSelect.addEventListener('change', () => {
-    const selectedAllocation = ledgerAllocationSelect.value;
+    // Data User Profile
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-    // Update the general ledger section based on the selected allocation
-    updateGeneralLedgerSection(selectedAllocation);
-});
+        const firstName = firstNameInput.value.trim();
+        const lastName = lastNameInput.value.trim();
+        const email = emailInput.value.trim();
 
-// Function to update the general ledger section based on the selected allocation
-function updateGeneralLedgerSection(allocation) {
-    let ledgerDetails = '';
-
-    switch (allocation) {
-        case 'Allocation A':
-            ledgerDetails = `
-                <h2>General Ledger Details for Allocation A</h2>
-                <p>Details specific to Allocation A...</p>
-            `;
-            break;
-        case 'Allocation B':
-            ledgerDetails = `
-                <h2>General Ledger Details for Allocation B</h2>
-                <p>Details specific to Allocation B...</p>
-            `;
-            break;
-        case 'Allocation C':
-            ledgerDetails = `
-                <h2>General Ledger Details for Allocation C</h2>
-                <p>Details specific to Allocation C...</p>
-            `;
-            break;
-        default:
-            // Clear the section if no allocation is selected
-            generalLedgerSection.innerHTML = '';
+        if (!firstName || !lastName || !email) {
+            alert('Please fill out all fields.');
             return;
+        }
+
+        const username = generateUsername(firstName, lastName);
+        const otp = generateOTP();
+
+        sendProfileDetails(username, otp, email);
+
+        // Reset form after submission
+        firstNameInput.value = '';
+        lastNameInput.value = '';
+        emailInput.value = '';
+
+        alert('Profile generated successfully!');
+    });
+
+    function generateUsername(firstName, lastName) {
+        const randomNum = Math.floor(Math.random() * 1000);
+        return firstName.toLowerCase() + lastName.toLowerCase() + randomNum;
     }
 
-    // Display the ledger details in the general ledger section
-    generalLedgerSection.innerHTML = ledgerDetails;
-}
-
-// Function to handle form submission
-form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    if (validateForm()) {
-        const formData = new FormData(form);
-        const transactionData = {};
-
-        formData.forEach((value, key) => {
-            transactionData[key] = value;
-        });
-
-        try {
-            // Simulate processing the transaction (replace with actual processing logic)
-            const processedTransaction = await processTransaction(transactionData);
-
-            // Clear form inputs after successful submission
-            form.reset();
-
-            // Display the submitted transaction details in a popup
-            displayTransaction(processedTransaction);
-        } catch (error) {
-            console.error('Error processing transaction:', error);
-            alert('An error occurred while submitting the transaction.');
-        }
-    } else {
-        alert('Please fill out all required fields before submitting.');
+    function generateOTP() {
+        return Math.floor(1000 + Math.random() * 9000); // 4-digit OTP
     }
-});
 
-// Function to validate the form fields
-function validateForm() {
-    const requiredFields = ['date', 'description', 'costCenter', 'amount', 'transactionType', 'ledgerAllocation'];
-    let isValid = true;
-
-    requiredFields.forEach((fieldName) => {
-        const fieldValue = form.elements[fieldName].value.trim();
-
-        if (!fieldValue) {
-            isValid = false;
-        }
-    });
-
-    return isValid;
-}
-
-// Simulated function to process the transaction (replace with actual backend logic)
-function processTransaction(transactionData) {
-    return new Promise((resolve, reject) => {
-        // Simulate processing time (1 second delay)
-        setTimeout(() => {
-            // Simulate response (processed transaction)
-            const processedTransaction = {
-                ...transactionData,
-                status: 'processed',
-                timestamp: new Date().toISOString()
-            };
-            resolve(processedTransaction);
-        }, 1000); // Simulate 1 second processing delay
-    });
-}
-
-// Function to display the transaction details in a popup
-function displayTransaction(transaction) {
-    const transactionDetails = `
-        <div class="transaction-details">
-            <h2>Transaction Details</h2>
-            <p><strong>Date:</strong> ${transaction.date}</p>
-            <p><strong>Description:</strong> ${transaction.description}</p>
-            <p><strong>Cost Center:</strong> ${transaction.costCenter}</p>
-            <p><strong>Amount:</strong> ${transaction.amount}</p>
-            <p><strong>Transaction Type:</strong> ${transaction.transactionType}</p>
-            <p><strong>Ledger Allocation:</strong> ${transaction.ledgerAllocation}</p>
-            <p><strong>Status:</strong> ${transaction.status}</p>
-            <p><strong>Timestamp:</strong> ${formatTimestamp(transaction.timestamp)}</p>
-            <button id="dismissButton">Okay</button>
-        </div>
-    `;
-
-    // Display the transaction details popup
-    transactionDisplay.innerHTML = transactionDetails;
-
-    // Attach event listener to the "Okay" button for dismissing the popup
-    const dismissButton = document.getElementById('dismissButton');
-    dismissButton.addEventListener('click', () => {
-        transactionDisplay.innerHTML = ''; // Clear transaction details popup
-    });
-}
-
-// Function to format timestamp
-function formatTimestamp(timestamp) {
-    const date = new Date(timestamp);
-    return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-}
-
-// Accounts Budget
+    function sendProfileDetails(username, otp, email) {
+        // Simulate sending email with username and OTP
+        console.log(`Sending email to ${email} with username: ${username} and OTP: ${otp}`);
+        // Here you can implement actual email sending logic
+    }    
+    // Accounts Budget
 // Sample budget data for departments
 const financeBudget = {
     projected: 100000,
@@ -461,138 +368,6 @@ let inventoryItems = [];
         }
     };
 
-
-    // Accounts Resgister
-// Static data for different reports with dates
-// const reportData = {
-//     suppliers: [
-//         { name: 'Supplier A', type: 'Product Supplier', balance: 1500, date: '2023-03-15' },
-//         { name: 'Supplier B', type: 'Service Provider', balance: 2000, date: '2023-04-20' }
-//     ],
-//     tradeDebtors: [
-//         { name: 'Customer X', type: 'Regular Customer', balance: -500, date: '2023-03-10' },
-//         { name: 'Customer Y', type: 'Corporate Client', balance: -1000, date: '2023-04-05' }
-//     ],
-//     tradeCreditors: [
-//         { name: 'Vendor 1', type: 'Material Supplier', balance: 3000, date: '2023-03-25' },
-//         { name: 'Vendor 2', type: 'Equipment Provider', balance: 2500, date: '2023-04-10' }
-//     ],
-//     assets: [
-//         { name: 'Equipment A', type: 'Machinery', value: 50000, date: '2023-03-01' },
-//         { name: 'Inventory', type: 'Stock Items', value: 20000, date: '2023-04-01' }
-//     ],
-//     babyList: [
-//         { name: 'Baby Product A', type: 'Diapers', quantity: 100, date: '2023-03-20' },
-//         { name: 'Baby Product B', type: 'Toys', quantity: 50, date: '2023-04-15' }
-//     ],
-//     staffList: [
-//         { name: 'Employee 1', position: 'Manager', date: '2023-03-05' },
-//         { name: 'Employee 2', position: 'Sales Associate', date: '2023-04-02' }
-//     ],
-//     payroll: [
-//         { name: 'Employee 1', salary: 5000, date: '2023-03-15' },
-//         { name: 'Employee 2', salary: 4000, date: '2023-04-01' }
-//     ]
-// };
-
-// let reportItemList = []; // Array to hold report line items
-
-// // Function to run the report based on selected criteria
-// function runReport() {
-//     const reportType = document.getElementById('reportType').value;
-//     const startDateInput = document.getElementById('startDate').value;
-//     const endDateInput = document.getElementById('endDate').value;
-
-//     // Validate report type selection
-//     if (!reportType) {
-//         alert('Please select a report type.');
-//         return;
-//     }
-
-//     // Validate start date and end date inputs
-//     const startDate = new Date(startDateInput);
-//     const endDate = new Date(endDateInput);
-
-//     if (!isValidDate(startDate) || !isValidDate(endDate)) {
-//         alert('Please select valid start and end dates.');
-//         return;
-//     }
-
-//     const selectedReport = reportData[reportType];
-//     if (selectedReport) {
-//         reportItemList = selectedReport.filter(item => {
-//             const itemDate = new Date(item.date);
-//             return itemDate >= startDate && itemDate <= endDate;
-//         }).map(item => formatReportItem(item));
-
-//         displayReport(); // Display filtered report items
-//     } else {
-//         alert('No data available for selected report type.');
-//     }
-// }
-
-// // Function to check if a date is valid
-// function isValidDate(date) {
-//     return date instanceof Date && !isNaN(date);
-// }
-
-// // Function to format report item based on report type
-// function formatReportItem(item) {
-//     switch (document.getElementById('reportType').value) {
-//         case 'suppliers':
-//         case 'tradeDebtors':
-//         case 'tradeCreditors':
-//             return `${item.name} (${item.type}) - Balance: $${item.balance}`;
-//         case 'assets':
-//             return `${item.name} (${item.type}) - Value: $${item.value}`;
-//         case 'babyList':
-//             return `${item.name} (${item.type}) - Quantity: ${item.quantity}`;
-//         case 'staffList':
-//             return `${item.name} - Position: ${item.position}`;
-//         case 'payroll':
-//             return `${item.name} - Salary: $${item.salary}`;
-//         default:
-//             return 'Invalid report type.';
-//     }
-// }
-
-// // Function to display the report items in the HTML
-// function displayReport() {
-//     const reportOutput = document.getElementById('reportOutput');
-//     reportOutput.innerHTML = ''; // Clear existing report output
-
-//     const reportItemListElement = document.createElement('ul');
-
-//     reportItemList.forEach(itemText => {
-//         const listItem = document.createElement('li');
-//         listItem.textContent = itemText;
-//         reportItemListElement.appendChild(listItem);
-//     });
-
-//     reportOutput.appendChild(reportItemListElement);
-
-//     // Add "Add Line Item" button for dynamic interaction
-//     const addLineItemButton = document.createElement('button');
-//     addLineItemButton.textContent = 'Add Line Item';
-//     addLineItemButton.onclick = addReportItem;
-//     reportOutput.appendChild(addLineItemButton);
-// }
-
-// // Function to add a new line item to the report
-// function addReportItem() {
-//     const newItemDescription = prompt('Enter new item description:');
-//     if (newItemDescription) {
-//         reportItemList.push(newItemDescription);
-//         displayReport(); // Update report display
-//     }
-// }
-
-// // Event listener to run the report when the form is submitted
-// const reportForm = document.getElementById('reportForm');
-// reportForm.addEventListener('submit', function(event) {
-//     event.preventDefault(); // Prevent default form submission
-//     runReport(); // Run the report based on form inputs
-// });
             
 });
 

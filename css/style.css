@@ -3,7 +3,7 @@ body {
 }
 
 main {
-  background: linear-gradient(to top, peachpuff, #F6DDD6,  white);
+  background: linear-gradient(to top, peachpuff, #F6DDD6 );
 }
 
 #welcome {

@@ -1,365 +1,592 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <style>
+      /* .container-users {
+      } */
+      /* Accounts dashboard */
+      .sidebar-users {
+        width: 250px;
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        display: flex;
+        min-height: 100vh;
+      }
 
-.container-users {
-    display: flex;
-    min-height: 100vh;
-}
+      .sidebar-users h2 {
+        text-align: center;
+      }
 
-.sidebar-users {
-    width: 250px;
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-}
+      .sidebar-users ul {
+        list-style-type: none;
+        padding: 0;
+      }
 
-.sidebar-users h2 {
-    text-align: center;
-}
+      .sidebar-users ul li a {
+        display: block;
+        padding: 10px 0;
+        color: #fff;
+        text-decoration: none;
+        text-align: left;
+      }
 
-.sidebar-users ul {
-    list-style-type: none;
-    padding: 0;
-}
+      .sidebar-users ul li a:hover {
+        background-color: #555;
+      }
 
-.sidebar-users ul li a {
-    display: block;
-    padding: 10px 0;
-    color: #fff;
-    text-decoration: none;
-    text-align: center;
-}
+      .main-users {
+        flex: 1;
+        padding: 20px;
+        display: inline;
+      }
 
-.sidebar-users ul li a:hover {
-    background-color: #555;
-}
+      .tabcontent-users {
+        display: none;
+      }
 
-.main-users {
-    flex: 1;
-    padding: 20px;
-    display: inline;
-}
+      .cards-container-users {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
 
-.tabcontent-users {
-    display: none;
-}
+      .card-users {
+        width: calc(33.33% - 20px);
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
 
-.cards-container-users {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
+      .tasks-container-users {
+        margin-top: 20px;
+      }
 
-.card-users {
-    width: calc(33.33% - 20px);
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+      .graphical-reports-container-users {
+        margin-top: 20px;
+        max-width: 800px;
+        width: 100%;
+        height: 400px;
+        position: relative;
+      }
 
-.tasks-container-users {
-    margin-top: 20px;
-}
+      .report-chart-users {
+        width: 100%;
+        max-width: 600px;
+        margin-top: 20px;
+      }
 
-.graphical-reports-container-users {
-    margin-top: 20px;
-    max-width: 800px;
-    width: 100%;
-    height: 400px;
-    position: relative; 
-}
+      .section-users {
+        display: none;
+      }
+      .active-users {
+        display: flex;
+      }
 
-.report-chart-users {
-    width: 100%;
-    max-width: 600px;
-    margin-top: 20px;
-}
+      .form-container {
+        /* display: table-column;
+    flex-direction: column; */
+        align-items: center;
+      }
 
-/* Add your CSS styles here */
-.section-users {
-    display: none;
-}
-.active-users {
-    display: flex;
-}
+      /* Accounts Data Entry */
+      .dataEntryFormUsers {
+        /* max-width: 600px; */
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        width: 60%;
+      }
 
-.container {
-    max-width: 600px;
-    margin: 50px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
+      .dataEntryFormUsers h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
 
-h1 {
-    text-align: center;
-    color: #007bff;
-}
+      .form-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
 
-#dataEntryForm-users {
-    display: flex;
-    flex-direction: column;
-}
+      .form-group {
+        flex: 1;
+        margin-right: 10px;
+      }
 
-#dataEntryForm-users label {
-    margin-bottom: 8px;
-}
+      .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
 
-input[type="date"],
-input[type="text"],
-input[type="number"],
-select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
 
-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="6"><polygon points="0,0 12,0 6,6" style="fill:#555"/></svg>');
-    background-repeat: no-repeat;
-    background-position-x: calc(100% - 12px);
-    background-position-y: center;
-    padding-right: 30px;
-}
+      .button-group {
+        text-align: center;
+        margin-top: 20px;
+      }
 
-button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 12px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+      .button-group button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
 
-button[type="submit"]:hover {
-    background-color: #0056b3;
-}
+      .button-group button:hover {
+        background-color: #0056b3;
+      }
+      .transaction-display {
+        border-top: 1px solid #ddd;
+        padding: 15px 0 0 15px;
+      }
 
-.transaction-details {
-    border-top: 1px solid #ddd;
-    padding-top: 15px;
-}
+      .transaction-display h3 {
+        color: #007bff;
+        margin-bottom: 10px;
+      }
 
-.transaction-details h3 {
-    color: #007bff;
-    margin-bottom: 10px;
-}
+      .transaction-display p {
+        margin-bottom: 8px;
+      }
 
-.transaction-details p {
-    margin-bottom: 8px;
-}
+      .transaction-display strong {
+        font-weight: bold;
+        margin-right: 5px;
+      }
 
-.transaction-details strong {
-    font-weight: bold;
-    margin-right: 5px;
-}    
-</style>
-    
+      /* Accounts Register */
+      .list-users {
+        margin: auto;
+      }
+
+      .list-users h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .list-users .form-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .list-users label {
+        width: 120px;
+        margin-right: 10px;
+        font-weight: bold;
+        padding: 10px;
+      }
+
+      input[type="date"],
+      select {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Accounts Budget */
+      .budget-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .department-card {
+        width: 48%; /* Two cards per row with a small gap */
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        background-color: #f9f9f9;
+      }
+
+      .department-card h2 {
+        margin-top: 0;
+        font-size: 20px;
+      }
+
+      .department-card p {
+        margin: 10px 0;
+      }
+
+      @media (max-width: 768px) {
+        .department-card {
+          width: 100%; /* Display one card per row on smaller screens */
+        }
+      }
+
+      /* Accounts Inventory */
+      #inventoryList-users {
+        margin-top: 20px;
+      }
+
+      .list-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px;
+        border-radius: 6px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
+      }
+
+      .list-item strong {
+        font-weight: bold;
+      }
+
+      .list-item button {
+        padding: 8px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .list-item button:hover {
+        background-color: #0056b3;
+      }
+
+      .form-container {
+        max-width: 400px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-container label,
+      .form-container input {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .form-container input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .form-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .form-container button:hover {
+        background-color: #0056b3;
+      }
+
+      input.invalid {
+        border-color: #ff0000; 
+      }
+    </style>
+
     <title>Accounts Dashboard</title>
-</head>
-<link rel="stylesheet" href="/css/style.css" />
-<link rel="stylesheet" href="/css/bootstrap/css/bootstrap.css" />
-<link
-rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-  
-  
-  
+  </head>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
   <body>
     <div w3-include-html="/pages/navbar.html"></div>
-    
-    
+
     <div class="container-shop"></div>
     <header>
-   
-        <nav class="dash">
-          <ul>
-            <li><a href="#dashboard-users">Dashboard</a></li>
-            <li><a href="#register-users">Register</a></li>
-            <li><a href="#dataEntry-users">Data Entry</a></li>
-            <li><a href="#budget-users">Budget</a></li>
-            <li><a href="#generalLedger-users">General Ledger</a></li>
-            <li><a href="#inventory-users">Inventory</a></li>
-            <li class="dropdown">
-              <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Accountant
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="#yourProfile">Your Profile</a></li>
-                <li><a href="/pages/login.html">Logout</a></li>
-              </ul>
-            </li>
-    
-          </ul>
-        </nav>
-      </header>
-        <main>
-        <!-- <div class="card container-fluid" style="width: 50rem; height: 20rem;">
-          <div class="card-body">
-          </div>
-        </div> -->
-        
-            <!-- <div class="container-users">
-            </div> -->
-        
+      <nav class="dash">
+        <ul>
+          <li><a href="#dashboard-users">Dashboard</a></li>
+          <li><a href="#register-users">Register</a></li>
+          <li><a href="#dataEntry-users">Data Entry</a></li>
+          <li><a href="#budget-users">Budget</a></li>
+          <li><a href="#inventory-users">Inventory</a></li>
+          <li class="dropdown">
+            <a
+              class="dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Accountant
+              <i class="fa-solid fa-user"></i>
+              
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#yourProfile">Your Profile</a></li>
+              <li><a href="/pages/login.html">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
     <!-- Main Content -->
     <main>
-        <div class="container-users">
-            <!-- Dashboard Section -->
-            <div id="dashboard-users" class="section-users active-users">
-                <!-- <h1>Dashboard</h1> -->
-                <!-- Dashboard Content Goes Here -->
-                <div class="sidebar-users">
-                    <!-- <h2>Users Dashboard</h2> -->
-                    <ul>
-                        <li><a href="#realtime-updates">Updates</a></li>
-                        <li><a href="#daily-tasks">Daily Tasks</a></li>
-                        <li><a href="#graphical-reports">Graphical Reports</a></li>
-                    </ul>
-                </div>
-                <div class="main-users">
-                    <div id="realtime-updates" class="tabcontent-users">
-                        <h2>Updates</h2>
-                        <div class="cards-container-users" id="realtime-cards-container"></div>
-                    </div>
-                    <div id="daily-tasks" class="tabcontent-users">
-                        <h2>Daily Tasks</h2>
-                        <div class="tasks-container-users" id="tasks-container"></div>
-                    </div>
-                    <div id="graphical-reports" class="tabcontent-users">
-                        <h2>Graphical Reports</h2>
-                        <div class="graphical-reports-container-users">
-                            <select id="report-type-select">
-                                <option value="bar">Bar Chart</option>
-                                <option value="line">Line Chart</option>
-                                <option value="pie">Pie Chart</option>
-                            </select>
-                            <canvas class="report-chart-users" id="graphical-report-chart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
+      <div class="container-users">
+        <!-- Dashboard Section -->
+        <div id="dashboard-users" class="section-users active-users">
+          <div class="sidebar-users">
+            <ul>
+              <li><a href="#realtime-updates">Updates</a></li>
+              <li><a href="#daily-tasks">Daily Tasks</a></li>
+              <li><a href="#graphical-reports">Graphical Reports</a></li>
+            </ul>
+          </div>
+          <div class="main-users">
+            <div id="realtime-updates" class="tabcontent-users">
+              <h2>Updates</h2>
+              <div
+                class="cards-container-users"
+                id="realtime-cards-container"
+              ></div>
             </div>
-
-            <!-- Register Section -->
-            <div id="register-users" class="section-users">
-                <div id="registerList-users" class="list-users">
-                    <h1>Register</h1>
-                    <!-- Editable list of items -->
-                    <div class="users-item">Assets</div>
-                    <div class="users-item">Suppliers</div>
-                    <div class="users-item">Trade Creditors</div>
-                    <div class="users-item">Trade Debtors</div>
-                </div>
+            <div id="daily-tasks" class="tabcontent-users">
+              <h2>Daily Tasks</h2>
+              <div class="tasks-container-users" id="tasks-container"></div>
             </div>
-
-            <!-- Data Entry Section -->
-            <div id="dataEntry-users" class="section-users">
-                <form id="dataEntryForm-users">
-                    <h1>Data Entry</h1>
-                    <!-- Form for accounting information entry -->
-                    <label for="date">Date:</label>
-                    <input type="date" id="date" name="date" required>
-        
-                    <label for="description">Description:</label>
-                    <input type="text" id="description" name="description" required>
-        
-                    <label for="costCenter">Cost Center (Department):</label>
-                    <select id="costCenter" name="costCenter" required>
-                        <option value="" disabled selected>Select Cost Center</option>
-                        <option value="Finance">Finance</option>
-                        <option value="Marketing">Marketing</option>
-                        <option value="Sales">Sales</option>
-                        <option value="Operations">Operations</option>
-                        <!-- Add more options as needed -->
-                    </select>
-        
-                    <label for="amount">Amount:</label>
-                    <input type="number" id="amount" name="amount" step="0.01" min="0" required>
-        
-                    <label for="transactionType">Transaction Type:</label>
-                    <select id="transactionType" name="transactionType" required>
-                        <option value="debit">Debit</option>
-                        <option value="credit">Credit</option>
-                    </select>
-        
-                    <label for="ledgerAllocation">General Ledger Allocation:</label>
-                    <select id="ledgerAllocation" name="ledgerAllocation" required>
-                        <option value="" disabled selected>Select Ledger Allocation</option>
-                        <option value="Allocation A">Allocation A</option>
-                        <option value="Allocation B">Allocation B</option>
-                        <option value="Allocation C">Allocation C</option>
-                        <!-- Add more options as needed -->
-                    </select>
-        
-                    <button type="submit">Submit</button>                
-                </form>
-                <div class="transaction-display" id="transactionDisplay">
-                    <!-- Transaction details will be displayed here -->
-                </div>
+            <div id="graphical-reports" class="tabcontent-users">
+              <h2>Graphical Reports</h2>
+              <div class="graphical-reports-container-users">
+                <select id="report-type-select">
+                  <option value="bar">Bar Chart</option>
+                  <option value="line">Line Chart</option>
+                  <option value="pie">Pie Chart</option>
+                </select>
+                <canvas
+                  class="report-chart-users"
+                  id="graphical-report-chart"
+                ></canvas>
+              </div>
             </div>
-
-            <!-- Budget Section -->
-            <div id="budget-users" class="section-users">
-                <h1>Budget</h1>
-                <div id="projectedBudget-users">
-                    <!-- Display projected budgets -->
-                    <p>Projected Budget: $100,000</p>
-                </div>
-            </div>
-
-            <!-- General Ledger Section -->
-            <div id="generalLedger-users" class="section-users">
-                <h1>General Ledger</h1>
-                <div id="ledgerOptions-users">
-                    <!-- Select accounting ledger options -->
-                    <select id="ledgerType">
-                        <option value="incomeStatement">Income Statement</option>
-                        <option value="balanceSheet">Balance Sheet</option>
-                        <option value="cashFlowStatement">Cash Flow Statement</option>
-                    </select>
-                    <button onclick="runLedger()">Run Ledger</button>
-                </div>
-            </div>
-
-            <!-- Inventory Section -->
-            <div id="inventory-users" class="section-users">
-                <h1>Inventory</h1>
-                <div id="inventoryList-users" class="list-users">
-                    <!-- Display all inventory items -->
-                    <div class="item-users">Item 1</div>
-                    <div class="item-users">Item 2</div>
-                    <div class="item-users">Item 3</div>
-                </div>
-            </div>
+          </div>
         </div>
-  </main>
-  
-  
-  
-  <div w3-include-html="/pages/footer.html"></div>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="/js/accts.js"></script>
-  <script src="/js/accounts.js"></script>
-  <script src="/css/bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="/js/add.js"></script>
 
-</body>
+        <!-- Register Section -->
+        <div id="register-users" class="section-users">
+          <div id="registerList-users" class="list-users">
+            <h1>Register</h1>
+            <div class="form-row">
+              <!-- Editable list of items -->
+              <label for="reportType">Report Type:</label>
+              <select id="reportType">
+                <option value="suppliers">Suppliers</option>
+                <option value="tradeDebtors">Trade Debtors</option>
+                <option value="tradeCreditors">Trade Creditors</option>
+                <option value="assets">Assets</option>
+                <option value="babyList">Baby List</option>
+                <option value="staffList">Staff List</option>
+                <option value="payroll">Payroll</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="startDate">Start Date:</label>
+              <input type="date" id="startDate" name="startDate" />
+
+              <label for="endDate">End Date:</label>
+              <input type="date" id="endDate" name="endDate" />
+            </div>
+            <div class="form-row">
+              <button onclick="runReport()">Run Report</button>
+            </div>
+            <div id="reportOutput">
+              <h2>Report Details</h2>
+              <ul id="reportItemList"></ul>
+              <button onclick="addReportItem()">Add Line Item</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Entry Section -->
+        <div id="dataEntry-users" class="section-users">
+          <form id="dataEntryForm-users" class="dataEntryFormUsers">
+            <h1>Data Entry</h1>
+            <!-- Form for accounting information entry -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" />
+              </div>
+              <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input
+                  type="number"
+                  id="amount"
+                  name="amount"
+                  step="100"
+                  min="0"
+                />
+              </div>
+              <div class="form-group">
+                <label for="costCenter">Cost Center:</label>
+                <select id="costCenter" name="costCenter">
+                  <option value="" disabled selected>Select Cost Center</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Sales">Sales</option>
+                  <option value="Operations">Operations</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="transactionType">Transaction Type:</label>
+                <select id="transactionType" name="transactionType">
+                  <option value="debit">Debit</option>
+                  <option value="credit">Credit</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ledgerAllocation">General Ledger Allocation:</label>
+                <select id="ledgerAllocation" name="ledgerAllocation">
+                  <option value="" disabled selected>
+                    Select Ledger Allocation
+                  </option>
+                  <option value="Allocation A">Allocation A</option>
+                  <option value="Allocation B">Allocation B</option>
+                  <option value="Allocation C">Allocation C</option>
+                </select>
+              </div>
+            </div>
+            <div class="button-group">
+              <button type="submit">Submit</button>
+            </div>
+          </form>
+          <div class="transaction-display" id="transactionDisplay">
+            <!-- Transaction details will be displayed here -->
+          </div>
+        </div>
+
+        <!-- Budget Section -->
+        <div id="budget-users" class="section-users">
+          <div class="budget-container">
+            <!-- Finance Department Budget Card -->
+            <div class="department-card">
+              <h2>Finance Department</h2>
+              <p>
+                Projected Budget: <span id="financeProjected">X Shillings</span>
+              </p>
+              <p>Amount Spent: <span id="financeSpent">Y Shillings</span></p>
+              <p>Balance: <span id="financeBalance">Z Shillings</span></p>
+            </div>
+
+            <!-- Administration Department Budget Card -->
+            <div class="department-card">
+              <h2>Administration Department</h2>
+              <p>
+                Projected Budget: <span id="adminProjected">X Shillings</span>
+              </p>
+              <p>Amount Spent: <span id="adminSpent">Y Shillings</span></p>
+              <p>Balance: <span id="adminBalance">Z Shillings</span></p>
+            </div>
+
+            <!-- Procurement Department Budget Card -->
+            <div class="department-card">
+              <h2>Procurement Department</h2>
+              <p>
+                Projected Budget:
+                <span id="procurementProjected">X Shillings</span>
+              </p>
+              <p>
+                Amount Spent: <span id="procurementSpent">Y Shillings</span>
+              </p>
+              <p>Balance: <span id="procurementBalance">Z Shillings</span></p>
+            </div>
+
+            <!-- Overall Budget Overview Card -->
+            <div class="department-card">
+              <h2>Overall Budget</h2>
+              <p>
+                Total Projected Budget:
+                <span id="totalProjected">X Shillings</span>
+              </p>
+              <p>
+                Total Amount Spent: <span id="totalSpent">Y Shillings</span>
+              </p>
+              <p>Total Balance: <span id="totalBalance">Z Shillings</span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inventory Section -->
+        <div id="inventory-users" class="section-users">
+          <div class="form-container">
+            <form id="addItemForm">
+              <h2>Add New Item</h2>
+              <label for="itemName">Item Name:</label>
+              <input type="text" id="itemName" name="itemName" />
+              <label for="itemQuantity">Quantity:</label>
+              <input type="number" id="itemQuantity" name="itemName" />
+              <button type="submit">Add Item</button>
+            </form>
+          </div>
+          <hr />
+          <div id="inventoryList-users" class="list-users">
+            <!-- Inventory items will be displayed here -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div w3-include-html="/pages/footer.html"></div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/accounts.js"></script>
+    <script src="/css/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/js/add.js"></script>
+  </body>
 </html>
