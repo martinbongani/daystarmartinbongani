@@ -39,8 +39,8 @@ function switchSection(sectionId) {
         const mockUpdates = [
             { type: 'Pending Tasks', count: 5 },
             { type: 'Completed Tasks', count: 12 },
-            { type: 'Total Revenue', amount: 'Shs 15,356,000' },
-            { type: 'Expenses', amount: 'Shs 9,635,500' }
+            { type: 'Total Revenue', amount: 'Shs 55,356,000' },
+            { type: 'Expenses', amount: 'Shs 29,635,500' }
         ];
 
         usersRealtimeCardsContainer.innerHTML = ''; // Clear existing content

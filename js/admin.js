@@ -3,13 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const usersTasksContainer = document.getElementById('tasks-container');
     const usersReportTypeSelect = document.getElementById('report-type-select');
     const usersGraphicalReportChart = document.getElementById('graphical-report-chart').getContext('2d');
-    const form = document.getElementById('babyProfileForm');
-    const popup = document.getElementById('babyProfilePopup');
-    const closePopupBtn = document.getElementById('closePopupBtn');
-    const formStaffProfile = document.getElementById('formStaffProfile');
-    const popupStaffProfile = document.getElementById('popupStaffProfile');
-    const closePopupBtnStaffProfile = document.getElementById('closePopupBtnStaffProfile');
-    const logElement = document.getElementById('log');
+    const form = document.getElementById('babyRegistrationForm');
 
     // Function to switch active section
 function switchSection(sectionId) {
@@ -38,14 +32,12 @@ function switchSection(sectionId) {
     function fetchUsersRealTimeUpdates() {
         // Simulate AJAX request to fetch real-time updates (replace with actual API call)
         const mockUpdates = [
-            { type: 'Pending Tasks', count: 33 },
-            { type: 'Completed Tasks', count: 18 },
-            { type: 'Users', count: 132 },
-            { type: 'Active Users', count: 98 },
-            { type: 'Attacks', count: 3 },
-            { type: 'Zero Day Attacks', count: 1 },
-            { type: 'System Updates', count: 7 }
-
+            { type: 'Babies Enrolled', count: 165 },
+            { type: 'Babies Present', count: 153 },
+            { type: 'Sitters Enrolled', count: 65 },
+            { type: 'Sitters Present', count: 56 },
+            { type: 'Total Revenue', amount: 'Shs 55,356,000' },
+            { type: 'Expenses', amount: 'Shs 29,635,500' }
         ];
 
         usersRealtimeCardsContainer.innerHTML = ''; // Clear existing content
@@ -72,13 +64,12 @@ function switchSection(sectionId) {
     function fetchUsersDailyTasks() {
         // Simulate AJAX request to fetch daily tasks (replace with actual API call)
         const mockTasks = [
-            'System Updates',
-            'Configurations',
-            'User Profile Updates',
-            'Debugging',
-            'Firewall checks',
-            'Registering Users'
-
+            'Register Babies',
+            'Register Sitters',
+            'Reviewing Parent Feedback',
+            'Staff Meeting',
+            'Reviewing Applications',
+            'Reviewing Departmental Reports and Performance'
         ];
 
         usersTasksContainer.innerHTML = ''; // Clear existing content
@@ -122,7 +113,7 @@ function switchSection(sectionId) {
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'System Performance',
+                    label: 'Overall Performance',
                     data: data,
                     backgroundColor: 'rgba(54, 162, 235, 0.5)',
                     borderColor: 'rgba(54, 162, 235, 1)',
@@ -151,11 +142,79 @@ function switchSection(sectionId) {
 window.usersGraphicalReport = new Chart(usersGraphicalReportChart, chartConfig);
 }
 
+    // Function to render graphical report based on selected type
+    function renderFinancialReport(reportType) {
+        // Simulate data for graphical report (replace with actual data retrieval)
+        const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May'];
+        let data, backgroundColor, borderColor;
+       
+        switch (reportType) {
+            case 'bar':
+                data = [7000, 4500, 9000, 3000, 6000]; // Example bar chart data
+                backgroundColor = 'rgba(255, 159, 64, 0.5)';
+                borderColor = 'rgba(255, 159, 64, 1)';
+                break;
+            case 'line':
+                data = [7000, 3500, 8000, 4500, 8500]; // Example line chart data
+                backgroundColor = 'rgba(54, 162, 235, 0.5)';
+                borderColor = 'rgba(54, 162, 235, 1)';
+                break;
+            case 'pie':
+                data = [20, 80, 50]; // Example pie chart data
+                backgroundColor = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 205, 86, 0.5)'];
+                borderColor = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 205, 86, 1)'];
+                break;
+            default:
+                return;
+        }
+
+        const chartConfig = {
+            type: reportType,
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Financial Performance',
+                    data: data,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        };
+
+ // Destroy existing chart if it exists
+ if (window.financialReport) {
+    window.financialReport.destroy();
+}
+
+// Create new chart
+window.financialReport = new Chart(financialReportChart, chartConfig);
+}
+
+
 // Event listener for report type selection
 usersReportTypeSelect.addEventListener('change', function() {
 const selectedReportType = this.value;
 renderUsersGraphicalReport(selectedReportType);
  } )
+
+// Event listener for report type selection
+usersReportTypeSelect.addEventListener('change', function() {
+    const selectedReportType = this.value;
+    renderFinancialReport(selectedReportType);
+ } )
+    
 
   // Function to display default content (real-time updates) when no tab is selected
   function displayDefaultContent() {
@@ -190,6 +249,10 @@ renderUsersGraphicalReport(selectedReportType);
                 const selectedReportType = usersReportTypeSelect.value;
                 renderUsersGraphicalReport(selectedReportType);
             }
+            else if (tabId === 'financial-performance') {
+                const selectedReportType = usersReportTypeSelect.value;
+                renderFinancialReport(selectedReportType);
+            }
         }
     }
 
@@ -197,6 +260,11 @@ renderUsersGraphicalReport(selectedReportType);
     usersReportTypeSelect.addEventListener('change', function() {
         const selectedReportType = this.value;
         renderUsersGraphicalReport(selectedReportType);
+    });
+
+    usersReportTypeSelect.addEventListener('change', function() {
+        const selectedReportType = this.value;
+        renderFinancialReport(selectedReportType);
     });
 
     // Show default tab on page load
@@ -209,118 +277,68 @@ renderUsersGraphicalReport(selectedReportType);
     }
 
 
-    // IT Baby Profile
-    form.addEventListener('submit', async (event) => {
+    // Admin Baby Registration
+    form.addEventListener('submit', function(event) {
         event.preventDefault();
+        validateForm();
+    });
 
-        const firstName = document.getElementById('babyProfileFirstName').value.trim();
-        const lastName = document.getElementById('babyProfileLastName').value.trim();
-        const otpMethod = document.querySelector('input[name="otpMethod"]:checked');
+    function validateForm() {
+        // Retrieve input values
+        const firstName = document.getElementById('firstNameBabyRegistration').value.trim();
+        const lastName = document.getElementById('lastNameBabyRegistration').value.trim();
+        const gender = document.getElementById('genderBabyRegistration').value;
 
-        if (!validateForm(firstName, lastName, otpMethod)) {
-            return;
+        // Retrieve error message elements
+        const errorFirstName = document.getElementById('errorFirstName');
+        const errorLastName = document.getElementById('errorLastName');
+        const errorGender = document.getElementById('errorGender');
+
+        // Reset previous error messages
+        errorFirstName.textContent = '';
+        errorLastName.textContent = '';
+        errorGender.textContent = '';
+
+        let isValid = true;
+
+        // Validate each input field
+        if (firstName === '') {
+            errorFirstName.textContent = 'First name is required';
+            isValid = false;
         }
 
-        const username = generateUsername(firstName, lastName);
-        const otp = generateOtp();
-
-        const deliveryMethod = otpMethod.value;
-
-        try {
-            const message = `Username: ${username}\nOTP: ${otp}`;
-            await sendDetails(username, otp, deliveryMethod);
-
-            const deliveryType = deliveryMethod === 'email' ? 'Email' : 'SMS';
-            const displayMessage = `Username and OTP sent via ${deliveryType}.`;
-            displayPopup(displayMessage);
-
-            clearForm(); // Clear the form after successful submission
-        } catch (error) {
-            console.error('Error sending details:', error);
-            alert('An error occurred while sending details.');
+        if (lastName === '') {
+            errorLastName.textContent = 'Last name is required';
+            isValid = false;
         }
-    });
 
-    closePopupBtn.addEventListener('click', () => {
-        popup.style.display = 'none';
-    });
+        if (gender === '') {
+            errorGender.textContent = 'Please select gender';
+            isValid = false;
+        }
 
-
-function validateForm(firstName, lastName, otpMethod) {
-    const errorFirstName = document.getElementById('errorFirstName');
-    const errorLastName = document.getElementById('errorLastName');
-    const errorOtpMethod = document.getElementById('errorOtpMethod');
-
-    errorFirstName.textContent = '';
-    errorLastName.textContent = '';
-    errorOtpMethod.textContent = '';
-
-    let isValid = true;
-
-    if (firstName === '') {
-        errorFirstName.textContent = 'First name is required';
-        isValid = false;
+        if (isValid) {
+            // If form is valid, proceed with registration logic
+            registerBaby(firstName, lastName, gender);
+        }
     }
 
-    if (lastName === '') {
-        errorLastName.textContent = 'Last name is required';
-        isValid = false;
+    function registerBaby(firstName, lastName, gender) {
+        // Replace this with actual registration logic (e.g., sending data to server)
+        const successMessage = `Baby ${firstName} ${lastName} (${gender}) registered successfully!`;
+        displaySuccessMessage(successMessage);
+        clearForm();
     }
 
-    if (!otpMethod) {
-        errorOtpMethod.textContent = 'Please select OTP delivery method';
-        isValid = false;
+    function displaySuccessMessage(message) {
+        const successMessageDiv = document.getElementById('successMessage');
+        successMessageDiv.textContent = message;
     }
 
-    return isValid;
-}
-
-function generateUsername(firstName, lastName) {
-    const randomNum = Math.floor(Math.random() * 1000);
-    const username = `${firstName.toLowerCase()}_${lastName.toLowerCase()}${randomNum}`;
-    return username;
-}
-
-function generateOtp() {
-    const otp = Math.floor(1000 + Math.random() * 9000);
-    return otp;
-}
-
-async function sendDetails(username, otp, deliveryMethod) {
-    // Simulate sending details (replace with actual sending logic)
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            console.log(`Sending details to ${deliveryMethod}...`);
-            resolve();
-        }, 2000); // Simulate 2 seconds delay for sending
-    });
-}
-
-function displayPopup(message) {
-    const popupContent = document.getElementById('babyProfileDetails');
-    popupContent.textContent = message;
-    const popup = document.getElementById('babyProfilePopup');
-    popup.style.display = 'flex';
-}
-
-function clearForm() {
-    const firstNameInput = document.getElementById('babyProfileFirstName');
-    const lastNameInput = document.getElementById('babyProfileLastName');
-    const otpMethods = document.querySelectorAll('input[name="otpMethod"]');
-
-    firstNameInput.value = '';
-    lastNameInput.value = '';
-
-    otpMethods.forEach(method => {
-        method.checked = false;
-    });
-
-    const errorMessages = document.querySelectorAll('.error-message');
-    errorMessages.forEach(message => {
-        message.textContent = '';
-    });
-}
-
+    function clearForm() {
+        form.reset();
+    }
+    
 // IT Staff Profile
 formStaffProfile.addEventListener('submit', async (event) => {
     event.preventDefault();

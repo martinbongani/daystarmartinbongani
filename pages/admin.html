@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <style>
-      /* IT dashboard */
+      /* Admin dashboard */
       .sidebar-users {
         width: 250px;
         background-color: #333;
@@ -89,90 +89,68 @@
       }
 
       .form-container {
-        /* display: table-column;
-            flex-direction: column; */
         align-items: center;
       }
 
-      /* Accounts Data Entry */
-      .dataEntryFormUsers {
-        /* max-width: 600px; */
-        margin: 50px auto;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        width: 60%;
-      }
+      /* Admin Baby Registration */
+      .container-babyRegistration {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 700px;
+    margin: auto;
+}
 
-      .dataEntryFormUsers h1 {
-        text-align: center;
-        margin-bottom: 20px;
-      }
+.h1-babyRegistration {
+    text-align: center;
+    color: #333;
+}
 
-      .form-row {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
-      }
+.label-babyRegistration {
+    font-weight: bold;
+}
 
-      .form-group {
-        flex: 1;
-        margin-right: 10px;
-      }
+.input-babyRegistration {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
 
-      .form-group label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
+.button-babyRegistration {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
 
-      .form-group input,
-      .form-group select {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-      }
+.button-babyRegistration:hover {
+    background-color: #0056b3;
+}
 
-      .button-group {
-        text-align: center;
-        margin-top: 20px;
-      }
+.error {
+    color: red;
+    font-size: 12px;
+}
 
-      .button-group button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
+.success-message {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    color: #155724;
+    font-weight: bold;
+}
 
-      .button-group button:hover {
-        background-color: #0056b3;
-      }
-      .transaction-display {
-        border-top: 1px solid #ddd;
-        padding: 15px 0 0 15px;
-      }
-
-      .transaction-display h3 {
-        color: #007bff;
-        margin-bottom: 10px;
-      }
-
-      .transaction-display p {
-        margin-bottom: 8px;
-      }
-
-      .transaction-display strong {
-        font-weight: bold;
-        margin-right: 5px;
-      }
-
-      /* IT Register */
+/* IT Register */
       .list-users {
         margin: auto;
       }
@@ -220,288 +198,68 @@
       }
 
       /* IT Baby Profile */
-      .container-babyProfileGeneration {
-        max-width: 400px;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
-      }
-
-      .label-babyProfile {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-
-      .input-babyProfile,
-      .input-radio {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-
-      .input-babyProfile:focus,
-      .input-radio:focus {
-        border-color: #007bff;
-        outline: none;
-      }
-
-      .button-babyProfile {
-        display: block;
-        width: 100%;
-        padding: 12px;
-        margin-top: 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-      }
-
-      .button-babyProfile:hover {
-        background-color: #0056b3;
-      }
-
-      .error-message {
-        color: #dc3545;
-        font-size: 14px;
-        margin-top: 5px;
-      }
-
-      .popup-babyProfile {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .popup-content-babyProfile {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        text-align: center;
-      }
-
-      .popup-close-btn-babyProfile {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-        margin-top: 20px;
-      }
-
-      .popup-close-btn-babyProfile:hover {
-        background-color: #0056b3;
-      }
-      /* IT Staff Profile */
-      .container-staffProfile {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        width: 300px;
-        margin: auto;
-      }
-
-      .label-staffProfile {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: bold;
-      }
-
-      .input-staffProfile {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 16px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-
-      .otp-method-container {
-        margin-bottom: 16px;
-      }
-
-      .otp-method-options label {
-        margin-right: 16px;
-      }
-
-      .error-message {
-        color: red;
-        font-size: 12px;
-        margin-bottom: 8px;
-      }
-
-      .button-staffProfile {
-        background-color: #007bff;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-      }
-
-      .popup-staffProfile {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        justify-content: center;
-        align-items: center;
-      }
-
-      .popup-content-staffProfile {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        text-align: center;
-      }
-
-      .popup-close-btn-staffProfile {
-        background-color: #007bff;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-        margin-top: 20px;
-      }
-
-      .popup-close-btn-staffProfile:hover {
-        background-color: #0056b3;
-      }
-
-      /* IT Breaches */
-      .container-breach {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
+      .container-babyRegistration {
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
     border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
 }
 
-.h1-breach {
+.h1-babyRegistration {
     text-align: center;
     color: #333;
+    margin-bottom: 20px;
 }
 
-.log-entry {
-    border: 1px solid #ddd;
-    background-color: #fff;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    position: relative;
+.label-babyRegistration {
+    font-weight: bold;
 }
 
-.log-entry strong {
-    color: #333;
-}
-
-.log-entry .actions {
-    margin-top: 10px;
-}
-
-.log-entry button {
-    padding: 8px 12px;
-    margin-right: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.log-entry button:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-.resolve-btn {
-    background-color: #4caf50;
-    color: #fff;
-}
-
-.ignore-btn {
-    background-color: #f44336;
-    color: #fff;
-}
-
-hr {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin-top: 10px;
-    margin-bottom: 5px;
-}
-
-.notification {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border: 2px solid #ccc;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    max-width: 300px;
+.input-babyRegistration {
     width: 100%;
-    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 5px;
 }
 
-.notification-content {
-    color: #333;
-}
-
-.notification h2 {
-    margin-top: 0;
-    color: #ff6347;
-}
-
-.notification p {
-    margin-bottom: 10px;
-}
-
-.ok-btn {
-    padding: 8px 16px;
+.button-babyRegistration {
+    width: 100%;
+    padding: 12px;
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    outline: none;
+    margin-top: 20px;
 }
 
-.ok-btn:hover {
+.button-babyRegistration:hover {
     background-color: #0056b3;
 }
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.success-message {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    color: #155724;
+    font-weight: bold;
+}    
 
 
     </style>
 
-    <title>I.T Admin Dashboard</title>
+    <title>Admin Dashboard</title>
   </head>
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.css" />
@@ -516,28 +274,15 @@ hr {
     <header>
       <nav class="dash">
         <ul>
-          <li><a href="#dashboard-users">Dashboard</a></li>
-          <li><a href="#register-users">Register</a></li>
-          <li><a href="#registerBaby-users">Register Baby</a></li>
-          <li><a href="#registerStaff-users">Register Staff</a></li>
-          <li><a href="#breaches">Breaches</a></li>
-          <li><a href="#requisition-users">Requisition</a></li>
-          <li class="dropdown">
-            <a
-              class="dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              IT Admin
-              <i class="fa-solid fa-user"></i>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#yourProfile">Your Profile</a></li>
-              <li><a href="/pages/login.html">Logout</a></li>
-            </ul>
-          </li>
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#registerBaby">Register Baby</a></li>
+          <li><a href="#applications">Applications</a></li>
+          <li><a href="#babies">Babies</a></li>
+          <li><a href="#staff">Staff</a></li>
+          <li><a href="#requisitions">Requisitions</a></li>
+          <li><a href="#liveFeed">Live Feed</a></li>
+          <li><a href="#yourProfile">Your Profile</a></li>
+          <li><a href="#logout">Logout</a></li>
         </ul>
       </nav>
     </header>
@@ -546,12 +291,13 @@ hr {
     <main>
       <div class="container-users">
         <!-- Dashboard Section -->
-        <div id="dashboard-users" class="section-users active-users">
+        <div id="dashboard" class="section-users active-users">
           <div class="sidebar-users">
             <ul>
               <li><a href="#realtime-updates">Updates</a></li>
               <li><a href="#daily-tasks">Daily Task Manager</a></li>
               <li><a href="#graphical-reports">Graphical Reports</a></li>
+              <li><a href="#financial-performance">Financial Performance</a></li>
             </ul>
           </div>
           <div class="main-users">
@@ -576,46 +322,104 @@ hr {
                 </select>
                 <canvas
                   class="report-chart-users"
-                  id="graphical-report-chart"
+                  id="graphical-report-chart" 
                 ></canvas>
               </div>
             </div>
+            <div id="financial-performance" class="tabcontent-users">
+              <h2>Financial Performance</h2>
+              <div class="graphical-reports-container-users">
+                <select id="report-type-select">
+                  <option value="bar">Bar Chart</option>
+                  <option value="line">Line Chart</option>
+                  <option value="pie">Pie Chart</option>
+                </select>
+                <canvas
+                  class="report-chart-users"
+                  id="financial-report-chart"
+                ></canvas>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <!-- Register Section -->
-        <div id="register-users" class="section-users">
-          <div id="registerList-users" class="list-users">
-            <h1>Log</h1>
-            <div class="form-row">
-              <!-- Editable list of items -->
-              <label for="reportType">Report Type:</label>
-              <select id="reportType">
-                <option value="babies">Babies</option>
-                <option value="staff">Staff</option>
-                <option value="profiles">Profiles</option>
-              </select>
-            </div>
-            <div class="form-row">
-              <label for="startDate">Start Date:</label>
-              <input type="date" id="startDate" name="startDate" />
-
-              <label for="endDate">End Date:</label>
-              <input type="date" id="endDate" name="endDate" />
-            </div>
-            <div class="form-row">
-              <button onclick="runReport()">Run Report</button>
-            </div>
-            <div id="reportOutput">
-              <h2>Report Details</h2>
-              <ul id="reportItemList"></ul>
-              <button onclick="addReportItem()">Add Line Item</button>
-            </div>
-          </div>
+        <!-- Register Baby -->
+        <div id="registerBaby" class="section-users">
+          <div class="container-babyRegistration">
+            <h1 class="h1-babyRegistration">Baby Registration Form</h1>
+            <form id="babyRegistrationForm" class="babyRegistrationForm">
+                <div class="form-group-babyRegistration">
+                    <label for="firstNameBabyRegistration" class="label-babyRegistration">First Name:</label>
+                    <input type="text" id="firstNameBabyRegistration" name="firstNameBabyRegistration" class="input-babyRegistration" required>
+                    <span class="error" id="errorFirstName"></span>
+                </div>
+                <div class="form-group-babyRegistration">
+                    <label for="lastNameBabyRegistration" class="label-babyRegistration">Last Name:</label>
+                    <input type="text" id="lastNameBabyRegistration" name="lastNameBabyRegistration" class="input-babyRegistration" required>
+                    <span class="error" id="errorLastName"></span>
+                </div>
+                <div class="form-group-babyRegistration">
+                    <label for="genderBabyRegistration" class="label-babyRegistration">Gender:</label>
+                    <select id="genderBabyRegistration" name="genderBabyRegistration" class="input-babyRegistration" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    <span class="error" id="errorGender"></span>
+                </div>
+                <div class="form-group-babyRegistration">
+                    <label for="age" class="label-babyRegistration">Age:</label>
+                    <input type="number" id="age" name="age" class="input-babyRegistration" required>
+                    <span class="error" id="errorAge"></span>
+                </div>
+                <div class="form-group-babyRegistration">
+                    <label for="location" class="label-babyRegistration">Location:</label>
+                    <input type="text" id="location" name="location" class="input-babyRegistration" required>
+                    <span class="error" id="errorLocation"></span>
+                </div>
+                <div class="form-group-babyRegistration">
+                    <label for="broughtBy" class="label-babyRegistration">Brought By:</label>
+                    <input type="text" id="broughtBy" name="broughtBy" class="input-babyRegistration" required>
+                    <span class="error" id="errorBroughtBy"></span>
+                </div>
+                <div class="form-group-babyRegistration">
+                    <label for="timeOfArrival" class="label-babyRegistration">Time of Arrival:</label>
+                    <input type="datetime-local" id="timeOfArrival" name="timeOfArrival" class="input-babyRegistration" required>
+                    <span class="error" id="errorTimeOfArrival"></span>
+                </div>
+                <div class="form-group-babyRegistration">
+                    <label class="label-babyRegistration">Father's Name:</label>
+                    <input type="text" id="fathersName" name="fathersName" class="input-babyRegistration">
+                    <label><input type="checkbox" id="deceasedFather" name="deceasedFather"> Deceased</label>
+                </div>
+                <div class="form-group-babyRegistration">
+                    <label class="label-babyRegistration">Mother's Name:</label>
+                    <input type="text" id="mothersName" name="mothersName" class="input-babyRegistration">
+                    <label><input type="checkbox" id="deceasedMother" name="deceasedMother"> Deceased</label>
+                </div>
+                <div class="form-group-babyRegistration">
+                    <label for="feeType" class="label-babyRegistration">Fee Type:</label>
+                    <select id="feeType" name="feeType" class="input-babyRegistration" required>
+                        <option value="">Select Fee Type</option>
+                        <option value="halfDay">Half Day (UGX 10,000)</option>
+                        <option value="fullDay">Full Day (UGX 15,000)</option>
+                    </select>
+                    <span class="error" id="errorFeeType"></span>
+                </div>
+                <div class="form-group-babyRegistration">
+                    <button type="submit" class="button-babyRegistration">Register Baby</button>
+                </div>
+            </form>
+            <div id="successMessage" class="success-message"></div>
+        </div>
+                </div>
+       </div>          
+      </div>
         </div>
 
-        <!-- Register Baby Profile -->
-        <div id="registerBaby-users" class="section-users">
+        <!-- Applications -->
+        <div id="applications" class="section-users">
           <div class="container-babyProfileGeneration">
             <h1>Baby Profile Generation</h1>
             <form id="babyProfileForm" class="form-group-babyProfile">
@@ -681,8 +485,8 @@ hr {
           </div>
         </div>
 
-        <!-- Register Staff Profile -->
-        <div id="registerStaff-users" class="section-users">
+        <!-- Babies -->
+        <div id="babies" class="section-users">
           <div class="container-staffProfile">
             <h1>Staff Profile Generation</h1>
             <form id="formStaffProfile" class="form-group-staffProfile">
@@ -759,19 +563,52 @@ hr {
           </div>
         </div>
 
-        <!-- Breaches -->
-        <div id="breaches" class="section-users">
+        <!-- Staff -->
+        <div id="staff" class="section-users">
           <div class="container-breach">
             <h1 class="h1-breach">System Breach Log</h1>
             <div id="log"></div>
           </div>
         </div>
+
+        <!-- Requisitions -->
+        <div id="requisitions" class="section-users">
+          <div class="container-breach">
+            <h1 class="h1-breach">System Breach Log</h1>
+            <div id="log"></div>
+          </div>
+        </div>
+
+        <!-- Live Feed -->
+        <div id="staff" class="section-users">
+          <div class="container-breach">
+            <h1 class="h1-breach">System Breach Log</h1>
+            <div id="log"></div>
+          </div>
+        </div>
+
+        <!-- Your Profile -->
+        <div id="yourProfile" class="section-users">
+          <div class="container-breach">
+            <h1 class="h1-breach">System Breach Log</h1>
+            <div id="log"></div>
+          </div>
+        </div>
+
+        <!-- Logout -->
+        <div id="logout" class="section-users">
+          <div class="container-breach">
+            <h1 class="h1-breach">System Breach Log</h1>
+            <div id="log"></div>
+          </div>
+        </div>
+
       </div>
     </main>
 
     <div w3-include-html="/pages/footer.html"></div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/techadmin.js"></script>
+    <script src="/js/admin.js"></script>
     <script src="/css/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/js/add.js"></script>
   </body>

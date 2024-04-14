@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // login data
     const users = [
-      { username: "techadmin", password: "123", userType: "techadmin" },
+      { username: "admin", password: "123", userType: "staff" },
       { username: "baby", password: "test123", userType: "baby" },
-      { username: "director", password: "test123", userType: "staff" },
+      { username: "techadmin", password: "test123", userType: "staff" },
       { username: "accounts", password: "test123", userType: "staff" },
       { username: "procurement", password: "test123", userType: "staff" },
       { username: "sitter", password: "test123", userType: "staff" },
@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", function() {
         case "baby":
           window.location.href = "/pages/baby.html";
           break;
-        case "director":
-          window.location.href = "/pages/director.html";
+        case "admin":
+          window.location.href = "/pages/admin.html";
           break;
           case "accounts":
             window.location.href = "/pages/accounts.html";
