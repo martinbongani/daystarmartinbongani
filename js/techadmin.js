@@ -4,9 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const usersReportTypeSelect = document.getElementById('report-type-select');
     const usersGraphicalReportChart = document.getElementById('graphical-report-chart').getContext('2d');
     const form = document.getElementById('babyProfileForm');
-    const firstNameInput = document.getElementById('firstNameBabyProfile');
-    const lastNameInput = document.getElementById('lastNameBabyProfile');
-    const emailInput = document.getElementById('email');
+    const popup = document.getElementById('babyProfilePopup');
+    const closePopupBtn = document.getElementById('closePopupBtn');
+    const formStaffProfile = document.getElementById('formStaffProfile');
+    const popupStaffProfile = document.getElementById('popupStaffProfile');
+    const closePopupBtnStaffProfile = document.getElementById('closePopupBtnStaffProfile');
+
 
     // Function to switch active section
 function switchSection(sectionId) {
@@ -207,166 +210,349 @@ renderUsersGraphicalReport(selectedReportType);
 
 
     // Data User Profile
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const firstName = firstNameInput.value.trim();
-        const lastName = lastNameInput.value.trim();
-        const email = emailInput.value.trim();
+        const firstName = document.getElementById('babyProfileFirstName').value.trim();
+        const lastName = document.getElementById('babyProfileLastName').value.trim();
+        const otpMethod = document.querySelector('input[name="otpMethod"]:checked');
 
-        if (!firstName || !lastName || !email) {
-            alert('Please fill out all fields.');
+        if (!validateForm(firstName, lastName, otpMethod)) {
             return;
         }
 
         const username = generateUsername(firstName, lastName);
-        const otp = generateOTP();
+        const otp = generateOtp();
 
-        sendProfileDetails(username, otp, email);
+        const deliveryMethod = otpMethod.value;
 
-        // Reset form after submission
-        firstNameInput.value = '';
-        lastNameInput.value = '';
-        emailInput.value = '';
+        try {
+            const message = `Username: ${username}\nOTP: ${otp}`;
+            await sendDetails(username, otp, deliveryMethod);
 
-        alert('Profile generated successfully!');
-    });
+            const deliveryType = deliveryMethod === 'email' ? 'Email' : 'SMS';
+            const displayMessage = `Username and OTP sent via ${deliveryType}.`;
+            displayPopup(displayMessage);
 
-    function generateUsername(firstName, lastName) {
-        const randomNum = Math.floor(Math.random() * 1000);
-        return firstName.toLowerCase() + lastName.toLowerCase() + randomNum;
-    }
-
-    function generateOTP() {
-        return Math.floor(1000 + Math.random() * 9000); // 4-digit OTP
-    }
-
-    function sendProfileDetails(username, otp, email) {
-        // Simulate sending email with username and OTP
-        console.log(`Sending email to ${email} with username: ${username} and OTP: ${otp}`);
-        // Here you can implement actual email sending logic
-    }    
-    // Accounts Budget
-// Sample budget data for departments
-const financeBudget = {
-    projected: 100000,
-    spent: 70000,
-    balance: 30000
-};
-
-const adminBudget = {
-    projected: 80000,
-    spent: 60000,
-    balance: 20000
-};
-
-const procurementBudget = {
-    projected: 120000,
-    spent: 90000,
-    balance: 30000
-};
-
-// Display finance department budget details
-document.getElementById('financeProjected').textContent = financeBudget.projected.toLocaleString();
-document.getElementById('financeSpent').textContent = financeBudget.spent.toLocaleString();
-document.getElementById('financeBalance').textContent = financeBudget.balance.toLocaleString();
-
-// Display administration department budget details
-document.getElementById('adminProjected').textContent = adminBudget.projected.toLocaleString();
-document.getElementById('adminSpent').textContent = adminBudget.spent.toLocaleString();
-document.getElementById('adminBalance').textContent = adminBudget.balance.toLocaleString();
-
-// Display procurement department budget details
-document.getElementById('procurementProjected').textContent = procurementBudget.projected.toLocaleString();
-document.getElementById('procurementSpent').textContent = procurementBudget.spent.toLocaleString();
-document.getElementById('procurementBalance').textContent = procurementBudget.balance.toLocaleString();
-
-// Calculate overall budget overview
-const totalProjected = financeBudget.projected + adminBudget.projected + procurementBudget.projected;
-const totalSpent = financeBudget.spent + adminBudget.spent + procurementBudget.spent;
-const totalBalance = financeBudget.balance + adminBudget.balance + procurementBudget.balance;
-
-// Display overall budget overview
-document.getElementById('totalProjected').textContent = totalProjected.toLocaleString();
-document.getElementById('totalSpent').textContent = totalSpent.toLocaleString();
-document.getElementById('totalBalance').textContent = totalBalance.toLocaleString();
-
-// Accounts Inventory
-let inventoryItems = [];
-
-    // Function to render inventory items
-    function renderInventory() {
-        inventoryList.innerHTML = '';
-        inventoryItems.forEach((item, index) => {
-            const itemElement = document.createElement('div');
-            itemElement.classList.add('list-item');
-            itemElement.innerHTML = `
-                <strong>${item.name}</strong> - Quantity: ${item.quantity}
-                <button onclick="updateItem(${index})">Update</button>
-                <button onclick="deleteItem(${index})">Delete</button>
-            `;
-            inventoryList.appendChild(itemElement);
-        });
-    }
-
-    // Function to add a new item
-    addItemForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        // Validate form fields
-        const itemNameInput = document.getElementById('itemName');
-        const itemQuantityInput = document.getElementById('itemQuantity');
-
-        if (validateField(itemNameInput) && validateField(itemQuantityInput)) {
-            const itemName = itemNameInput.value;
-            const itemQuantity = parseInt(itemQuantityInput.value);
-
-            if (itemName && !isNaN(itemQuantity) && itemQuantity > 0) {
-                const newItem = {
-                    name: itemName,
-                    quantity: itemQuantity
-                };
-                inventoryItems.push(newItem);
-                renderInventory();
-                addItemForm.reset();
-            } else {
-                alert('Please provide a valid item name and quantity.');
-            }
-        } else {
-            alert('Please fill out all required fields.');
+            clearForm(); // Clear the form after successful submission
+        } catch (error) {
+            console.error('Error sending details:', error);
+            alert('An error occurred while sending details.');
         }
     });
 
-    // Function to validate a form field
-    function validateField(input) {
-        if (input.value.trim() === '') {
-            input.classList.add('invalid');
-            return false;
-        } else {
-            input.classList.remove('invalid');
-            return true;
-        }
+    closePopupBtn.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+
+
+function validateForm(firstName, lastName, otpMethod) {
+    const errorFirstName = document.getElementById('errorFirstName');
+    const errorLastName = document.getElementById('errorLastName');
+    const errorOtpMethod = document.getElementById('errorOtpMethod');
+
+    errorFirstName.textContent = '';
+    errorLastName.textContent = '';
+    errorOtpMethod.textContent = '';
+
+    let isValid = true;
+
+    if (firstName === '') {
+        errorFirstName.textContent = 'First name is required';
+        isValid = false;
     }
 
-    // Function to update an item
-    window.updateItem = (index) => {
-        const newQuantity = prompt(`Update quantity for ${inventoryItems[index].name}:`, inventoryItems[index].quantity);
-        const parsedQuantity = parseInt(newQuantity);
-        if (!isNaN(parsedQuantity) && parsedQuantity >= 0) {
-            inventoryItems[index].quantity = parsedQuantity;
-            renderInventory();
-        } else {
-            alert('Please provide a valid quantity.');
-        }
-    };
+    if (lastName === '') {
+        errorLastName.textContent = 'Last name is required';
+        isValid = false;
+    }
 
-    // Function to delete an item
-    window.deleteItem = (index) => {
-        if (confirm(`Are you sure you want to delete ${inventoryItems[index].name}?`)) {
-            inventoryItems.splice(index, 1);
-            renderInventory();
-        }
-    };
+    if (!otpMethod) {
+        errorOtpMethod.textContent = 'Please select OTP delivery method';
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+function generateUsername(firstName, lastName) {
+    const randomNum = Math.floor(Math.random() * 1000);
+    const username = `${firstName.toLowerCase()}_${lastName.toLowerCase()}${randomNum}`;
+    return username;
+}
+
+function generateOtp() {
+    const otp = Math.floor(1000 + Math.random() * 9000);
+    return otp;
+}
+
+async function sendDetails(username, otp, deliveryMethod) {
+    // Simulate sending details (replace with actual sending logic)
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log(`Sending details to ${deliveryMethod}...`);
+            resolve();
+        }, 2000); // Simulate 2 seconds delay for sending
+    });
+}
+
+function displayPopup(message) {
+    const popupContent = document.getElementById('babyProfileDetails');
+    popupContent.textContent = message;
+    const popup = document.getElementById('babyProfilePopup');
+    popup.style.display = 'flex';
+}
+
+function clearForm() {
+    const firstNameInput = document.getElementById('babyProfileFirstName');
+    const lastNameInput = document.getElementById('babyProfileLastName');
+    const otpMethods = document.querySelectorAll('input[name="otpMethod"]');
+
+    firstNameInput.value = '';
+    lastNameInput.value = '';
+
+    otpMethods.forEach(method => {
+        method.checked = false;
+    });
+
+    const errorMessages = document.querySelectorAll('.error-message');
+    errorMessages.forEach(message => {
+        message.textContent = '';
+    });
+}
+
+// Accounts Budget
+formStaffProfile.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const firstNameInputStaffProfile = document.getElementById('firstNameInputStaffProfile').value.trim();
+    const lastNameInputStaffProfile = document.getElementById('lastNameInputStaffProfile').value.trim();
+    const otpMethodInputStaffProfile = document.querySelector('input[name="otpMethodStaffProfile"]:checked');
+
+    if (!validateFormStaffProfile(firstNameInputStaffProfile, lastNameInputStaffProfile, otpMethodInputStaffProfile)) {
+        return;
+    }
+
+    const generatedUsernameStaffProfile = generateUsernameStaffProfile(firstNameInputStaffProfile, lastNameInputStaffProfile);
+    const generatedOtpStaffProfile = generateOtpStaffProfile();
+
+    const deliveryMethodStaffProfile = otpMethodInputStaffProfile.value;
+
+    try {
+        const message = `Username: ${generatedUsernameStaffProfile}\nOTP: ${generatedOtpStaffProfile}`;
+        await sendDetailsStaffProfile(generatedUsernameStaffProfile, generatedOtpStaffProfile, deliveryMethodStaffProfile);
+
+        const deliveryType = deliveryMethodStaffProfile === 'email' ? 'Email' : 'SMS';
+        const displayMessage = `Username and OTP sent via ${deliveryType}.`;
+        displayPopupStaffProfile(displayMessage);
+        clearFormStaffProfile(); // Clear the form after submission
+    } catch (error) {
+        console.error('Error sending details:', error);
+        alert('An error occurred while sending details.');
+    }
+
+
+closePopupBtnStaffProfile.addEventListener('click', () => {
+    popupStaffProfile.style.display = 'none';
+});
+});
+
+function validateFormStaffProfile(firstName, lastName, otpMethod) {
+const errorFirstNameStaffProfile = document.getElementById('errorFirstNameStaffProfile');
+const errorLastNameStaffProfile = document.getElementById('errorLastNameStaffProfile');
+const errorOtpMethodStaffProfile = document.getElementById('errorOtpMethodStaffProfile');
+
+errorFirstNameStaffProfile.textContent = '';
+errorLastNameStaffProfile.textContent = '';
+errorOtpMethodStaffProfile.textContent = '';
+
+let isValid = true;
+
+if (firstName === '') {
+    errorFirstNameStaffProfile.textContent = 'First name is required';
+    isValid = false;
+}
+
+if (lastName === '') {
+    errorLastNameStaffProfile.textContent = 'Last name is required';
+    isValid = false;
+}
+
+if (!otpMethod) {
+    errorOtpMethodStaffProfile.textContent = 'Please select OTP delivery method';
+    isValid = false;
+}
+
+return isValid;
+}
+
+function generateUsernameStaffProfile(firstName, lastName) {
+const randomNumStaffProfile = Math.floor(Math.random() * 1000);
+const usernameStaffProfile = `${firstName.toLowerCase()}_${lastName.toLowerCase()}${randomNumStaffProfile}`;
+return usernameStaffProfile;
+}
+
+function generateOtpStaffProfile() {
+const otpStaffProfile = Math.floor(1000 + Math.random() * 9000);
+return otpStaffProfile;
+}
+
+async function sendDetailsStaffProfile(username, otp, deliveryMethod) {
+// Simulate sending details (replace with actual sending logic)
+return new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log(`Sending details to ${deliveryMethod}...`);
+        resolve();
+    }, 2000); // Simulate 2 seconds delay for sending
+});
+}
+
+function displayPopupStaffProfile(message) {
+const popupContentStaffProfile = document.getElementById('popupContentStaffProfile');
+popupContentStaffProfile.innerHTML = `
+    <p>${message}</p>
+    <button id="okButtonStaffProfile" class="popup-close-btn-staffProfile">OK</button>
+`;
+
+const popupStaffProfile = document.getElementById('popupStaffProfile');
+popupStaffProfile.style.display = 'flex';
+
+// Add event listener to the "OK" button
+const okButtonStaffProfile = document.getElementById('okButtonStaffProfile');
+okButtonStaffProfile.addEventListener('click', () => {
+    popupStaffProfile.style.display = 'none'; // Hide the popup
+});
+}
+
+function clearFormStaffProfile() {
+document.getElementById('firstNameInputStaffProfile').value = '';
+document.getElementById('lastNameInputStaffProfile').value = '';
+document.querySelector('input[name="otpMethodStaffProfile"]:checked').checked = false;
+document.getElementById('errorFirstNameStaffProfile').textContent = '';
+document.getElementById('errorLastNameStaffProfile').textContent = '';
+document.getElementById('errorOtpMethodStaffProfile').textContent = '';
+}
+
+// // Sample budget data for departments
+// const financeBudget = {
+//     projected: 100000,
+//     spent: 70000,
+//     balance: 30000
+// };
+
+// const adminBudget = {
+//     projected: 80000,
+//     spent: 60000,
+//     balance: 20000
+// };
+
+// const procurementBudget = {
+//     projected: 120000,
+//     spent: 90000,
+//     balance: 30000
+// };
+
+// // Display finance department budget details
+// document.getElementById('financeProjected').textContent = financeBudget.projected.toLocaleString();
+// document.getElementById('financeSpent').textContent = financeBudget.spent.toLocaleString();
+// document.getElementById('financeBalance').textContent = financeBudget.balance.toLocaleString();
+
+// // Display administration department budget details
+// document.getElementById('adminProjected').textContent = adminBudget.projected.toLocaleString();
+// document.getElementById('adminSpent').textContent = adminBudget.spent.toLocaleString();
+// document.getElementById('adminBalance').textContent = adminBudget.balance.toLocaleString();
+
+// // Display procurement department budget details
+// document.getElementById('procurementProjected').textContent = procurementBudget.projected.toLocaleString();
+// document.getElementById('procurementSpent').textContent = procurementBudget.spent.toLocaleString();
+// document.getElementById('procurementBalance').textContent = procurementBudget.balance.toLocaleString();
+
+// // Calculate overall budget overview
+// const totalProjected = financeBudget.projected + adminBudget.projected + procurementBudget.projected;
+// const totalSpent = financeBudget.spent + adminBudget.spent + procurementBudget.spent;
+// const totalBalance = financeBudget.balance + adminBudget.balance + procurementBudget.balance;
+
+// // Display overall budget overview
+// document.getElementById('totalProjected').textContent = totalProjected.toLocaleString();
+// document.getElementById('totalSpent').textContent = totalSpent.toLocaleString();
+// document.getElementById('totalBalance').textContent = totalBalance.toLocaleString();
+
+// // Accounts Inventory
+// let inventoryItems = [];
+
+//     // Function to render inventory items
+//     function renderInventory() {
+//         inventoryList.innerHTML = '';
+//         inventoryItems.forEach((item, index) => {
+//             const itemElement = document.createElement('div');
+//             itemElement.classList.add('list-item');
+//             itemElement.innerHTML = `
+//                 <strong>${item.name}</strong> - Quantity: ${item.quantity}
+//                 <button onclick="updateItem(${index})">Update</button>
+//                 <button onclick="deleteItem(${index})">Delete</button>
+//             `;
+//             inventoryList.appendChild(itemElement);
+//         });
+//     }
+
+//     // Function to add a new item
+//     addItemForm.addEventListener('submit', (event) => {
+//         event.preventDefault();
+
+//         // Validate form fields
+//         const itemNameInput = document.getElementById('itemName');
+//         const itemQuantityInput = document.getElementById('itemQuantity');
+
+//         if (validateField(itemNameInput) && validateField(itemQuantityInput)) {
+//             const itemName = itemNameInput.value;
+//             const itemQuantity = parseInt(itemQuantityInput.value);
+
+//             if (itemName && !isNaN(itemQuantity) && itemQuantity > 0) {
+//                 const newItem = {
+//                     name: itemName,
+//                     quantity: itemQuantity
+//                 };
+//                 inventoryItems.push(newItem);
+//                 renderInventory();
+//                 addItemForm.reset();
+//             } else {
+//                 alert('Please provide a valid item name and quantity.');
+//             }
+//         } else {
+//             alert('Please fill out all required fields.');
+//         }
+//     });
+
+//     // Function to validate a form field
+//     function validateField(input) {
+//         if (input.value.trim() === '') {
+//             input.classList.add('invalid');
+//             return false;
+//         } else {
+//             input.classList.remove('invalid');
+//             return true;
+//         }
+//     }
+
+//     // Function to update an item
+//     window.updateItem = (index) => {
+//         const newQuantity = prompt(`Update quantity for ${inventoryItems[index].name}:`, inventoryItems[index].quantity);
+//         const parsedQuantity = parseInt(newQuantity);
+//         if (!isNaN(parsedQuantity) && parsedQuantity >= 0) {
+//             inventoryItems[index].quantity = parsedQuantity;
+//             renderInventory();
+//         } else {
+//             alert('Please provide a valid quantity.');
+//         }
+//     };
+
+//     // Function to delete an item
+//     window.deleteItem = (index) => {
+//         if (confirm(`Are you sure you want to delete ${inventoryItems[index].name}?`)) {
+//             inventoryItems.splice(index, 1);
+//             renderInventory();
+//         }
+//     };
 
             
 });
