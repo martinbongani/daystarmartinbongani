@@ -150,111 +150,113 @@
     font-weight: bold;
 }
 
-/* IT Register */
-      .list-users {
-        margin: auto;
-      }
-
-      .list-users h1 {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-
-      .list-users .form-row {
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-      }
-
-      .list-users label {
-        width: 120px;
-        margin-right: 10px;
-        font-weight: bold;
-        padding: 10px;
-      }
-
-      input[type="date"],
-      select {
-        flex: 1;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-      }
-
-      button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        font-size: 16px;
-        font-weight: bold;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-
-      button:hover {
-        background-color: #0056b3;
-      }
-
-      /* IT Baby Profile */
-      .container-babyRegistration {
+/* Admin Applications */
+.container-applicationCheckAdmin {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
     background-color: #fff;
-    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.h1-applicationCheckAdmin {
+    text-align: center;
+    color: #007bff;
+}
+
+.h2-applicationCheckAdmin {
+    color: #555;
+}
+
+ul.adminApplicationCheck {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+
+li:hover {
+    background-color: #f5f5f5;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 80%;
     width: 400px;
 }
 
-.h1-babyRegistration {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.label-babyRegistration {
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-.input-babyRegistration {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 5px;
+.close:hover,
+.close:focus {
+    color: #333;
 }
 
-.button-babyRegistration {
-    width: 100%;
-    padding: 12px;
-    background-color: #007bff;
-    color: #fff;
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 20px;
+    font-size: 16px;
 }
 
-.button-babyRegistration:hover {
-    background-color: #0056b3;
+.buttonAcceptApplicationCheckAdmin {
+    background-color: #28a745;
+    color: #fff;
 }
 
-.error {
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
+.buttonRejectApplicationCheckAdmin {
+    background-color: #dc3545;
+    color: #fff;
 }
 
-.success-message {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
-    border-radius: 4px;
-    color: #155724;
-    font-weight: bold;
-}    
+button:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 600px) {
+    .modal-content {
+        max-width: 100%;
+        width: 80%;
+    }
+}
+
 
 
     </style>
@@ -351,17 +353,17 @@
             <form id="babyRegistrationForm" class="babyRegistrationForm">
                 <div class="form-group-babyRegistration">
                     <label for="firstNameBabyRegistration" class="label-babyRegistration">First Name:</label>
-                    <input type="text" id="firstNameBabyRegistration" name="firstNameBabyRegistration" class="input-babyRegistration" required>
+                    <input type="text" id="firstNameBabyRegistration" name="firstNameBabyRegistration" class="input-babyRegistration">
                     <span class="error" id="errorFirstName"></span>
                 </div>
                 <div class="form-group-babyRegistration">
                     <label for="lastNameBabyRegistration" class="label-babyRegistration">Last Name:</label>
-                    <input type="text" id="lastNameBabyRegistration" name="lastNameBabyRegistration" class="input-babyRegistration" required>
+                    <input type="text" id="lastNameBabyRegistration" name="lastNameBabyRegistration" class="input-babyRegistration">
                     <span class="error" id="errorLastName"></span>
                 </div>
                 <div class="form-group-babyRegistration">
                     <label for="genderBabyRegistration" class="label-babyRegistration">Gender:</label>
-                    <select id="genderBabyRegistration" name="genderBabyRegistration" class="input-babyRegistration" required>
+                    <select id="genderBabyRegistration" name="genderBabyRegistration" class="input-babyRegistration">
                         <option value="">Select Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
@@ -370,22 +372,22 @@
                 </div>
                 <div class="form-group-babyRegistration">
                     <label for="age" class="label-babyRegistration">Age:</label>
-                    <input type="number" id="age" name="age" class="input-babyRegistration" required>
+                    <input type="number" id="age" name="age" class="input-babyRegistration">
                     <span class="error" id="errorAge"></span>
                 </div>
                 <div class="form-group-babyRegistration">
                     <label for="location" class="label-babyRegistration">Location:</label>
-                    <input type="text" id="location" name="location" class="input-babyRegistration" required>
+                    <input type="text" id="location" name="location" class="input-babyRegistration">
                     <span class="error" id="errorLocation"></span>
                 </div>
                 <div class="form-group-babyRegistration">
                     <label for="broughtBy" class="label-babyRegistration">Brought By:</label>
-                    <input type="text" id="broughtBy" name="broughtBy" class="input-babyRegistration" required>
+                    <input type="text" id="broughtBy" name="broughtBy" class="input-babyRegistration">
                     <span class="error" id="errorBroughtBy"></span>
                 </div>
                 <div class="form-group-babyRegistration">
                     <label for="timeOfArrival" class="label-babyRegistration">Time of Arrival:</label>
-                    <input type="datetime-local" id="timeOfArrival" name="timeOfArrival" class="input-babyRegistration" required>
+                    <input type="datetime-local" id="timeOfArrival" name="timeOfArrival" class="input-babyRegistration">
                     <span class="error" id="errorTimeOfArrival"></span>
                 </div>
                 <div class="form-group-babyRegistration">
@@ -400,7 +402,7 @@
                 </div>
                 <div class="form-group-babyRegistration">
                     <label for="feeType" class="label-babyRegistration">Fee Type:</label>
-                    <select id="feeType" name="feeType" class="input-babyRegistration" required>
+                    <select id="feeType" name="feeType" class="input-babyRegistration">
                         <option value="">Select Fee Type</option>
                         <option value="halfDay">Half Day (UGX 10,000)</option>
                         <option value="fullDay">Full Day (UGX 15,000)</option>
@@ -420,70 +422,34 @@
 
         <!-- Applications -->
         <div id="applications" class="section-users">
-          <div class="container-babyProfileGeneration">
-            <h1>Baby Profile Generation</h1>
-            <form id="babyProfileForm" class="form-group-babyProfile">
-              <div>
-                <label for="babyProfileFirstName" class="label-babyProfile"
-                  >First Name:</label
-                >
-                <input
-                  type="text"
-                  id="babyProfileFirstName"
-                  class="input-babyProfile"
-                  name="babyProfileFirstName"
-                />
-                <span id="errorFirstName" class="error-message"></span>
-              </div>
-              <div>
-                <label for="babyProfileLastName" class="label-babyProfile"
-                  >Last Name:</label
-                >
-                <input
-                  type="text"
-                  id="babyProfileLastName"
-                  class="input-babyProfile"
-                  name="babyProfileLastName"
-                />
-                <span id="errorLastName" class="error-message"></span>
-              </div>
-              <div>
-                <label for="otpMethod" class="label-babyProfile"
-                  >Username and OTP Delivery Method:</label
-                >
-                <div>
-                  <input
-                    type="radio"
-                    id="emailMethod"
-                    name="otpMethod"
-                    value="email"
-                  />
-                  <label for="emailMethod">Email</label>
-                  <input
-                    type="radio"
-                    id="smsMethod"
-                    name="otpMethod"
-                    value="sms"
-                  />
-                  <label for="smsMethod">SMS</label>
-                </div>
-                <span id="errorOtpMethod" class="error-message"></span>
-              </div>
-              <button type="submit" class="button-babyProfile">
-                Generate Username & OTP
-              </button>
-            </form>
-          </div>
-
-          <div id="babyProfilePopup" class="popup-babyProfile">
-            <div class="popup-content-babyProfile">
-              <span id="babyProfileDetails"></span>
-              <button id="closePopupBtn" class="popup-close-btn-babyProfile">
-                OK
-              </button>
-            </div>
-          </div>
+          <div class="container-applicationCheckAdmin">
+            <h1 class="h1-applicationCheckAdmin">Daycare Application Management</h1>
+            
+            <!-- Baby Applications Section -->
+            <section id="babyApplications">
+                <h2 class="h2-applicationCheckAdmin">Baby Applications</h2>
+                <ul id="babyList" class="adminApplicationCheck"></ul>
+            </section>
+            
+            <!-- Employee Applications Section -->
+            <section id="employeeApplications">
+                <h2>Employee Applications</h2>
+                <ul id="employeeList" class="adminApplicationCheck"></ul>
+            </section>
         </div>
+    
+        <!-- Modal for Application Details -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="applicationDetails"></div>
+                <div class="button-group">
+                    <button id="acceptButton" class="buttonAcceptApplicationCheckAdmin">Accept</button>
+                    <button id="rejectButton" class="buttonRejectApplicationCheckAdmin">Reject</button>
+                </div>
+            </div>
+        </div>
+            </div>
 
         <!-- Babies -->
         <div id="babies" class="section-users">

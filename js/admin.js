@@ -4,6 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const usersReportTypeSelect = document.getElementById('report-type-select');
     const usersGraphicalReportChart = document.getElementById('graphical-report-chart').getContext('2d');
     const form = document.getElementById('babyRegistrationForm');
+    const babyList = document.getElementById('babyList');
+    const employeeList = document.getElementById('employeeList');
+    const modal = document.getElementById('modal');
+    const applicationDetails = document.getElementById('applicationDetails');
+    const acceptButton = document.getElementById('acceptButton');
+    const rejectButton = document.getElementById('rejectButton');
+    const closeButton = document.querySelector('.close');
+
 
     // Function to switch active section
 function switchSection(sectionId) {
@@ -339,117 +347,124 @@ usersReportTypeSelect.addEventListener('change', function() {
         form.reset();
     }
     
-// IT Staff Profile
-formStaffProfile.addEventListener('submit', async (event) => {
-    event.preventDefault();
+// Admin Applications
+    // Counter variables to track application numbers
+    let babyApplicationCounter = 0;
+    let employeeApplicationCounter = 0;
 
-    const firstNameInputStaffProfile = document.getElementById('firstNameInputStaffProfile').value.trim();
-    const lastNameInputStaffProfile = document.getElementById('lastNameInputStaffProfile').value.trim();
-    const otpMethodInputStaffProfile = document.querySelector('input[name="otpMethodStaffProfile"]:checked');
-
-    if (!validateFormStaffProfile(firstNameInputStaffProfile, lastNameInputStaffProfile, otpMethodInputStaffProfile)) {
-        return;
+    // Function to generate sequential application numbers
+    function generateApplicationNumber(type) {
+        if (type === 'baby') {
+            babyApplicationCounter++;
+            return `Baby Application ${padNumber(babyApplicationCounter)}/2024`;
+        } else if (type === 'employee') {
+            employeeApplicationCounter++;
+            return `Staff Application ${padNumber(employeeApplicationCounter)}/2024`;
+        }
     }
 
-    const generatedUsernameStaffProfile = generateUsernameStaffProfile(firstNameInputStaffProfile, lastNameInputStaffProfile);
-    const generatedOtpStaffProfile = generateOtpStaffProfile();
-
-    const deliveryMethodStaffProfile = otpMethodInputStaffProfile.value;
-
-    try {
-        const message = `Username: ${generatedUsernameStaffProfile}\nOTP: ${generatedOtpStaffProfile}`;
-        await sendDetailsStaffProfile(generatedUsernameStaffProfile, generatedOtpStaffProfile, deliveryMethodStaffProfile);
-
-        const deliveryType = deliveryMethodStaffProfile === 'email' ? 'Email' : 'SMS';
-        const displayMessage = `Username and OTP sent via ${deliveryType}.`;
-        displayPopupStaffProfile(displayMessage);
-        clearFormStaffProfile(); // Clear the form after submission
-    } catch (error) {
-        console.error('Error sending details:', error);
-        alert('An error occurred while sending details.');
+    // Helper function to pad numbers with leading zeros (e.g., 001, 002, ...)
+    function padNumber(num) {
+        return num.toString().padStart(3, '0');
     }
 
+    // Render applications in the list with formatted numbers
+    function renderApplicationsWithNumbers(applications, listElement) {
+        listElement.innerHTML = ''; // Clear existing list
 
-closePopupBtnStaffProfile.addEventListener('click', () => {
-    popupStaffProfile.style.display = 'none';
-});
-});
+        applications.forEach(application => {
+            const listItem = document.createElement('li');
+            const applicationNumber = generateApplicationNumber(application.type);
+            listItem.textContent = applicationNumber;
+            listItem.addEventListener('click', () => showApplicationDetails(application));
+            listElement.appendChild(listItem);
+        });
+    }
 
-function validateFormStaffProfile(firstName, lastName, otpMethod) {
-const errorFirstNameStaffProfile = document.getElementById('errorFirstNameStaffProfile');
-const errorLastNameStaffProfile = document.getElementById('errorLastNameStaffProfile');
-const errorOtpMethodStaffProfile = document.getElementById('errorOtpMethodStaffProfile');
+    // Simulated applications (up to 10 for each category)
+    const numApplications = 10; // Number of applications per category
+    const babyApplications = generateRandomApplications(numApplications, 'baby');
+    const employeeApplications = generateRandomApplications(numApplications, 'employee');
 
-errorFirstNameStaffProfile.textContent = '';
-errorLastNameStaffProfile.textContent = '';
-errorOtpMethodStaffProfile.textContent = '';
+    // Display applications in the UI with formatted numbers
+    renderApplicationsWithNumbers(babyApplications, babyList);
+    renderApplicationsWithNumbers(employeeApplications, employeeList);
 
-let isValid = true;
+    // Function to generate random applications
+    function generateRandomApplications(num, type) {
+        const applications = [];
 
-if (firstName === '') {
-    errorFirstNameStaffProfile.textContent = 'First name is required';
-    isValid = false;
-}
+        for (let i = 0; i < num; i++) {
+            applications.push({ type });
+        }
 
-if (lastName === '') {
-    errorLastNameStaffProfile.textContent = 'Last name is required';
-    isValid = false;
-}
+        return applications;
+    }
 
-if (!otpMethod) {
-    errorOtpMethodStaffProfile.textContent = 'Please select OTP delivery method';
-    isValid = false;
-}
+    // Function to display application details in the modal
+    function showApplicationDetails(application) {
+        modal.style.display = 'block';
+        applicationDetails.innerHTML = `
+            <h2>${generateApplicationNumber(application.type)} Details</h2>
+            <p>Type: ${application.type}</p>
+            <p>Details: (Add specific details here)</p>
+        `;
 
-return isValid;
-}
+        // Handle accept button click
+        acceptButton.onclick = function() {
+            acceptApplication(application);
+            modal.style.display = 'none';
+        };
 
-function generateUsernameStaffProfile(firstName, lastName) {
-const randomNumStaffProfile = Math.floor(Math.random() * 1000);
-const usernameStaffProfile = `${firstName.toLowerCase()}_${lastName.toLowerCase()}${randomNumStaffProfile}`;
-return usernameStaffProfile;
-}
+        // Handle reject button click
+        rejectButton.onclick = function() {
+            rejectApplication(application);
+            modal.style.display = 'none';
+        };
 
-function generateOtpStaffProfile() {
-const otpStaffProfile = Math.floor(1000 + Math.random() * 9000);
-return otpStaffProfile;
-}
+        // Close modal when the close button is clicked
+        closeButton.onclick = function() {
+            modal.style.display = 'none';
+        };
+    }
 
-async function sendDetailsStaffProfile(username, otp, deliveryMethod) {
-// Simulate sending details (replace with actual sending logic)
-return new Promise((resolve, reject) => {
-    setTimeout(() => {
-        console.log(`Sending details to ${deliveryMethod}...`);
-        resolve();
-    }, 2000); // Simulate 2 seconds delay for sending
-});
-}
+    // Function to accept application
+    function acceptApplication(application) {
+        const { type } = application;
+        const applicationNumber = generateApplicationNumber(type);
+        const enrollmentToken = generateEnrollmentToken();
 
-function displayPopupStaffProfile(message) {
-const popupContentStaffProfile = document.getElementById('popupContentStaffProfile');
-popupContentStaffProfile.innerHTML = `
-    <p>${message}</p>
-    <button id="okButtonStaffProfile" class="popup-close-btn-staffProfile">OK</button>
-`;
+        // Send success email to the applicant
+        sendSuccessEmail(application, enrollmentToken);
 
-const popupStaffProfile = document.getElementById('popupStaffProfile');
-popupStaffProfile.style.display = 'flex';
+        // Display success message
+        alert(`Application ${applicationNumber} accepted!`);
+    }
 
-// Add event listener to the "OK" button
-const okButtonStaffProfile = document.getElementById('okButtonStaffProfile');
-okButtonStaffProfile.addEventListener('click', () => {
-    popupStaffProfile.style.display = 'none'; // Hide the popup
-});
-}
+    // Function to reject application
+    function rejectApplication(application) {
+        const { type } = application;
+        const applicationNumber = generateApplicationNumber(type);
 
-function clearFormStaffProfile() {
-document.getElementById('firstNameInputStaffProfile').value = '';
-document.getElementById('lastNameInputStaffProfile').value = '';
-document.querySelector('input[name="otpMethodStaffProfile"]:checked').checked = false;
-document.getElementById('errorFirstNameStaffProfile').textContent = '';
-document.getElementById('errorLastNameStaffProfile').textContent = '';
-document.getElementById('errorOtpMethodStaffProfile').textContent = '';
-}
+        // Implement rejection logic (if needed)
+        alert(`Application ${applicationNumber} rejected.`);
+    }
+
+    // Function to send success email with enrollment token
+    function sendSuccessEmail(application, enrollmentToken) {
+        const { type } = application;
+        const applicationNumber = generateApplicationNumber(type);
+        const email = `${type.toLowerCase()}${applicationNumber.split(' ')[2].split("/")[2]}@example.com`;
+        const message = `Dear applicant,\n\nYour application (${applicationNumber}) has been accepted!\nYour enrollment token is: ${enrollmentToken}\n\nPlease present this token on your first day at the daycare center.\n\nRegards,\nDaycare Center`;
+
+        // Simulating email sending (replace with actual email sending logic)
+        console.log(`Sending email to ${email}: ${message}`);
+    }
+
+    // Function to generate enrollment token (dummy implementation)
+    function generateEnrollmentToken() {
+        return Math.random().toString(36).substr(2, 10).toUpperCase();
+    }
 
 // IT Breaches
 function addLogEntry(timestamp, location, source, details) {

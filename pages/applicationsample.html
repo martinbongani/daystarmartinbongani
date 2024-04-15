@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container-applicationCheckAdmin {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.h1-applicationCheckAdmin {
+    text-align: center;
+    color: #007bff;
+}
+
+.h2-applicationCheckAdmin {
+    color: #555;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+
+li:hover {
+    background-color: #f5f5f5;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 80%;
+    width: 400px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: #333;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.buttonAcceptApplicationCheckAdmin {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.buttonRejectApplicationCheckAdmin {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 600px) {
+    .modal-content {
+        max-width: 100%;
+        width: 80%;
+    }
+}
+    </style>
+    <title>Daycare Application Management</title>
+</head>
+<body>
+    <div class="container-applicationCheckAdmin">
+        <h1 class="h1-applicationCheckAdmin">Daycare Application Management</h1>
+        
+        <!-- Baby Applications Section -->
+        <section id="babyApplications">
+            <h2 class="h2-applicationCheckAdmin">Baby Applications</h2>
+            <ul id="babyList"></ul>
+        </section>
+        
+        <!-- Employee Applications Section -->
+        <section id="employeeApplications">
+            <h2>Employee Applications</h2>
+            <ul id="employeeList"></ul>
+        </section>
+    </div>
+
+    <!-- Modal for Application Details -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="applicationDetails"></div>
+            <div class="button-group">
+                <button id="acceptButton" class="buttonAcceptApplicationCheckAdmin">Accept</button>
+                <button id="rejectButton" class="buttonRejectApplicationCheckAdmin">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const babyList = document.getElementById('babyList');
+    const employeeList = document.getElementById('employeeList');
+    const modal = document.getElementById('modal');
+    const applicationDetails = document.getElementById('applicationDetails');
+    const acceptButton = document.getElementById('acceptButton');
+    const rejectButton = document.getElementById('rejectButton');
+    const closeButton = document.querySelector('.close');
+
+    // Counter variables to track application numbers
+    let babyApplicationCounter = 0;
+    let employeeApplicationCounter = 0;
+
+    // Function to generate sequential application numbers
+    function generateApplicationNumber(type) {
+        if (type === 'baby') {
+            babyApplicationCounter++;
+            return `Baby Application ${padNumber(babyApplicationCounter)}/2024`;
+        } else if (type === 'employee') {
+            employeeApplicationCounter++;
+            return `Staff Application ${padNumber(employeeApplicationCounter)}/2024`;
+        }
+    }
+
+    // Helper function to pad numbers with leading zeros (e.g., 001, 002, ...)
+    function padNumber(num) {
+        return num.toString().padStart(3, '0');
+    }
+
+    // Render applications in the list with formatted numbers
+    function renderApplicationsWithNumbers(applications, listElement) {
+        listElement.innerHTML = ''; // Clear existing list
+
+        applications.forEach(application => {
+            const listItem = document.createElement('li');
+            const applicationNumber = generateApplicationNumber(application.type);
+            listItem.textContent = applicationNumber;
+            listItem.addEventListener('click', () => showApplicationDetails(application));
+            listElement.appendChild(listItem);
+        });
+    }
+
+    // Simulated applications (up to 10 for each category)
+    const numApplications = 10; // Number of applications per category
+    const babyApplications = generateRandomApplications(numApplications, 'baby');
+    const employeeApplications = generateRandomApplications(numApplications, 'employee');
+
+    // Display applications in the UI with formatted numbers
+    renderApplicationsWithNumbers(babyApplications, babyList);
+    renderApplicationsWithNumbers(employeeApplications, employeeList);
+
+    // Function to generate random applications
+    function generateRandomApplications(num, type) {
+        const applications = [];
+
+        for (let i = 0; i < num; i++) {
+            applications.push({ type });
+        }
+
+        return applications;
+    }
+
+    // Function to display application details in the modal
+    function showApplicationDetails(application) {
+        modal.style.display = 'block';
+        applicationDetails.innerHTML = `
+            <h2>${generateApplicationNumber(application.type)} Details</h2>
+            <p>Type: ${application.type}</p>
+            <p>Details: (Add specific details here)</p>
+        `;
+
+        // Handle accept button click
+        acceptButton.onclick = function() {
+            acceptApplication(application);
+            modal.style.display = 'none';
+        };
+
+        // Handle reject button click
+        rejectButton.onclick = function() {
+            rejectApplication(application);
+            modal.style.display = 'none';
+        };
+
+        // Close modal when the close button is clicked
+        closeButton.onclick = function() {
+            modal.style.display = 'none';
+        };
+    }
+
+    // Function to accept application
+    function acceptApplication(application) {
+        const { type } = application;
+        const applicationNumber = generateApplicationNumber(type);
+        const enrollmentToken = generateEnrollmentToken();
+
+        // Send success email to the applicant
+        sendSuccessEmail(application, enrollmentToken);
+
+        // Display success message
+        alert(`Application ${applicationNumber} accepted!`);
+    }
+
+    // Function to reject application
+    function rejectApplication(application) {
+        const { type } = application;
+        const applicationNumber = generateApplicationNumber(type);
+
+        // Implement rejection logic (if needed)
+        alert(`Application ${applicationNumber} rejected.`);
+    }
+
+    // Function to send success email with enrollment token
+    function sendSuccessEmail(application, enrollmentToken) {
+        const { type } = application;
+        const applicationNumber = generateApplicationNumber(type);
+        const email = `${type.toLowerCase()}${applicationNumber.split(' ')[2].split("/")[2]}@example.com`;
+        const message = `Dear applicant,\n\nYour application (${applicationNumber}) has been accepted!\nYour enrollment token is: ${enrollmentToken}\n\nPlease present this token on your first day at the daycare center.\n\nRegards,\nDaycare Center`;
+
+        // Simulating email sending (replace with actual email sending logic)
+        console.log(`Sending email to ${email}: ${message}`);
+    }
+
+    // Function to generate enrollment token (dummy implementation)
+    function generateEnrollmentToken() {
+        return Math.random().toString(36).substr(2, 10).toUpperCase();
+    }
+});
+
+    </script>
+</body>
+</html>
