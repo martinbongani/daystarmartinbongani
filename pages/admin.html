@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <style>
-      /* Admin dashboard */
-      .sidebar-users {
+<style>
+  /* Admin dashboard */
+.sidebar-users {
         width: 250px;
         background-color: #333;
         color: #fff;
@@ -345,14 +345,12 @@ button:hover {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Form styles */
 .form-staffReportAdmin {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
 
-/* Form input styles */
 .label-staffReportAdmin {
     flex: 1 0 100%;
     margin-bottom: 10px;
@@ -367,7 +365,6 @@ button:hover {
     margin-bottom: 15px;
 }
 
-/* Button styles */
 .button-staffReportAdmin {
     background-color: #007bff;
     color: #fff;
@@ -383,7 +380,6 @@ button:hover {
     cursor: not-allowed;
 }
 
-/* Table styles */
 .table-staffReportAdmin {
     width: 100%;
     border-collapse: collapse;
@@ -401,7 +397,6 @@ button:hover {
     color: #fff;
 }
 
-/* Modal styles */
 .modal-staffReportAdmin {
     display: none;
     position: fixed;
@@ -431,7 +426,6 @@ button:hover {
     color: #888;
 }
 
-/* Responsive styles */
 @media (max-width: 600px) {
     .form-staffReportAdmin {
         flex-direction: column;
@@ -441,10 +435,134 @@ button:hover {
     }
 }
 
-/* Hover effect */
 .button-staffReportAdmin:hover {
     background-color: #0056b3;
 }
+
+/* Admin Resource Requests */
+.container-resCheckAdmin {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2-resCheckAdmin {
+            text-align: center;
+            color: #333;
+        }
+
+        .log-container-resCheckAdmin {
+            border-top: 2px solid #ccc;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+
+        .resource-entry-resCheckAdmin {
+            cursor: pointer;
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .resource-entry-resCheckAdmin:hover {
+            background-color: #f9f9f9;
+        }
+
+        .popup-resCheckAdmin {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .popup-content-resCheckAdmin {
+            position: relative;
+            background-color: #fff;
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            overflow: auto;
+        }
+
+        .close-btn-resCheckAdmin {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .resource-details-resCheckAdmin {
+            margin-bottom: 20px;
+        }
+
+        .total-amount-resCheckAdmin {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .action-buttons-resCheckAdmin {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .action-button-resCheckAdmin {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .action-button-resCheckAdmin.approve-resCheckAdmin {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        .action-button-resCheckAdmin.reject-resCheckAdmin {
+            background-color: #f44336;
+            color: #fff;
+        }
+
+/* Live Feed */
+.camera-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: auto;
+}
+
+.camera {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+    .camera-grid {
+        grid-template-columns: repeat(3, 1fr); /* Ensure 3 columns on larger screens */
+    }
+}
+
 
 
     </style>
@@ -472,7 +590,7 @@ button:hover {
           <li><a href="#requisitions">Requisitions</a></li>
           <li><a href="#liveFeed">Live Feed</a></li>
           <li><a href="#yourProfile">Your Profile</a></li>
-          <li><a href="#logout">Logout</a></li>
+          <button id="logoutBtn">Logout</button>
         </ul>
       </nav>
     </header>
@@ -719,11 +837,38 @@ button:hover {
 
         <!-- Requisitions -->
         <div id="requisitions" class="section-users">
-          
+          <div class="container-resCheckAdmin">
+            <h2 class="h2-resCheckAdmin">Resource Approval Log</h2>
+            <div id="logContainer" class="log-container-resCheckAdmin">
+                <!-- Resource request entries will be dynamically added here -->
+            </div>
+        </div>
+    
+        <!-- Resource details popup -->
+        <div id="popup" class="popup-resCheckAdmin">
+            <div class="popup-content-resCheckAdmin">
+                <span class="close-btn-resCheckAdmin" onclick="closePopup()">&times;</span>
+                <h3>Resource Details</h3>
+                <div id="resourceDetails" class="resource-details-resCheckAdmin">
+                    <!-- Resource details will be dynamically added here -->
+                </div>
+                <div id="totalAmount" class="total-amount-resCheckAdmin"></div>
+                <div class="action-buttons-resCheckAdmin">
+                    <button id="saveButton" class="action-button-resCheckAdmin" onclick="saveEdits()">Save</button>
+                    <button id="approveButton" class="action-button-resCheckAdmin approve-resCheckAdmin" onclick="approveRequest()" disabled>Approve</button>
+                    <button id="rejectButton" class="action-button-resCheckAdmin reject-resCheckAdmin" onclick="rejectRequest()" disabled>Reject</button>
+                </div>
+            </div>
+        </div>
+    
         </div>
 
         <!-- Live Feed -->
-        <div id="staff" class="section-users">
+        <div id="liveFeed" class="section-users">
+            <div class="camera-grid" id="cameraGrid">
+                <!-- Camera containers will be dynamically added here -->
+            </div>
+       
         </div>
 
         <!-- Your Profile -->
@@ -733,20 +878,12 @@ button:hover {
             <div id="log"></div>
           </div>
         </div>
-
-        <!-- Logout -->
-        <div id="logout" class="section-users">
-          <div class="container-breach">
-            <h1 class="h1-breach">System Breach Log</h1>
-            <div id="log"></div>
-          </div>
-        </div>
-
-      </div>
     </main>
 
     <div w3-include-html="/pages/footer.html"></div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/logout.js"></script>
+    <script src="/js/adminrequisitions.js"></script>
     <script src="/js/admin.js"></script>
     <script src="/css/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/js/add.js"></script>

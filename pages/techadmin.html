@@ -522,22 +522,8 @@ hr {
           <li><a href="#registerStaff-users">Register Staff</a></li>
           <li><a href="#breaches">Breaches</a></li>
           <li><a href="#requisition-users">Requisition</a></li>
-          <li class="dropdown">
-            <a
-              class="dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              IT Admin
-              <i class="fa-solid fa-user"></i>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#yourProfile">Your Profile</a></li>
-              <li><a href="/pages/login.html">Logout</a></li>
-            </ul>
-          </li>
+          <li><a href="#yourProfile">Your Profile</a></li>
+          <button id="logoutBtn">Logout</button>
         </ul>
       </nav>
     </header>
@@ -766,11 +752,21 @@ hr {
             <div id="log"></div>
           </div>
         </div>
+
+        <div id="requisition-users" class="section-users">
+
+          <!-- <div w3-include-html="/pages/resourceform.html"></div> -->
+          <div w3-include-html="/pages/tablesample.html"></div>
+
+        </div>
+
+
       </div>
     </main>
 
     <div w3-include-html="/pages/footer.html"></div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/logout.js"></script>
     <script src="/js/techadmin.js"></script>
     <script src="/css/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/js/add.js"></script>
