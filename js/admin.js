@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const acceptButton = document.getElementById('acceptButton');
     const rejectButton = document.getElementById('rejectButton');
     const closeButton = document.querySelector('.close');
+    const generateReportBtn = document.getElementById('generateReportstaffReportAdmin');
+    const exportReportBtn = document.getElementById('exportReportstaffReportAdmin');
+    const reportTableBody = document.getElementById('tbody-staffReportAdmin');
 
 
     // Function to switch active section
@@ -579,6 +582,199 @@ document.getElementById('exportButtonBabyReportAdmin').addEventListener('click',
 
 // Disable export button initially
 document.getElementById('exportButtonBabyReportAdmin').disabled = true;
+
+
+// Admin Staff Report
+let reportData = []; // Array to store report data
+
+// Simulated data for accounts staff
+const accountsStaff = [
+    { fullName: 'John Doe', staffNumber: 'Sn001/24', enrollmentDate: '2024-01-05', status: 'Present', remarks: 'Excellent performance' },
+    { fullName: 'Alice Johnson', staffNumber: 'Sn002/24', enrollmentDate: '2024-02-10', status: 'Present', remarks: '' },
+    { fullName: 'David Smith', staffNumber: 'Sn003/24', enrollmentDate: '2024-03-15', status: 'Absent', remarks: 'On leave' },
+    { fullName: 'Emma White', staffNumber: 'Sn004/24', enrollmentDate: '2024-04-20', status: 'Present', remarks: '' },
+    { fullName: 'Sarah Brown', staffNumber: 'Sn005/24', enrollmentDate: '2024-05-25', status: 'Present', remarks: '' },
+    { fullName: 'Michael Johnson', staffNumber: 'Sn006/24', enrollmentDate: '2024-06-30', status: 'Absent', remarks: 'Sick' },
+    { fullName: 'Laura Anderson', staffNumber: 'Sn007/24', enrollmentDate: '2024-07-05', status: 'Present', remarks: '' },
+    { fullName: 'Sophia Lee', staffNumber: 'Sn008/24', enrollmentDate: '2024-08-10', status: 'Present', remarks: '' },
+    { fullName: 'Robert Taylor', staffNumber: 'Sn009/24', enrollmentDate: '2024-09-15', status: 'Present', remarks: '' },
+    { fullName: 'William Clark', staffNumber: 'Sn010/24', enrollmentDate: '2024-10-20', status: 'Present', remarks: '' }
+];
+
+// Simulated data for procurement staff
+const procurementStaff = [
+    { fullName: 'Olivia Brown', staffNumber: 'Sn011/24', enrollmentDate: '2024-01-10', status: 'Present', remarks: '' },
+    { fullName: 'James Wilson', staffNumber: 'Sn012/24', enrollmentDate: '2024-02-15', status: 'Present', remarks: '' },
+    { fullName: 'Emily Martinez', staffNumber: 'Sn013/24', enrollmentDate: '2024-03-20', status: 'Absent', remarks: 'Vacation' },
+    { fullName: 'Daniel Harris', staffNumber: 'Sn014/24', enrollmentDate: '2024-04-25', status: 'Present', remarks: '' },
+    { fullName: 'Ella Davis', staffNumber: 'Sn015/24', enrollmentDate: '2024-05-30', status: 'Present', remarks: '' },
+    { fullName: 'Matthew Thomas', staffNumber: 'Sn016/24', enrollmentDate: '2024-06-05', status: 'Absent', remarks: 'Family emergency' },
+    { fullName: 'Isabella Moore', staffNumber: 'Sn017/24', enrollmentDate: '2024-07-10', status: 'Present', remarks: '' },
+    { fullName: 'Jackson Murphy', staffNumber: 'Sn018/24', enrollmentDate: '2024-08-15', status: 'Present', remarks: '' },
+    { fullName: 'Ava Rivera', staffNumber: 'Sn019/24', enrollmentDate: '2024-09-20', status: 'Present', remarks: '' },
+    { fullName: 'Logan Garcia', staffNumber: 'Sn020/24', enrollmentDate: '2024-10-25', status: 'Present', remarks: '' }
+];
+
+// Simulated data for sitters staff
+const sittersStaff = [
+    { fullName: 'Grace Martinez', staffNumber: 'Sn021/24', enrollmentDate: '2024-01-15', status: 'Present', remarks: '' },
+    { fullName: 'Lucas Young', staffNumber: 'Sn022/24', enrollmentDate: '2024-02-20', status: 'Present', remarks: '' },
+    { fullName: 'Mia Robinson', staffNumber: 'Sn023/24', enrollmentDate: '2024-03-25', status: 'Absent', remarks: 'Doctor appointment' },
+    { fullName: 'Benjamin King', staffNumber: 'Sn024/24', enrollmentDate: '2024-04-30', status: 'Present', remarks: '' },
+    { fullName: 'Lily Wright', staffNumber: 'Sn025/24', enrollmentDate: '2024-05-05', status: 'Present', remarks: '' },
+    { fullName: 'Alexander Hill', staffNumber: 'Sn026/24', enrollmentDate: '2024-06-10', status: 'Absent', remarks: 'Personal reasons' },
+    { fullName: 'Chloe Scott', staffNumber: 'Sn027/24', enrollmentDate: '2024-07-15', status: 'Present', remarks: '' },
+    { fullName: 'William Adams', staffNumber: 'Sn028/24', enrollmentDate: '2024-08-20', status: 'Present', remarks: '' },
+    { fullName: 'Victoria Baker', staffNumber: 'Sn029/24', enrollmentDate: '2024-09-25', status: 'Present', remarks: '' },
+    { fullName: 'Ethan Carter', staffNumber: 'Sn030/24', enrollmentDate: '2024-10-30', status: 'Present', remarks: '' }
+];
+
+// Simulated data for support staff
+const supportStaff = [
+    { fullName: 'Natalie Walker', staffNumber: 'Sn031/24', enrollmentDate: '2024-01-20', status: 'Present', remarks: '' },
+    { fullName: 'Christopher Hall', staffNumber: 'Sn032/24', enrollmentDate: '2024-02-25', status: 'Present', remarks: '' },
+    { fullName: 'Hannah Young', staffNumber: 'Sn033/24', enrollmentDate: '2024-03-30', status: 'Absent', remarks: 'Training' },
+    { fullName: 'Gabriel Lopez', staffNumber: 'Sn034/24', enrollmentDate: '2024-04-05', status: 'Present', remarks: '' },
+    { fullName: 'Sofia Martinez', staffNumber: 'Sn035/24', enrollmentDate: '2024-05-10', status: 'Present', remarks: '' },
+    { fullName: 'Dylan Perez', staffNumber: 'Sn036/24', enrollmentDate: '2024-06-15', status: 'Absent', remarks: 'Vacation' },
+    { fullName: 'Avery Gonzales', staffNumber: 'Sn037/24', enrollmentDate: '2024-07-20', status: 'Present', remarks: '' },
+    { fullName: 'Zoe Evans', staffNumber: 'Sn038/24', enrollmentDate: '2024-08-25', status: 'Present', remarks: '' },
+    { fullName: 'Jackson Morris', staffNumber: 'Sn039/24', enrollmentDate: '2024-09-30', status: 'Present', remarks: '' },
+    { fullName: 'Madison Rogers', staffNumber: 'Sn040/24', enrollmentDate: '2024-10-05', status: 'Present', remarks: '' }
+];
+
+// Simulated data for administration staff
+const administrationStaff = [
+    { fullName: 'William Cooper', staffNumber: 'Sn041/24', enrollmentDate: '2024-01-25', status: 'Present', remarks: '' },
+    { fullName: 'Samantha Nelson', staffNumber: 'Sn042/24', enrollmentDate: '2024-02-28', status: 'Present', remarks: '' },
+    { fullName: 'Andrew Hughes', staffNumber: 'Sn043/24', enrollmentDate: '2024-03-05', status: 'Absent', remarks: 'Medical appointment' },
+    { fullName: 'Evelyn Rivera', staffNumber: 'Sn044/24', enrollmentDate: '2024-04-10', status: 'Present', remarks: '' },
+    { fullName: 'Mason Wood', staffNumber: 'Sn045/24', enrollmentDate: '2024-05-15', status: 'Present', remarks: '' },
+    { fullName: 'Harper Stewart', staffNumber: 'Sn046/24', enrollmentDate: '2024-06-20', status: 'Absent', remarks: 'Family event' },
+    { fullName: 'Jack Collins', staffNumber: 'Sn047/24', enrollmentDate: '2024-07-25', status: 'Present', remarks: '' },
+    { fullName: 'Ella Bailey', staffNumber: 'Sn048/24', enrollmentDate: '2024-08-30', status: 'Present', remarks: '' },
+    { fullName: 'Lucas Parker', staffNumber: 'Sn049/24', enrollmentDate: '2024-09-05', status: 'Present', remarks: '' },
+    { fullName: 'Aria Long', staffNumber: 'Sn050/24', enrollmentDate: '2024-10-10', status: 'Present', remarks: '' }
+];
+
+generateReportBtn.addEventListener('click', () => {
+    const fromDate = document.getElementById('fromDatestaffReportAdmin').value;
+    const toDate = document.getElementById('toDatestaffReportAdmin').value;
+    const staffType = document.getElementById('staffTypestaffReportAdmin').value;
+
+    if (!fromDate || !toDate) {
+        alert('Please select both "From" and "To" dates.');
+        return;
+    }
+
+    // Select staff data based on staff type
+    switch (staffType) {
+        case 'accounts':
+            reportData = accountsStaff;
+            break;
+        case 'procurement':
+            reportData = procurementStaff;
+            break;
+        case 'sitters':
+            reportData = sittersStaff;
+            break;
+        case 'support':
+            reportData = supportStaff;
+            break;
+        case 'administration':
+            reportData = administrationStaff;
+            break;
+        case 'all':
+            reportData = [
+                ...accountsStaff,
+                ...procurementStaff,
+                ...sittersStaff,
+                ...supportStaff,
+                ...administrationStaff
+            ];
+            break;
+        default:
+            reportData = [];
+            break;
+    }
+
+    // Clear previous table rows
+    reportTableBody.innerHTML = '';
+
+    // Populate table with selected staff data
+    reportData.forEach(staff => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${staff.fullName}</td>
+            <td>${staff.staffNumber}</td>
+            <td>${staff.enrollmentDate}</td>
+            <td>${staffType}</td>
+            <td>${staff.status}</td>
+            <td>${staff.remarks}</td>
+        `;
+        reportTableBody.appendChild(row);
+    });
+
+    // Enable export button
+    exportReportBtn.disabled = false;
+});
+
+exportReportBtn.addEventListener('click', () => {
+    if (reportData.length === 0) {
+        alert('Please generate a report before exporting.');
+        return;
+    }
+
+    let csvContent = 'data:text/csv;charset=utf-8,';
+    csvContent += 'Name,Staff Number,Enrollment Date,Department,Status,Remarks\n';
+
+    reportData.forEach(staff => {
+        const rowData = [
+            staff.fullName,
+            staff.staffNumber,
+            staff.enrollmentDate,
+            document.getElementById('staffTypestaffReportAdmin').value,
+            staff.status,
+            staff.remarks
+        ];
+        const csvRow = rowData.join(',');
+        csvContent += `${csvRow}\n`;
+    });
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'daycare_report.csv');
+    document.body.appendChild(link);
+    link.click();
+});
+
+reportTableBody.addEventListener('click', (event) => {
+    const targetRow = event.target.closest('tr');
+    if (!targetRow || targetRow === reportTableBody.firstElementChild) return;
+
+    const staffName = targetRow.cells[0].textContent;
+    const checkInTime = ''; // Retrieve from biometric system
+    const babiesUnderCare = ''; // Retrieve for sitters
+
+    document.getElementById('staffName-staffReportAdmin').textContent = staffName;
+    document.getElementById('checkInTime-staffReportAdmin').textContent = `Checked in at: ${checkInTime}`;
+    document.getElementById('babiesUnderCare-staffReportAdmin').textContent = `Babies under care: ${babiesUnderCare}`;
+
+    const modal = document.getElementById('modal-staffReportAdmin');
+    modal.style.display = 'block';
+
+    modal.querySelector('.close-staffReportAdmin').addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+});
+
 
 });
 
