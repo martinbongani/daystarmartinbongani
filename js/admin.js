@@ -466,152 +466,119 @@ usersReportTypeSelect.addEventListener('change', function() {
         return Math.random().toString(36).substr(2, 10).toUpperCase();
     }
 
-// IT Breaches
-function addLogEntry(timestamp, location, source, details) {
-    const entry = document.createElement('div');
-    entry.className = 'log-entry';
-    entry.innerHTML = `
-        <strong>${timestamp}</strong>:
-        <div><strong>Location:</strong> ${location}</div>
-        <div><strong>Source:</strong> ${source}</div>
-        <div><strong>Details:</strong> ${details}</div>
-        <div class="actions">
-            <button class="resolve-btn">Resolve</button>
-            <button class="ignore-btn">Ignore</button>
-        </div>
-        <hr>
-    `;
-    logElement.insertBefore(entry, logElement.firstChild);
-
-    // Add event listeners for resolve and ignore buttons
-    const resolveBtn = entry.querySelector('.resolve-btn');
-    resolveBtn.addEventListener('click', () => {
-        resolveIncident(entry);
-    });
-
-    const ignoreBtn = entry.querySelector('.ignore-btn');
-    ignoreBtn.addEventListener('click', () => {
-        ignoreIncident(entry);
-    });
-}
-
-// Function to simulate multiple breaches and add them to the log
-function simulateBreaches() {
-    const incidentData = [
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Server Room A',
-            source: 'Workstation-123',
-            details: 'Unauthorized access detected.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Firewall Gateway',
-            source: 'Router-789',
-            details: 'Security breach in firewall.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Database Server',
-            source: 'Application Server-456',
-            details: 'Data exfiltration attempt detected.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Network Storage',
-            source: 'Backup Server-789',
-            details: 'Unauthorized file access detected.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Admin Panel',
-            source: 'Admin Workstation',
-            details: 'Suspicious login attempt detected.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Email Server',
-            source: 'Mail Client',
-            details: 'Phishing email detected and blocked.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Web Application',
-            source: 'Visitor Browser',
-            details: 'SQL injection attempt detected.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Cloud Storage',
-            source: 'Third-party Application',
-            details: 'Unauthorized data upload detected.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'VPN Connection',
-            source: 'Remote Device',
-            details: 'Abnormal VPN traffic detected.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Authentication Server',
-            source: 'Login Service',
-            details: 'Multiple failed login attempts detected.'
-        }
+// Admin Baby Report
+document.getElementById('reportFormBabyAdmin').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    // Get selected period
+    const fromDate = document.getElementById('fromDateBabyReportAdmin').value;
+    const toDate = document.getElementById('toDateBabyReportAdmin').value;
+    
+    // Validate period selection
+    if (!fromDate || !toDate) {
+        alert('Please select both "From" and "To" dates to generate the report.');
+        return;
+    }
+    
+    // Simulated data (20 babies for demonstration)
+    const babies = [
+        { fullName: 'Alice Johnson', babyNumber: 'Bn001/24', dateEnrolled: '2024-04-01', status: 'Present', room: 'Infants', sitter: 'Jane Doe', remarks: '' },
+        { fullName: 'Benjamin Smith', babyNumber: 'Bn002/24', dateEnrolled: '2024-03-15', status: 'Absent', remarks: 'Allergic to dairy products' },
+        { fullName: 'Caroline Brown', babyNumber: 'Bn003/24', dateEnrolled: '2024-04-05', status: 'Present', room: 'Toddlers', sitter: 'John Smith', remarks: '' },
+        { fullName: 'Daniel White', babyNumber: 'Bn004/24', dateEnrolled: '2024-03-20', status: 'Present', room: 'Infants', sitter: 'Emily Johnson', remarks: '' },
+        { fullName: 'Ella Davis', babyNumber: 'Bn005/24', dateEnrolled: '2024-04-10', status: 'Absent', remarks: '' },
+        { fullName: 'Franklin Moore', babyNumber: 'Bn006/24', dateEnrolled: '2024-03-25', status: 'Present', room: 'Toddlers', sitter: 'Sarah Adams', remarks: '' },
+        { fullName: 'Grace Clark', babyNumber: 'Bn007/24', dateEnrolled: '2024-04-02', status: 'Present', room: 'Infants', sitter: 'Michael Brown', remarks: '' },
+        { fullName: 'Henry Lee', babyNumber: 'Bn008/24', dateEnrolled: '2024-03-18', status: 'Absent', remarks: 'Feeling unwell' },
+        { fullName: 'Isabella Garcia', babyNumber: 'Bn009/24', dateEnrolled: '2024-04-08', status: 'Present', room: 'Toddlers', sitter: 'Olivia Wilson', remarks: '' },
+        { fullName: 'Jack Martinez', babyNumber: 'Bn010/24', dateEnrolled: '2024-03-22', status: 'Present', room: 'Infants', sitter: 'David Thompson', remarks: '' },
+        { fullName: 'Katherine Adams', babyNumber: 'Bn011/24', dateEnrolled: '2024-04-03', status: 'Absent', remarks: '' },
+        { fullName: 'Liam Johnson', babyNumber: 'Bn012/24', dateEnrolled: '2024-03-27', status: 'Present', room: 'Toddlers', sitter: 'Emma Brown', remarks: '' },
+        { fullName: 'Mia Wilson', babyNumber: 'Bn013/24', dateEnrolled: '2024-04-06', status: 'Present', room: 'Infants', sitter: 'Noah Martinez', remarks: '' },
+        { fullName: 'Nathan Taylor', babyNumber: 'Bn014/24', dateEnrolled: '2024-03-19', status: 'Absent', remarks: 'Family vacation' },
+        { fullName: 'Olivia Moore', babyNumber: 'Bn015/24', dateEnrolled: '2024-04-04', status: 'Present', room: 'Toddlers', sitter: 'Ethan Wilson', remarks: '' },
+        { fullName: 'Peter Brown', babyNumber: 'Bn016/24', dateEnrolled: '2024-03-24', status: 'Present', room: 'Infants', sitter: 'Sophia Adams', remarks: '' },
+        { fullName: 'Quinn Anderson', babyNumber: 'Bn017/24', dateEnrolled: '2024-04-07', status: 'Present', room: 'Toddlers', sitter: 'Lucas Clark', remarks: '' },
+        { fullName: 'Rachel Garcia', babyNumber: 'Bn018/24', dateEnrolled: '2024-03-21', status: 'Absent', remarks: 'Doctor appointment' },
+        { fullName: 'Samuel Thompson', babyNumber: 'Bn019/24', dateEnrolled: '2024-04-09', status: 'Present', room: 'Infants', sitter: 'Chloe Lee', remarks: '' },
+        { fullName: 'Taylor Martinez', babyNumber: 'Bn020/24', dateEnrolled: '2024-03-23', status: 'Present', room: 'Toddlers', sitter: 'Lily Johnson', remarks: '' }
     ];
-
-    // Display each simulated incident in the log
-    incidentData.forEach(incident => {
-        addLogEntry(incident.timestamp, incident.location, incident.source, incident.details);
+    
+    // Display babies in the enrollment table
+    const enrollmentList = document.getElementById('enrollmentListBabyReportAdmin');
+    enrollmentList.innerHTML = ''; // Clear previous table rows
+    
+    babies.forEach(baby => {
+        const row = document.createElement('tr');
+        
+        // Create table cells for each baby detail
+        const fullNameCell = document.createElement('td');
+        fullNameCell.textContent = baby.fullName;
+        row.appendChild(fullNameCell);
+        
+        const babyNumberCell = document.createElement('td');
+        babyNumberCell.textContent = baby.babyNumber;
+        row.appendChild(babyNumberCell);
+        
+        const dateEnrolledCell = document.createElement('td');
+        dateEnrolledCell.textContent = baby.dateEnrolled;
+        row.appendChild(dateEnrolledCell);
+        
+        const statusCell = document.createElement('td');
+        statusCell.textContent = baby.status || 'N/A';
+        row.appendChild(statusCell);
+        
+        const roomCell = document.createElement('td');
+        roomCell.textContent = baby.room || 'N/A';
+        row.appendChild(roomCell);
+        
+        const sitterCell = document.createElement('td');
+        sitterCell.textContent = baby.sitter || 'N/A';
+        row.appendChild(sitterCell);
+        
+        const remarksCell = document.createElement('td');
+        remarksCell.textContent = baby.remarks || 'N/A';
+        row.appendChild(remarksCell);
+        
+        // Append the row to the table body
+        enrollmentList.appendChild(row);
     });
-}
+    
+    // Enable export button
+    document.getElementById('exportButtonBabyReportAdmin').disabled = false;
+});
 
-// Function to get current timestamp in YYYY-MM-DD HH:mm:ss format
-function getCurrentTimestamp() {
-    const now = new Date();
-    const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ');
-    return formattedDate;
-}
-
-// Simulate breaches periodically (e.g., every 30 seconds)
-simulateBreaches();
-setInterval(simulateBreaches, 30000); // Update every 30 seconds (adjust as needed)
-
-// Function to resolve an incident (simulated action)
-function resolveIncident(entry) {
-    entry.remove(); // Remove the incident log entry from the DOM
-
-    // Display pop-up notification for resolution
-    displayNotification('Incident Resolved', 'The incident has been resolved.');
-}
-
-// Function to ignore an incident (simulated action)
-function ignoreIncident(entry) {
-    entry.remove(); // Remove the incident log entry from the DOM
-
-    // Display pop-up notification for ignoring
-    displayNotification('Incident Ignored', 'The incident has been ignored.');
-}
-
-// Function to display a pop-up notification
-function displayNotification(title, message) {
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.innerHTML = `
-        <div class="notification-content">
-            <h2>${title}</h2>
-            <p>${message}</p>
-            <button class="ok-btn">OK</button>
-        </div>
-    `;
-    document.body.appendChild(notification);
-
-    // Add event listener to OK button to dismiss notification
-    const okBtn = notification.querySelector('.ok-btn');
-    okBtn.addEventListener('click', () => {
-        notification.remove(); // Remove the notification from the DOM
+document.getElementById('exportButtonBabyReportAdmin').addEventListener('click', function() {
+    // Check if report has been generated
+    const enrollmentTable = document.getElementById('enrollmentTableBabyReportAdmin');
+    if (enrollmentTable.rows.length <= 1) {
+        alert('Please generate a report before exporting.');
+        return;
+    }
+    
+    // Create CSV content from table data
+    const rows = enrollmentTable.querySelectorAll('tr');
+    let csvContent = 'data:text/csv;charset=utf-8,';
+    
+    rows.forEach(row => {
+        const rowData = [];
+        row.querySelectorAll('td').forEach(cell => {
+            rowData.push(`"${cell.textContent}"`);
+        });
+        csvContent += rowData.join(',') + '\n';
     });
-}
+    
+    // Create a download link
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'enrollment_report.csv');
+    document.body.appendChild(link);
+    link.click();
+});
+
+// Disable export button initially
+document.getElementById('exportButtonBabyReportAdmin').disabled = true;
 
 });
 

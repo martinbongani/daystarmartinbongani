@@ -257,6 +257,83 @@ button:hover {
     }
 }
 
+/* Admin Baby Report */
+.container-babyReportAdmin {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.h1-babyReportAdmin {
+    text-align: center;
+    color: #333;
+}
+
+.form-babyReportAdmin {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.label-babyReportAdmin {
+    font-weight: bold;
+}
+
+.input-babyReportAdmin {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.button-babyReportAdmin {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.button-babyReportAdmin:hover {
+    background-color: #0056b3;
+}
+
+.table-babyReportAdmin {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.thead-babyReportAdmin {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.tr-babyReportAdmin {
+    border-bottom: 1px solid #ddd;
+}
+
+.th-babyReportAdmin,
+.td-babyReportAdmin {
+    padding: 12px;
+    text-align: left;
+}
+
+.th-babyReportAdmin {
+    font-weight: bold;
+}
+
+.td-babyReportAdmin {
+    border-bottom: 1px solid #ddd;
+}
+
+.td-babyReportAdmin:nth-child(even) {
+    background-color: #f9f9f9;
+}
 
 
     </style>
@@ -423,7 +500,7 @@ button:hover {
         <!-- Applications -->
         <div id="applications" class="section-users">
           <div class="container-applicationCheckAdmin">
-            <h1 class="h1-applicationCheckAdmin">Daycare Application Management</h1>
+            <h1 class="h1-applicationCheckAdmin">Daystar Daycare Application Management</h1>
             
             <!-- Baby Applications Section -->
             <section id="babyApplications">
@@ -453,81 +530,32 @@ button:hover {
 
         <!-- Babies -->
         <div id="babies" class="section-users">
-          <div class="container-staffProfile">
-            <h1>Staff Profile Generation</h1>
-            <form id="formStaffProfile" class="form-group-staffProfile">
-              <label class="label-staffProfile" for="firstNameInputStaffProfile"
-                >First Name:</label
-              >
-              <input
-                type="text"
-                id="firstNameInputStaffProfile"
-                name="firstNameInputStaffProfile"
-              />
-              <span
-                id="errorFirstNameStaffProfile"
-                class="error-message"
-              ></span>
-
-              <label class="label-staffProfile" for="lastNameInputStaffProfile"
-                >Last Name:</label
-              >
-              <input
-                type="text"
-                id="lastNameInputStaffProfile"
-                name="lastNameInputStaffProfile"
-              />
-              <span id="errorLastNameStaffProfile" class="error-message"></span>
-
-              <div class="otp-method-container">
-                <label class="label-staffProfile"
-                  >Username and OTP Delivery Method:</label
-                >
-                <div class="otp-method-options">
-                  <label
-                    ><input
-                      type="radio"
-                      name="otpMethodStaffProfile"
-                      value="email"
-                    />
-                    Email</label
-                  >
-                  <label
-                    ><input
-                      type="radio"
-                      name="otpMethodStaffProfile"
-                      value="sms"
-                    />
-                    SMS</label
-                  >
-                </div>
-                <span
-                  id="errorOtpMethodStaffProfile"
-                  class="error-message"
-                ></span>
-              </div>
-
-              <button type="submit" class="button-staffProfile">
-                Generate Profile
-              </button>
+          <div class="container-babyReportAdmin">
+            <h1 class="h1-babyReportAdmin">Daystar Daycare Baby Report</h1>
+            <form id="reportFormBabyAdmin" class="form-babyReportAdmin">
+                <label for="fromDateBabyReportAdmin" class="label-babyReportAdmin">From:</label>
+                <input type="date" id="fromDateBabyReportAdmin" name="fromDateBabyReportAdmin" class="input-babyReportAdmin">
+                <label for="toDateBabyReportAdmin" class="label-babyReportAdmin">To:</label>
+                <input type="date" id="toDateBabyReportAdmin" name="toDateBabyReportAdmin" class="input-babyReportAdmin">
+                <button type="submit" class="button-babyReportAdmin">Generate Report</button>
+                <button type="button" id="exportButtonBabyReportAdmin" class="button-babyReportAdmin">Export Report</button>
             </form>
-          </div>
-
-          <div id="popupStaffProfile" class="popup-staffProfile">
-            <div
-              class="popup-content-staffProfile"
-              id="popupContentStaffProfile"
-            >
-              <p></p>
-              <button
-                id="closePopupBtnStaffProfile"
-                class="popup-close-btn-staffProfile"
-              >
-                OK
-              </button>
-            </div>
-          </div>
+            <table id="enrollmentTableBabyReportAdmin" class="table-babyReportAdmin">
+                <thead class="thead-babyReportAdmin">
+                    <tr class="tr-babyReportAdmin">
+                        <th class="th-babyReportAdmin">Full Name</th>
+                        <th class="th-babyReportAdmin">Baby Number</th>
+                        <th class="th-babyReportAdmin">Date Enrolled</th>
+                        <th class="th-babyReportAdmin">Status</th>
+                        <th class="th-babyReportAdmin">Room</th>
+                        <th class="th-babyReportAdmin">Sitter</th>
+                        <th class="th-babyReportAdmin">Remarks</th>
+                    </tr>
+                </thead>
+                <tbody id="enrollmentListBabyReportAdmin" class="enrollmentList-babyReportAdmin"></tbody>
+            </table>
         </div>
+            </div>
 
         <!-- Staff -->
         <div id="staff" class="section-users">

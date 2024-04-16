@@ -4,139 +4,370 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body {
+body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f7f7f7;
-}
-
-.dataEntryFormUsers {
-    max-width: 600px;
-    margin: 50px auto;
+    background-color: #f8f8f8;
+    color: #333;
     padding: 20px;
+}
+
+/* Container styles */
+.container-staffReportAdmin {
+    max-width: 800px;
+    margin: 0 auto;
     background-color: #fff;
-    border: 1px solid #ddd;
+    padding: 20px;
     border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.dataEntryFormUsers h1 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.inline-group {
+/* Form styles */
+.form-staffReportAdmin {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
-.input-group {
-    flex: 1;
-    margin-right: 10px;
+/* Form input styles */
+.label-staffReportAdmin {
+    flex: 1 0 100%;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
-.button-group {
-    text-align: center;
-    margin-top: 20px;
+.input-staffReportAdmin {
+    flex: 1 0 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
 }
 
-.button-group button {
-    padding: 10px 20px;
+/* Button styles */
+.button-staffReportAdmin {
     background-color: #007bff;
     color: #fff;
+    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
 }
 
-.button-group button:hover {
+.button-staffReportAdmin:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Table styles */
+.table-staffReportAdmin {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table-staffReportAdmin th, .table-staffReportAdmin td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.table-staffReportAdmin th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Modal styles */
+.modal-staffReportAdmin {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content-staffReportAdmin {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.close-staffReportAdmin {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    .form-staffReportAdmin {
+        flex-direction: column;
+    }
+    .input-staffReportAdmin {
+        margin-right: 0;
+    }
+}
+
+/* Hover effect */
+.button-staffReportAdmin:hover {
     background-color: #0056b3;
 }
-
     </style>
-    <title>Data Entry Form</title>
-    
+    <title>Daycare Report</title>
 </head>
 <body>
+    <div class="container-staffReportAdmin">
+        <h1 class="h1-staffReportAdmin">Daycare Report</h1>
+        <form id="form-staffReportAdmin" class="form-staffReportAdmin">
+            <label for="fromDatestaffReportAdmin" class="label-staffReportAdmin">From:</label>
+            <input type="date" id="fromDatestaffReportAdmin" class="input-staffReportAdmin" required>
+            <label for="toDatestaffReportAdmin" class="label-staffReportAdmin">To:</label>
+            <input type="date" id="toDatestaffReportAdmin" class="input-staffReportAdmin" required>
+            <label for="staffTypestaffReportAdmin" class="label-staffReportAdmin">Staff Type:</label>
+            <select id="staffTypestaffReportAdmin" class="select-staffReportAdmin">
+                <option value="accounts">Accounts</option>
+                <option value="procurement">Procurement</option>
+                <option value="sitters">Sitters</option>
+                <option value="support">Support Staff</option>
+                <option value="administration">Administration</option>
+                <option value="all">All Staff</option>
+            </select>
+            <button type="button" id="generateReportstaffReportAdmin" class="button-staffReportAdmin">Generate Report</button>
+            <button type="button" id="exportReportstaffReportAdmin" class="button-staffReportAdmin" disabled>Export Report</button>
+        </form>
+        <table id="reportTablestaffReportAdmin" class="table-staffReportAdmin">
+            <thead class="thead-staffReportAdmin">
+                <tr>
+                    <th>Name</th>
+                    <th>Staff Number</th>
+                    <th>Enrollment Date</th>
+                    <th>Department</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-staffReportAdmin" class="tbody-staffReportAdmin">
+                <!-- Table rows will be dynamically populated -->
+            </tbody>
+        </table>
+    </div>
 
-    <form id="dataEntryForm-users" class="dataEntryFormUsers">
-        <h1>Data Entry</h1>
-
-        <!-- Date Input and Description Input (Inline) -->
-        <div class="form-group inline-group">
-            <div class="input-group">
-                <label for="date">Date:</label>
-                <input type="date" id="date" name="date" required>
-            </div>
-            <div class="input-group">
-                <label for="description">Description:</label>
-                <input type="text" id="description" name="description" required>
-            </div>
+    <!-- Modal for displaying staff details -->
+    <div id="modal-staffReportAdmin" class="modal-staffReportAdmin">
+        <div class="modal-content-staffReportAdmin">
+            <span class="close-staffReportAdmin">&times;</span>
+            <h2 id="staffName-staffReportAdmin" class="staffName-staffReportAdmin"></h2>
+            <p id="checkInTime-staffReportAdmin" class="checkInTime-staffReportAdmin"></p>
+            <p id="babiesUnderCare-staffReportAdmin" class="babiesUnderCare-staffReportAdmin"></p>
         </div>
+    </div>
 
-        <!-- Amount Input and Cost Center Select -->
-        <div class="form-group inline-group">
-            <div class="input-group">
-                <label for="amount">Amount:</label>
-                <input type="number" id="amount" name="amount" step="100" min="0" required>
-            </div>
-            <div class="input-group">
-                <label for="costCenter">Cost Center:</label>
-                <select id="costCenter" name="costCenter" required>
-                    <option value="" disabled selected>Select Cost Center</option>
-                    <option value="Finance">Finance</option>
-                    <option value="Marketing">Marketing</option>
-                    <option value="Sales">Sales</option>
-                    <option value="Operations">Operations</option>
-                </select>
-            </div>
-        </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const generateReportBtn = document.getElementById('generateReportstaffReportAdmin');
+    const exportReportBtn = document.getElementById('exportReportstaffReportAdmin');
+    const reportTableBody = document.getElementById('tbody-staffReportAdmin');
 
-        <!-- Transaction Type Select and General Ledger Allocation Select -->
-        <div class="form-group inline-group">
-            <div class="input-group">
-                <label for="transactionType">Transaction Type:</label>
-                <select id="transactionType" name="transactionType" required>
-                    <option value="debit">Debit</option>
-                    <option value="credit">Credit</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label for="ledgerAllocation">General Ledger Allocation:</label>
-                <select id="ledgerAllocation" name="ledgerAllocation" required>
-                    <option value="" disabled selected>Select Ledger Allocation</option>
-                    <option value="Allocation A">Allocation A</option>
-                    <option value="Allocation B">Allocation B</option>
-                    <option value="Allocation C">Allocation C</option>
-                    <!-- Add more options as needed -->
-                </select>
-            </div>
-        </div>
+    let reportData = []; // Array to store report data
 
-        <!-- Submit Button -->
-        <div class="button-group">
-            <button type="submit">Submit</button>
-        </div>
-    </form>
+    // Simulated data for accounts staff
+    const accountsStaff = [
+        { fullName: 'John Doe', staffNumber: 'Sn001/24', enrollmentDate: '2024-01-05', status: 'Present', remarks: 'Excellent performance' },
+        { fullName: 'Alice Johnson', staffNumber: 'Sn002/24', enrollmentDate: '2024-02-10', status: 'Present', remarks: '' },
+        { fullName: 'David Smith', staffNumber: 'Sn003/24', enrollmentDate: '2024-03-15', status: 'Absent', remarks: 'On leave' },
+        { fullName: 'Emma White', staffNumber: 'Sn004/24', enrollmentDate: '2024-04-20', status: 'Present', remarks: '' },
+        { fullName: 'Sarah Brown', staffNumber: 'Sn005/24', enrollmentDate: '2024-05-25', status: 'Present', remarks: '' },
+        { fullName: 'Michael Johnson', staffNumber: 'Sn006/24', enrollmentDate: '2024-06-30', status: 'Absent', remarks: 'Sick' },
+        { fullName: 'Laura Anderson', staffNumber: 'Sn007/24', enrollmentDate: '2024-07-05', status: 'Present', remarks: '' },
+        { fullName: 'Sophia Lee', staffNumber: 'Sn008/24', enrollmentDate: '2024-08-10', status: 'Present', remarks: '' },
+        { fullName: 'Robert Taylor', staffNumber: 'Sn009/24', enrollmentDate: '2024-09-15', status: 'Present', remarks: '' },
+        { fullName: 'William Clark', staffNumber: 'Sn010/24', enrollmentDate: '2024-10-20', status: 'Present', remarks: '' }
+    ];
 
+    // Simulated data for procurement staff
+    const procurementStaff = [
+        { fullName: 'Olivia Brown', staffNumber: 'Sn011/24', enrollmentDate: '2024-01-10', status: 'Present', remarks: '' },
+        { fullName: 'James Wilson', staffNumber: 'Sn012/24', enrollmentDate: '2024-02-15', status: 'Present', remarks: '' },
+        { fullName: 'Emily Martinez', staffNumber: 'Sn013/24', enrollmentDate: '2024-03-20', status: 'Absent', remarks: 'Vacation' },
+        { fullName: 'Daniel Harris', staffNumber: 'Sn014/24', enrollmentDate: '2024-04-25', status: 'Present', remarks: '' },
+        { fullName: 'Ella Davis', staffNumber: 'Sn015/24', enrollmentDate: '2024-05-30', status: 'Present', remarks: '' },
+        { fullName: 'Matthew Thomas', staffNumber: 'Sn016/24', enrollmentDate: '2024-06-05', status: 'Absent', remarks: 'Family emergency' },
+        { fullName: 'Isabella Moore', staffNumber: 'Sn017/24', enrollmentDate: '2024-07-10', status: 'Present', remarks: '' },
+        { fullName: 'Jackson Murphy', staffNumber: 'Sn018/24', enrollmentDate: '2024-08-15', status: 'Present', remarks: '' },
+        { fullName: 'Ava Rivera', staffNumber: 'Sn019/24', enrollmentDate: '2024-09-20', status: 'Present', remarks: '' },
+        { fullName: 'Logan Garcia', staffNumber: 'Sn020/24', enrollmentDate: '2024-10-25', status: 'Present', remarks: '' }
+    ];
+
+    // Simulated data for sitters staff
+    const sittersStaff = [
+        { fullName: 'Grace Martinez', staffNumber: 'Sn021/24', enrollmentDate: '2024-01-15', status: 'Present', remarks: '' },
+        { fullName: 'Lucas Young', staffNumber: 'Sn022/24', enrollmentDate: '2024-02-20', status: 'Present', remarks: '' },
+        { fullName: 'Mia Robinson', staffNumber: 'Sn023/24', enrollmentDate: '2024-03-25', status: 'Absent', remarks: 'Doctor appointment' },
+        { fullName: 'Benjamin King', staffNumber: 'Sn024/24', enrollmentDate: '2024-04-30', status: 'Present', remarks: '' },
+        { fullName: 'Lily Wright', staffNumber: 'Sn025/24', enrollmentDate: '2024-05-05', status: 'Present', remarks: '' },
+        { fullName: 'Alexander Hill', staffNumber: 'Sn026/24', enrollmentDate: '2024-06-10', status: 'Absent', remarks: 'Personal reasons' },
+        { fullName: 'Chloe Scott', staffNumber: 'Sn027/24', enrollmentDate: '2024-07-15', status: 'Present', remarks: '' },
+        { fullName: 'William Adams', staffNumber: 'Sn028/24', enrollmentDate: '2024-08-20', status: 'Present', remarks: '' },
+        { fullName: 'Victoria Baker', staffNumber: 'Sn029/24', enrollmentDate: '2024-09-25', status: 'Present', remarks: '' },
+        { fullName: 'Ethan Carter', staffNumber: 'Sn030/24', enrollmentDate: '2024-10-30', status: 'Present', remarks: '' }
+    ];
+
+    // Simulated data for support staff
+    const supportStaff = [
+        { fullName: 'Natalie Walker', staffNumber: 'Sn031/24', enrollmentDate: '2024-01-20', status: 'Present', remarks: '' },
+        { fullName: 'Christopher Hall', staffNumber: 'Sn032/24', enrollmentDate: '2024-02-25', status: 'Present', remarks: '' },
+        { fullName: 'Hannah Young', staffNumber: 'Sn033/24', enrollmentDate: '2024-03-30', status: 'Absent', remarks: 'Training' },
+        { fullName: 'Gabriel Lopez', staffNumber: 'Sn034/24', enrollmentDate: '2024-04-05', status: 'Present', remarks: '' },
+        { fullName: 'Sofia Martinez', staffNumber: 'Sn035/24', enrollmentDate: '2024-05-10', status: 'Present', remarks: '' },
+        { fullName: 'Dylan Perez', staffNumber: 'Sn036/24', enrollmentDate: '2024-06-15', status: 'Absent', remarks: 'Vacation' },
+        { fullName: 'Avery Gonzales', staffNumber: 'Sn037/24', enrollmentDate: '2024-07-20', status: 'Present', remarks: '' },
+        { fullName: 'Zoe Evans', staffNumber: 'Sn038/24', enrollmentDate: '2024-08-25', status: 'Present', remarks: '' },
+        { fullName: 'Jackson Morris', staffNumber: 'Sn039/24', enrollmentDate: '2024-09-30', status: 'Present', remarks: '' },
+        { fullName: 'Madison Rogers', staffNumber: 'Sn040/24', enrollmentDate: '2024-10-05', status: 'Present', remarks: '' }
+    ];
+
+    // Simulated data for administration staff
+    const administrationStaff = [
+        { fullName: 'William Cooper', staffNumber: 'Sn041/24', enrollmentDate: '2024-01-25', status: 'Present', remarks: '' },
+        { fullName: 'Samantha Nelson', staffNumber: 'Sn042/24', enrollmentDate: '2024-02-28', status: 'Present', remarks: '' },
+        { fullName: 'Andrew Hughes', staffNumber: 'Sn043/24', enrollmentDate: '2024-03-05', status: 'Absent', remarks: 'Medical appointment' },
+        { fullName: 'Evelyn Rivera', staffNumber: 'Sn044/24', enrollmentDate: '2024-04-10', status: 'Present', remarks: '' },
+        { fullName: 'Mason Wood', staffNumber: 'Sn045/24', enrollmentDate: '2024-05-15', status: 'Present', remarks: '' },
+        { fullName: 'Harper Stewart', staffNumber: 'Sn046/24', enrollmentDate: '2024-06-20', status: 'Absent', remarks: 'Family event' },
+        { fullName: 'Jack Collins', staffNumber: 'Sn047/24', enrollmentDate: '2024-07-25', status: 'Present', remarks: '' },
+        { fullName: 'Ella Bailey', staffNumber: 'Sn048/24', enrollmentDate: '2024-08-30', status: 'Present', remarks: '' },
+        { fullName: 'Lucas Parker', staffNumber: 'Sn049/24', enrollmentDate: '2024-09-05', status: 'Present', remarks: '' },
+        { fullName: 'Aria Long', staffNumber: 'Sn050/24', enrollmentDate: '2024-10-10', status: 'Present', remarks: '' }
+    ];
+
+    generateReportBtn.addEventListener('click', () => {
+        const fromDate = document.getElementById('fromDatestaffReportAdmin').value;
+        const toDate = document.getElementById('toDatestaffReportAdmin').value;
+        const staffType = document.getElementById('staffTypestaffReportAdmin').value;
+
+        if (!fromDate || !toDate) {
+            alert('Please select both "From" and "To" dates.');
+            return;
+        }
+
+        // Select staff data based on staff type
+        switch (staffType) {
+            case 'accounts':
+                reportData = accountsStaff;
+                break;
+            case 'procurement':
+                reportData = procurementStaff;
+                break;
+            case 'sitters':
+                reportData = sittersStaff;
+                break;
+            case 'support':
+                reportData = supportStaff;
+                break;
+            case 'administration':
+                reportData = administrationStaff;
+                break;
+            case 'all':
+                reportData = [
+                    ...accountsStaff,
+                    ...procurementStaff,
+                    ...sittersStaff,
+                    ...supportStaff,
+                    ...administrationStaff
+                ];
+                break;
+            default:
+                reportData = [];
+                break;
+        }
+
+        // Clear previous table rows
+        reportTableBody.innerHTML = '';
+
+        // Populate table with selected staff data
+        reportData.forEach(staff => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${staff.fullName}</td>
+                <td>${staff.staffNumber}</td>
+                <td>${staff.enrollmentDate}</td>
+                <td>${staffType}</td>
+                <td>${staff.status}</td>
+                <td>${staff.remarks}</td>
+            `;
+            reportTableBody.appendChild(row);
+        });
+
+        // Enable export button
+        exportReportBtn.disabled = false;
+    });
+
+    exportReportBtn.addEventListener('click', () => {
+        if (reportData.length === 0) {
+            alert('Please generate a report before exporting.');
+            return;
+        }
+
+        let csvContent = 'data:text/csv;charset=utf-8,';
+        csvContent += 'Name,Staff Number,Enrollment Date,Department,Status,Remarks\n';
+
+        reportData.forEach(staff => {
+            const rowData = [
+                staff.fullName,
+                staff.staffNumber,
+                staff.enrollmentDate,
+                document.getElementById('staffTypestaffReportAdmin').value,
+                staff.status,
+                staff.remarks
+            ];
+            const csvRow = rowData.join(',');
+            csvContent += `${csvRow}\n`;
+        });
+
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement('a');
+        link.setAttribute('href', encodedUri);
+        link.setAttribute('download', 'daycare_report.csv');
+        document.body.appendChild(link);
+        link.click();
+    });
+
+    reportTableBody.addEventListener('click', (event) => {
+        const targetRow = event.target.closest('tr');
+        if (!targetRow || targetRow === reportTableBody.firstElementChild) return;
+
+        const staffName = targetRow.cells[0].textContent;
+        const checkInTime = ''; // Retrieve from biometric system
+        const babiesUnderCare = ''; // Retrieve for sitters
+
+        document.getElementById('staffName-staffReportAdmin').textContent = staffName;
+        document.getElementById('checkInTime-staffReportAdmin').textContent = `Checked in at: ${checkInTime}`;
+        document.getElementById('babiesUnderCare-staffReportAdmin').textContent = `Babies under care: ${babiesUnderCare}`;
+
+        const modal = document.getElementById('modal-staffReportAdmin');
+        modal.style.display = 'block';
+
+        modal.querySelector('.close-staffReportAdmin').addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+});
+
+    </script>
 </body>
 </html>
