@@ -32,11 +32,11 @@ function switchSection(sectionId) {
     function fetchUsersRealTimeUpdates() {
         // Simulate AJAX request to fetch real-time updates (replace with actual API call)
         const mockUpdates = [
-            { type: 'Babies Enrolled', count: 165 },
-            { type: 'Babies Present', count: 153 },
-            { type: 'Sitters Enrolled', count: 65 },
-            { type: 'Sitters Present', count: 56 },
-            { type: 'Total Revenue', amount: 'Shs 55,356,000' },
+            { type: 'Amount Due', amount: 'Shs 105,000' },
+            { type: 'Days Present', count: 43 },
+            { type: 'Appetite (Scale of 10)', count: 7 },
+            { type: 'Social Habits (Scale of 10)', count: 8 },
+            { type: 'Playtime', value: 'Very Active' },
             { type: 'Expenses', amount: 'Shs 29,635,500' }
         ];
 
@@ -200,9 +200,65 @@ renderUsersGraphicalReport(selectedReportType);
     }
 
 
-
 });
 
+// Baby Financial Statement
+const transactions = [
+    { date: '2024-04-01', code: 'T001', description: 'Balance B/F', dr: '', cr: '50,000', balance: '50,000' },
+    { date: '2024-04-05', code: 'T002', description: 'Payment: April Fees', dr: '', cr: '30,000', balance: '80,000' },
+    { date: '2024-04-10', code: 'T003', description: 'Snack Purchase', dr: '5,000', cr: '', balance: '75,000' },
+    { date: '2024-04-15', code: 'T004', description: 'Payment: May Fees', dr: '', cr: '30,000', balance: '105,000' },
+    { date: '2024-04-20', code: 'T005', description: 'Payment: June Fees', dr: '', cr: '30,000', balance: '135,000' },
+    { date: '2024-05-01', code: 'T006', description: 'Social Habits (Scale of 10)', dr: '2,000', cr: '', balance: '133,000' },
+    { date: '2024-05-05', code: 'T007', description: 'Snack Purchase', dr: '4,000', cr: '', balance: '129,000' },
+    { date: '2024-05-10', code: 'T008', description: 'Playtime', dr: '3,000', cr: '', balance: '126,000' },
+    { date: '2024-05-15', code: 'T009', description: 'Payment: July Fees', dr: '', cr: '30,000', balance: '156,000' },
+    { date: '2024-05-20', code: 'T010', description: 'Expenses', dr: '25,000', cr: '', balance: '131,000' },
+    { date: '2024-06-01', code: 'T011', description: 'Payment: June Fees', dr: '', cr: '30,000', balance: '161,000' },
+    { date: '2024-06-05', code: 'T012', description: 'Appetite (Scale of 10)', dr: '1,000', cr: '', balance: '160,000' },
+    { date: '2024-06-10', code: 'T013', description: 'Payment: July Fees', dr: '', cr: '30,000', balance: '190,000' },
+    { date: '2024-06-15', code: 'T014', description: 'Expenses', dr: '5,000', cr: '', balance: '185,000' },
+    { date: '2024-06-20', code: 'T015', description: 'Payment: August Fees', dr: '', cr: '30,000', balance: '215,000' }
+];
+
+// Function to populate the transaction table
+function populateTransactionTable(data) {
+    const tbody = document.getElementById('transaction-body-babyFinStatement');
+    tbody.innerHTML = ''; // Clear existing rows
+    data.forEach(transaction => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td id="td-babyFinStatement">${transaction.date}</td>
+            <td id="td-babyFinStatement">${transaction.code}</td>
+            <td id="td-babyFinStatement">${transaction.description}</td>
+            <td id="td-babyFinStatement">${transaction.dr}</td>
+            <td id="td-babyFinStatement">${transaction.cr}</td>
+            <td id="td-babyFinStatement">${transaction.balance}</td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// Function to print the financial statement
+function printStatement() {
+    window.print();
+}
+
+// Function to export the financial statement to Excel (Basic version)
+function exportToExcel() {
+    const table = document.getElementById('table-babyFinStatement');
+    const html = table.outerHTML;
+    const url = 'data:application/vnd.ms-excel;base64,' + btoa(html);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'daystar_statement.xls';
+    a.click();
+}
+
+// Populate the transaction table with default data on page load
+window.onload = function() {
+    populateTransactionTable(transactions);
+};
 
 
 

@@ -92,63 +92,55 @@
         align-items: center;
       }
 
-      /* Admin Baby Registration */
-      .container-babyRegistration {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 700px;
-    margin: auto;
-}
+      /* Baby Financial Statement */
+      #container-babyFinStatement {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
 
-.h1-babyRegistration {
-    text-align: center;
-    color: #333;
-}
+        #h1-babyFinStatement {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
 
-.label-babyRegistration {
-    font-weight: bold;
-}
+        .p-babyFinStatement {
+            margin-bottom: 10px;
+        }
 
-.input-babyRegistration {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 5px;
-}
+        #table-babyFinStatement {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
-.button-babyRegistration {
-    width: 100%;
-    padding: 12px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-}
+        #table-babyFinStatement, #th-babyFinStatement, #td-babyFinStatement {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
 
-.button-babyRegistration:hover {
-    background-color: #0056b3;
-}
+        #th-babyFinStatement {
+            background-color: #007bff;
+            color: #fff;
+        }
 
-.error {
-    color: red;
-    font-size: 12px;
-}
+        .button-babyFinStatement {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
 
-.success-message {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
-    border-radius: 4px;
-    color: #155724;
-    font-weight: bold;
-}
+        .button-babyFinStatement:hover {
+            background-color: #0056b3;
+        }
 
 /* Admin Applications */
 .container-applicationCheckAdmin {
@@ -658,7 +650,31 @@ video {
 
         <!-- Financial Statement -->
         <div id="financialStatement" class="section-users">
-        
+          <div id="container-babyFinStatement">
+            <h1 id="h1-babyFinStatement">Daystar Account Financial Statement</h1>
+            <p class="p-babyFinStatement"><strong>Name:</strong> Claire Karungi</p>
+            <p class="p-babyFinStatement"><strong>Baby Number:</strong> Bn001/24</p>
+            
+            <table id="table-babyFinStatement">
+                <thead>
+                    <tr>
+                        <th id="th-babyFinStatement">Date</th>
+                        <th id="th-babyFinStatement">Transaction Code</th>
+                        <th id="th-babyFinStatement">Description</th>
+                        <th id="th-babyFinStatement">DR (UGX)</th>
+                        <th id="th-babyFinStatement">CR (UGX)</th>
+                        <th id="th-babyFinStatement">Balance (UGX)</th>
+                    </tr>
+                </thead>
+                <tbody id="transaction-body-babyFinStatement">
+                    <!-- Transaction rows will be dynamically populated -->
+                </tbody>
+            </table>
+    
+            <button class="button-babyFinStatement" onclick="printStatement()">Print Statement</button>
+            <button class="button-babyFinStatement" onclick="exportToExcel()">Export to Excel</button>
+        </div>
+    
         </div>
 
         <!-- Activities -->
