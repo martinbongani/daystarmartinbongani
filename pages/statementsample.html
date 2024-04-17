@@ -3,150 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daystar Account Financial Statement</title>
+    <title>Baby Play Corner</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            margin: 0;
+            background-color: #f8f8f8;
             padding: 20px;
+            margin: 0;
         }
 
-        #container-babyFinStatement {
+        .container-PlayCorner {
             max-width: 800px;
             margin: 0 auto;
             background-color: #fff;
             padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        #h1-babyFinStatement {
+        .heading-PlayCorner {
             text-align: center;
-            color: #007bff;
+            font-size: 32px;
+            color: #333;
             margin-bottom: 20px;
         }
 
-        .p-babyFinStatement {
-            margin-bottom: 10px;
+        .section-PlayCorner {
+            margin-bottom: 40px;
         }
 
-        #table-babyFinStatement {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        .section-PlayCorner h2 {
+            font-size: 24px;
+            color: #007bff;
+            margin-bottom: 16px;
         }
 
-        #table-babyFinStatement, #th-babyFinStatement, #td-babyFinStatement {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
+        .games-container-PlayCorner {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        #th-babyFinStatement {
-            background-color: #007bff;
-            color: #fff;
-        }
-
-        .button-babyFinStatement {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
+        .game-PlayCorner {
+            width: 200px;
+            height: 200px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
-            border-radius: 5px;
-            margin-top: 20px;
+            transition: background-color 0.3s ease;
         }
 
-        .button-babyFinStatement:hover {
-            background-color: #0056b3;
+        .game-PlayCorner:hover {
+            background-color: #e0e0e0;
+        }
+
+        .music-player-PlayCorner {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .gallery-image-PlayCorner {
+            width: calc(33.33% - 10px);
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .video-container-PlayCorner {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .video-PlayCorner {
+            width: calc(50% - 20px);
+            height: 200px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
     </style>
 </head>
 <body>
-    <div id="container-babyFinStatement">
-        <h1 id="h1-babyFinStatement">Daystar Account Financial Statement</h1>
-        <p class="p-babyFinStatement"><strong>Name:</strong> Claire Karungi</p>
-        <p class="p-babyFinStatement"><strong>Baby Number:</strong> Bn001/24</p>
-        
-        <table id="table-babyFinStatement">
-            <thead>
-                <tr>
-                    <th id="th-babyFinStatement">Date</th>
-                    <th id="th-babyFinStatement">Transaction Code</th>
-                    <th id="th-babyFinStatement">Description</th>
-                    <th id="th-babyFinStatement">DR (UGX)</th>
-                    <th id="th-babyFinStatement">CR (UGX)</th>
-                    <th id="th-babyFinStatement">Balance (UGX)</th>
-                </tr>
-            </thead>
-            <tbody id="transaction-body-babyFinStatement">
-                <!-- Transaction rows will be dynamically populated -->
-            </tbody>
-        </table>
+    <div class="container-PlayCorner">
+        <h1 class="heading-PlayCorner">Baby Play Corner</h1>
 
-        <button class="button-babyFinStatement" onclick="printStatement()">Print Statement</button>
-        <button class="button-babyFinStatement" onclick="exportToExcel()">Export to Excel</button>
+        <section class="section-PlayCorner">
+            <h2>Games for Babies</h2>
+            <div class="games-container-PlayCorner" id="gamesContainer-PlayCorner">
+                <!-- Games will be dynamically populated here -->
+            </div>
+        </section>
+
+        <section class="section-PlayCorner">
+            <h2>Baby Music</h2>
+            <div class="music-player-PlayCorner" id="musicPlayer-PlayCorner">
+                <!-- Music player controls will be dynamically populated here -->
+            </div>
+        </section>
+
+        <section class="section-PlayCorner">
+            <h2>Gallery</h2>
+            <div class="gallery-container-PlayCorner" id="galleryContainer-PlayCorner">
+                <!-- Gallery images will be dynamically populated here -->
+            </div>
+            <input type="file" id="imageUploader-PlayCorner" accept="image/*">
+        </section>
+
+        <section class="section-PlayCorner">
+            <h2>Videos</h2>
+            <div class="video-container-PlayCorner" id="videoContainer-PlayCorner">
+                <!-- Videos will be dynamically populated here -->
+            </div>
+            <input type="file" id="videoUploader-PlayCorner" accept="video/*">
+        </section>
     </div>
 
     <script>
-        // Sample data for transactions
-        const transactions = [
-            { date: '2024-04-01', code: 'T001', description: 'Balance B/F', dr: '', cr: '50,000', balance: '50,000' },
-            { date: '2024-04-05', code: 'T002', description: 'Payment: April Fees', dr: '', cr: '30,000', balance: '80,000' },
-            { date: '2024-04-10', code: 'T003', description: 'Snack Purchase', dr: '5,000', cr: '', balance: '75,000' },
-            { date: '2024-04-15', code: 'T004', description: 'Payment: May Fees', dr: '', cr: '30,000', balance: '105,000' },
-            { date: '2024-04-20', code: 'T005', description: 'Payment: June Fees', dr: '', cr: '30,000', balance: '135,000' },
-            { date: '2024-05-01', code: 'T006', description: 'Social Habits (Scale of 10)', dr: '2,000', cr: '', balance: '133,000' },
-            { date: '2024-05-05', code: 'T007', description: 'Snack Purchase', dr: '4,000', cr: '', balance: '129,000' },
-            { date: '2024-05-10', code: 'T008', description: 'Playtime', dr: '3,000', cr: '', balance: '126,000' },
-            { date: '2024-05-15', code: 'T009', description: 'Payment: July Fees', dr: '', cr: '30,000', balance: '156,000' },
-            { date: '2024-05-20', code: 'T010', description: 'Expenses', dr: '25,000', cr: '', balance: '131,000' },
-            { date: '2024-06-01', code: 'T011', description: 'Payment: June Fees', dr: '', cr: '30,000', balance: '161,000' },
-            { date: '2024-06-05', code: 'T012', description: 'Appetite (Scale of 10)', dr: '1,000', cr: '', balance: '160,000' },
-            { date: '2024-06-10', code: 'T013', description: 'Payment: July Fees', dr: '', cr: '30,000', balance: '190,000' },
-            { date: '2024-06-15', code: 'T014', description: 'Expenses', dr: '5,000', cr: '', balance: '185,000' },
-            { date: '2024-06-20', code: 'T015', description: 'Payment: August Fees', dr: '', cr: '30,000', balance: '215,000' }
-        ];
+        document.addEventListener('DOMContentLoaded', () => {
+            const gamesData = [
+                { name: 'Peek-a-Boo', imageUrl: 'game1.jpg' },
+                { name: 'Shape Sorter', imageUrl: 'game2.jpg' },
+                { name: 'Musical Toys', imageUrl: 'game3.jpg' },
+                { name: 'Bubble Pop', imageUrl: 'game4.jpg' }
+            ];
 
-        // Function to populate the transaction table
-        function populateTransactionTable(data) {
-            const tbody = document.getElementById('transaction-body-babyFinStatement');
-            tbody.innerHTML = ''; // Clear existing rows
-            data.forEach(transaction => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td id="td-babyFinStatement">${transaction.date}</td>
-                    <td id="td-babyFinStatement">${transaction.code}</td>
-                    <td id="td-babyFinStatement">${transaction.description}</td>
-                    <td id="td-babyFinStatement">${transaction.dr}</td>
-                    <td id="td-babyFinStatement">${transaction.cr}</td>
-                    <td id="td-babyFinStatement">${transaction.balance}</td>
-                `;
-                tbody.appendChild(row);
+            const musicData = [
+                { title: 'Twinkle Twinkle Little Star', audioUrl: 'music1.mp3' },
+                { title: 'Baby Shark', audioUrl: 'music2.mp3' },
+                { title: 'Rock-a-bye Baby', audioUrl: 'music3.mp3' }
+            ];
+
+            const galleryImages = [
+                'image1.jpg',
+                'image2.jpg',
+                'image3.jpg',
+                'image4.jpg',
+                'image5.jpg',
+                'image6.jpg'
+            ];
+
+            const videosData = [
+                { title: 'Baby Laughing', videoUrl: 'video1.mp4' },
+                { title: 'Cute Baby Animals', videoUrl: 'video2.mp4' },
+                { title: 'First Steps', videoUrl: 'video3.mp4' }
+            ];
+
+            const gamesContainer = document.getElementById('gamesContainer-PlayCorner');
+            const musicPlayer = document.getElementById('musicPlayer-PlayCorner');
+            const galleryContainer = document.getElementById('galleryContainer-PlayCorner');
+            const videoContainer = document.getElementById('videoContainer-PlayCorner');
+
+            gamesData.forEach(game => {
+                const gameElement = document.createElement('div');
+                gameElement.classList.add('game-PlayCorner');
+                gameElement.style.backgroundImage = `url('${game.imageUrl}')`;
+                gameElement.setAttribute('title', game.name);
+                gamesContainer.appendChild(gameElement);
             });
-        }
 
-        // Function to print the financial statement
-        function printStatement() {
-            window.print();
-        }
+            musicData.forEach(music => {
+                const audioElement = document.createElement('audio');
+                audioElement.src = music.audioUrl;
+                audioElement.controls = true;
+                musicPlayer.appendChild(audioElement);
+            });
 
-        // Function to export the financial statement to Excel (Basic version)
-        function exportToExcel() {
-            const table = document.getElementById('table-babyFinStatement');
-            const html = table.outerHTML;
-            const url = 'data:application/vnd.ms-excel;base64,' + btoa(html);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'daystar_statement.xls';
-            a.click();
-        }
+            galleryImages.forEach(imageUrl => {
+                const imageElement = document.createElement('img');
+                imageElement.classList.add('gallery-image-PlayCorner');
+                imageElement.src = imageUrl;
+                galleryContainer.appendChild(imageElement);
+            });
 
-        // Populate the transaction table with default data on page load
-        window.onload = function() {
-            populateTransactionTable(transactions);
-        };
+            videosData.forEach(video => {
+                const videoElement = document.createElement('video');
+                videoElement.src = video.videoUrl;
+                videoElement.controls = true;
+                videoElement.classList.add('video-PlayCorner');
+                videoContainer.appendChild(videoElement);
+            });
+
+            const imageUploader = document.getElementById('imageUploader-PlayCorner');
+            imageUploader.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const imageUrl = URL.createObjectURL(file);
+                    const imageElement = document.createElement('img');
+                    imageElement.classList.add('gallery-image-PlayCorner');
+                    imageElement.src = imageUrl;
+                    galleryContainer.appendChild(imageElement);
+                }
+            });
+
+            const videoUploader = document.getElementById('videoUploader-PlayCorner');
+            videoUploader.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const videoUrl = URL.createObjectURL(file);
+                    const videoElement = document.createElement('video');
+                    videoElement.src = videoUrl;
+                    videoElement.controls = true;
+                    videoElement.classList.add('video-PlayCorner');
+                    videoContainer.appendChild(videoElement);
+                }
+            });
+        });
     </script>
 </body>
 </html>

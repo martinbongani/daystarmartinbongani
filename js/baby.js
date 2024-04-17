@@ -260,6 +260,217 @@ window.onload = function() {
     populateTransactionTable(transactions);
 };
 
+// Baby Activities
+let today = new Date();
+
+function generateWeek() {
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const weekContainer = document.getElementById('weekContainer-scheduleBaby');
+    weekContainer.innerHTML = ''; // Clear previous week
+
+    for (let i = 0; i < 6; i++) { // Loop through weekdays only (Monday to Saturday)
+        const date = new Date(today);
+        date.setDate(today.getDate() + i);
+
+        const dayName = daysOfWeek[i];
+        const formattedDate = `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
+
+        const dayElement = document.createElement('div');
+        dayElement.classList.add('day-scheduleBaby');
+        dayElement.setAttribute('data-date', formattedDate);
+
+        const dateElement = document.createElement('div');
+        dateElement.classList.add('date-scheduleBaby');
+        dateElement.textContent = `${dayName}, ${date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+
+        dayElement.appendChild(dateElement);
+
+        const activities = getActivitiesForDay(dayName);
+        activities.forEach(activity => {
+            const activityElement = document.createElement('div');
+            activityElement.classList.add('activity-scheduleBaby');
+            activityElement.setAttribute('data-time', activity.time);
+            activityElement.setAttribute('data-room', activity.room);
+            activityElement.setAttribute('data-sitter', activity.sitter);
+            activityElement.textContent = activity.name;
+
+            activityElement.addEventListener('click', () => showPopup(activity));
+
+            dayElement.appendChild(activityElement);
+        });
+
+        weekContainer.appendChild(dayElement);
+    }
+}
+
+function getActivitiesForDay(day) {
+    const activities = {
+        Monday: [
+            { name: 'Morning Playtime', time: '09:00', room: 'Playroom A', sitter: 'Sarah' },
+            { name: 'Nap Time', time: '11:00', room: 'Nap Room', sitter: 'James' }
+        ],
+        Tuesday: [
+            { name: 'Outdoor Play', time: '10:00', room: 'Outdoor Area', sitter: 'Emma' },
+            { name: 'Lunch Time', time: '12:00', room: 'Lunch Room', sitter: 'David' }
+        ],
+        Wednesday: [
+            { name: 'Story Time', time: '10:30', room: 'Story Corner', sitter: 'Emily' },
+            { name: 'Art and Crafts', time: '14:00', room: 'Art Room', sitter: 'Michael' }
+        ],
+        Thursday: [
+            { name: 'Music Session', time: '11:00', room: 'Music Room', sitter: 'Olivia' },
+            { name: 'Outdoor Play', time: '15:00', room: 'Outdoor Area', sitter: 'Daniel' }
+        ],
+        Friday: [
+            { name: 'Dance Class', time: '10:00', room: 'Dance Studio', sitter: 'Sophia' },
+            { name: 'Snack Time', time: '14:00', room: 'Snack Area', sitter: 'Ethan' }
+        ],
+        Saturday: [
+            { name: 'Puzzle Time', time: '09:30', room: 'Activity Room', sitter: 'Isabella' },
+            { name: 'Outdoor Play', time: '11:30', room: 'Outdoor Area', sitter: 'Noah' }
+        ]
+    };
+
+    return activities[day] || [];
+}
+
+function showPopup(activity) {
+    const popup = document.getElementById('activityPopup-scheduleBaby');
+    const popupTime = document.getElementById('popupTime-scheduleBaby');
+    const popupRoom = document.getElementById('popupRoom-scheduleBaby');
+    const popupSitter = document.getElementById('popupSitter-scheduleBaby');
+    popupTime.textContent = activity.time;
+    popupRoom.textContent = activity.room;
+    popupSitter.textContent = activity.sitter;
+    popup.style.display = 'flex';
+
+    const closePopupButton = document.getElementById('closePopupButton-scheduleBaby');
+    closePopupButton.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+}
+
+generateWeek();
+
+setInterval(() => {
+    today.setDate(today.getDate() + 6);
+    generateWeek();
+}, 1000 * 60 * 60 * 24 * 6);
+
+// Hide the popup initially
+const popup = document.getElementById('activityPopup-scheduleBaby');
+popup.style.display = 'none';
+
+// Baby Child Progress Report
+const reportData = [
+    { area: 'Motor Skills', progress: 'Good', recommendations: 'Encourage more outdoor play', reporter: 'Sarah Johnson' },
+    { area: 'Language Development', progress: 'Excellent', recommendations: 'Read more storybooks', reporter: 'James Smith' },
+    { area: 'Social Interaction', progress: 'Needs Improvement', recommendations: 'More group activities', reporter: 'Emma Brown' },
+    { area: 'Cognitive Skills', progress: 'Average', recommendations: 'Introduce puzzles and games', reporter: 'David Wilson' }
+];
+
+const reportBody = document.getElementById('reportBody-childProgressReport');
+
+reportData.forEach(item => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td class="td-childProgressReport">${item.area}</td>
+        <td class="td-childProgressReport">${item.progress}</td>
+        <td class="td-childProgressReport">${item.recommendations}</td>
+        <td class="td-childProgressReport">${item.reporter}</td>
+    `;
+    reportBody.appendChild(row);
+});
+
+// Baby Play Corner
+const gamesData = [
+    { name: 'Peek-a-Boo', imageUrl: 'game1.jpg' },
+    { name: 'Shape Sorter', imageUrl: 'game2.jpg' },
+    { name: 'Musical Toys', imageUrl: 'game3.jpg' },
+    { name: 'Bubble Pop', imageUrl: 'game4.jpg' }
+];
+
+const musicData = [
+    { title: 'Twinkle Twinkle Little Star', audioUrl: 'music1.mp3' },
+    { title: 'Baby Shark', audioUrl: 'music2.mp3' },
+    { title: 'Rock-a-bye Baby', audioUrl: 'music3.mp3' }
+];
+
+const galleryImages = [
+    'image1.jpg',
+    'image2.jpg',
+    'image3.jpg',
+    'image4.jpg',
+    'image5.jpg',
+    'image6.jpg'
+];
+
+const videosData = [
+    { title: 'Baby Laughing', videoUrl: 'video1.mp4' },
+    { title: 'Cute Baby Animals', videoUrl: 'video2.mp4' },
+    { title: 'First Steps', videoUrl: 'video3.mp4' }
+];
+
+const gamesContainer = document.getElementById('gamesContainer-PlayCorner');
+const musicPlayer = document.getElementById('musicPlayer-PlayCorner');
+const galleryContainer = document.getElementById('galleryContainer-PlayCorner');
+const videoContainer = document.getElementById('videoContainer-PlayCorner');
+
+gamesData.forEach(game => {
+    const gameElement = document.createElement('div');
+    gameElement.classList.add('game-PlayCorner');
+    gameElement.style.backgroundImage = `url('${game.imageUrl}')`;
+    gameElement.setAttribute('title', game.name);
+    gamesContainer.appendChild(gameElement);
+});
+
+musicData.forEach(music => {
+    const audioElement = document.createElement('audio');
+    audioElement.src = music.audioUrl;
+    audioElement.controls = true;
+    musicPlayer.appendChild(audioElement);
+});
+
+galleryImages.forEach(imageUrl => {
+    const imageElement = document.createElement('img');
+    imageElement.classList.add('gallery-image-PlayCorner');
+    imageElement.src = imageUrl;
+    galleryContainer.appendChild(imageElement);
+});
+
+videosData.forEach(video => {
+    const videoElement = document.createElement('video');
+    videoElement.src = video.videoUrl;
+    videoElement.controls = true;
+    videoElement.classList.add('video-PlayCorner');
+    videoContainer.appendChild(videoElement);
+});
+
+const imageUploader = document.getElementById('imageUploader-PlayCorner');
+imageUploader.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const imageUrl = URL.createObjectURL(file);
+        const imageElement = document.createElement('img');
+        imageElement.classList.add('gallery-image-PlayCorner');
+        imageElement.src = imageUrl;
+        galleryContainer.appendChild(imageElement);
+    }
+});
+
+const videoUploader = document.getElementById('videoUploader-PlayCorner');
+videoUploader.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const videoUrl = URL.createObjectURL(file);
+        const videoElement = document.createElement('video');
+        videoElement.src = videoUrl;
+        videoElement.controls = true;
+        videoElement.classList.add('video-PlayCorner');
+        videoContainer.appendChild(videoElement);
+    }
+});
+
 
 
 

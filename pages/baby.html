@@ -142,301 +142,214 @@
             background-color: #0056b3;
         }
 
-/* Admin Applications */
-.container-applicationCheckAdmin {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
+/* Baby Activities */
+.container-scheduleBaby {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
 
-.h1-applicationCheckAdmin {
-    text-align: center;
-    color: #007bff;
-}
+        .calendar-heading-scheduleBaby {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
 
-.h2-applicationCheckAdmin {
-    color: #555;
-}
+        .week-scheduleBaby {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-ul.adminApplicationCheck {
-    list-style-type: none;
-    padding: 0;
-}
+        .day-scheduleBaby {
+            flex: 0 0 calc(33.33% - 20px);
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
 
-li {
-    cursor: pointer;
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    transition: background-color 0.3s ease;
-}
+        .date-scheduleBaby {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #555;
+        }
 
-li:hover {
-    background-color: #f5f5f5;
-}
+        .activity-scheduleBaby {
+            cursor: pointer;
+            padding: 10px 16px;
+            background-color: #e0e0e0;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    overflow: auto;
-    justify-content: center;
-    align-items: center;
-}
+        .activity-scheduleBaby:hover {
+            background-color: #c0c0c0;
+        }
 
-.modal-content {
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    padding: 20px;
-    max-width: 80%;
-    width: 400px;
-}
+        .popup-scheduleBaby {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
+        .popup-content-scheduleBaby {
+            background-color: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 80%;
+        }
 
-.close:hover,
-.close:focus {
-    color: #333;
-}
+        .button-scheduleBaby {
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
 
-.button-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
+        .button-scheduleBaby:hover {
+            background-color: #0056b3;
+        }
 
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
+/* Baby Child Progress Report */
+.container-childProgressReport {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
 
-.buttonAcceptApplicationCheckAdmin {
-    background-color: #28a745;
-    color: #fff;
-}
+        .heading-childProgressReport {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
 
-.buttonRejectApplicationCheckAdmin {
-    background-color: #dc3545;
-    color: #fff;
-}
+        .report-table-childProgressReport {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-button:hover {
-    opacity: 0.9;
-}
+        .th-childProgressReport, .td-childProgressReport {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
 
-@media (max-width: 600px) {
-    .modal-content {
-        max-width: 100%;
-        width: 80%;
-    }
-}
+        .th-childProgressReport {
+            background-color: #007bff;
+            color: #fff;
+        }
 
-/* Admin Baby Report */
-.container-babyReportAdmin {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-}
+        .tbody-childProgressReport tr:hover {
+            background-color: #f5f5f5;
+        }
 
-.h1-babyReportAdmin {
-    text-align: center;
-    color: #333;
-}
+/* Baby Play Corner */
+.container-PlayCorner {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
 
-.form-babyReportAdmin {
-    margin-bottom: 20px;
-    text-align: center;
-}
+        .heading-PlayCorner {
+            text-align: center;
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+        }
 
-.label-babyReportAdmin {
-    font-weight: bold;
-}
+        .section-PlayCorner {
+            margin-bottom: 40px;
+        }
 
-.input-babyReportAdmin {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin: 5px;
-}
+        .section-PlayCorner h2 {
+            font-size: 24px;
+            color: #007bff;
+            margin-bottom: 16px;
+        }
 
-.button-babyReportAdmin {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 5px;
-}
+        .games-container-PlayCorner {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-.button-babyReportAdmin:hover {
-    background-color: #0056b3;
-}
+        .game-PlayCorner {
+            width: 200px;
+            height: 200px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-.table-babyReportAdmin {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
+        .game-PlayCorner:hover {
+            background-color: #e0e0e0;
+        }
 
-.thead-babyReportAdmin {
-    background-color: #007bff;
-    color: #fff;
-}
+        .music-player-PlayCorner {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-.tr-babyReportAdmin {
-    border-bottom: 1px solid #ddd;
-}
+        .gallery-image-PlayCorner {
+            width: calc(33.33% - 10px);
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
 
-.th-babyReportAdmin,
-.td-babyReportAdmin {
-    padding: 12px;
-    text-align: left;
-}
+        .video-container-PlayCorner {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-.th-babyReportAdmin {
-    font-weight: bold;
-}
-
-.td-babyReportAdmin {
-    border-bottom: 1px solid #ddd;
-}
-
-.td-babyReportAdmin:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-/* Admin Staff Report */
-.container-staffReportAdmin {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Form styles */
-.form-staffReportAdmin {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-}
-
-/* Form input styles */
-.label-staffReportAdmin {
-    flex: 1 0 100%;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-.input-staffReportAdmin {
-    flex: 1 0 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 15px;
-}
-
-/* Button styles */
-.button-staffReportAdmin {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.button-staffReportAdmin:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-/* Table styles */
-.table-staffReportAdmin {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-.table-staffReportAdmin th, .table-staffReportAdmin td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
-
-.table-staffReportAdmin th {
-    background-color: #007bff;
-    color: #fff;
-}
-
-/* Modal styles */
-.modal-staffReportAdmin {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content-staffReportAdmin {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-.close-staffReportAdmin {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
-    cursor: pointer;
-    color: #888;
-}
-
-/* Responsive styles */
-@media (max-width: 600px) {
-    .form-staffReportAdmin {
-        flex-direction: column;
-    }
-    .input-staffReportAdmin {
-        margin-right: 0;
-    }
-}
-
-/* Hover effect */
-.button-staffReportAdmin:hover {
-    background-color: #0056b3;
-}
+        .video-PlayCorner {
+            width: calc(50% - 20px);
+            height: 200px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
 
 /* Admin Resource Requests */
 .container-resCheckAdmin {
@@ -679,17 +592,82 @@ video {
 
         <!-- Activities -->
         <div id="activities" class="section-users">
+            <div class="container-scheduleBaby">
+                <h1 class="calendar-heading-scheduleBaby">Daystar Daycare Baby Activity Schedule</h1>
+                <div class="week-scheduleBaby" id="weekContainer-scheduleBaby">
+                    <!-- Days of the week will be dynamically generated here -->
+                </div>
+        
+                <div class="popup-scheduleBaby" id="activityPopup-scheduleBaby">
+                    <div class="popup-content-scheduleBaby">
+                        <h2>Activity Details</h2>
+                        <p><strong>Time:</strong> <span id="popupTime-scheduleBaby"></span></p>
+                        <p><strong>Room:</strong> <span id="popupRoom-scheduleBaby"></span></p>
+                        <p><strong>Sitter:</strong> <span id="popupSitter-scheduleBaby"></span></p>
+                        <button id="closePopupButton-scheduleBaby" class="button-scheduleBaby">OK</button>
+                    </div>
+                </div>
+            </div>
         
         </div>
 
         <!-- Child Progress -->
         <div id="childProgress" class="section-users">
-
+            <div class="container-childProgressReport">
+                <h1 class="heading-childProgressReport">Child Progress Report</h1>
+                <table class="report-table-childProgressReport">
+                    <thead>
+                        <tr>
+                            <th class="th-childProgressReport">Area</th>
+                            <th class="th-childProgressReport">Progress</th>
+                            <th class="th-childProgressReport">Recommendations</th>
+                            <th class="th-childProgressReport">Reported By</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-childProgressReport" id="reportBody-childProgressReport">
+                        <!-- Progress report rows will be dynamically populated here -->
+                    </tbody>
+                </table>
+            </div>
+        
         </div>    
         
         <!-- Play Corner -->
         <div id="playCorner" class="section-users">
-
+            <div class="container-PlayCorner">
+                <h1 class="heading-PlayCorner">Baby Play Corner</h1>
+        
+                <section class="section-PlayCorner">
+                    <h2>Games for Babies</h2>
+                    <div class="games-container-PlayCorner" id="gamesContainer-PlayCorner">
+                        <!-- Games will be dynamically populated here -->
+                    </div>
+                </section>
+        
+                <section class="section-PlayCorner">
+                    <h2>Baby Music</h2>
+                    <div class="music-player-PlayCorner" id="musicPlayer-PlayCorner">
+                        <!-- Music player controls will be dynamically populated here -->
+                    </div>
+                </section>
+        
+                <section class="section-PlayCorner">
+                    <h2>Gallery</h2>
+                    <div class="gallery-container-PlayCorner" id="galleryContainer-PlayCorner">
+                        <!-- Gallery images will be dynamically populated here -->
+                    </div>
+                    <input type="file" id="imageUploader-PlayCorner" accept="image/*">
+                </section>
+        
+                <section class="section-PlayCorner">
+                    <h2>Videos</h2>
+                    <div class="video-container-PlayCorner" id="videoContainer-PlayCorner">
+                        <!-- Videos will be dynamically populated here -->
+                    </div>
+                    <input type="file" id="videoUploader-PlayCorner" accept="video/*">
+                </section>
+            </div>
+        
         </div>
     
         <!-- Resource details popup -->
