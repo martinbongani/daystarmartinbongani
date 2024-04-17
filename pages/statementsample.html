@@ -3,220 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baby Play Corner</title>
+    <title>Baby Sitting List</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f8f8;
             padding: 20px;
-            margin: 0;
-        }
-
-        .container-PlayCorner {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .heading-PlayCorner {
-            text-align: center;
-            font-size: 32px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .section-PlayCorner {
-            margin-bottom: 40px;
-        }
-
-        .section-PlayCorner h2 {
-            font-size: 24px;
-            color: #007bff;
-            margin-bottom: 16px;
-        }
-
-        .games-container-PlayCorner {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .game-PlayCorner {
-            width: 200px;
-            height: 200px;
-            background-color: #f5f5f5;
-            border-radius: 8px;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #container-babyListSitter {
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        #h1-babyListSitter {
+            text-align: center;
+            color: #333;
+        }
+
+        #ul-babyListSitter {
+            list-style: none;
+            padding: 0;
+        }
+
+        .li-babyListSitter {
+            padding: 12px 16px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .li-babyListSitter:last-child {
+            border-bottom: none;
+        }
+
+        .button-babyListSitter {
+            padding: 8px 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-babyListSitter:hover {
+            background-color: #0056b3;
+        }
+
+        .status-babyListSitter {
+            margin-left: 16px; /* Adjust margin for status */
+            flex-grow: 1; /* Allow status to grow to fill remaining space */
+        }
+
+        .action-buttons-babyListSitter {
+            display: flex;
+            gap: 8px; /* Adjust spacing between action buttons */
+        }
+
+        .popup-container-babyListSitter {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-babyListSitter {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .popup-babyListSitter input {
+            width: calc(100% - 24px);
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .popup-babyListSitter button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        .game-PlayCorner:hover {
-            background-color: #e0e0e0;
-        }
-
-        .music-player-PlayCorner {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .gallery-image-PlayCorner {
-            width: calc(33.33% - 10px);
-            height: 150px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .video-container-PlayCorner {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .video-PlayCorner {
-            width: calc(50% - 20px);
-            height: 200px;
-            background-color: #f5f5f5;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+        .popup-babyListSitter button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div class="container-PlayCorner">
-        <h1 class="heading-PlayCorner">Baby Play Corner</h1>
+    <div id="container-babyListSitter">
+        <h1 id="h1-babyListSitter">Baby List</h1>
+        <ul id="baby-list-babyListSitter"></ul>
+    </div>
 
-        <section class="section-PlayCorner">
-            <h2>Games for Babies</h2>
-            <div class="games-container-PlayCorner" id="gamesContainer-PlayCorner">
-                <!-- Games will be dynamically populated here -->
-            </div>
-        </section>
+    <div class="popup-container-babyListSitter" id="popup-overlay-babyListSitter">
+        <div class="popup-babyListSitter" id="details-popup-babyListSitter">
+            <h2 id="details-popup-title-babyListSitter"></h2>
+            <p><strong>Age:</strong> <span id="details-age-babyListSitter"></span></p>
+            <p><strong>Gender:</strong> <span id="details-gender-babyListSitter"></span></p>
+            <p><strong>Enrolled Date:</strong> <span id="details-enrolled-babyListSitter"></span></p>
+            <p><strong>Special Needs:</strong> <span id="details-special-needs-babyListSitter"></span></p>
+            <p><strong>Remarks:</strong> <span id="details-remarks-babyListSitter"></span></p>
+            <button class="button-babyListSitter" onclick="closePopup('details-popup-babyListSitter')">Close</button>
+        </div>
 
-        <section class="section-PlayCorner">
-            <h2>Baby Music</h2>
-            <div class="music-player-PlayCorner" id="musicPlayer-PlayCorner">
-                <!-- Music player controls will be dynamically populated here -->
-            </div>
-        </section>
-
-        <section class="section-PlayCorner">
-            <h2>Gallery</h2>
-            <div class="gallery-container-PlayCorner" id="galleryContainer-PlayCorner">
-                <!-- Gallery images will be dynamically populated here -->
-            </div>
-            <input type="file" id="imageUploader-PlayCorner" accept="image/*">
-        </section>
-
-        <section class="section-PlayCorner">
-            <h2>Videos</h2>
-            <div class="video-container-PlayCorner" id="videoContainer-PlayCorner">
-                <!-- Videos will be dynamically populated here -->
-            </div>
-            <input type="file" id="videoUploader-PlayCorner" accept="video/*">
-        </section>
+        <div class="popup-babyListSitter" id="action-popup-babyListSitter">
+            <input type="text" id="personNameInput-babyListSitter" placeholder="Enter name...">
+            <input type="text" id="commentsInput-babyListSitter" placeholder="Comments (optional)...">
+            <button class="button-babyListSitter" onclick="handleAction()">OK</button>
+        </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const gamesData = [
-                { name: 'Peek-a-Boo', imageUrl: 'game1.jpg' },
-                { name: 'Shape Sorter', imageUrl: 'game2.jpg' },
-                { name: 'Musical Toys', imageUrl: 'game3.jpg' },
-                { name: 'Bubble Pop', imageUrl: 'game4.jpg' }
-            ];
+        const babies = [
+            { name: "Baby One", number: "B1001/24", status: "absent", details: { age: "12 months", gender: "Male", enrolledDate: "2023-01-01", specialNeeds: "", remarks: "" } },
+            { name: "Baby Two", number: "B2001/24", status: "absent", details: { age: "10 months", gender: "Female", enrolledDate: "2023-03-15", specialNeeds: "Allergic to nuts", remarks: "Quiet and shy" } },
+            { name: "Baby Three", number: "B3001/24", status: "absent", details: { age: "9 months", gender: "Male", enrolledDate: "2023-06-10", specialNeeds: "Requires extra nap time", remarks: "Loves playing with blocks" } },
+            { name: "Baby Four", number: "B4001/24", status: "absent", details: { age: "11 months", gender: "Female", enrolledDate: "2023-02-20", specialNeeds: "", remarks: "Very active and playful" } },
+            { name: "Baby Five", number: "B5001/24", status: "absent", details: { age: "8 months", gender: "Male", enrolledDate: "2023-06-05", specialNeeds: "Needs gluten-free snacks", remarks: "Enjoys drawing" } },
+            { name: "Baby Six", number: "B6001/24", status: "absent", details: { age: "7 months", gender: "Female", enrolledDate: "2023-08-01", specialNeeds: "Lactose intolerant", remarks: "Loves storytelling" } },
+            { name: "Baby Seven", number: "B7001/24", status: "absent", details: { age: "10 months", gender: "Male", enrolledDate: "2023-04-10", specialNeeds: "Requires extra attention during meals", remarks: "Enthusiastic learner" } }
+        ];
 
-            const musicData = [
-                { title: 'Twinkle Twinkle Little Star', audioUrl: 'music1.mp3' },
-                { title: 'Baby Shark', audioUrl: 'music2.mp3' },
-                { title: 'Rock-a-bye Baby', audioUrl: 'music3.mp3' }
-            ];
+        const babyList = document.getElementById('baby-list-babyListSitter');
+        let currentBaby = null;
 
-            const galleryImages = [
-                'image1.jpg',
-                'image2.jpg',
-                'image3.jpg',
-                'image4.jpg',
-                'image5.jpg',
-                'image6.jpg'
-            ];
-
-            const videosData = [
-                { title: 'Baby Laughing', videoUrl: 'video1.mp4' },
-                { title: 'Cute Baby Animals', videoUrl: 'video2.mp4' },
-                { title: 'First Steps', videoUrl: 'video3.mp4' }
-            ];
-
-            const gamesContainer = document.getElementById('gamesContainer-PlayCorner');
-            const musicPlayer = document.getElementById('musicPlayer-PlayCorner');
-            const galleryContainer = document.getElementById('galleryContainer-PlayCorner');
-            const videoContainer = document.getElementById('videoContainer-PlayCorner');
-
-            gamesData.forEach(game => {
-                const gameElement = document.createElement('div');
-                gameElement.classList.add('game-PlayCorner');
-                gameElement.style.backgroundImage = `url('${game.imageUrl}')`;
-                gameElement.setAttribute('title', game.name);
-                gamesContainer.appendChild(gameElement);
+        // Render baby list
+        function renderBabyList() {
+            babyList.innerHTML = '';
+            babies.forEach(baby => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('li-babyListSitter');
+                listItem.innerHTML = `
+                    <span onclick="showDetails('${baby.name}')">
+                        <strong>${baby.name}</strong> - ${baby.number}
+                    </span>
+                    <span class="status-babyListSitter">${baby.status}</span>
+                    <div class="action-buttons-babyListSitter">
+                        <button class="button-babyListSitter" onclick="showActionPopup('${baby.name}', 'in')" ${baby.status !== 'absent' ? 'disabled' : ''}>Check In</button>
+                        <button class="button-babyListSitter" onclick="showActionPopup('${baby.name}', 'out')" ${baby.status !== 'present' ? 'disabled' : ''}>Check Out</button>
+                    </div>
+                `;
+                babyList.appendChild(listItem);
             });
+        }
 
-            musicData.forEach(music => {
-                const audioElement = document.createElement('audio');
-                audioElement.src = music.audioUrl;
-                audioElement.controls = true;
-                musicPlayer.appendChild(audioElement);
-            });
+        renderBabyList(); // Initial render
 
-            galleryImages.forEach(imageUrl => {
-                const imageElement = document.createElement('img');
-                imageElement.classList.add('gallery-image-PlayCorner');
-                imageElement.src = imageUrl;
-                galleryContainer.appendChild(imageElement);
-            });
+        // Show baby details in popup
+        function showDetails(babyName) {
+            const baby = babies.find(b => b.name === babyName);
+            if (baby) {
+                document.getElementById('details-popup-title-babyListSitter').textContent = `${baby.name} Details`;
+                document.getElementById('details-age-babyListSitter').textContent = baby.details.age || 'N/A';
+                document.getElementById('details-gender-babyListSitter').textContent = baby.details.gender || 'N/A';
+                document.getElementById('details-enrolled-babyListSitter').textContent = baby.details.enrolledDate || 'N/A';
+                document.getElementById('details-special-needs-babyListSitter').textContent = baby.details.specialNeeds || 'N/A';
+                document.getElementById('details-remarks-babyListSitter').textContent = baby.details.remarks || 'N/A';
 
-            videosData.forEach(video => {
-                const videoElement = document.createElement('video');
-                videoElement.src = video.videoUrl;
-                videoElement.controls = true;
-                videoElement.classList.add('video-PlayCorner');
-                videoContainer.appendChild(videoElement);
-            });
+                displayPopup('details-popup-babyListSitter');
+            }
+        }
 
-            const imageUploader = document.getElementById('imageUploader-PlayCorner');
-            imageUploader.addEventListener('change', (event) => {
-                const file = event.target.files[0];
-                if (file) {
-                    const imageUrl = URL.createObjectURL(file);
-                    const imageElement = document.createElement('img');
-                    imageElement.classList.add('gallery-image-PlayCorner');
-                    imageElement.src = imageUrl;
-                    galleryContainer.appendChild(imageElement);
-                }
-            });
+        // Show action popup (check-in or check-out)
+        function showActionPopup(babyName, action) {
+            const baby = babies.find(b => b.name === babyName);
+            if (!baby) return;
 
-            const videoUploader = document.getElementById('videoUploader-PlayCorner');
-            videoUploader.addEventListener('change', (event) => {
-                const file = event.target.files[0];
-                if (file) {
-                    const videoUrl = URL.createObjectURL(file);
-                    const videoElement = document.createElement('video');
-                    videoElement.src = videoUrl;
-                    videoElement.controls = true;
-                    videoElement.classList.add('video-PlayCorner');
-                    videoContainer.appendChild(videoElement);
-                }
+            const personNameInput = document.getElementById('personNameInput-babyListSitter');
+            const commentsInput = document.getElementById('commentsInput-babyListSitter');
+            personNameInput.placeholder = action === 'in' ? `Enter name bringing ${babyName}` : `Enter name taking ${babyName}`;
+            personNameInput.value = '';
+            commentsInput.value = '';
+
+            displayPopup('action-popup-babyListSitter');
+            currentBaby = { name: babyName, action };
+        }
+
+        // Handle check-in or check-out action
+        function handleAction() {
+            const personNameInput = document.getElementById('personNameInput-babyListSitter').value.trim();
+            if (!personNameInput) {
+                alert('Please enter a valid name.');
+                return;
+            }
+
+            const baby = babies.find(b => b.name === currentBaby.name);
+            if (!baby) return;
+
+            const actionLabel = currentBaby.action === 'in' ? 'checked in' : 'checked out';
+            baby.status = currentBaby.action === 'in' ? 'present' : 'absent';
+
+            // Update status in the baby list
+            renderBabyList();
+
+            alert(`${personNameInput} has ${actionLabel} ${currentBaby.name} at ${new Date().toLocaleString()}`);
+            closePopup('action-popup-babyListSitter');
+        }
+
+        // Display popup by ID
+        function displayPopup(popupId) {
+            closeAllPopups(); // Close all other popups before displaying new one
+            document.getElementById(popupId).style.display = 'block';
+            document.getElementById('popup-overlay-babyListSitter').style.display = 'flex';
+        }
+
+        // Close all popups
+        function closeAllPopups() {
+            const popups = document.querySelectorAll('.popup-container-babyListSitter .popup-babyListSitter');
+            popups.forEach(popup => {
+                popup.style.display = 'none';
             });
-        });
+            document.getElementById('popup-overlay-babyListSitter').style.display = 'none';
+        }
+
+        // Close specific popup by ID
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+            document.getElementById('popup-overlay-babyListSitter').style.display = 'none';
+        }
     </script>
 </body>
 </html>

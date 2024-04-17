@@ -1,61 +1,434 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      /* Admin dashboard */
+      .sidebar-users {
+        width: 250px;
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .sidebar-users h2 {
+        text-align: center;
+      }
+
+      .sidebar-users ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .sidebar-users ul li a {
+        display: block;
+        padding: 10px 0;
+        color: #fff;
+        text-decoration: none;
+        text-align: left;
+      }
+
+      .sidebar-users ul li a:hover {
+        background-color: #555;
+      }
+
+      .main-users {
+        flex: 1;
+        padding: 20px;
+        display: inline;
+      }
+
+      .tabcontent-users {
+        display: none;
+      }
+
+      .cards-container-users {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .card-users {
+        width: calc(33.33% - 20px);
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .tasks-container-users {
+        margin-top: 20px;
+        background-color: #fff;
+      }
+
+      .graphical-reports-container-users {
+        margin-top: 20px;
+        max-width: 800px;
+        width: 100%;
+        height: 400px;
+        position: relative;
+      }
+
+      .report-chart-users {
+        width: 100%;
+        max-width: 600px;
+        margin-top: 20px;
+        background-color: #fff;
+      }
+
+      .section-users {
+        display: none;
+      }
+      .active-users {
+        display: flex;
+      }
+
+      .form-container {
+        align-items: center;
+      }
+
+      /* Baby Financial Statement */
+      #container-babyFinStatement {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      #h1-babyFinStatement {
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 20px;
+      }
+
+      .p-babyFinStatement {
+        margin-bottom: 10px;
+      }
+
+      #table-babyFinStatement {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      #table-babyFinStatement,
+      #th-babyFinStatement,
+      #td-babyFinStatement {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+
+      #th-babyFinStatement {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      .button-babyFinStatement {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+
+      .button-babyFinStatement:hover {
+        background-color: #0056b3;
+      }
+
+      /* Baby Activities */
+      .container-scheduleBaby {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .calendar-heading-scheduleBaby {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .week-scheduleBaby {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .day-scheduleBaby {
+        flex: 0 0 calc(33.33% - 20px);
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      .date-scheduleBaby {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #555;
+      }
+
+      .activity-scheduleBaby {
+        cursor: pointer;
+        padding: 10px 16px;
+        background-color: #e0e0e0;
+        margin-bottom: 8px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+      }
+
+      .activity-scheduleBaby:hover {
+        background-color: #c0c0c0;
+      }
+
+      .popup-scheduleBaby {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+      }
+
+      .popup-content-scheduleBaby {
+        background-color: #fff;
+        padding: 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        max-width: 80%;
+      }
+
+      .button-scheduleBaby {
+        padding: 12px 24px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+      }
+
+      .button-scheduleBaby:hover {
+        background-color: #0056b3;
+      }
+
+      /* Baby Child Progress Report */
+      .container-childProgressReport {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .heading-childProgressReport {
+        text-align: center;
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      .report-table-childProgressReport {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .th-childProgressReport,
+      .td-childProgressReport {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .th-childProgressReport {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      .tbody-childProgressReport tr:hover {
+        background-color: #f5f5f5;
+      }
+
+      /* Baby Play Corner */
+      .container-PlayCorner {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .heading-PlayCorner {
+        text-align: center;
+        font-size: 32px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      .section-PlayCorner {
+        margin-bottom: 40px;
+      }
+
+      .section-PlayCorner h2 {
+        font-size: 24px;
+        color: #007bff;
+        margin-bottom: 16px;
+      }
+
+      .games-container-PlayCorner {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .game-PlayCorner {
+        width: 200px;
+        height: 200px;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .game-PlayCorner:hover {
+        background-color: #e0e0e0;
+      }
+
+      .music-player-PlayCorner {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .gallery-image-PlayCorner {
+        width: calc(33.33% - 10px);
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+
+      .video-container-PlayCorner {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .video-PlayCorner {
+        width: calc(50% - 20px);
+        height: 200px;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+    </style>
+
     <title>Sitter</title>
-</head>
-<link rel="stylesheet" href="/css/style.css" />
-<link rel="stylesheet" href="/css/bootstrap/css/bootstrap.css" />
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-
-
-
-<body>
+  </head>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <body>
     <div w3-include-html="/pages/navbar.html"></div>
-
 
     <div class="container-shop"></div>
     <header>
-   
-    <nav class="dash">
-      <ul>
-        <li><a href="#dashboard">Dashboard</a></li>
-        <li><a href="#babies">Babies</a></li>
-        <li><a href="#activities">Activities</a></li>
-        <li><a href="#reports">Reports</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Sitter
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="#yourProfile">Your Profile</a></li>
-            <li><a href="/pages/login.html">Logout</a></li>
-          </ul>
-        </li>
+      <nav class="dash">
+        <ul>
+          <li><a href="#dashboard-sitter">Dashboard</a></li>
+          <li><a href="#babies">Babies</a></li>
+          <li><a href="#calendar">Calendar</a></li>
+          <li><a href="#progressReports">Progress Reports</a></li>
+          <li><a href="#resourceRequests">Resource Requests</a></li>
+          <li><a href="#yourProfile">Your Profile</a></li>
+          <button id="logoutBtn">Logout</button>
+        </ul>
+      </nav>
+    </header>
 
-      </ul>
-    </nav>
-  </header>
+    <!-- Main Content -->
     <main>
-      <div class="card container-fluid" style="width: 50rem; height: 20rem;">
-        <div class="card-body">
+      <div class="container-users">
+        <!-- Dashboard Section -->
+        <div id="dashboard-sitter" class="section-users active-users">
+          <div class="sidebar-users">
+            <ul>
+              <li><a href="#realtime-updates">Updates</a></li>
+              <li><a href="#daily-tasks">Daily Task Manager</a></li>
+            </ul>
+          </div>
+          <div class="main-users">
+            <div id="realtime-updates" class="tabcontent-users">
+              <h2>Updates</h2>
+              <div
+                class="cards-container-users"
+                id="realtime-cards-container"
+              ></div>
+            </div>
+            <div id="daily-tasks" class="tabcontent-users">
+              <h2>Daily Task Manager</h2>
+              <div class="tasks-container-users" id="tasks-container"></div>
+            </div>
+          </div>
         </div>
+
+        <!-- Babies -->
+        <div id="babies" class="section-users"></div>
+
+        <!-- Calender -->
+        <div id="calendar" class="section-users"></div>
+
+        <!-- Progress Reports -->
+        <div id="progressReports" class="section-users"></div>
+
+        <!-- Resource Requests -->
+        <div id="resourceRequests" class="section-users"></div>
+
+        <!-- Your Profile -->
+        <div id="yourProfile" class="section-users"></div>
       </div>
     </main>
 
-
-    
-
-
-    
-    
     <div w3-include-html="/pages/footer.html"></div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/logout.js"></script>
     <script src="/js/sitter.js"></script>
     <script src="/css/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/js/add.js"></script>
-
-</body>
+  </body>
 </html>
