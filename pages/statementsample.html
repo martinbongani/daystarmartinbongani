@@ -3,220 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sitter Progress Report</title>
+    <title>Daycare Purchase Order System</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            padding: 20px;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
         }
-        .container-babyReportSitter {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        #h1-babyReportSitter {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .baby-report-sitter {
-            border: 1px solid #ddd;
+        
+        #container-PurchaseOrder {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 20px auto;
             padding: 20px;
             background-color: #fff;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            position: relative;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
-        .baby-name-babyReportSitter {
-            margin-bottom: 10px;
+        
+        #left-panel-PurchaseOrder, #right-panel-PurchaseOrder {
+            width: 45%;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        .add-activity-btn-babyReportSitter {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
+        
+        #h2-PurchaseOrder {
+            color: #333;
         }
-        .activity-item-babyReportSitter {
-            margin-bottom: 10px;
+        
+        #ul-PurchaseOrder {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        #li-PurchaseOrder {
+            padding: 10px;
             border-bottom: 1px solid #ddd;
-            padding-bottom: 5px;
-        }
-        .modal-babyReportSitter {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        .modal-babyReportSitter input[type="text"],
-        .modal-babyReportSitter textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .modal-babyReportSitter button {
-            padding: 8px 16px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
             cursor: pointer;
         }
-        .post-report-btn-babyReportSitter {
-            display: block;
+        
+        #li-PurchaseOrder:hover {
+            background-color: #f9f9f9;
+        }
+        
+        #currentDate-PurchaseOrder {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        #grandTotal-PurchaseOrder {
+            font-weight: bold;
             margin-top: 20px;
-            padding: 8px 16px;
-            background-color: #28a745;
+        }
+        
+        #printButton-PurchaseOrder {
+            padding: 10px 20px;
+            background-color: #4CAF50;
             color: #fff;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        #printButton-PurchaseOrder:hover {
+            background-color: #45a049;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #right-panel-PurchaseOrder, #right-panel-PurchaseOrder * {
+                visibility: visible;
+            }
+            #right-panel-PurchaseOrder {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
         }
     </style>
 </head>
-<body>
-    <div class="container-babyReportSitter">
-        <h1 id="h1-babyReportSitter">Sitter Progress Report</h1>
-
-        <!-- Baby Reports -->
-        <div id="babyReports-sitter"></div>
-
-        <!-- Modal for Activity Details -->
-        <div id="activityModal-babyReportSitter" class="modal-babyReportSitter">
-            <h2 id="modalTitle-babyReportSitter">Add Activity</h2>
-            <input type="hidden" id="currentBabyIndex-babyReportSitter">
-            <input type="hidden" id="currentActivityIndex-babyReportSitter">
-            <label for="activityInput-babyReportSitter">Activity:</label>
-            <input type="text" id="activityInput-babyReportSitter">
-            <label for="commentsInput-babyReportSitter">Comments:</label>
-            <textarea id="commentsInput-babyReportSitter" rows="4"></textarea>
-            <button onclick="saveActivity()">Save</button>
-            <button onclick="cancelActivity()">Cancel</button>
+<body id="body-PurchaseOrder">
+    <div id="container-PurchaseOrder">
+        <div id="left-panel-PurchaseOrder">
+            <h2 id="h2-PurchaseOrder">Approved Resource Requests</h2>
+            <ul id="resourceRequests-PurchaseOrder">
+                <!-- JavaScript will populate this list dynamically -->
+            </ul>
         </div>
-
-        <!-- Post Report Button -->
-        <button id="postReportBtn-babyReportSitter" class="post-report-btn-babyReportSitter" onclick="postReport()">Post Report</button>
+        <div id="right-panel-PurchaseOrder">
+            <h2 id="summaryHeading-PurchaseOrder">Daily Expenses Summary - <span id="currentDate-PurchaseOrder"></span></h2>
+            <ul id="selectedItems-PurchaseOrder">
+                <!-- Selected items will be displayed here -->
+            </ul>
+            <p id="grandTotal-PurchaseOrder">Grand Total: UGX 0.00</p>
+            <button id="printButton-PurchaseOrder">Print Summary</button>
+        </div>
     </div>
 
     <script>
-        // Sample baby reports data (up to 7 babies)
-        const babyReportsData = [
-            { name: 'Emma Johnson', babyNumber: 'Bn001/24', activities: [] },
-            { name: 'Liam Smith', babyNumber: 'Bn002/24', activities: [] },
-            { name: 'Olivia Williams', babyNumber: 'Bn003/24', activities: [] },
-            { name: 'Noah Brown', babyNumber: 'Bn004/24', activities: [] },
-            { name: 'Ava Jones', babyNumber: 'Bn005/24', activities: [] },
-            { name: 'William Davis', babyNumber: 'Bn006/24', activities: [] },
-            { name: 'Sophia Miller', babyNumber: 'Bn007/24', activities: [] }
-        ];
+        document.addEventListener('DOMContentLoaded', () => {
+            const resourceRequestsList = document.querySelector('#resourceRequests-PurchaseOrder');
+            const currentDateElement = document.getElementById('currentDate-PurchaseOrder');
+            const selectedItemsList = document.getElementById('selectedItems-PurchaseOrder');
+            let totalAmount = 0;
 
-        // Function to initialize baby reports
-        function initializeBabyReports() {
-            const babyReportsContainer = document.getElementById('babyReports-sitter');
-            babyReportsContainer.innerHTML = ''; // Clear previous content
+            let currentDate = new Date().toLocaleDateString();
+            currentDateElement.textContent = currentDate;
 
-            babyReportsData.forEach((baby, index) => {
-                const babyReportDiv = document.createElement('div');
-                babyReportDiv.classList.add('baby-report-sitter');
+            const resourceRequests = [
+                {
+                    id: 'RR001',
+                    items: [
+                        { name: 'Crayons', quantity: 3, amount: 3500, department: 'Art' },
+                        { name: 'Construction Paper', quantity: 2, amount: 2100, department: 'Art' }
+                    ]
+                },
+                {
+                    id: 'RR002',
+                    items: [
+                        { name: 'Play-Doh', quantity: 5, amount: 4500, department: 'Creative Play' }
+                    ]
+                }
+                // Add more resource requests as needed
+            ];
 
-                const babyNameHeader = document.createElement('h2');
-                babyNameHeader.classList.add('baby-name-babyReportSitter');
-                babyNameHeader.textContent = `${baby.name} (${baby.babyNumber})`;
+            resourceRequests.forEach(request => {
+                const listItem = document.createElement('li');
+                listItem.textContent = request.id;
+                listItem.addEventListener('click', () => displayItems(request, listItem));
+                resourceRequestsList.appendChild(listItem);
+            });
 
-                const addActivityBtn = document.createElement('button');
-                addActivityBtn.classList.add('add-activity-btn-babyReportSitter');
-                addActivityBtn.textContent = 'Add Activity';
-                addActivityBtn.addEventListener('click', () => openActivityModal(index));
+            function displayItems(request, selectedListItem) {
+                request.items.forEach(item => {
+                    const itemDetails = `${item.name} - Quantity: ${item.quantity}, Amount: UGX ${item.amount.toLocaleString()}, Department: ${item.department}`;
+                    const listItem = document.createElement('li');
+                    listItem.textContent = itemDetails;
+                    selectedItemsList.appendChild(listItem);
 
-                const activitiesList = document.createElement('div');
-                activitiesList.classList.add('activity-item-babyReportSitter');
-                baby.activities.forEach((activity, idx) => {
-                    const activityItem = createActivityItem(activity);
-                    activitiesList.appendChild(activityItem);
+                    totalAmount += item.amount;
                 });
 
-                babyReportDiv.appendChild(babyNameHeader);
-                babyReportDiv.appendChild(addActivityBtn);
-                babyReportDiv.appendChild(activitiesList);
+                const grandTotalElement = document.getElementById('grandTotal-PurchaseOrder');
+                grandTotalElement.textContent = `Grand Total: UGX ${totalAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
 
-                babyReportsContainer.appendChild(babyReportDiv);
+                // Remove selected resource request from left panel
+                resourceRequestsList.removeChild(selectedListItem);
+            }
+
+            const printButton = document.getElementById('printButton-PurchaseOrder');
+            printButton.addEventListener('click', () => {
+                window.print();
             });
-        }
-
-        // Function to create an activity item element
-        function createActivityItem(activity) {
-            const activityItem = document.createElement('div');
-            activityItem.classList.add('activity-item-babyReportSitter');
-            activityItem.innerHTML = `
-                <div><strong>Activity:</strong> ${activity.activity}</div>
-                <div><strong>Comments:</strong> ${activity.comments}</div>
-            `;
-            return activityItem;
-        }
-
-        // Function to open activity modal for adding or editing activity
-        function openActivityModal(index) {
-            const modal = document.getElementById('activityModal-babyReportSitter');
-            modal.style.display = 'block';
-            document.getElementById('currentBabyIndex-babyReportSitter').value = index;
-        }
-
-        // Function to save new activity
-        function saveActivity() {
-            const index = document.getElementById('currentBabyIndex-babyReportSitter').value;
-            const activityInput = document.getElementById('activityInput-babyReportSitter').value.trim();
-            const commentsInput = document.getElementById('commentsInput-babyReportSitter').value.trim();
-
-            if (activityInput !== '') {
-                babyReportsData[index].activities.push({ activity: activityInput, comments: commentsInput });
-                closeModal();
-                initializeBabyReports(); // Re-render reports after adding activity
-            } else {
-                alert('Please enter a valid activity.');
-            }
-        }
-
-        // Function to cancel activity operation
-        function cancelActivity() {
-            closeModal();
-        }
-
-        // Function to post the report to the database
-        function postReport() {
-            const timestamp = new Date().toLocaleString();
-            const index = document.getElementById('currentBabyIndex-babyReportSitter').value;
-            const baby = babyReportsData[index];
-
-            if (baby.activities.length > 0) {
-                const reportContent = `
-                    ${baby.name} (${baby.babyNumber}) - ${timestamp}\n\n` +
-                    baby.activities.map(activity => `Activity: ${activity.activity}\nComments: ${activity.comments}\n\n`).join('');
-
-                // Dummy implementation: Display report content and clear activities
-                console.log(reportContent);
-                baby.activities = [];
-                initializeBabyReports(); // Re-render reports after clearing activities
-            } else {
-                alert('Cannot post an empty report.');
-            }
-        }
-
-        // Function to close the activity modal
-        function closeModal() {
-            const modal = document.getElementById('activityModal-babyReportSitter');
-            modal.style.display = 'none';
-            document.getElementById('activityInput-babyReportSitter').value = '';
-            document.getElementById('commentsInput-babyReportSitter').value = '';
-        }
-
-        // Initialize baby reports on page load
-        initializeBabyReports();
+        });
     </script>
 </body>
 </html>
