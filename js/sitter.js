@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     const usersRealtimeCardsContainer = document.getElementById('realtime-cards-container');
     const usersTasksContainer = document.getElementById('tasks-container');
+    const calendarContainer = document.getElementById('calendar-sitter');
+    const activityDetails = document.getElementById('activityDetails-sitterCalendar');
+    const activityTitle = document.getElementById('activityTitle-sitterCalendar');
+    const activityTime = document.getElementById('activityTime-sitterCalendar');
+    const activityBabies = document.getElementById('activityBabies-sitterCalendar');
+    const activityLocation = document.getElementById('activityLocation-sitterCalendar');
+    const closeButton = document.getElementById('closeButton-sitterCalendar');
+
 
     // Function to switch active section
 function switchSection(sectionId) {
@@ -126,380 +134,305 @@ function switchSection(sectionId) {
         displayDefaultContent();
     }
 
+// Sitter Calendar
+            // Complete schedule data
+            const schedule = [
+                { day: 'Monday', activities: [
+                    { time: '09:00 AM', title: 'Morning playtime', babies: ['Emma', 'Liam'], location: 'Playroom A' },
+                    { time: '11:30 AM', title: 'Nap time', babies: ['Olivia', 'Noah'], location: 'Nap Room' },
+                    { time: '02:00 PM', title: 'Snack break', babies: ['Ava', 'William'], location: 'Dining Area' }
+                ] },
+                { day: 'Tuesday', activities: [
+                    { time: '10:00 AM', title: 'Arts and crafts', babies: ['Sophia', 'James'], location: 'Art Room' },
+                    { time: '12:00 PM', title: 'Lunch', babies: ['Isabella', 'Mason'], location: 'Dining Area' },
+                    { time: '03:00 PM', title: 'Outdoor walk', babies: ['Evelyn', 'Elijah'], location: 'Backyard' }
+                ] },
+                { day: 'Wednesday', activities: [
+                    { time: '09:30 AM', title: 'Morning playtime', babies: ['Harper', 'Benjamin'], location: 'Playroom B' },
+                    { time: '12:00 PM', title: 'Music session', babies: ['Amelia', 'Oliver'], location: 'Music Room' },
+                    { time: '03:30 PM', title: 'Nap time', babies: ['Charlotte', 'Jacob'], location: 'Nap Room' }
+                ] },
+                { day: 'Thursday', activities: [
+                    { time: '08:45 AM', title: 'Breakfast', babies: ['Sophie', 'Logan', 'Aria'], location: 'Dining Area' },
+                    { time: '11:00 AM', title: 'Indoor play', babies: ['Lucas', 'Avery'], location: 'Playroom C' },
+                    { time: '02:30 PM', title: 'Story time', babies: ['Ella', 'Jackson'], location: 'Reading Corner' }
+                ] },
+                { day: 'Friday', activities: [
+                    { time: '10:15 AM', title: 'Sensory activities', babies: ['Avery', 'Michael', 'Luna'], location: 'Sensory Room' },
+                    { time: '12:30 PM', title: 'Lunch', babies: ['Scarlett', 'Jack'], location: 'Dining Area' },
+                    { time: '03:15 PM', title: 'Outdoor play', babies: ['Lucy', 'Henry'], location: 'Playground' }
+                ] },
+                { day: 'Saturday', activities: [
+                    { time: '09:00 AM', title: 'Day off' }
+                ] },
+                { day: 'Sunday', activities: [
+                    { time: '09:00 AM', title: 'Day off' }
+                ] }
+            ];
 
-    // IT Baby Profile
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
+            // Render the calendar
+            schedule.forEach(day => {
+                const dayElement = document.createElement('div');
+                dayElement.classList.add('day-sitterCalendar');
 
-        const firstName = document.getElementById('babyProfileFirstName').value.trim();
-        const lastName = document.getElementById('babyProfileLastName').value.trim();
-        const otpMethod = document.querySelector('input[name="otpMethod"]:checked');
+                const dayHeader = document.createElement('div');
+                dayHeader.classList.add('day-header-sitterCalendar');
+                dayHeader.textContent = day.day;
+                dayElement.appendChild(dayHeader);
 
-        if (!validateForm(firstName, lastName, otpMethod)) {
-            return;
-        }
+                day.activities.forEach(activity => {
+                    if (activity.title !== 'Day off') {
+                        const activityElement = document.createElement('div');
+                        activityElement.classList.add('activity-sitterCalendar');
+                        activityElement.textContent = `${activity.title} - ${activity.time}`;
+                        activityElement.addEventListener('click', () => showActivityDetails(activity));
+                        dayElement.appendChild(activityElement);
+                    }
+                });
 
-        const username = generateUsername(firstName, lastName);
-        const otp = generateOtp();
+                calendarContainer.appendChild(dayElement);
+            });
 
-        const deliveryMethod = otpMethod.value;
+            // Function to display activity details
+            function showActivityDetails(activity) {
+                if (activity.title !== 'Day off') {
+                    activityTitle.textContent = activity.title;
+                    activityTime.textContent = activity.time;
+                    activityBabies.textContent = activity.babies.join(', ');
+                    activityLocation.textContent = activity.location;
+                    activityDetails.style.display = 'block';
+                }
+            }
 
-        try {
-            const message = `Username: ${username}\nOTP: ${otp}`;
-            await sendDetails(username, otp, deliveryMethod);
+            // Close button functionality
+            closeButton.addEventListener('click', function() {
+                activityDetails.style.display = 'none';
+            });
 
-            const deliveryType = deliveryMethod === 'email' ? 'Email' : 'SMS';
-            const displayMessage = `Username and OTP sent via ${deliveryType}.`;
-            displayPopup(displayMessage);
 
-            clearForm(); // Clear the form after successful submission
-        } catch (error) {
-            console.error('Error sending details:', error);
-            alert('An error occurred while sending details.');
-        }
+});
+
+// Sitter Baby List
+const babies = [
+    { name: "Baby One", number: "B1001/24", status: "absent", details: { age: "12 months", gender: "Male", enrolledDate: "2023-01-01", specialNeeds: "", remarks: "" } },
+    { name: "Baby Two", number: "B2001/24", status: "absent", details: { age: "10 months", gender: "Female", enrolledDate: "2023-03-15", specialNeeds: "Allergic to nuts", remarks: "Quiet and shy" } },
+    { name: "Baby Three", number: "B3001/24", status: "absent", details: { age: "9 months", gender: "Male", enrolledDate: "2023-06-10", specialNeeds: "Requires extra nap time", remarks: "Loves playing with blocks" } },
+    { name: "Baby Four", number: "B4001/24", status: "absent", details: { age: "11 months", gender: "Female", enrolledDate: "2023-02-20", specialNeeds: "", remarks: "Very active and playful" } },
+    { name: "Baby Five", number: "B5001/24", status: "absent", details: { age: "8 months", gender: "Male", enrolledDate: "2023-06-05", specialNeeds: "Needs gluten-free snacks", remarks: "Enjoys drawing" } },
+    { name: "Baby Six", number: "B6001/24", status: "absent", details: { age: "7 months", gender: "Female", enrolledDate: "2023-08-01", specialNeeds: "Lactose intolerant", remarks: "Loves storytelling" } },
+    { name: "Baby Seven", number: "B7001/24", status: "absent", details: { age: "10 months", gender: "Male", enrolledDate: "2023-04-10", specialNeeds: "Requires extra attention during meals", remarks: "Enthusiastic learner" } }
+];
+
+const babyList = document.getElementById('baby-list-babyListSitter');
+let currentBaby = null;
+
+// Render baby list
+function renderBabyList() {
+    babyList.innerHTML = '';
+    babies.forEach(baby => {
+        const listItem = document.createElement('li');
+        listItem.classList.add('li-babyListSitter');
+        listItem.innerHTML = `
+            <span onclick="showDetails('${baby.name}')">
+                <strong>${baby.name}</strong> - ${baby.number}
+            </span>
+            <span class="status-babyListSitter">${baby.status}</span>
+            <div class="action-buttons-babyListSitter">
+                <button class="button-babyListSitter" onclick="showActionPopup('${baby.name}', 'in')" ${baby.status !== 'absent' ? 'disabled' : ''}>Check In</button>
+                <button class="button-babyListSitter" onclick="showActionPopup('${baby.name}', 'out')" ${baby.status !== 'present' ? 'disabled' : ''}>Check Out</button>
+            </div>
+        `;
+        babyList.appendChild(listItem);
     });
+}
 
-    closePopupBtn.addEventListener('click', () => {
-        popup.style.display = 'none';
-    });
+renderBabyList(); // Initial render
 
+// Show baby details in popup
+function showDetails(babyName) {
+    const baby = babies.find(b => b.name === babyName);
+    if (baby) {
+        document.getElementById('details-popup-title-babyListSitter').textContent = `${baby.name} Details`;
+        document.getElementById('details-age-babyListSitter').textContent = baby.details.age || 'N/A';
+        document.getElementById('details-gender-babyListSitter').textContent = baby.details.gender || 'N/A';
+        document.getElementById('details-enrolled-babyListSitter').textContent = baby.details.enrolledDate || 'N/A';
+        document.getElementById('details-special-needs-babyListSitter').textContent = baby.details.specialNeeds || 'N/A';
+        document.getElementById('details-remarks-babyListSitter').textContent = baby.details.remarks || 'N/A';
 
-function validateForm(firstName, lastName, otpMethod) {
-    const errorFirstName = document.getElementById('errorFirstName');
-    const errorLastName = document.getElementById('errorLastName');
-    const errorOtpMethod = document.getElementById('errorOtpMethod');
-
-    errorFirstName.textContent = '';
-    errorLastName.textContent = '';
-    errorOtpMethod.textContent = '';
-
-    let isValid = true;
-
-    if (firstName === '') {
-        errorFirstName.textContent = 'First name is required';
-        isValid = false;
+        displayPopup('details-popup-babyListSitter');
     }
-
-    if (lastName === '') {
-        errorLastName.textContent = 'Last name is required';
-        isValid = false;
-    }
-
-    if (!otpMethod) {
-        errorOtpMethod.textContent = 'Please select OTP delivery method';
-        isValid = false;
-    }
-
-    return isValid;
 }
 
-function generateUsername(firstName, lastName) {
-    const randomNum = Math.floor(Math.random() * 1000);
-    const username = `${firstName.toLowerCase()}_${lastName.toLowerCase()}${randomNum}`;
-    return username;
+// Show action popup (check-in or check-out)
+function showActionPopup(babyName, action) {
+    const baby = babies.find(b => b.name === babyName);
+    if (!baby) return;
+
+    const personNameInput = document.getElementById('personNameInput-babyListSitter');
+    const commentsInput = document.getElementById('commentsInput-babyListSitter');
+    personNameInput.placeholder = action === 'in' ? `Enter name bringing ${babyName}` : `Enter name taking ${babyName}`;
+    personNameInput.value = '';
+    commentsInput.value = '';
+
+    displayPopup('action-popup-babyListSitter');
+    currentBaby = { name: babyName, action };
 }
 
-function generateOtp() {
-    const otp = Math.floor(1000 + Math.random() * 9000);
-    return otp;
-}
-
-async function sendDetails(username, otp, deliveryMethod) {
-    // Simulate sending details (replace with actual sending logic)
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            console.log(`Sending details to ${deliveryMethod}...`);
-            resolve();
-        }, 2000); // Simulate 2 seconds delay for sending
-    });
-}
-
-function displayPopup(message) {
-    const popupContent = document.getElementById('babyProfileDetails');
-    popupContent.textContent = message;
-    const popup = document.getElementById('babyProfilePopup');
-    popup.style.display = 'flex';
-}
-
-function clearForm() {
-    const firstNameInput = document.getElementById('babyProfileFirstName');
-    const lastNameInput = document.getElementById('babyProfileLastName');
-    const otpMethods = document.querySelectorAll('input[name="otpMethod"]');
-
-    firstNameInput.value = '';
-    lastNameInput.value = '';
-
-    otpMethods.forEach(method => {
-        method.checked = false;
-    });
-
-    const errorMessages = document.querySelectorAll('.error-message');
-    errorMessages.forEach(message => {
-        message.textContent = '';
-    });
-}
-
-// IT Staff Profile
-formStaffProfile.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const firstNameInputStaffProfile = document.getElementById('firstNameInputStaffProfile').value.trim();
-    const lastNameInputStaffProfile = document.getElementById('lastNameInputStaffProfile').value.trim();
-    const otpMethodInputStaffProfile = document.querySelector('input[name="otpMethodStaffProfile"]:checked');
-
-    if (!validateFormStaffProfile(firstNameInputStaffProfile, lastNameInputStaffProfile, otpMethodInputStaffProfile)) {
+// Handle check-in or check-out action
+function handleAction() {
+    const personNameInput = document.getElementById('personNameInput-babyListSitter').value.trim();
+    if (!personNameInput) {
+        alert('Please enter a valid name.');
         return;
     }
 
-    const generatedUsernameStaffProfile = generateUsernameStaffProfile(firstNameInputStaffProfile, lastNameInputStaffProfile);
-    const generatedOtpStaffProfile = generateOtpStaffProfile();
+    const baby = babies.find(b => b.name === currentBaby.name);
+    if (!baby) return;
 
-    const deliveryMethodStaffProfile = otpMethodInputStaffProfile.value;
+    const actionLabel = currentBaby.action === 'in' ? 'checked in' : 'checked out';
+    baby.status = currentBaby.action === 'in' ? 'present' : 'absent';
 
-    try {
-        const message = `Username: ${generatedUsernameStaffProfile}\nOTP: ${generatedOtpStaffProfile}`;
-        await sendDetailsStaffProfile(generatedUsernameStaffProfile, generatedOtpStaffProfile, deliveryMethodStaffProfile);
+    // Update status in the baby list
+    renderBabyList();
 
-        const deliveryType = deliveryMethodStaffProfile === 'email' ? 'Email' : 'SMS';
-        const displayMessage = `Username and OTP sent via ${deliveryType}.`;
-        displayPopupStaffProfile(displayMessage);
-        clearFormStaffProfile(); // Clear the form after submission
-    } catch (error) {
-        console.error('Error sending details:', error);
-        alert('An error occurred while sending details.');
+    alert(`${personNameInput} has ${actionLabel} ${currentBaby.name} at ${new Date().toLocaleString()}`);
+    closePopup('action-popup-babyListSitter');
+}
+
+// Display popup by ID
+function displayPopup(popupId) {
+    closeAllPopups(); // Close all other popups before displaying new one
+    document.getElementById(popupId).style.display = 'block';
+    document.getElementById('popup-overlay-babyListSitter').style.display = 'flex';
+}
+
+// Close all popups
+function closeAllPopups() {
+    const popups = document.querySelectorAll('.popup-container-babyListSitter .popup-babyListSitter');
+    popups.forEach(popup => {
+        popup.style.display = 'none';
+    });
+    document.getElementById('popup-overlay-babyListSitter').style.display = 'none';
+}
+
+// Close specific popup by ID
+function closePopup(popupId) {
+    document.getElementById(popupId).style.display = 'none';
+    document.getElementById('popup-overlay-babyListSitter').style.display = 'none';
+}
+
+// Sitter Progress Report
+const babyReportsData = [
+    { name: 'Emma Johnson', babyNumber: 'Bn001/24', activities: [] },
+    { name: 'Liam Smith', babyNumber: 'Bn002/24', activities: [] },
+    { name: 'Olivia Williams', babyNumber: 'Bn003/24', activities: [] },
+    { name: 'Noah Brown', babyNumber: 'Bn004/24', activities: [] },
+    { name: 'Ava Jones', babyNumber: 'Bn005/24', activities: [] },
+    { name: 'William Davis', babyNumber: 'Bn006/24', activities: [] },
+    { name: 'Sophia Miller', babyNumber: 'Bn007/24', activities: [] }
+];
+
+// Function to initialize baby reports
+function initializeBabyReports() {
+    const babyReportsContainer = document.getElementById('babyReports-sitter');
+    babyReportsContainer.innerHTML = ''; // Clear previous content
+
+    babyReportsData.forEach((baby, index) => {
+        const babyReportDiv = document.createElement('div');
+        babyReportDiv.classList.add('baby-report-sitter');
+
+        const babyNameHeader = document.createElement('h2');
+        babyNameHeader.classList.add('baby-name-babyReportSitter');
+        babyNameHeader.textContent = `${baby.name} (${baby.babyNumber})`;
+
+        const addActivityBtn = document.createElement('button');
+        addActivityBtn.classList.add('add-activity-btn-babyReportSitter');
+        addActivityBtn.textContent = 'Add Activity';
+        addActivityBtn.addEventListener('click', () => openActivityModal(index));
+
+        const activitiesList = document.createElement('div');
+        activitiesList.classList.add('activity-item-babyReportSitter');
+        baby.activities.forEach((activity, idx) => {
+            const activityItem = createActivityItem(activity);
+            activitiesList.appendChild(activityItem);
+        });
+
+        babyReportDiv.appendChild(babyNameHeader);
+        babyReportDiv.appendChild(addActivityBtn);
+        babyReportDiv.appendChild(activitiesList);
+
+        babyReportsContainer.appendChild(babyReportDiv);
+    });
+}
+
+// Function to create an activity item element
+function createActivityItem(activity) {
+    const activityItem = document.createElement('div');
+    activityItem.classList.add('activity-item-babyReportSitter');
+    activityItem.innerHTML = `
+        <div><strong>Activity:</strong> ${activity.activity}</div>
+        <div><strong>Comments:</strong> ${activity.comments}</div>
+    `;
+    return activityItem;
+}
+
+// Function to open activity modal for adding or editing activity
+function openActivityModal(index) {
+    const modal = document.getElementById('activityModal-babyReportSitter');
+    modal.style.display = 'block';
+    document.getElementById('currentBabyIndex-babyReportSitter').value = index;
+}
+
+// Function to save new activity
+function saveActivity() {
+    const index = document.getElementById('currentBabyIndex-babyReportSitter').value;
+    const activityInput = document.getElementById('activityInput-babyReportSitter').value.trim();
+    const commentsInput = document.getElementById('commentsInput-babyReportSitter').value.trim();
+
+    if (activityInput !== '') {
+        babyReportsData[index].activities.push({ activity: activityInput, comments: commentsInput });
+        closeModal();
+        initializeBabyReports(); // Re-render reports after adding activity
+    } else {
+        alert('Please enter a valid activity.');
     }
-
-
-closePopupBtnStaffProfile.addEventListener('click', () => {
-    popupStaffProfile.style.display = 'none';
-});
-});
-
-function validateFormStaffProfile(firstName, lastName, otpMethod) {
-const errorFirstNameStaffProfile = document.getElementById('errorFirstNameStaffProfile');
-const errorLastNameStaffProfile = document.getElementById('errorLastNameStaffProfile');
-const errorOtpMethodStaffProfile = document.getElementById('errorOtpMethodStaffProfile');
-
-errorFirstNameStaffProfile.textContent = '';
-errorLastNameStaffProfile.textContent = '';
-errorOtpMethodStaffProfile.textContent = '';
-
-let isValid = true;
-
-if (firstName === '') {
-    errorFirstNameStaffProfile.textContent = 'First name is required';
-    isValid = false;
 }
 
-if (lastName === '') {
-    errorLastNameStaffProfile.textContent = 'Last name is required';
-    isValid = false;
+// Function to cancel activity operation
+function cancelActivity() {
+    closeModal();
 }
 
-if (!otpMethod) {
-    errorOtpMethodStaffProfile.textContent = 'Please select OTP delivery method';
-    isValid = false;
+// Function to post the report to the database
+function postReport() {
+    const timestamp = new Date().toLocaleString();
+    const index = document.getElementById('currentBabyIndex-babyReportSitter').value;
+    const baby = babyReportsData[index];
+
+    if (baby.activities.length > 0) {
+        const reportContent = `
+            ${baby.name} (${baby.babyNumber}) - ${timestamp}\n\n` +
+            baby.activities.map(activity => `Activity: ${activity.activity}\nComments: ${activity.comments}\n\n`).join('');
+
+        // Dummy implementation: Display report content and clear activities
+        console.log(reportContent);
+        baby.activities = [];
+        initializeBabyReports(); // Re-render reports after clearing activities
+    } else {
+        alert('Cannot post an empty report.');
+    }
 }
 
-return isValid;
+// Function to close the activity modal
+function closeModal() {
+    const modal = document.getElementById('activityModal-babyReportSitter');
+    modal.style.display = 'none';
+    document.getElementById('activityInput-babyReportSitter').value = '';
+    document.getElementById('commentsInput-babyReportSitter').value = '';
 }
 
-function generateUsernameStaffProfile(firstName, lastName) {
-const randomNumStaffProfile = Math.floor(Math.random() * 1000);
-const usernameStaffProfile = `${firstName.toLowerCase()}_${lastName.toLowerCase()}${randomNumStaffProfile}`;
-return usernameStaffProfile;
-}
-
-function generateOtpStaffProfile() {
-const otpStaffProfile = Math.floor(1000 + Math.random() * 9000);
-return otpStaffProfile;
-}
-
-async function sendDetailsStaffProfile(username, otp, deliveryMethod) {
-// Simulate sending details (replace with actual sending logic)
-return new Promise((resolve, reject) => {
-    setTimeout(() => {
-        console.log(`Sending details to ${deliveryMethod}...`);
-        resolve();
-    }, 2000); // Simulate 2 seconds delay for sending
-});
-}
-
-function displayPopupStaffProfile(message) {
-const popupContentStaffProfile = document.getElementById('popupContentStaffProfile');
-popupContentStaffProfile.innerHTML = `
-    <p>${message}</p>
-    <button id="okButtonStaffProfile" class="popup-close-btn-staffProfile">OK</button>
-`;
-
-const popupStaffProfile = document.getElementById('popupStaffProfile');
-popupStaffProfile.style.display = 'flex';
-
-// Add event listener to the "OK" button
-const okButtonStaffProfile = document.getElementById('okButtonStaffProfile');
-okButtonStaffProfile.addEventListener('click', () => {
-    popupStaffProfile.style.display = 'none'; // Hide the popup
-});
-}
-
-function clearFormStaffProfile() {
-document.getElementById('firstNameInputStaffProfile').value = '';
-document.getElementById('lastNameInputStaffProfile').value = '';
-document.querySelector('input[name="otpMethodStaffProfile"]:checked').checked = false;
-document.getElementById('errorFirstNameStaffProfile').textContent = '';
-document.getElementById('errorLastNameStaffProfile').textContent = '';
-document.getElementById('errorOtpMethodStaffProfile').textContent = '';
-}
-
-// IT Breaches
-function addLogEntry(timestamp, location, source, details) {
-    const entry = document.createElement('div');
-    entry.className = 'log-entry';
-    entry.innerHTML = `
-        <strong>${timestamp}</strong>:
-        <div><strong>Location:</strong> ${location}</div>
-        <div><strong>Source:</strong> ${source}</div>
-        <div><strong>Details:</strong> ${details}</div>
-        <div class="actions">
-            <button class="resolve-btn">Resolve</button>
-            <button class="ignore-btn">Ignore</button>
-        </div>
-        <hr>
-    `;
-    logElement.insertBefore(entry, logElement.firstChild);
-
-    // Add event listeners for resolve and ignore buttons
-    const resolveBtn = entry.querySelector('.resolve-btn');
-    resolveBtn.addEventListener('click', () => {
-        resolveIncident(entry);
-    });
-
-    const ignoreBtn = entry.querySelector('.ignore-btn');
-    ignoreBtn.addEventListener('click', () => {
-        ignoreIncident(entry);
-    });
-}
-
-// Function to simulate multiple breaches and add them to the log
-function simulateBreaches() {
-    const incidentData = [
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Server Room A',
-            source: 'Workstation-123',
-            details: 'Unauthorized access detected.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Firewall Gateway',
-            source: 'Router-789',
-            details: 'Security breach in firewall.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Database Server',
-            source: 'Application Server-456',
-            details: 'Data exfiltration attempt detected.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Network Storage',
-            source: 'Backup Server-789',
-            details: 'Unauthorized file access detected.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Admin Panel',
-            source: 'Admin Workstation',
-            details: 'Suspicious login attempt detected.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Email Server',
-            source: 'Mail Client',
-            details: 'Phishing email detected and blocked.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Web Application',
-            source: 'Visitor Browser',
-            details: 'SQL injection attempt detected.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Cloud Storage',
-            source: 'Third-party Application',
-            details: 'Unauthorized data upload detected.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'VPN Connection',
-            source: 'Remote Device',
-            details: 'Abnormal VPN traffic detected.'
-        },
-        { 
-            timestamp: getCurrentTimestamp(),
-            location: 'Authentication Server',
-            source: 'Login Service',
-            details: 'Multiple failed login attempts detected.'
-        }
-    ];
-
-    // Display each simulated incident in the log
-    incidentData.forEach(incident => {
-        addLogEntry(incident.timestamp, incident.location, incident.source, incident.details);
-    });
-}
-
-// Function to get current timestamp in YYYY-MM-DD HH:mm:ss format
-function getCurrentTimestamp() {
-    const now = new Date();
-    const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ');
-    return formattedDate;
-}
-
-// Simulate breaches periodically (e.g., every 30 seconds)
-simulateBreaches();
-setInterval(simulateBreaches, 30000); // Update every 30 seconds (adjust as needed)
-
-// Function to resolve an incident (simulated action)
-function resolveIncident(entry) {
-    entry.remove(); // Remove the incident log entry from the DOM
-
-    // Display pop-up notification for resolution
-    displayNotification('Incident Resolved', 'The incident has been resolved.');
-}
-
-// Function to ignore an incident (simulated action)
-function ignoreIncident(entry) {
-    entry.remove(); // Remove the incident log entry from the DOM
-
-    // Display pop-up notification for ignoring
-    displayNotification('Incident Ignored', 'The incident has been ignored.');
-}
-
-// Function to display a pop-up notification
-function displayNotification(title, message) {
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.innerHTML = `
-        <div class="notification-content">
-            <h2>${title}</h2>
-            <p>${message}</p>
-            <button class="ok-btn">OK</button>
-        </div>
-    `;
-    document.body.appendChild(notification);
-
-    // Add event listener to OK button to dismiss notification
-    const okBtn = notification.querySelector('.ok-btn');
-    okBtn.addEventListener('click', () => {
-        notification.remove(); // Remove the notification from the DOM
-    });
-}
-
-});
-
+// Initialize baby reports on page load
+initializeBabyReports();
 
 
 
