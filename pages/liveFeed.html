@@ -153,12 +153,10 @@ video {
     <!-- Main Content -->
     <main>
         <!-- Live Feed -->
-        <div id="liveFeed" class="section-users">
             <div class="camera-grid" id="cameraGrid">
                 <!-- Camera containers will be dynamically added here -->
             </div>
        
-        </div>
     </main>
 
     <div w3-include-html="/pages/footer.html"></div>
@@ -168,7 +166,7 @@ video {
     <script src="/css/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/js/add.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        // document.addEventListener('DOMContentLoaded', function() {
     const cameraGrid = document.getElementById('cameraGrid');
     const numCameras = 15;
 
@@ -204,7 +202,7 @@ video {
         videoElement.src = videoSource;
     }
     
-    });
+    // });
 
     </script>
   </body>
