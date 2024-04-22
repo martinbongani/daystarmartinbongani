@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .section {
+            flex: 1;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            flex: 1 0 40%;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .graph-container {
+            width: 75%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .tasks-container {
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            margin-top: 10px;
+            min-height: 150px;
+            overflow-y: auto;
+        }
+
+        .tasks-container div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .tasks-container div:last-child {
+            border-bottom: none;
+        }
+
+        .task-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .task-complete {
+            text-decoration: line-through;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <h2>Real-time Updates</h2>
+            <div class="cards-container" id="realtime-cards-container"></div>
+        </div>
+        <div class="section">
+            <h2>To-Do List</h2>
+            <input type="text" id="taskInput" placeholder="Add new task">
+            <button onclick="addTask()">Add Task</button>
+            <button onclick="clearTasks()">Clear All</button>
+            <div class="tasks-container" id="tasks-container"></div>
+        </div>
+    </div>
+
+    <div class="graph-container">
+        <h2>Graphical Report</h2>
+        <canvas id="graphical-report-chart"></canvas>
+        <select id="report-type-select" onchange="renderGraph()">
+            <option value="bar">Bar Chart</option>
+            <option value="line">Line Chart</option>
+            <option value="pie">Pie Chart</option>
+        </select>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cardsContainer = document.getElementById('realtime-cards-container');
+
+            // Simulated real-time updates data
+            const updatesData = [
+                { type: 'Babies Enrolled', count: 165 },
+                { type: 'Babies Present', count: 153 },
+                { type: 'Sitters Enrolled', count: 65 },
+                { type: 'Sitters Present', count: 56 }
+            ];
+
+            // Display real-time updates cards
+            updatesData.forEach(update => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.innerHTML = `
+                    <h3>${update.type}</h3>
+                    <p>${update.count}</p>
+                `;
+                cardsContainer.appendChild(card);
+            });
+
+            const tasksContainer = document.getElementById('tasks-container');
+            let tasks = [];
+
+            function addTask() {
+                const taskInput = document.getElementById('taskInput');
+                const taskText = taskInput.value.trim();
+                if (taskText) {
+                    tasks.push({ text: taskText, completed: false });
+                    renderTasks();
+                    taskInput.value = '';
+                }
+            }
+
+            function renderTasks() {
+                tasksContainer.innerHTML = '';
+                tasks.forEach((task, index) => {
+                    const taskElement = document.createElement('div');
+                    taskElement.textContent = task.text;
+                    taskElement.classList.toggle('task-complete', task.completed);
+                    taskElement.addEventListener('click', () => toggleTaskCompletion(index));
+                    tasksContainer.appendChild(taskElement);
+                });
+            }
+
+            function clearTasks() {
+                tasks = [];
+                renderTasks();
+            }
+
+            function toggleTaskCompletion(index) {
+                tasks[index].completed = !tasks[index].completed;
+                renderTasks();
+            }
+
+            function renderGraph() {
+                const reportType = document.getElementById('report-type-select').value;
+                const chartCanvas = document.getElementById('graphical-report-chart');
+
+                let labels, data, backgroundColor;
+                switch (reportType) {
+                    case 'bar':
+                        labels = ['January', 'February', 'March', 'April', 'May'];
+                        data = [65, 59, 80, 81, 56];
+                        backgroundColor = 'rgba(54, 162, 235, 0.5)';
+                        break;
+                    case 'line':
+                        labels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
+                        data = [12, 19, 3, 5, 2, 3];
+                        backgroundColor = 'rgba(255, 206, 86, 0.5)';
+                        break;
+                    case 'pie':
+                        labels = ['Red', 'Blue', 'Yellow'];
+                        data = [30, 20, 50];
+                        backgroundColor = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 205, 86, 0.5)'];
+                        break;
+                    default:
+                        return;
+                }
+
+                new Chart(chartCanvas, {
+                    type: reportType,
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Performance',
+                            data: data,
+                            backgroundColor: backgroundColor,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+
+            renderTasks(); // Initial rendering of tasks
+            renderGraph(); // Initial rendering of graph
+        });
+    </script>
+</body>
+</html>

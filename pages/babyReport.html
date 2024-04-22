@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DayStar Baby Report</title>
+    <style>
+
+        .container-babyReportAdmin {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .h2-babyReportAdmin {
+            text-align: center;
+            color:#007bff;
+        }
+
+        .form-babyReportAdmin {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .label-babyReportAdmin {
+            font-weight: bold;
+        }
+
+        .input-babyReportAdmin {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        .button-babyReportAdmin {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .button-babyReportAdmin:hover {
+            background-color: #0056b3;
+        }
+
+        .table-babyReportAdmin {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .thead-babyReportAdmin {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .tr-babyReportAdmin {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .th-babyReportAdmin,
+        .td-babyReportAdmin {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd; /* Add border to table cells */
+        }
+
+        .th-babyReportAdmin {
+            font-weight: bold;
+        }
+
+        .td-babyReportAdmin {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .td-babyReportAdmin:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+     <link rel="stylesheet" href="/css/style.css" />
+     <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.css" />
+     <link
+       rel="stylesheet"
+       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+     />
+    
+</head>
+<body>
+
+    <div w3-include-html="/pages/navbar.html"></div>
+
+    <div class="container-shop"></div>
+
+    <header>
+        <nav class="dash">
+          <ul>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="/pages/babyRegistration.html">Register Baby</a></li>
+            <li><a href="/pages/sitterRegistration.html">Register Sitter</a></li>
+            <li><a href="/pages/babyReport.html">Baby Report</a></li>
+            <li><a href="/pages/sittterReport.html">Sitter Report</a></li>
+            <li><a href="#liveFeed">Live Feed</a></li>
+            <button id="logoutBtn">Logout</button>
+          </ul>
+        </nav>
+      </header>
+    
+      <main>
+    <div class="container-babyReportAdmin">
+        <h2 class="h2-babyReportAdmin">DayStar Baby Report</h2>
+        <form id="reportFormBabyAdmin" class="form-babyReportAdmin">
+            <label for="fromDateBabyReportAdmin" class="label-babyReportAdmin">From:</label>
+            <input type="date" id="fromDateBabyReportAdmin" name="fromDateBabyReportAdmin" class="input-babyReportAdmin">
+            <label for="toDateBabyReportAdmin" class="label-babyReportAdmin">To:</label>
+            <input type="date" id="toDateBabyReportAdmin" name="toDateBabyReportAdmin" class="input-babyReportAdmin">
+            <button type="submit" class="button-babyReportAdmin">Generate Report</button>
+            <button type="button" id="exportButtonBabyReportAdmin" class="button-babyReportAdmin">Export Report</button>
+        </form>
+        <table id="enrollmentTableBabyReportAdmin" class="table-babyReportAdmin">
+            <thead class="thead-babyReportAdmin">
+                <tr class="tr-babyReportAdmin">
+                    <th class="th-babyReportAdmin">Full Name</th>
+                    <th class="th-babyReportAdmin">Baby Number</th>
+                    <th class="th-babyReportAdmin">Status</th>
+                    <th class="th-babyReportAdmin">Sitter</th>
+                </tr>
+            </thead>
+            <tbody id="enrollmentListBabyReportAdmin" class="enrollmentList-babyReportAdmin"></tbody>
+        </table>
+    </div>
+</main>
+        <div w3-include-html="/pages/footer.html"></div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="/js/babyReport.js"></script>
+        <script src="/css/bootstrap/js/bootstrap.bundle.js"></script>
+        <script src="/js/add.js"></script>
+    
+</body>
+</html>

@@ -582,14 +582,12 @@ video {
     <header>
       <nav class="dash">
         <ul>
-          <li><a href="#dashboard">Dashboard</a></li>
-          <li><a href="#registerBaby">Register Baby</a></li>
-          <li><a href="#applications">Applications</a></li>
-          <li><a href="#babies">Babies</a></li>
-          <li><a href="#staff">Staff</a></li>
-          <li><a href="#requisitions">Requisitions</a></li>
+          <li><a href="/pages/admin.html">Dashboard</a></li>
+          <li><a href="/pages/babyRegistration.html">Register Baby</a></li>
+          <li><a href="/pages/sitterRegistration.html">Register Sitter</a></li>
+          <li><a href="/pages/babyReport.html">Baby Report</a></li>
+          <li><a href="/pages/sittterReport.html">Sitter Report</a></li>
           <li><a href="#liveFeed">Live Feed</a></li>
-          <li><a href="#yourProfile">Your Profile</a></li>
           <button id="logoutBtn">Logout</button>
         </ul>
       </nav>
@@ -605,7 +603,6 @@ video {
               <li><a href="#realtime-updates">Updates</a></li>
               <li><a href="#daily-tasks">Daily Task Manager</a></li>
               <li><a href="#graphical-reports">Graphical Reports</a></li>
-              <li><a href="#financial-performance">Financial Performance</a></li>
             </ul>
           </div>
           <div class="main-users">
@@ -634,256 +631,15 @@ video {
                 ></canvas>
               </div>
             </div>
-            <div id="financial-performance" class="tabcontent-users">
-              <h2>Financial Performance</h2>
-              <div class="graphical-reports-container-users">
-                <select id="report-type-select">
-                  <option value="bar">Bar Chart</option>
-                  <option value="line">Line Chart</option>
-                  <option value="pie">Pie Chart</option>
-                </select>
-                <canvas
-                  class="report-chart-users"
-                  id="financial-report-chart"
-                ></canvas>
-              </div>
-            </div>
 
           </div>
         </div>
 
-        <!-- Register Baby -->
-        <div id="registerBaby" class="section-users">
-          <div class="container-babyRegistration">
-            <h1 class="h1-babyRegistration">Baby Registration Form</h1>
-            <form id="babyRegistrationForm" class="babyRegistrationForm">
-                <div class="form-group-babyRegistration">
-                    <label for="firstNameBabyRegistration" class="label-babyRegistration">First Name:</label>
-                    <input type="text" id="firstNameBabyRegistration" name="firstNameBabyRegistration" class="input-babyRegistration">
-                    <span class="error" id="errorFirstName"></span>
-                </div>
-                <div class="form-group-babyRegistration">
-                    <label for="lastNameBabyRegistration" class="label-babyRegistration">Last Name:</label>
-                    <input type="text" id="lastNameBabyRegistration" name="lastNameBabyRegistration" class="input-babyRegistration">
-                    <span class="error" id="errorLastName"></span>
-                </div>
-                <div class="form-group-babyRegistration">
-                    <label for="genderBabyRegistration" class="label-babyRegistration">Gender:</label>
-                    <select id="genderBabyRegistration" name="genderBabyRegistration" class="input-babyRegistration">
-                        <option value="">Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                    <span class="error" id="errorGender"></span>
-                </div>
-                <div class="form-group-babyRegistration">
-                    <label for="age" class="label-babyRegistration">Age:</label>
-                    <input type="number" id="age" name="age" class="input-babyRegistration">
-                    <span class="error" id="errorAge"></span>
-                </div>
-                <div class="form-group-babyRegistration">
-                    <label for="location" class="label-babyRegistration">Location:</label>
-                    <input type="text" id="location" name="location" class="input-babyRegistration">
-                    <span class="error" id="errorLocation"></span>
-                </div>
-                <div class="form-group-babyRegistration">
-                    <label for="broughtBy" class="label-babyRegistration">Brought By:</label>
-                    <input type="text" id="broughtBy" name="broughtBy" class="input-babyRegistration">
-                    <span class="error" id="errorBroughtBy"></span>
-                </div>
-                <div class="form-group-babyRegistration">
-                    <label for="timeOfArrival" class="label-babyRegistration">Time of Arrival:</label>
-                    <input type="datetime-local" id="timeOfArrival" name="timeOfArrival" class="input-babyRegistration">
-                    <span class="error" id="errorTimeOfArrival"></span>
-                </div>
-                <div class="form-group-babyRegistration">
-                    <label class="label-babyRegistration">Father's Name:</label>
-                    <input type="text" id="fathersName" name="fathersName" class="input-babyRegistration">
-                    <label><input type="checkbox" id="deceasedFather" name="deceasedFather"> Deceased</label>
-                </div>
-                <div class="form-group-babyRegistration">
-                    <label class="label-babyRegistration">Mother's Name:</label>
-                    <input type="text" id="mothersName" name="mothersName" class="input-babyRegistration">
-                    <label><input type="checkbox" id="deceasedMother" name="deceasedMother"> Deceased</label>
-                </div>
-                <div class="form-group-babyRegistration">
-                    <label for="feeType" class="label-babyRegistration">Fee Type:</label>
-                    <select id="feeType" name="feeType" class="input-babyRegistration">
-                        <option value="">Select Fee Type</option>
-                        <option value="halfDay">Half Day (UGX 10,000)</option>
-                        <option value="fullDay">Full Day (UGX 15,000)</option>
-                    </select>
-                    <span class="error" id="errorFeeType"></span>
-                </div>
-                <div class="form-group-babyRegistration">
-                    <button type="submit" class="button-babyRegistration">Register Baby</button>
-                </div>
-            </form>
-            <div id="successMessage" class="success-message"></div>
-        </div>
-                </div>
-       </div>          
-      </div>
-        </div>
-
-        <!-- Applications -->
-        <div id="applications" class="section-users">
-          <div class="container-applicationCheckAdmin">
-            <h1 class="h1-applicationCheckAdmin">Daystar Daycare Application Management</h1>
-            
-            <!-- Baby Applications Section -->
-            <section id="babyApplications">
-                <h2 class="h2-applicationCheckAdmin">Baby Applications</h2>
-                <ul id="babyList" class="adminApplicationCheck"></ul>
-            </section>
-            
-            <!-- Employee Applications Section -->
-            <section id="employeeApplications">
-                <h2>Employee Applications</h2>
-                <ul id="employeeList" class="adminApplicationCheck"></ul>
-            </section>
-        </div>
-    
-        <!-- Modal for Application Details -->
-        <div id="modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div id="applicationDetails"></div>
-                <div class="button-group">
-                    <button id="acceptButton" class="buttonAcceptApplicationCheckAdmin">Accept</button>
-                    <button id="rejectButton" class="buttonRejectApplicationCheckAdmin">Reject</button>
-                </div>
-            </div>
-        </div>
-            </div>
-
-        <!-- Babies -->
-        <div id="babies" class="section-users">
-          <div class="container-babyReportAdmin">
-            <h1 class="h1-babyReportAdmin">Daystar Daycare Baby Report</h1>
-            <form id="reportFormBabyAdmin" class="form-babyReportAdmin">
-                <label for="fromDateBabyReportAdmin" class="label-babyReportAdmin">From:</label>
-                <input type="date" id="fromDateBabyReportAdmin" name="fromDateBabyReportAdmin" class="input-babyReportAdmin">
-                <label for="toDateBabyReportAdmin" class="label-babyReportAdmin">To:</label>
-                <input type="date" id="toDateBabyReportAdmin" name="toDateBabyReportAdmin" class="input-babyReportAdmin">
-                <button type="submit" class="button-babyReportAdmin">Generate Report</button>
-                <button type="button" id="exportButtonBabyReportAdmin" class="button-babyReportAdmin">Export Report</button>
-            </form>
-            <table id="enrollmentTableBabyReportAdmin" class="table-babyReportAdmin">
-                <thead class="thead-babyReportAdmin">
-                    <tr class="tr-babyReportAdmin">
-                        <th class="th-babyReportAdmin">Full Name</th>
-                        <th class="th-babyReportAdmin">Baby Number</th>
-                        <th class="th-babyReportAdmin">Date Enrolled</th>
-                        <th class="th-babyReportAdmin">Status</th>
-                        <th class="th-babyReportAdmin">Room</th>
-                        <th class="th-babyReportAdmin">Sitter</th>
-                        <th class="th-babyReportAdmin">Remarks</th>
-                    </tr>
-                </thead>
-                <tbody id="enrollmentListBabyReportAdmin" class="enrollmentList-babyReportAdmin"></tbody>
-            </table>
-        </div>
-            </div>
-
-        <!-- Staff -->
-        <div id="staff" class="section-users">
-          <div class="container-staffReportAdmin">
-            <h1 class="h1-staffReportAdmin">Daystar Daycare Staff Report</h1>
-            <form id="form-staffReportAdmin" class="form-staffReportAdmin">
-                <label for="fromDatestaffReportAdmin" class="label-staffReportAdmin">From:</label>
-                <input type="date" id="fromDatestaffReportAdmin" class="input-staffReportAdmin" required>
-                <label for="toDatestaffReportAdmin" class="label-staffReportAdmin">To:</label>
-                <input type="date" id="toDatestaffReportAdmin" class="input-staffReportAdmin" required>
-                <label for="staffTypestaffReportAdmin" class="label-staffReportAdmin">Staff Type:</label>
-                <select id="staffTypestaffReportAdmin" class="select-staffReportAdmin">
-                    <option value="accounts">Accounts</option>
-                    <option value="procurement">Procurement</option>
-                    <option value="sitters">Sitters</option>
-                    <option value="support">Support Staff</option>
-                    <option value="administration">Administration</option>
-                    <option value="all">All Staff</option>
-                </select>
-                <button type="button" id="generateReportstaffReportAdmin" class="button-staffReportAdmin">Generate Report</button>
-                <button type="button" id="exportReportstaffReportAdmin" class="button-staffReportAdmin" disabled>Export Report</button>
-            </form>
-            <table id="reportTablestaffReportAdmin" class="table-staffReportAdmin">
-                <thead class="thead-staffReportAdmin">
-                    <tr>
-                        <th>Name</th>
-                        <th>Staff Number</th>
-                        <th>Enrollment Date</th>
-                        <th>Department</th>
-                        <th>Status</th>
-                        <th>Remarks</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-staffReportAdmin" class="tbody-staffReportAdmin">
-                    <!-- Table rows will be dynamically populated -->
-                </tbody>
-            </table>
-        </div>
-    
-        <!-- Modal for displaying staff details -->
-        <div id="modal-staffReportAdmin" class="modal-staffReportAdmin">
-            <div class="modal-content-staffReportAdmin">
-                <span class="close-staffReportAdmin">&times;</span>
-                <h2 id="staffName-staffReportAdmin" class="staffName-staffReportAdmin"></h2>
-                <p id="checkInTime-staffReportAdmin" class="checkInTime-staffReportAdmin"></p>
-                <p id="babiesUnderCare-staffReportAdmin" class="babiesUnderCare-staffReportAdmin"></p>
-            </div>
-        </div>
-            </div>
-
-        <!-- Requisitions -->
-        <div id="requisitions" class="section-users">
-          <div class="container-resCheckAdmin">
-            <h2 class="h2-resCheckAdmin">Resource Approval Log</h2>
-            <div id="logContainer" class="log-container-resCheckAdmin">
-                <!-- Resource request entries will be dynamically added here -->
-            </div>
-        </div>
-    
-        <!-- Resource details popup -->
-        <div id="popup" class="popup-resCheckAdmin">
-            <div class="popup-content-resCheckAdmin">
-                <span class="close-btn-resCheckAdmin" onclick="closePopup()">&times;</span>
-                <h3>Resource Details</h3>
-                <div id="resourceDetails" class="resource-details-resCheckAdmin">
-                    <!-- Resource details will be dynamically added here -->
-                </div>
-                <div id="totalAmount" class="total-amount-resCheckAdmin"></div>
-                <div class="action-buttons-resCheckAdmin">
-                    <button id="saveButton" class="action-button-resCheckAdmin" onclick="saveEdits()">Save</button>
-                    <button id="approveButton" class="action-button-resCheckAdmin approve-resCheckAdmin" onclick="approveRequest()" disabled>Approve</button>
-                    <button id="rejectButton" class="action-button-resCheckAdmin reject-resCheckAdmin" onclick="rejectRequest()" disabled>Reject</button>
-                </div>
-            </div>
-        </div>
-    
-        </div>
-
-        <!-- Live Feed -->
-        <div id="liveFeed" class="section-users">
-            <div class="camera-grid" id="cameraGrid">
-                <!-- Camera containers will be dynamically added here -->
-            </div>
-       
-        </div>
-
-        <!-- Your Profile -->
-        <div id="yourProfile" class="section-users">
-          <div class="container-breach">
-            <h1 class="h1-breach">System Breach Log</h1>
-            <div id="log"></div>
-          </div>
-        </div>
     </main>
 
     <div w3-include-html="/pages/footer.html"></div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/js/logout.js"></script>
-    <script src="/js/adminrequisitions.js"></script>
     <script src="/js/admin.js"></script>
     <script src="/css/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/js/add.js"></script>

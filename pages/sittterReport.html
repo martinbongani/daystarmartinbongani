@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DayStar Sitter Report</title>
+    <style>
+        .h2-staffReportAdmin {
+            /* text-align: center; */
+            color:#007bff;
+        }
+
+        .container-staffReportAdmin {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-staffReportAdmin {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .label-staffReportAdmin {
+            flex: 0 0 100px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .input-staffReportAdmin {
+            flex: 1 0 150px; 
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .button-staffReportAdmin {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px; 
+        }
+
+        .button-staffReportAdmin:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .table-staffReportAdmin {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table-staffReportAdmin th, .table-staffReportAdmin td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .table-staffReportAdmin th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .modal-staffReportAdmin {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content-staffReportAdmin {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-staffReportAdmin {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+        }
+
+        @media (max-width: 600px) {
+            .form-staffReportAdmin {
+                flex-direction: column;
+            }
+            .input-staffReportAdmin {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            .label-staffReportAdmin {
+                flex: 1 0 100%;
+            }
+        }
+
+        .button-staffReportAdmin:hover {
+            background-color: #0056b3;
+        }
+    </style>
+         <link rel="stylesheet" href="/css/style.css" />
+         <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.css" />
+         <link
+           rel="stylesheet"
+           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+         />
+    
+</head>
+<body>
+    
+    <div w3-include-html="/pages/navbar.html"></div>
+
+    <div class="container-shop"></div>
+
+    <header>
+        <nav class="dash">
+          <ul>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="/pages/babyRegistration.html">Register Baby</a></li>
+            <li><a href="/pages/sitterRegistration.html">Register Sitter</a></li>
+            <li><a href="/pages/babyReport.html">Baby Report</a></li>
+            <li><a href="/pages/sittterReport.html">Sitter Report</a></li>
+            <li><a href="#liveFeed">Live Feed</a></li>
+            <button id="logoutBtn">Logout</button>
+          </ul>
+        </nav>
+      </header>
+      <main>
+    <div class="container-staffReportAdmin">
+        <h2 class="h2-staffReportAdmin">DayStar Sitter Report</h2>
+        <form id="form-staffReportAdmin" class="form-staffReportAdmin">
+            <div class="form-row">
+                <label for="fromDatestaffReportAdmin" class="label-staffReportAdmin">From:</label>
+                <input type="date" id="fromDatestaffReportAdmin" class="input-staffReportAdmin" required>
+                <label for="toDatestaffReportAdmin" class="label-staffReportAdmin">To:</label>
+                <input type="date" id="toDatestaffReportAdmin" class="input-staffReportAdmin" required>
+            </div>
+            <div class="form-row">
+                <button type="button" id="generateReportstaffReportAdmin" class="button-staffReportAdmin">Generate Report</button>
+                <button type="button" id="exportReportstaffReportAdmin" class="button-staffReportAdmin" disabled>Export Report</button>
+            </div>
+        </form>
+        <table id="reportTablestaffReportAdmin" class="table-staffReportAdmin">
+            <thead class="thead-staffReportAdmin">
+                <tr>
+                    <th>Name</th>
+                    <th>Sitter Number</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-staffReportAdmin" class="tbody-staffReportAdmin">
+                <!-- Table rows will be dynamically populated -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal for displaying staff details -->
+    <div id="modal-staffReportAdmin" class="modal-staffReportAdmin">
+        <div class="modal-content-staffReportAdmin">
+            <span class="close-staffReportAdmin">&times;</span>
+            <h2 id="staffName-staffReportAdmin" class="staffName-staffReportAdmin"></h2>
+            <p id="checkInTime-staffReportAdmin" class="checkInTime-staffReportAdmin"></p>
+            <p id="babiesUnderCare-staffReportAdmin" class="babiesUnderCare-staffReportAdmin"></p>
+        </div>
+    </div>
+</main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const generateReportBtn = document.getElementById('generateReportstaffReportAdmin');
+            const exportReportBtn = document.getElementById('exportReportstaffReportAdmin');
+            const reportTableBody = document.getElementById('tbody-staffReportAdmin');
+
+            let reportData = []; // Array to store report data
+
+            // Simulated data for sitters staff
+            const sittersStaff = [
+                { fullName: 'Grace Martinez', staffNumber: 'SN001/24', status: 'Present' },
+                { fullName: 'Lucas Young', staffNumber: 'SN002/24', status: 'Present' },
+                { fullName: 'Mia Robinson', staffNumber: 'SN003/24', status: 'Absent' },
+                { fullName: 'Benjamin King', staffNumber: 'SN004/24', status: 'Present' },
+                { fullName: 'Lily Wright', staffNumber: 'SN005/24', status: 'Present' },
+                { fullName: 'Alexander Hill', staffNumber: 'SN006/24', status: 'Absent' },
+                { fullName: 'Chloe Scott', staffNumber: 'SN007/24', status: 'Present' },
+                { fullName: 'William Adams', staffNumber: 'SN008/24', status: 'Present' },
+                { fullName: 'Victoria Baker', staffNumber: 'SN009/24', status: 'Present' },
+                { fullName: 'Ethan Carter', staffNumber: 'SN010/24', status: 'Present' }
+            ];
+
+            generateReportBtn.addEventListener('click', () => {
+                const fromDate = document.getElementById('fromDatestaffReportAdmin').value;
+                const toDate = document.getElementById('toDatestaffReportAdmin').value;
+
+                if (!fromDate || !toDate) {
+                    alert('Please select both "From" and "To" dates.');
+                    return;
+                }
+
+                // Assign sitters staff data
+                reportData = sittersStaff;
+
+                // Clear previous table rows
+                reportTableBody.innerHTML = '';
+
+                // Populate table with sitters staff data
+                reportData.forEach(staff => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${staff.fullName}</td>
+                        <td>${staff.staffNumber}</td>
+                        <td>${staff.status}</td>
+                    `;
+                    reportTableBody.appendChild(row);
+                });
+
+                // Enable export button
+                exportReportBtn.disabled = false;
+            });
+
+            exportReportBtn.addEventListener('click', () => {
+                if (reportData.length === 0) {
+                    alert('Please generate a report before exporting.');
+                    return;
+                }
+
+                let csvContent = 'data:text/csv;charset=utf-8,';
+                csvContent += 'Name,Staff Number,Status\n';
+
+                reportData.forEach(staff => {
+                    const csvRow = `${staff.fullName},${staff.staffNumber},${staff.status}\n`;
+                    csvContent += csvRow;
+                });
+
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement('a');
+                link.setAttribute('href', encodedUri);
+                link.setAttribute('download', 'daycare_report.csv');
+                document.body.appendChild(link);
+                link.click();
+            });
+
+            reportTableBody.addEventListener('click', (event) => {
+                const targetRow = event.target.closest('tr');
+                if (!targetRow || targetRow === reportTableBody.firstElementChild) return;
+
+                const staffName = targetRow.cells[0].textContent;
+                const checkInTime = ''; // Retrieve from biometric system
+                const babiesUnderCare = ''; // Retrieve for sitters
+
+                document.getElementById('staffName-staffReportAdmin').textContent = staffName;
+                document.getElementById('checkInTime-staffReportAdmin').textContent = `Checked in at: ${checkInTime}`;
+                document.getElementById('babiesUnderCare-staffReportAdmin').textContent = `Babies under care: ${babiesUnderCare}`;
+
+                const modal = document.getElementById('modal-staffReportAdmin');
+                modal.style.display = 'block';
+
+                modal.querySelector('.close-staffReportAdmin').addEventListener('click', () => {
+                    modal.style.display = 'none';
+                });
+
+                window.addEventListener('click', (event) => {
+                    if (event.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+            <div w3-include-html="/pages/footer.html"></div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="/js/b"></script>
+            <script src="/css/bootstrap/js/bootstrap.bundle.js"></script>
+            <script src="/js/add.js"></script>
+    
+</body>
+</html>

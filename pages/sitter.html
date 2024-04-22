@@ -5,93 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <style>
-      /* Admin dashboard */
-      .sidebar-users {
-        width: 250px;
-        background-color: #333;
-        color: #fff;
-        padding: 20px;
-        display: flex;
-        min-height: 100vh;
-      }
-
-      .sidebar-users h2 {
-        text-align: center;
-      }
-
-      .sidebar-users ul {
-        list-style-type: none;
-        padding: 0;
-      }
-
-      .sidebar-users ul li a {
-        display: block;
-        padding: 10px 0;
-        color: #fff;
-        text-decoration: none;
-        text-align: left;
-      }
-
-      .sidebar-users ul li a:hover {
-        background-color: #555;
-      }
-
-      .main-users {
-        flex: 1;
-        padding: 20px;
-        display: inline;
-      }
-
-      .tabcontent-users {
-        display: none;
-      }
-
-      .cards-container-users {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-
-      .card-users {
-        width: calc(33.33% - 20px);
-        margin-bottom: 20px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      .tasks-container-users {
-        margin-top: 20px;
-        background-color: #fff;
-      }
-
-      .graphical-reports-container-users {
-        margin-top: 20px;
-        max-width: 800px;
-        width: 100%;
-        height: 400px;
-        position: relative;
-      }
-
-      .report-chart-users {
-        width: 100%;
-        max-width: 600px;
-        margin-top: 20px;
-        background-color: #fff;
-      }
-
-      .section-users {
-        display: none;
-      }
-      .active-users {
-        display: flex;
-      }
-
-      .form-container {
-        align-items: center;
-      }
-
       /* Sitter Baby List */
       #container-babyListSitter {
             max-width: 600px;
@@ -102,9 +15,9 @@
             margin: auto;
         }
 
-        #h1-babyListSitter {
-            text-align: center;
-            color: #333;
+        #h2-babyListSitter {
+          text-align: center;
+          color:#007bff;
         }
 
         #ul-babyListSitter {
@@ -199,131 +112,10 @@
             background-color: #0056b3;
         }
 
-      /* Sitter Calendar */
-      .calendar-sitter {
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        nav button #logoutbtn {
+         text-align: right;
         }
 
-        #h1-sitterCalendar {
-            text-align: center;
-            color: #333;
-        }
-
-        #calendar-sitter {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            grid-gap: 5px;
-        }
-
-        .day-sitterCalendar {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .day-header-sitterCalendar {
-            background-color: #f0f0f0;
-            font-weight: bold;
-        }
-
-        .activity-sitterCalendar {
-            margin-bottom: 5px;
-            padding: 5px;
-            background-color: #f9a825;
-            color: #333;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        .activity-details-sitterCalendar {
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            display: none;
-        }
-
-        #closeButton-sitterCalendar {
-            cursor: pointer;
-            float: right;
-            font-weight: bold;
-        }
-
-      /* Sitter Progress Report */
-      .container-babyReportSitter {
-            width: 800px;
-            margin: auto;
-        }
-        #h1-babyReportSitter {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .baby-report-sitter {
-            border: 1px solid #ddd;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        .baby-name-babyReportSitter {
-            margin-bottom: 10px;
-        }
-        .add-activity-btn-babyReportSitter {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-        }
-        .activity-item-babyReportSitter {
-            margin-bottom: 10px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 5px;
-        }
-        .modal-babyReportSitter {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        .modal-babyReportSitter input[type="text"],
-        .modal-babyReportSitter textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .modal-babyReportSitter button {
-            padding: 8px 16px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .post-report-btn-babyReportSitter {
-            display: block;
-            margin-top: 20px;
-            padding: 8px 16px;
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
     </style>
 
     <title>Sitter</title>
@@ -341,12 +133,7 @@
     <header>
       <nav class="dash">
         <ul>
-          <li><a href="#dashboard-sitter">Dashboard</a></li>
-          <li><a href="#babies">Babies</a></li>
-          <li><a href="#calendar">Calendar</a></li>
-          <li><a href="#progressReports">Progress Reports</a></li>
-          <li><a href="#yourProfile">Your Profile</a></li>
-          <button id="resourceReqBtn">Generate Resource Request</button>
+          <li>Sitter Profile</li>
           <button id="logoutBtn">Logout</button>
         </ul>
       </nav>
@@ -354,34 +141,11 @@
 
     <!-- Main Content -->
     <main>
-      <div class="container-users">
-        <!-- Dashboard Section -->
-        <div id="dashboard-sitter" class="section-users active-users">
-          <div class="sidebar-users">
-            <ul>
-              <li><a href="#realtime-updates">Updates</a></li>
-              <li><a href="#daily-tasks">Daily Task Manager</a></li>
-            </ul>
-          </div>
-          <div class="main-users">
-            <div id="realtime-updates" class="tabcontent-users">
-              <h2>Updates</h2>
-              <div
-                class="cards-container-users"
-                id="realtime-cards-container"
-              ></div>
-            </div>
-            <div id="daily-tasks" class="tabcontent-users">
-              <h2>Daily Task Manager</h2>
-              <div class="tasks-container-users" id="tasks-container"></div>
-            </div>
-          </div>
-        </div>
 
         <!-- Babies -->
         <div id="babies" class="section-users">
           <div id="container-babyListSitter">
-            <h1 id="h1-babyListSitter">Baby List</h1>
+            <h2 id="h2-babyListSitter">Baby Attendance List</h2>
             <ul id="baby-list-babyListSitter"></ul>
         </div>
     
@@ -403,62 +167,11 @@
             </div>
         </div>
     
-        </div>
-
-        <!-- Calender -->
-        <div id="calendar" class="section-users">
-          <div class="calendar-sitter">
-            <h1 id="h1-sitterCalendar">Sitter Calendar</h1>
-            <div id="calendar-sitter"></div>
-            <div id="activityDetails-sitterCalendar" class="activity-details-sitterCalendar">
-                <span id="closeButton-sitterCalendar">&times;</span>
-                <h2 id="activityTitle-sitterCalendar"></h2>
-                <p><strong>Time:</strong> <span id="activityTime-sitterCalendar"></span></p>
-                <p><strong>Babies Attending:</strong> <span id="activityBabies-sitterCalendar"></span></p>
-                <p><strong>Location:</strong> <span id="activityLocation-sitterCalendar"></span></p>
-            </div>
-        </div>
     
-        </div>
-
-        <!-- Progress Reports -->
-        <div id="progressReports" class="section-users">
-          <div class="container-babyReportSitter">
-            <h1 id="h1-babyReportSitter">Baby Progress Reports</h1>
-    
-            <!-- Baby Reports -->
-            <div id="babyReports-sitter"></div>
-    
-            <!-- Modal for Activity Details -->
-            <div id="activityModal-babyReportSitter" class="modal-babyReportSitter">
-                <h2 id="modalTitle-babyReportSitter">Add Activity</h2>
-                <input type="hidden" id="currentBabyIndex-babyReportSitter">
-                <input type="hidden" id="currentActivityIndex-babyReportSitter">
-                <label for="activityInput-babyReportSitter">Activity:</label>
-                <input type="text" id="activityInput-babyReportSitter">
-                <label for="commentsInput-babyReportSitter">Comments:</label>
-                <textarea id="commentsInput-babyReportSitter" rows="4"></textarea>
-                <button onclick="saveActivity()">Save</button>
-                <button onclick="cancelActivity()">Cancel</button>
-            </div>
-    
-            <!-- Post Report Button -->
-            <button id="postReportBtn-babyReportSitter" class="post-report-btn-babyReportSitter" onclick="postReport()">Post Report</button>
-        </div>
-    
-        </div>
-
-        <!-- Resource Requests -->
-        <div id="resourceRequests" class="section-users"></div>
-
-        <!-- Your Profile -->
-        <div id="yourProfile" class="section-users"></div>
-      </div>
     </main>
 
     <div w3-include-html="/pages/footer.html"></div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/generateresrequest.js"></script>
     <script src="/js/logout.js"></script>
     <script src="/js/sitter.js"></script>
     <script src="/css/bootstrap/js/bootstrap.bundle.js"></script>
