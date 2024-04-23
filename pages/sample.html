@@ -3,214 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accounting Entry Form</title>
+    <title>Daycare Inventory Management System</title>
     <style>
-        /* General Styles */
         body {
             font-family: Arial, sans-serif;
-            padding: 20px;
-            background-color: #f7f7f7;
-        }
-
-        h2, h3 {
+            background-color: #f8f9fa;
             color: #333;
-            text-align: center;
+            margin: 0;
+            padding: 0;
         }
 
-        /* Form Styles */
-        #transaction-form {
+        .container {
             max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
+            margin: 20px auto;
             padding: 20px;
+            background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        #transaction-form label {
-            width: 45%; /* Adjust width for labels */
-            margin-bottom: 10px;
-            font-weight: bold;
+        h1, h2 {
+            text-align: center;
+            color: #007bff;
         }
 
-        #transaction-form input,
-        #transaction-form select {
-            width: 45%; /* Adjust width for input fields */
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"], input[type="number"], textarea {
+            width: calc(100% - 24px); /* Adjust input width with spacing */
             padding: 10px;
-            font-size: 16px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+            border-radius: 5px;
         }
 
-        #transaction-form button {
-            width: 100%;
-            background-color: #4CAF50;
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
             color: #fff;
-            padding: 12px;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
         }
 
-        #transaction-form button:hover {
-            background-color: #45a049;
+        button:hover {
+            background-color: #0056b3;
         }
 
-        /* Transaction History Table Styles */
-        #transaction-table {
+        table {
             width: 100%;
             border-collapse: collapse;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
         }
 
-        #transaction-table th, #transaction-table td {
+        th, td {
             padding: 12px;
-            border-bottom: 1px solid #ddd;
             text-align: left;
+            border-bottom: 1px solid #ddd;
         }
 
-        #transaction-table th {
-            background-color: #f2f2f2;
-            font-weight: bold;
+        th {
+            background-color: #007bff;
+            color: #fff;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            #transaction-form label,
-            #transaction-form input,
-            #transaction-form select {
-                width: 100%; /* Full width on smaller screens */
-            }
+        td img {
+            max-width: 80px;
+            height: auto;
+        }
+
+        .action-btn {
+            padding: 8px 12px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
-    <h2>Accounting Entry Form</h2>
+    <div class="container">
+        <h1>Daycare Inventory Management System</h1>
+        <div class="add-item">
+            <h2>Add New Item</h2>
+            <label for="itemName">Item Name:</label>
+            <input type="text" id="itemName">
+            <label for="itemUnit">Unit:</label>
+            <input type="text" id="itemUnit">
+            <label for="itemPrice">Price (UGX):</label>
+            <input type="number" id="itemPrice">
+            <label for="itemImage">Image URL:</label>
+            <input type="text" id="itemImage">
+            <button onclick="addItem()">Add Item</button>
+        </div>
+        <hr>
+        <div class="inventory-list">
+            <h2>Inventory List</h2>
+            <table id="inventoryTable">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Unit</th>
+                        <th>Price (UGX)</th>
+                        <th>Received</th>
+                        <th>Issued</th>
+                        <th>Balance</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryBody">
+                    <!-- Inventory items will be dynamically populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <!-- Transaction Entry Form -->
-    <form id="transaction-form">
-        <label for="description">Description:</label>
-        <input type="text" id="description" required>
-        
-        <label for="amount">Amount (UGX):</label>
-        <input type="number" id="amount" required>
-        
-        <label for="type">Type:</label>
-        <select id="type" required>
-            <option value="expense">Expense</option>
-            <option value="income">Income</option>
-        </select>
-
-        <label for="date">Date:</label>
-        <input type="date" id="date" required>
-        
-        <button type="submit">Add Transaction</button>
-    </form>
-
-    <!-- Transaction History Table -->
-    <h3>Transaction History</h3>
-    <table id="transaction-table">
-        <thead>
-            <tr>
-                <th>Description</th>
-                <th>Amount (UGX)</th>
-                <th>Type</th>
-                <th>Date</th>
-                <th>Running Balance (UGX)</th>
-            </tr>
-        </thead>
-        <tbody id="history-body"></tbody>
-    </table>
-
-    <!-- JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const transactionForm = document.getElementById('transaction-form');
-            const historyBody = document.getElementById('history-body');
-            let transactions = [];
+        let inventory = []; // Array to store inventory items
 
-            // Function to add transaction to history
-            function addTransaction(description, amount, type, date) {
-                const transactionAmount = parseFloat(amount);
-                const sign = (type === 'expense') ? '-' : '+';
+        // Function to add a new item to the inventory
+        function addItem() {
+            const itemName = document.getElementById('itemName').value.trim();
+            const itemUnit = document.getElementById('itemUnit').value.trim();
+            const itemPrice = parseFloat(document.getElementById('itemPrice').value.trim());
+            const itemImage = document.getElementById('itemImage').value.trim();
 
-                // Create new transaction object
-                const transaction = {
-                    description,
-                    amount: transactionAmount,
-                    type,
-                    date,
-                    runningBalance: 0 // Running balance will be computed later
-                };
-
-                // Add transaction to array
-                transactions.push(transaction);
-
-                // Sort transactions by date (earliest to latest)
-                transactions.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-                // Compute running balances from top to bottom
-                let runningTotal = 0;
-                transactions.forEach((transaction) => {
-                    if (transaction.type === 'expense') {
-                        runningTotal -= transaction.amount;
-                    } else {
-                        runningTotal += transaction.amount;
-                    }
-                    transaction.runningBalance = runningTotal;
-                });
-
-                // Clear history body before re-rendering
-                historyBody.innerHTML = '';
-
-                // Render transactions in the table
-                transactions.forEach((transaction) => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${transaction.description}</td>
-                        <td>${sign}UGX ${transaction.amount.toLocaleString()}</td>
-                        <td>${transaction.type}</td>
-                        <td>${transaction.date}</td>
-                        <td>UGX ${transaction.runningBalance.toLocaleString()}</td>
-                    `;
-                    historyBody.appendChild(row);
-                });
+            if (itemName === '' || itemUnit === '' || isNaN(itemPrice) || itemPrice <= 0 || itemImage === '') {
+                alert('Please fill in all fields correctly.');
+                return;
             }
 
-            // Function to handle form submission
-            transactionForm.addEventListener('submit', (e) => {
-                e.preventDefault(); // Prevent default form submission
+            const newItem = {
+                name: itemName,
+                unit: itemUnit,
+                price: itemPrice,
+                image: itemImage,
+                received: 0,
+                issued: 0,
+                balance: 0
+            };
 
-                // Get input values
-                const description = document.getElementById('description').value;
-                const amount = document.getElementById('amount').value;
-                const type = document.getElementById('type').value;
-                const date = document.getElementById('date').value;
+            inventory.push(newItem);
+            renderInventory();
+            clearForm();
+        }
 
-                // Validate input
-                if (!description || isNaN(amount) || !date) {
-                    alert('Please enter valid description, amount, and date.');
-                    return;
-                }
+        // Function to render the inventory table
+        function renderInventory() {
+            const tbody = document.getElementById('inventoryBody');
+            tbody.innerHTML = '';
 
-                // Add transaction to history
-                addTransaction(description, amount, type, date);
+            inventory.forEach((item, index) => {
+                const row = document.createElement('tr');
 
-                // Clear input fields after submission
-                document.getElementById('description').value = '';
-                document.getElementById('amount').value = '';
-                document.getElementById('date').value = '';
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td><img src="${item.image}" alt="${item.name}"></td>
+                    <td>${item.unit}</td>
+                    <td>${formatNumber(item.price)}</td>
+                    <td><input type="number" value="${item.received}" id="received${index}"></td>
+                    <td><input type="number" value="${item.issued}" id="issued${index}"></td>
+                    <td>${formatNumber(item.balance)}</td>
+                    <td><button class="action-btn" onclick="updateBalance(${index})">OK</button></td>
+                `;
+
+                tbody.appendChild(row);
             });
-        });
+        }
+
+        // Function to update balance based on received or issued quantity
+        function updateBalance(index) {
+            const receivedInput = document.getElementById(`received${index}`);
+            const issuedInput = document.getElementById(`issued${index}`);
+
+            const received = parseInt(receivedInput.value) || 0;
+            const issued = parseInt(issuedInput.value) || 0;
+
+            const currentBalance = inventory[index].received - inventory[index].issued;
+
+            if (received < 0 || issued < 0 || issued > currentBalance) {
+                alert('Invalid quantity. Check received and issued values.');
+                return;
+            }
+
+            // Update received and issued quantities
+            inventory[index].received = received;
+            inventory[index].issued = issued;
+
+            // Update balance
+            const newBalance = inventory[index].received - inventory[index].issued;
+            inventory[index].balance = newBalance;
+
+            renderInventory();
+
+            // Clear received and issued fields
+            receivedInput.value = '';
+            issuedInput.value = '';
+        }
+
+        // Function to clear the form fields after adding an item
+        function clearForm() {
+            document.getElementById('itemName').value = '';
+            document.getElementById('itemUnit').value = '';
+            document.getElementById('itemPrice').value = '';
+            document.getElementById('itemImage').value = '';
+        }
+
+        // Function to format number with commas for better readability
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
     </script>
 </body>
 </html>
