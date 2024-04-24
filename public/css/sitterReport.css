@@ -1,0 +1,112 @@
+.h2-staffReportAdmin {
+    /* text-align: center; */
+    color:#007bff;
+}
+
+.container-staffReportAdmin {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-staffReportAdmin {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.label-staffReportAdmin {
+    flex: 0 0 100px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.input-staffReportAdmin {
+    flex: 1 0 150px; 
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.button-staffReportAdmin {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px; 
+}
+
+.button-staffReportAdmin:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.table-staffReportAdmin {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table-staffReportAdmin th, .table-staffReportAdmin td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.table-staffReportAdmin th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.modal-staffReportAdmin {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content-staffReportAdmin {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.close-staffReportAdmin {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+}
+
+@media (max-width: 600px) {
+    .form-staffReportAdmin {
+        flex-direction: column;
+    }
+    .input-staffReportAdmin {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .label-staffReportAdmin {
+        flex: 1 0 100%;
+    }
+}
+
+.button-staffReportAdmin:hover {
+    background-color: #0056b3;
+}

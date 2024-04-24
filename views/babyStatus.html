@@ -3,129 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <style>
-      /* Sitter Baby List */
-      #container-babyListSitter {
-            max-width: 600px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin: auto;
-        }
-
-        #h2-babyListSitter {
-          text-align: center;
-          color:#007bff;
-        }
-
-        #ul-babyListSitter {
-            list-style: none;
-            padding: 0;
-        }
-
-        .li-babyListSitter {
-            padding: 12px 16px;
-            border-bottom: 1px solid #ddd;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .li-babyListSitter:last-child {
-            border-bottom: none;
-        }
-
-        .button-babyListSitter {
-            padding: 8px 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 4px;
-            background-color: #007bff;
-            color: #fff;
-            font-size: 14px;
-            transition: background-color 0.3s ease;
-        }
-
-        .button-babyListSitter:hover {
-            background-color: #0056b3;
-        }
-
-        .status-babyListSitter {
-            margin-left: 16px;
-            flex-grow: 1;
-        }
-
-        .action-buttons-babyListSitter {
-            display: flex;
-            gap: 8px;
-        }
-
-        .popup-container-babyListSitter {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .popup-babyListSitter {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .popup-babyListSitter input {
-            width: calc(100% - 24px);
-            padding: 8px;
-            margin-bottom: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .popup-babyListSitter button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 12px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .popup-babyListSitter button:hover {
-            background-color: #0056b3;
-        }
-
-        nav button #logoutbtn {
-         text-align: right;
-        }
-
-    </style>
-
     <title>Baby Status</title>
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <link rel="stylesheet" href="/public/css/bootstrap/css/bootstrap.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/public/css/babyStatus.css" />
   </head>
-  <link rel="stylesheet" href="/public/css/style.css" />
-  <link rel="stylesheet" href="/public/css/bootstrap/css/bootstrap.css" />
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-  />
   <body>
     <div w3-include-html="/views/navbar.html"></div>
 
@@ -134,7 +20,9 @@
       <nav class="dash">
         <ul>
           <li><a href="/views/admin.html">Dashboard</a></li>
-          <li><a href="/views/adminRegistration.html">Admin Registration</a></li>
+          <li>
+            <a href="/views/adminRegistration.html">Admin Registration</a>
+          </li>
           <li><a href="/views/babyRegistration.html">Register Baby</a></li>
           <li><a href="/views/sitterRegistration.html">Register Sitter</a></li>
           <li><a href="/views/babyStatus.html">Baby Status</a></li>
@@ -144,46 +32,76 @@
           <li><a href="/views/inventory.html">Inventory</a></li>
           <li><a href="/views/liveFeed.html">Live Feed</a></li>
           <button id="logoutBtn">Logout</button>
-      </ul>
+        </ul>
       </nav>
     </header>
 
-    <!-- Main Content -->
     <main>
+      <!-- Babies -->
+      <div id="babies" class="section-users">
+        <div id="container-babyListSitter">
+          <h2 id="h2-babyListSitter">Baby Attendance List</h2>
+          <ul id="baby-list-babyListSitter"></ul>
+        </div>
 
-        <!-- Babies -->
-        <div id="babies" class="section-users">
-          <div id="container-babyListSitter">
-            <h2 id="h2-babyListSitter">Baby Attendance List</h2>
-            <ul id="baby-list-babyListSitter"></ul>
+        <div
+          class="popup-container-babyListSitter"
+          id="popup-overlay-babyListSitter"
+        >
+          <div class="popup-babyListSitter" id="details-popup-babyListSitter">
+            <h2 id="details-popup-title-babyListSitter"></h2>
+            <p>
+              <strong>Age:</strong>
+              <span id="details-age-babyListSitter"></span>
+            </p>
+            <p>
+              <strong>Gender:</strong>
+              <span id="details-gender-babyListSitter"></span>
+            </p>
+            <p>
+              <strong>Enrolled Date:</strong>
+              <span id="details-enrolled-babyListSitter"></span>
+            </p>
+            <p>
+              <strong>Special Needs:</strong>
+              <span id="details-special-needs-babyListSitter"></span>
+            </p>
+            <p>
+              <strong>Remarks:</strong>
+              <span id="details-remarks-babyListSitter"></span>
+            </p>
+            <button
+              class="button-babyListSitter"
+              onclick="closePopup('details-popup-babyListSitter')"
+            >
+              Close
+            </button>
+          </div>
+
+          <div class="popup-babyListSitter" id="action-popup-babyListSitter">
+            <input
+              type="text"
+              id="personNameInput-babyListSitter"
+              placeholder="Enter name..."
+            />
+            <input
+              type="text"
+              id="commentsInput-babyListSitter"
+              placeholder="Comments (optional)..."
+            />
+            <button class="button-babyListSitter" onclick="handleAction()">
+              OK
+            </button>
+          </div>
         </div>
-    
-        <div class="popup-container-babyListSitter" id="popup-overlay-babyListSitter">
-            <div class="popup-babyListSitter" id="details-popup-babyListSitter">
-                <h2 id="details-popup-title-babyListSitter"></h2>
-                <p><strong>Age:</strong> <span id="details-age-babyListSitter"></span></p>
-                <p><strong>Gender:</strong> <span id="details-gender-babyListSitter"></span></p>
-                <p><strong>Enrolled Date:</strong> <span id="details-enrolled-babyListSitter"></span></p>
-                <p><strong>Special Needs:</strong> <span id="details-special-needs-babyListSitter"></span></p>
-                <p><strong>Remarks:</strong> <span id="details-remarks-babyListSitter"></span></p>
-                <button class="button-babyListSitter" onclick="closePopup('details-popup-babyListSitter')">Close</button>
-            </div>
-    
-            <div class="popup-babyListSitter" id="action-popup-babyListSitter">
-                <input type="text" id="personNameInput-babyListSitter" placeholder="Enter name...">
-                <input type="text" id="commentsInput-babyListSitter" placeholder="Comments (optional)...">
-                <button class="button-babyListSitter" onclick="handleAction()">OK</button>
-            </div>
-        </div>
-    
-    
     </main>
 
-    <div w3-include-html="/views/footer.html"></div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/public/js/logout.js"></script>
-    <script src="/public/js/babyStatus.js"></script>
-    <script src="/public/css/bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="/public/js/add.js"></script>
+        <div w3-include-html="/views/footer.html"></div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="/public/js/logout.js"></script>
+        <script src="/public/js/babyStatus.js"></script>
+        <script src="/public/css/bootstrap/js/bootstrap.bundle.js"></script>
+        <script src="/public/js/add.js"></script>
+      </div>
   </body>
 </html>

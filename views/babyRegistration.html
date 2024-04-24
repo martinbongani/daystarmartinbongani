@@ -1,199 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Baby Registration Form</title>
-    <style>
-        main {
-            background: linear-gradient(to top, peachpuff, #F6DDD6 );
-        }
-
-        .container-babyReg {
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 50%;
-        }
-
-        .h2-babyReg {
-            text-align: center;
-            color:#007bff;
-        }
-
-        label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input[type="text"], input[type="date"], select, textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        textarea {
-            height: 40px; /* Set the height of textarea */
-            resize: vertical; /* Allow vertical resizing */
-        }
-
-        .form-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        button.btn-babyReg {
-            width: 100%;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button.btn-babyReg:hover {
-            background-color: #45a049;
-        }
-
-        input[readonly] {
-            background-color: #f9f9f9;
-        }
-
-        .popup-babyReg {
-            display: none;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            z-index: 999;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-    </style>
     <link rel="stylesheet" href="/public/css/style.css" />
     <link rel="stylesheet" href="/public/css/bootstrap/css/bootstrap.css" />
-         <link
-           rel="stylesheet"
-           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-         />
-      
-</head>
-<body>
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/public/css/babyRegistration.css" />
+  </head>
+  <body>
     <div w3-include-html="/views/navbar.html"></div>
 
     <div class="container-shop"></div>
 
     <header>
-        <nav class="dash">
-          <ul>
-            <li><a href="/views/admin.html">Dashboard</a></li>
-            <li><a href="/views/adminRegistration.html">Admin Registration</a></li>
-            <li><a href="/views/babyRegistration.html">Register Baby</a></li>
-            <li><a href="/views/sitterRegistration.html">Register Sitter</a></li>
-            <li><a href="/views/babyStatus.html">Baby Status</a></li>
-            <li><a href="/views/babyReport.html">Baby Report</a></li>
-            <li><a href="/views/sittterReport.html">Sitter Report</a></li>
-            <li><a href="/views/accounts.html">Accounts</a></li>
-            <li><a href="/views/inventory.html">Inventory</a></li>
-            <li><a href="/views/liveFeed.html">Live Feed</a></li>
-            <button id="logoutBtn">Logout</button>
-              </ul>
-        </nav>
-      </header>
+      <nav class="dash">
+        <ul>
+          <li><a href="/views/admin.html">Dashboard</a></li>
+          <li>
+            <a href="/views/adminRegistration.html">Admin Registration</a>
+          </li>
+          <li><a href="/views/babyRegistration.html">Register Baby</a></li>
+          <li><a href="/views/sitterRegistration.html">Register Sitter</a></li>
+          <li><a href="/views/babyStatus.html">Baby Status</a></li>
+          <li><a href="/views/babyReport.html">Baby Report</a></li>
+          <li><a href="/views/sittterReport.html">Sitter Report</a></li>
+          <li><a href="/views/accounts.html">Accounts</a></li>
+          <li><a href="/views/inventory.html">Inventory</a></li>
+          <li><a href="/views/liveFeed.html">Live Feed</a></li>
+          <button id="logoutBtn">Logout</button>
+        </ul>
+      </nav>
+    </header>
 
-      <main>
-    <div class="container-babyReg">
+    <main>
+      <div class="container-babyReg">
         <h2 class="h2-babyReg">DayStar Baby Registration Form</h2>
         <form id="registrationForm">
-            <div class="form-row">
-                <div style="flex-basis: 48%;">
-                    <label for="firstName">First Name:</label>
-                    <input type="text" id="firstName" name="firstName">
-                </div>
-                <div style="flex-basis: 48%;">
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" id="lastName" name="lastName">
-                </div>
+          <div class="form-row">
+            <div style="flex-basis: 48%">
+              <label for="firstName">First Name:</label>
+              <input type="text" id="firstName" name="firstName" />
             </div>
-
-            <div class="form-row">
-                <div style="flex-basis: 48%;">
-                    <label for="dob">Date of Birth:</label>
-                    <input type="date" id="dob" name="dob">
-                </div>
-                <div style="flex-basis: 48%;">
-                    <label for="gender">Gender:</label>
-                    <select id="gender" name="gender">
-                        <option value="">Select</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
+            <div style="flex-basis: 48%">
+              <label for="lastName">Last Name:</label>
+              <input type="text" id="lastName" name="lastName" />
             </div>
+          </div>
 
-            <label for="address">Address:</label>
-            <input type="text" id="address" name="address" rows="1">
-            <div class="form-row">
-                <div style="flex-basis: 48%;">
-                    <label for="fatherName">Father's Name:</label>
-                    <input type="text" id="fatherName" name="fatherName">
-                </div>
-                <div style="flex-basis: 48%;">
-                    <label>&nbsp;</label>
-                    <input type="checkbox" id="fatherDeceased" name="fatherDeceased" onchange="toggleFatherName(this)">
-                    <label for="fatherDeceased">Father Deceased</label>
-                </div>
+          <div class="form-row">
+            <div style="flex-basis: 48%">
+              <label for="dob">Date of Birth:</label>
+              <input type="date" id="dob" name="dob" />
             </div>
-
-            <div class="form-row">
-                <div style="flex-basis: 48%;">
-                    <label for="motherName">Mother's Name:</label>
-                    <input type="text" id="motherName" name="motherName">
-                </div>
-                <div style="flex-basis: 48%;">
-                    <label>&nbsp;</label>
-                    <input type="checkbox" id="motherDeceased" name="motherDeceased" onchange="toggleMotherName(this)">
-                    <label for="motherDeceased">Mother Deceased</label>
-                </div>
+            <div style="flex-basis: 48%">
+              <label for="gender">Gender:</label>
+              <select id="gender" name="gender">
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
             </div>
+          </div>
 
-            <div id="guardianField" class="form-row hidden">
-                <div style="flex-basis: 100%;">
-                    <label for="guardianName">Guardian's Name:</label>
-                    <input type="text" id="guardianName" name="guardianName">
-                </div>
+          <label for="address">Address:</label>
+          <input type="text" id="address" name="address" rows="1" />
+          <div class="form-row">
+            <div style="flex-basis: 48%">
+              <label for="fatherName">Father's Name:</label>
+              <input type="text" id="fatherName" name="fatherName" />
             </div>
+            <div style="flex-basis: 48%">
+              <label>&nbsp;</label>
+              <input
+                type="checkbox"
+                id="fatherDeceased"
+                name="fatherDeceased"
+                onchange="toggleFatherName(this)"
+              />
+              <label for="fatherDeceased">Father Deceased</label>
+            </div>
+          </div>
 
-            <button class="btn-babyReg" type="button" onclick="registerBaby()">Register Baby</button>
+          <div class="form-row">
+            <div style="flex-basis: 48%">
+              <label for="motherName">Mother's Name:</label>
+              <input type="text" id="motherName" name="motherName" />
+            </div>
+            <div style="flex-basis: 48%">
+              <label>&nbsp;</label>
+              <input
+                type="checkbox"
+                id="motherDeceased"
+                name="motherDeceased"
+                onchange="toggleMotherName(this)"
+              />
+              <label for="motherDeceased">Mother Deceased</label>
+            </div>
+          </div>
+
+          <div id="guardianField" class="form-row hidden">
+            <div style="flex-basis: 100%">
+              <label for="guardianName">Guardian's Name:</label>
+              <input type="text" id="guardianName" name="guardianName" />
+            </div>
+          </div>
+
+          <button class="btn-babyReg" type="button" onclick="registerBaby()">
+            Register Baby
+          </button>
         </form>
-    </div>
+      </div>
 
-    <div id="popup-babyReg" class="popup-babyReg">
+      <div id="popup-babyReg" class="popup-babyReg">
         <p id="registrationMessage"></p>
         <button onclick="closePopup()">OK</button>
-    </div>
-</main>
-            <div w3-include-html="/views/footer.html"></div>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script src="/public/css/bootstrap/js/bootstrap.bundle.js"></script>
-            <script src="/js/babyRegistration.js"></script>
-            <script src="/public/js/add.js"></script>
-    
-</body>
+      </div>
+    </main>
+    <div w3-include-html="/views/footer.html"></div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/public/css/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/public/js/babyRegistration.js"></script>
+    <script src="/public/js/add.js"></script>
+  </body>
 </html>

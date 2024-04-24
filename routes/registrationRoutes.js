@@ -10,18 +10,17 @@ router.get('/registerAdmin', (req, res) => {
 
 router.post('/registerAdmin', async(res, req) => {
     try {
-        const adminRegister = new AdminRegister(req.body)
-        await AdminRegister.register(adminRegister, req.body.password,(error) => {
+        const adminRegister = new AdminRegister.register(req.body);
+        await AdminRegister.register(adminRegister, req.body.password, (error) => {
             if(error){
                 throw error
             }
-            res.redirect('/registerAdmin')
-    
-        });
-    
+            res.redirect("/registerAdmin")
+        })
     } catch (error) {
-        res.status(400).send('Sorry, something went wrong')
+        res.status(400).send("User not registered")
+        console.log(error)
     }
-});
+})
 
-model.exports = router;
+module.exports = router;

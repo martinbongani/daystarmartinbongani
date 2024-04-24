@@ -4,30 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <style>
-      .container-login {
-        margin: auto;
-        padding: 30px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        width: 30%;
-        padding-bottom: 0;
-      }
-
-      .h2-login {
-        text-align: center;
-        color: #007bff;
-      }
-    </style>
+    <style></style>
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <link rel="stylesheet" href="/public/css/bootstrap/css/bootstrap.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/public/css/login.css" />
   </head>
-  <link rel="stylesheet" href="/public/css/style.css" />
-  <link rel="stylesheet" href="/public/css/bootstrap/css/bootstrap.css" />
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-  />
-
   <body>
     <div w3-include-html="/views/navbar.html"></div>
 
@@ -42,12 +27,14 @@
             class="form-control"
             id="exampleInputEmail1"
             name="username"
-          >
+          />
           <label for="exampleInputPassword1" class="form-label">Password</label>
           <input
             type="password"
             class="form-control"
-            id="exampleInputPassword1" name="password"><br>
+            id="exampleInputPassword1"
+            name="password"
+          /><br />
           <!-- <label for="exampleInputPassword1" class="form-label">User</label>
           <select class="form-select">
             <option value="">Select Option</option>

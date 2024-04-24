@@ -2,19 +2,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const passport = require("passport")
+const passport = require('passport')
 const expressSession = require("express-session")({
   secret:"secret",
   resave:false,
   saveUninitialized:false
 })
 
-
-
 require('dotenv').config();
 
 // Import register model with user details
-// const AdminRegister = require('./models/AdminRegister');
+const AdminRegister = require('./models/AdminRegister');
 
 // Import routes
 const registrationRoutes = require('./routes/registrationRoutes')
@@ -45,18 +43,19 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
 // Express session configurations
-// app.use(expressSession);
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(expressSession);
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Passport configurations
-// passport.use(Register.createStrategy());
-// passport.serializeUser(Register.serializeUser());
-// passport.deserializeUser(Register.deserializeUser());
+passport.use(AdminRegister.createStrategy());
+passport.serializeUser(AdminRegister.serializeUser());
+passport.deserializeUser(AdminRegister.deserializeUser());
+
+// Use imported routes
+app.use("/", registrationRoutes)
 
 // Routes
-app.use('/', registrationRoutes)
-
 // app.get('/', (req, res) => {
 //     res.send ('Welcome to Daystar Daycare Center!');
 // });

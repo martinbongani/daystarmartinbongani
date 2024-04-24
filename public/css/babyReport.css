@@ -1,0 +1,77 @@
+.container-babyReportAdmin {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.h2-babyReportAdmin {
+    text-align: center;
+    color:#007bff;
+}
+
+.form-babyReportAdmin {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.label-babyReportAdmin {
+    font-weight: bold;
+}
+
+.input-babyReportAdmin {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.button-babyReportAdmin {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.button-babyReportAdmin:hover {
+    background-color: #0056b3;
+}
+
+.table-babyReportAdmin {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.thead-babyReportAdmin {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.tr-babyReportAdmin {
+    border-bottom: 1px solid #ddd;
+}
+
+.th-babyReportAdmin,
+.td-babyReportAdmin {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd; /* Add border to table cells */
+}
+
+.th-babyReportAdmin {
+    font-weight: bold;
+}
+
+.td-babyReportAdmin {
+    border-bottom: 1px solid #ddd;
+}
+
+.td-babyReportAdmin:nth-child(even) {
+    background-color: #f9f9f9;
+}

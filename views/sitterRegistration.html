@@ -1,196 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sitter Registration Form</title>
-    <style>
-
-        .container-sitterReg {
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 50%;
-        }
-
-        .h2-sitterReg {
-            text-align: center;
-            color:#007bff;
-        }
-
-        label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input[type="text"], input[type="date"], select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        button.btn-sitterReg {
-            width: 100%;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button.btn-sitterReg:hover {
-            background-color: #45a049;
-        }
-
-        .popup-sitterReg {
-            display: none;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            z-index: 999;
-        }
-
-        .error-message {
-            color: #ff0000;
-            font-size: 14px;
-            margin-top: 4px;
-        }
-
-        .form-row {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .form-row div {
-            flex-basis: 48%;
-        }
-    </style>
     <link rel="stylesheet" href="/public/css/style.css" />
     <link rel="stylesheet" href="/public/css/bootstrap/css/bootstrap.css" />
-             <link
-               rel="stylesheet"
-               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-             />
-    
-</head>
-<body>
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/public/css/sitterRegistration.css" />
+  </head>
+  <body>
     <div w3-include-html="/views/navbar.html"></div>
 
     <div class="container-shop"></div>
 
     <header>
-        <nav class="dash">
-          <ul>
-            <li><a href="/views/admin.html">Dashboard</a></li>
-            <li><a href="/views/adminRegistration.html">Admin Registration</a></li>
-            <li><a href="/views/babyRegistration.html">Register Baby</a></li>
-            <li><a href="/views/sitterRegistration.html">Register Sitter</a></li>
-            <li><a href="/views/babyStatus.html">Baby Status</a></li>
-            <li><a href="/views/babyReport.html">Baby Report</a></li>
-            <li><a href="/views/sittterReport.html">Sitter Report</a></li>
-            <li><a href="/views/accounts.html">Accounts</a></li>
-            <li><a href="/views/inventory.html">Inventory</a></li>
-            <li><a href="/views/liveFeed.html">Live Feed</a></li>
-            <button id="logoutBtn">Logout</button>
-              </ul>
-        </nav>
-      </header>
+      <nav class="dash">
+        <ul>
+          <li><a href="/views/admin.html">Dashboard</a></li>
+          <li>
+            <a href="/views/adminRegistration.html">Admin Registration</a>
+          </li>
+          <li><a href="/views/babyRegistration.html">Register Baby</a></li>
+          <li><a href="/views/sitterRegistration.html">Register Sitter</a></li>
+          <li><a href="/views/babyStatus.html">Baby Status</a></li>
+          <li><a href="/views/babyReport.html">Baby Report</a></li>
+          <li><a href="/views/sittterReport.html">Sitter Report</a></li>
+          <li><a href="/views/accounts.html">Accounts</a></li>
+          <li><a href="/views/inventory.html">Inventory</a></li>
+          <li><a href="/views/liveFeed.html">Live Feed</a></li>
+          <button id="logoutBtn">Logout</button>
+        </ul>
+      </nav>
+    </header>
 
-      <main>
-    <div class="container-sitterReg">
+    <main>
+      <div class="container-sitterReg">
         <h2 class="h2-sitterReg">DayStar Sitter Registration Form</h2>
         <form id="registrationForm" onsubmit="return validateForm()">
-            <div class="form-row">
-                <div>
-                    <label for="firstName">First Name:</label>
-                    <input type="text" id="firstName" name="firstName">
-                </div>
-                <div>
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" id="lastName" name="lastName">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div>
-                    <label for="nationalId">National ID Number:</label>
-                    <input type="text" id="nationalId" name="nationalId">
-                </div>
-                <div>
-                    <label for="address">Address:</label>
-                    <input type="text" id="address" name="address">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div>
-                    <label for="dob">Date of Birth:</label>
-                    <input type="date" id="dob" name="dob">
-                </div>
-                <div>
-                    <label for="gender">Gender:</label>
-                    <select id="gender" name="gender">
-                        <option value="">Select</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div>
-                    <label for="nextOfKin">Next of Kin:</label>
-                    <input type="text" id="nextOfKin" name="nextOfKin">
-                </div>
-                <div>
-                    <label for="recommenderName">Recommender's Name:</label>
-                    <input type="text" id="recommenderName" name="recommenderName">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div>
-                    <label for="religion">Religion:</label>
-                    <input type="text" id="religion" name="religion">
-                </div>
-                <div>
-                    <label for="contact">Contact:</label>
-                    <input type="text" id="contact" name="contact">
-                </div>
-            </div>
-
+          <div class="form-row">
             <div>
-                <label for="educationLevel">Level of Education:</label>
-                <input type="text" id="educationLevel" name="educationLevel">
+              <label for="firstName">First Name:</label>
+              <input type="text" id="firstName" name="firstName" />
             </div>
+            <div>
+              <label for="lastName">Last Name:</label>
+              <input type="text" id="lastName" name="lastName" />
+            </div>
+          </div>
 
-            <button class="btn-sitterReg" type="submit">Register Sitter</button>
+          <div class="form-row">
+            <div>
+              <label for="nationalId">National ID Number:</label>
+              <input type="text" id="nationalId" name="nationalId" />
+            </div>
+            <div>
+              <label for="address">Address:</label>
+              <input type="text" id="address" name="address" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label for="dob">Date of Birth:</label>
+              <input type="date" id="dob" name="dob" />
+            </div>
+            <div>
+              <label for="gender">Gender:</label>
+              <select id="gender" name="gender">
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label for="nextOfKin">Next of Kin:</label>
+              <input type="text" id="nextOfKin" name="nextOfKin" />
+            </div>
+            <div>
+              <label for="recommenderName">Recommender's Name:</label>
+              <input type="text" id="recommenderName" name="recommenderName" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label for="religion">Religion:</label>
+              <input type="text" id="religion" name="religion" />
+            </div>
+            <div>
+              <label for="contact">Contact:</label>
+              <input type="text" id="contact" name="contact" />
+            </div>
+          </div>
+
+          <div>
+            <label for="educationLevel">Level of Education:</label>
+            <input type="text" id="educationLevel" name="educationLevel" />
+          </div>
+
+          <button class="btn-sitterReg" type="submit">Register Sitter</button>
         </form>
-    </div>
+      </div>
 
-    <div id="popup-sitterReg" class="popup-sitterReg">
+      <div id="popup-sitterReg" class="popup-sitterReg">
         <p id="registrationMessage"></p>
         <button onclick="closePopup()">OK</button>
-    </div>
-</main>
-                <div w3-include-html="/views/footer.html"></div>
-                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                <script src="/public/css/bootstrap/js/bootstrap.bundle.js"></script>
-                <script src="/public/js/sitterRegistration.js"></script>
-                <script src="/public/js/add.js"></script>
-    
-</body>
+      </div>
+    </main>
+    <div w3-include-html="/views/footer.html"></div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/public/css/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/public/js/sitterRegistration.js"></script>
+    <script src="/public/js/add.js"></script>
+  </body>
 </html>

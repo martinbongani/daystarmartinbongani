@@ -3,134 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<style>
-  /* Admin dashboard */
-.sidebar-users {
-        width: 250px;
-        background-color: #333;
-        color: #fff;
-        padding: 20px;
-        display: flex;
-        min-height: 100vh;
-      }
-
-      .sidebar-users h2 {
-        text-align: center;
-      }
-
-      .sidebar-users ul {
-        list-style-type: none;
-        padding: 0;
-      }
-
-      .sidebar-users ul li a {
-        display: block;
-        padding: 10px 0;
-        color: #fff;
-        text-decoration: none;
-        text-align: left;
-      }
-
-      .sidebar-users ul li a:hover {
-        background-color: #555;
-      }
-
-      .main-users {
-        flex: 1;
-        padding: 20px;
-        display: inline;
-      }
-
-      .tabcontent-users {
-        display: none;
-      }
-
-      .cards-container-users {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-
-      .card-users {
-        width: calc(33.33% - 20px);
-        margin-bottom: 20px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      .tasks-container-users {
-        margin-top: 20px;
-        background-color: #fff;
-      }
-
-      .graphical-reports-container-users {
-        margin-top: 20px;
-        max-width: 800px;
-        width: 100%;
-        height: 400px;
-        position: relative;
-      }
-
-      .report-chart-users {
-        width: 100%;
-        max-width: 600px;
-        margin-top: 20px;
-        background-color: #fff;
-      }
-
-      .section-users {
-        display: none;
-      }
-      .active-users {
-        display: flex;
-      }
-
-      .form-container {
-        align-items: center;
-      }
-
-      /* Live Feed */
-.camera-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    margin: auto;
-}
-
-.camera {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-video {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-@media (min-width: 768px) {
-    .camera-grid {
-        grid-template-columns: repeat(3, 1fr); /* Ensure 3 columns on larger screens */
-    }
-}
-
-    </style>
-
     <title>Live Feed</title>
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <link rel="stylesheet" href="/public/css/bootstrap/css/bootstrap.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/public/css/liveFeed.css" />
   </head>
-  <link rel="stylesheet" href="/public/css/style.css" />
-  <link rel="stylesheet" href="/public/css/bootstrap/css/bootstrap.css" />
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-  />
   <body>
     <div w3-include-html="/views/navbar.html"></div>
 
@@ -139,7 +20,9 @@ video {
       <nav class="dash">
         <ul>
           <li><a href="/views/admin.html">Dashboard</a></li>
-          <li><a href="/views/adminRegistration.html">Admin Registration</a></li>
+          <li>
+            <a href="/views/adminRegistration.html">Admin Registration</a>
+          </li>
           <li><a href="/views/babyRegistration.html">Register Baby</a></li>
           <li><a href="/views/sitterRegistration.html">Register Sitter</a></li>
           <li><a href="/views/babyStatus.html">Baby Status</a></li>
@@ -155,58 +38,17 @@ video {
 
     <!-- Main Content -->
     <main>
-        <!-- Live Feed -->
-            <div class="camera-grid" id="cameraGrid">
-                <!-- Camera containers will be dynamically added here -->
-            </div>
-       
+      <!-- Live Feed -->
+      <div class="camera-grid" id="cameraGrid">
+        <!-- Camera containers will be dynamically added here -->
+      </div>
     </main>
 
     <div w3-include-html="/views/footer.html"></div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/public/js/logout.js"></script>
-    <!-- <script src="/js/liveFeed.js"></script> -->
+    <script src="/public/js/liveFeed.js"></script>
     <script src="/public/css/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/public/js/add.js"></script>
-    <script>
-        // document.addEventListener('DOMContentLoaded', function() {
-    const cameraGrid = document.getElementById('cameraGrid');
-    const numCameras = 15;
-
-    for (let i = 1; i <= numCameras; i++) {
-        const cameraId = `cam${i}`;
-        const cameraName = `Camera ${i}`;
-    
-        // Create camera container
-        const cameraContainer = document.createElement('div');
-        cameraContainer.className = 'camera';
-    
-        // Create camera name heading
-        const cameraHeading = document.createElement('h3');
-        cameraHeading.textContent = `${cameraName}`;
-    
-        // Create video element
-        const videoElement = document.createElement('video');
-        videoElement.id = cameraId;
-        videoElement.autoplay = true;
-        videoElement.muted = true;
-    
-        // Append elements to camera container
-        cameraContainer.appendChild(cameraHeading);
-        cameraContainer.appendChild(videoElement);
-    
-        // Append camera container to grid
-        cameraGrid.appendChild(cameraContainer);
-    
-        // Simulated video source (replace with actual camera URL)
-        const videoSource = 'https://www.w3schools.com/html/mov_bbb.mp4'; // Example video source
-    
-        // Set video source
-        videoElement.src = videoSource;
-    }
-    
-    // });
-
-    </script>
   </body>
 </html>
