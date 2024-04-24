@@ -1,0 +1,81 @@
+.form-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin: auto;
+  }
+
+  .h2-adminReg {
+    text-align: center;
+    color:#007bff;
+    margin-bottom: 20px;
+  }
+
+  .input-group {
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  input#firstName {
+    width: 100%; /* Adjust input width with spacing */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+  }
+
+  input#lastName {
+    width: 100%; /* Adjust input width with spacing */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+  }
+
+  input#email {
+    width: 100%; /* Adjust input width with spacing */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  input#password {
+    width: 100%; /* Adjust input width with spacing */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+  .success {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  button.btn-adminReg {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  button.btn-adminReg:hover {
+    background-color: #0056b3;
+  }

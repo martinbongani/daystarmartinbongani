@@ -2,9 +2,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const passport = require("passport")
+const expressSession = require("express-session")({
+  secret:"secret",
+  resave:false,
+  saveUninitialized:false
+})
+
 
 
 require('dotenv').config();
+
+// Import register model with user details
+// const AdminRegister = require('./models/AdminRegister');
+
+// Import routes
+const registrationRoutes = require('./routes/registrationRoutes')
 
 // Instantiations
 const app = express();
@@ -27,16 +40,30 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware
+app.use(express.static(path.join(__dirname, "public"))) // Set directory for static files
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
-app.get('/home', (req, res) => {
-    res.send ('Welcome to Daystar Daycare Center!');
-});
+// Express session configurations
+// app.use(expressSession);
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-app.get('/about', (req, res) => {
-    res.send ('This is the About page of Daystar Daycare Center');
-});
+// Passport configurations
+// passport.use(Register.createStrategy());
+// passport.serializeUser(Register.serializeUser());
+// passport.deserializeUser(Register.deserializeUser());
+
+// Routes
+app.use('/', registrationRoutes)
+
+// app.get('/', (req, res) => {
+//     res.send ('Welcome to Daystar Daycare Center!');
+// });
+
+// app.get('/about', (req, res) => {
+//     res.send ('This is the About page of Daystar Daycare Center');
+// });
 
 
 
