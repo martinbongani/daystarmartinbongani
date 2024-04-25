@@ -1,0 +1,72 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Baby Status
+  link(rel='stylesheet' href='/public/css/style.css')
+  link(rel='stylesheet' href='/public/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet' href='/public/css/babyStatus.css')
+div(w3-include-html='/views/navbar.html')
+.container-shop
+header
+  nav.dash
+    ul
+      li
+        a(href='/views/admin.html') Dashboard
+      li
+        a(href='/views/adminRegistration.html') Admin Registration
+      li
+        a(href='/views/babyRegistration.html') Register Baby
+      li
+        a(href='/views/sitterRegistration.html') Register Sitter
+      li
+        a(href='/views/babyStatus.html') Baby Status
+      li
+        a(href='/views/babyReport.html') Baby Report
+      li
+        a(href='/views/sittterReport.html') Sitter Report
+      li
+        a(href='/views/accounts.html') Accounts
+      li
+        a(href='/views/inventory.html') Inventory
+      li
+        a(href='/views/liveFeed.html') Live Feed
+      button#logoutBtn Logout
+main
+  // Babies
+  #babies.section-users
+    #container-babyListSitter
+      h2#h2-babyListSitter Baby Attendance List
+      ul#baby-list-babyListSitter
+    #popup-overlay-babyListSitter.popup-container-babyListSitter
+      #details-popup-babyListSitter.popup-babyListSitter
+        h2#details-popup-title-babyListSitter
+        p
+          strong Age:
+          span#details-age-babyListSitter
+        p
+          strong Gender:
+          span#details-gender-babyListSitter
+        p
+          strong Enrolled Date:
+          span#details-enrolled-babyListSitter
+        p
+          strong Special Needs:
+          span#details-special-needs-babyListSitter
+        p
+          strong Remarks:
+          span#details-remarks-babyListSitter
+        button.button-babyListSitter(onclick="closePopup('details-popup-babyListSitter')")
+          | Close
+      #action-popup-babyListSitter.popup-babyListSitter
+        input#personNameInput-babyListSitter(type='text' placeholder='Enter name...' name='personNameInput')
+        input#commentsInput-babyListSitter(type='text' placeholder='Comments (optional)...' name='comments')
+        button.button-babyListSitter(onclick='handleAction()')
+          | OK
+div(w3-include-html='/views/footer.html')
+script(src='https://cdn.jsdelivr.net/npm/chart.js')
+script(src='/public/js/logout.js')
+script(src='/public/js/babyStatus.js')
+script(src='/public/css/bootstrap/js/bootstrap.bundle.js')
+script(src='/public/js/add.js')

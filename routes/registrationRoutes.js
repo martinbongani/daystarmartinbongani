@@ -24,4 +24,14 @@ router.post('/registerAdmin', async(res, req) => {
     }
 })
 
+router.get('/registerBaby', (req,res) =>{
+    res.render('babyRegistration');
+})
+
+// Installing async function
+
+router.get('/adminDash', (req,res) =>{
+    res.render('admin')
+})
+
 module.exports = router;

@@ -13,6 +13,7 @@ require('dotenv').config();
 
 // Import register model with user details
 const AdminRegister = require('./models/AdminRegister');
+const BabyRegister = require('./models/BabyRegister');
 
 // Import routes
 const registrationRoutes = require('./routes/registrationRoutes')

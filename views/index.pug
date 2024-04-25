@@ -1,0 +1,101 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Daystar Daycare Center
+  link(rel='stylesheet' href='/public/css/style.css')
+  link(rel='stylesheet' href='/public/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+div(w3-include-html='/views/navbar.html')
+// <div class="container-fluid">
+#welcome
+  i
+    h1.fancy Welcome to Daystar Daycare Center...
+  p Where Every Child is a Star
+  .button-container.col-4
+    a.btn.btn-primary.col-4(href='/views/login.html') Login
+    // <a href="pages/babyapplication.html" class="btn btn-primary col-4">Enroll Now!</a>
+// </div>
+#carouselExampleCaptions.carousel.slide(data-bs-ride='carousel')
+  .carousel-inner
+    .carousel-item.active(style="\
+    background-image: url('https://media.istockphoto.com/id/618831960/photo/kindergarten-game-room.jpg?s=612x612&w=0&k=20&c=5KuLZ5ch5pZtEBQ5VT2slP2T_ZSzhklcLV3cSD0MguM=');\
+    ")
+      .carousel-caption
+        h1 Building Bright Futures, One Child at a Time
+        // <p>This is the description of the first slide.</p>
+    .carousel-item(style="\
+    background-image: url('https://media.istockphoto.com/id/1352343930/photo/3d-render-of-kindergarten-room-kids-school-interior.jpg?s=612x612&w=0&k=20&c=wcniC1lQVNK62jRAqVt5mDivWiVYeS-_KTFGu2rDYh0=');\
+    ")
+      .carousel-caption
+        h1 Little Steps, Big Adventures
+        // <p>This is the description of the second slide.</p>
+    .carousel-item(style="\
+    background-image: url('https://media.istockphoto.com/id/612818352/photo/game-room-in-the-kindergarten.jpg?s=612x612&w=0&k=20&c=2tRFDOzlhvEJrsxOYpcNkMZCWoWoMwbtGvMEbwmP4zs=');\
+    ")
+      .carousel-caption
+        h1 Play, Learn, Love, Grow
+        // <p>This is the description of the second slide.</p>
+  button.carousel-control-prev(type='button' data-bs-target='#carouselExampleCaptions' data-bs-slide='prev')
+    span.carousel-control-prev-icon(aria-hidden='true')
+    span.visually-hidden Previous
+  button.carousel-control-next(type='button' data-bs-target='#carouselExampleCaptions' data-bs-slide='next')
+    span.carousel-control-next-icon(aria-hidden='true')
+    span.visually-hidden Next
+.container-fluid(style='padding: 50px')
+  .row.row-cols-1.row-cols-md-3.g-4
+    .col-sec
+      .card-sec.h-100
+        h5.card-title Infant Care
+        p.card-text 6 weeks to 12 months
+        img.card-img(src='https://img.freepik.com/free-vector/hand-drawn-black-baby-collection_23-2148868957.jpg?w=740' alt='6 months baby')
+        .card-body
+    .col-sec
+      .card-sec.h-100
+        h5.card-title Toddler Care
+        p.card-text 13 to 24 months
+        img.card-img(src='https://img.freepik.com/free-vector/cute-boy-cartoon-character-white-background_1308-110404.jpg?w=360' alt='24 month toddler')
+        .card-body
+    .col-sec
+      .card-sec.h-100
+        h5.card-title Early Preschool
+        p.card-text 2 years
+        img.card-img(src='https://img.freepik.com/free-vector/cute-happy-smiling-child-isolated-white_1308-36748.jpg?w=360' alt='Early Preschool')
+        .card-body
+.container-fluid.custom-shape-divider-top-1712483388
+  .container.text-center
+    h1
+      i Hear from our parents...
+    .row.align-items-center
+      .col
+        h5
+          i
+            | &quot;Great learning curriculum, lots of different activities for
+            | the kids and &quot;weekly themes&quot;. My son comes home very happy from
+            | school and also looks forward to going everyday. Love that
+            | breakfast, lunch and snacks provided. Overall, the staff is
+            | great.&quot;
+        h5
+          i Peter Obol
+      .col
+        h5
+          i
+            | &quot;You guys treat the kids like we do at home. So highly
+            | recommended for kids who want to be at home away from home.&quot;
+        h5
+          i Hellen Kikomeko
+      .col
+        h5
+          i
+            | &quot;I love everything about Daystar Daycare Center and always tell
+            | people how great it is. I love how caring and energetic the
+            | sitters are. Its clearly run super well due to how quickly
+            | everyone responds to parents and emails/texts. The fact that
+            | nutritious meals are provided is a huge mental burden off my
+            | personal plate.&quot;
+        h5
+          i Christine Nuwahereza
+div(w3-include-html='/views/footer.html')
+script(src='/public/js/landing.js')
+script(src='/public/css/bootstrap/js/bootstrap.bundle.js')
+script(src='/public/js/add.js')

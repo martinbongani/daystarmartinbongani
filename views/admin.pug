@@ -1,0 +1,60 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Admin Dashboard
+  link(rel='stylesheet' href='/public/css/style.css')
+  link(rel='stylesheet' href='/public/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet' href='/public/css/admin.css')
+div(w3-include-html='/views/navbar.html')
+.container-shop
+header
+  nav.dash
+    ul
+      li
+        a(href='/views/admin.html') Dashboard
+      li
+        a(href='/views/adminRegistration.html') Admin Registration
+      li
+        a(href='/views/babyRegistration.html') Register Baby
+      li
+        a(href='/views/sitterRegistration.html') Register Sitter
+      li
+        a(href='/views/babyStatus.html') Baby Status
+      li
+        a(href='/views/babyReport.html') Baby Report
+      li
+        a(href='/views/sittterReport.html') Sitter Report
+      li
+        a(href='/views/accounts.html') Accounts
+      li
+        a(href='/views/inventory.html') Inventory
+      li
+        a(href='/views/liveFeed.html') Live Feed
+      button#logoutBtn(href='/logout') Logout
+// Main Content
+main.mainAdmin
+  .container-adminDash
+    .section
+      h2 Updates
+      #realtime-cards-container.cards-container
+    .section
+      h2 To-Do List
+      input#taskInput(type='text' placeholder='Add new task...')
+      button.btn-toDo(onclick='addTask()') Add Task
+      button.btn-toDo(onclick='clearList()') Clear List
+      ul#taskList
+  .graph-container
+    h2 Graphical Report
+    select#report-type-select(onchange='renderGraph()')
+      option(value='bar') Bar Chart
+      option(value='line') Line Chart
+      option(value='pie') Pie Chart
+    canvas#graphical-report-chart
+div(w3-include-html='/views/footer.html')
+script(src='https://cdn.jsdelivr.net/npm/chart.js')
+script(src='/public/js/logout.js')
+script(src='/public/css/bootstrap/js/bootstrap.bundle.js')
+script(src='/public/js/add.js')
+script(src='/public/js/admin.js')
