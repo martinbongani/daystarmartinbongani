@@ -11,6 +11,7 @@ router.get('/registerAdmin', (req, res) => {
 router.post('/registerAdmin', async(res, req) => {
     try {
         const adminRegister = new AdminRegister.register(req.body);
+        console.log(adminRegister)
         await AdminRegister.register(adminRegister, req.body.password, (error) => {
             if(error){
                 throw error

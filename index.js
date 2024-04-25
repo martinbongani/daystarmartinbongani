@@ -16,6 +16,7 @@ const AdminRegister = require('./models/AdminRegister');
 
 // Import routes
 const registrationRoutes = require('./routes/registrationRoutes')
+const authenticationRoutes = require('./routes/authenticationRoutes')
 
 // Instantiations
 const app = express();
@@ -53,7 +54,8 @@ passport.serializeUser(AdminRegister.serializeUser());
 passport.deserializeUser(AdminRegister.deserializeUser());
 
 // Use imported routes
-app.use("/", registrationRoutes)
+app.use("/", registrationRoutes);
+app.use("/", authenticationRoutes);
 
 // Routes
 // app.get('/', (req, res) => {
