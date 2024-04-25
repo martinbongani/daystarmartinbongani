@@ -3,35 +3,35 @@ head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Admin Dashboard
-  link(rel='stylesheet' href='/public/css/style.css')
-  link(rel='stylesheet' href='/public/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-  link(rel='stylesheet' href='/public/css/admin.css')
+  link(rel='stylesheet' href='/css/admin.css')
 div(w3-include-html='/views/navbar.html')
 .container-shop
 header
   nav.dash
     ul
       li
-        a(href='/views/admin.html') Dashboard
+        a(href='/admin.html') Dashboard
       li
-        a(href='/views/adminRegistration.html') Admin Registration
+        a(href='/adminRegistration.pug') Admin Registration
       li
-        a(href='/views/babyRegistration.html') Register Baby
+        a(href='/babyRegistration.pug') Register Baby
       li
-        a(href='/views/sitterRegistration.html') Register Sitter
+        a(href='/sitterRegistration.pug') Register Sitter
       li
-        a(href='/views/babyStatus.html') Baby Status
+        a(href='/babyStatus.pug') Baby Status
       li
-        a(href='/views/babyReport.html') Baby Report
+        a(href='/babyReport.pug') Baby Report
       li
-        a(href='/views/sittterReport.html') Sitter Report
+        a(href='/sittterReport.html') Sitter Report
       li
-        a(href='/views/accounts.html') Accounts
+        a(href='/accounts.pug') Accounts
       li
-        a(href='/views/inventory.html') Inventory
+        a(href='/inventory.html') Inventory
       li
-        a(href='/views/liveFeed.html') Live Feed
+        a(href='/liveFeed.html') Live Feed
       button#logoutBtn(href='/logout') Logout
 // Main Content
 main.mainAdmin
@@ -54,7 +54,7 @@ main.mainAdmin
     canvas#graphical-report-chart
 div(w3-include-html='/views/footer.html')
 script(src='https://cdn.jsdelivr.net/npm/chart.js')
-script(src='/public/js/logout.js')
-script(src='/public/css/bootstrap/js/bootstrap.bundle.js')
-script(src='/public/js/add.js')
-script(src='/public/js/admin.js')
+script(src='/js/logout.js')
+script(src='/css/bootstrap/js/bootstrap.bundle.js')
+script(src='/js/add.js')
+script(src='/js/admin.js')

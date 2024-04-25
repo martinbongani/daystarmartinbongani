@@ -14,10 +14,10 @@ const adminRegistrationSchema = new mongoose.Schema({
         type:String,
         trim:true
     },
-    password:{
-        type:String,
-        trim:true
-    },
+    // password:{
+    //     type:String,
+    //     trim:true
+    // },
     role:{
         type:String,
         trim:true
