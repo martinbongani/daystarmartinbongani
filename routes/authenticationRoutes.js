@@ -27,12 +27,13 @@ router.post('/registerAdmin', async(req, res) => {
 
 
 router.get("/login", (req, res) => {
-    res.render("login")
-})
+    res.render("login");
+});
 
 router.post("/login", passport.authenticate("local",{failureRedirect: "/login"}), (req,res) => {
-    res.render("/adminDash")
-})
+    req.session.user = req.user
+    res.redirect("/registerAdmin");
+});
 
 router.get("/logout", (req,res) => {
     if(req.session){

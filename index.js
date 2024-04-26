@@ -1,6 +1,7 @@
 // Dependencies
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const path = require('path');
 const passport = require('passport')
 const expressSession = require("express-session")({
@@ -43,6 +44,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, "public"))) // Set directory for static files
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+app.use(cors());
 
 // Express session configurations
 app.use(expressSession);
