@@ -29,11 +29,51 @@ const babyRegistrationSchema = new mongoose.Schema({
         type:String,
         trim:true
     },
+    fatherEmail:{
+        type:String,
+        trim:true
+    },
+    fatherContact:{
+        type:String,
+        trim:true
+    },
+    fatherOccupation:{
+        type:String,
+        trim:true
+    },
+    motherName:{
+        type:String,
+        trim:true
+    },
     motherDeceased:{
         type:String,
         trim:true
     },
+    motherEmail:{
+        type:String,
+        trim:true
+    },
+    motherContact:{
+        type:String,
+        trim:true
+    },
+    motherOccupation:{
+        type:String,
+        trim:true
+    },
+    babyNumber:{
+        type:String,
+        trim:true
+    },
+    babyNumber:{
+        type:String,
+        trim:true
+    },
     guardianName:{
+        type:String,
+        trim:true
+    },
+    parentResponsibility:{
         type:String,
         trim:true
     }

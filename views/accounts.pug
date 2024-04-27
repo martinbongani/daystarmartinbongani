@@ -3,35 +3,35 @@ head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Accounting Entry Form
-  link(rel='stylesheet' href='/public/css/style.css')
-  link(rel='stylesheet' href='/public/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-  link(rel='stylesheet' href='/public/css/accounts.css')
-div(w3-include-html='/views/navbar.html')
+  link(rel='stylesheet' href='/css/accounts.css')
+include navbar
 .container-shop
 header
   nav.dash
     ul
       li
-        a(href='/views/admin.html') Dashboard
+        a(href='/admin') Dashboard
       li
-        a(href='/views/adminRegistration.html') Admin Registration
+        a(href='/adminRegistration') Admin Registration
       li
-        a(href='/views/babyRegistration.html') Register Baby
+        a(href='/babyRegistration') Register Baby
       li
-        a(href='/views/sitterRegistration.html') Register Sitter
+        a(href='/sitterRegistration') Register Sitter
       li
-        a(href='/views/babyStatus.html') Baby Status
+        a(href='/babyStatus') Baby Status
       li
-        a(href='/views/babyReport.html') Baby Report
+        a(href='/babyReport') Baby Report
       li
-        a(href='/views/sittterReport.html') Sitter Report
+        a(href='/sittterReport') Sitter Report
       li
-        a(href='/views/accounts.html') Accounts
+        a(href='/accounts') Accounts
       li
-        a(href='/views/inventory.html') Inventory
+        a(href='/inventory') Inventory
       li
-        a(href='/views/liveFeed.html') Live Feed
+        a(href='/liveFeed') Live Feed
       button#logoutBtn Logout
 main
   h2 Accounting Entry Form
@@ -59,9 +59,9 @@ main
         th Date
         th Running Balance (UGX)
     tbody#history-body
-div(w3-include-html='/views/footer.html')
+include footer
 script(src='https://cdn.jsdelivr.net/npm/chart.js')
-script(src='/public/js/logout.js')
-script(src='/public/js/accounts.js')
-script(src='/public/css/bootstrap/js/bootstrap.bundle.js')
-script(src='/public/js/add.js')
+script(src='/js/logout.js')
+script(src='/js/accounts.js')
+script(src='/css/bootstrap/js/bootstrap.bundle.js')
+script(src='/js/add.js')

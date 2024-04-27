@@ -1,0 +1,76 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Sitter Registration Form
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet' href='/css/sitterRegistration.css')
+include navbar
+.container-shop
+header
+  include userNav  
+main
+  .container-sitterReg
+    h2.h2-sitterReg DayStar Sitter Registration Form
+    form#registrationForm(onsubmit='return validateForm()' action='/registerSitter' method='POST')
+      .form-row
+        div
+          label(for='sitterName') Sitter Name:
+          input#sitterName(type='text' name='sitterName')
+        div
+          label(for='lastName') Sitter Number:
+          input#sitterNumber(type='text' name='sitterNumber')
+      .form-row
+        div
+          label(for='nationalId') National ID Number:
+          input#nationalId(type='text' name='nationalId')
+        div
+          label(for='address') Address:
+          input#address(type='text' name='address')
+      .form-row
+        div
+          label(for='dob') Date of Birth:
+          input#dob(type='date' name='dob')
+        div
+          label(for='gender') Gender:
+          select#gender(name='gender')
+            option(value='') Select
+            option(value='male') Male
+            option(value='female') Female
+      .form-row
+        div
+          label(for='email') Email:
+          input#email(type='text' name='email')
+        div
+          label(for='contact') Contact:
+          input#contact(type='text' name='contact')
+      .form-row
+        div
+          label(for='educationLevel') Level of Education:
+          input#educationLevel(type='text' name='educationLevel')
+        div
+          label(for='religion') Religion:
+          input#religion(type='text' name='religion')
+      .form-row
+        div
+          label(for='recommenderName') Recommender&apos;s Name:
+          input#recommenderName(type='text' name='recommenderName')
+        div
+          label(for='recommenderContact') Recommender&apos;s Contact:
+          input#recommenderContact(type='text' name='recommenderContact')
+      .form-row
+        div
+          label(for='nextOfKin') Next of Kin:
+          input#nextOfKin(type='text' name='nextOfKin')
+        div
+          label(for='nextOfKinContact') Next Of Kin&apos;s Contact:
+          input#nextOfKinContact(type='text' name='nextOfKinContact')
+      button.btn-sitterReg(type='submit') Register Sitter
+  #popup-sitterReg.popup-sitterReg
+    p#registrationMessage
+    button(onclick='closePopup()') OK
+include footer
+script(src='/css/bootstrap/js/bootstrap.bundle.js')
+script(src='/js/sitterRegistration.js')

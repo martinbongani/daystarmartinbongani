@@ -1,50 +1,96 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-// // Import model
-// const AdminRegister = require('../models/AdminRegister');
+// Import model
+const BabyRegister = require("../models/BabyRegister");
+const SitterRegister = require("../models/SitterRegister");
 
-// router.get('/registerAdmin', (req, res) => {
-//     res.render('adminRegistration');
-// });
+router.get("/registerBaby", (req, res) => {
+  res.render("babyRegistration");
+});
 
-// router.post('/registerAdmin', async(res, req) => {
-//     try {
-//         const adminRegister = new AdminRegister.register(req.body);
-//         console.log(adminRegister)
-//         await AdminRegister.register(adminRegister, req.body.password, (error) => {
-//             if(error){
-//                 throw error
-//             }
-//             res.redirect("/registerAdmin")
-//         })
-//     } catch (error) {
-//         res.status(400).send("User not registered")
-//         console.log(error)
-//     }
-// })
-
-router.get('/registerBaby', (req,res) =>{
-    res.render('babyRegistration');
-})
-
-router.post("/registerBaby", async (req, res) => {
-    try {
-      const baby = new BabyRegister(req.body);
-      console.log(baby);
-      await baby.save();
-      res.redirect("/babyRegistration");
-    } catch (error) {
-      res.status(400).send("Sorry, something went wrong");
-      console.log("Error registering the baby", error);
-    }
-  
-  });
-  
 // Installing async function
+router.post("/registerBaby", async (req, res) => {
+  try {
+    const baby = new BabyRegister(req.body);
+    console.log(baby);
+    await baby.save();
+    res.redirect("/registerBaby");
+  } catch (error) {
+    res.status(400).send("Sorry, something went wrong");
+    console.log("Error registering the baby", error);
+  }
+});
 
-router.get('/adminDash', (req,res) =>{
-    res.render('admin')
-})
+// Fetching babies from the db
+router.get("/babiesList", async (req, res) => {
+  try {
+    let babies = await BabyRegister.find();
+    res.render("babyList", { babies: babies });
+  } catch (error) {
+    res.status(400).send("Unable to fetch babies from the database");
+  }
+});
+
+// Delete Route
+router.post("/delete", async (req, res) => {
+  try {
+    await BabyRegister.deleteOne({ _id: req.body.id });
+    res.redirect("back");
+  } catch (error) {
+    res.status(400).send("Unable to delete baby from the db");
+    console.log("Error deleting baby", error);
+  }
+});
+
+router.get("/registerSitter", (req, res) => {
+  res.render("sitterRegistration");
+});
+
+// Installing async function
+router.post("/registerSitter", async (req, res) => {
+  try {
+    const sitter = new SitterRegister(req.body);
+    console.log(sitter);
+    await sitter.save();
+    res.redirect("/registerSitter");
+  } catch (error) {
+    res.status(400).send("Sorry, something went wrong");
+    console.log("Error registering the sitter", error);
+  }
+});
+
+// Fetching sitters from the db
+router.get("/sittersList", async (req, res) => {
+  try {
+    let sitters = await SitterRegister.find();
+    res.render("sitterList", { sitters: sitters });
+  } catch (error) {
+    res.status(400).send("Unable to fetch sitters from the database");
+  }
+});
+
+// Delete Route
+router.post("/delete", async (req, res) => {
+  try {
+    await SitterRegister.deleteOne({ _id: req.body.id });
+    res.redirect("back");
+  } catch (error) {
+    res.status(400).send("Unable to delete sitter from the db");
+    console.log("Error deleting sitter", error);
+  }
+});
+
+router.get("/adminDash", (req, res) => {
+  res.render("admin");
+});
+
+router.get("/babiesList", (req, res) => {
+  res.render("babyList");
+});
+
+router.get("/sittersList", (req, res) => {
+  res.render("sitterList");
+});
 
 module.exports = router;

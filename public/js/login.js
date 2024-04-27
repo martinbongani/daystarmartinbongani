@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
         resetValidationStyles();
 
         // Username validation
-        const usernameInput = form.elements['username'];
-        if (usernameInput.value.trim() === '') {
+        const emailInput = form.elements['email'];
+        if (emailInput.value.trim() === '') {
             isValid = false;
-            setInvalid(usernameInput, 'Username cannot be empty');
+            setInvalid(emailInput, 'Email cannot be empty');
         }
 
         // Password validation

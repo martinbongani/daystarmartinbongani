@@ -31,8 +31,9 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", passport.authenticate("local",{failureRedirect: "/login"}), (req,res) => {
+    console.log(req.body);
     req.session.user = req.user
-    res.redirect("/registerAdmin");
+    res.redirect("/adminDash");
 });
 
 router.get("/logout", (req,res) => {

@@ -1,0 +1,48 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Sitters List
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet' href='/css/sitterReport.css')
+include navbar
+.container-shop
+  header
+    include userNav
+.container
+  table.table.table-striped
+    thead
+      tr
+        th Sitter Name
+        th Sitter Number
+        th Address
+        th Date of Birth
+        th Gender
+        th National ID Number
+        th Phone 
+        th Email
+        th Next of Kin (Name and Contact)
+        th Action
+    tbody#sitterTableBody
+      each sitter in sitters
+        tr
+          td #{sitter.sitterName}
+          td #{sitter.sitterNumber}
+          td #{sitter.address}
+          td #{sitter.dob}
+          td #{sitter.gender}
+          td #{sitter.nationalId}
+          td #{sitter.contact}
+          td #{sitter.email}
+          td #{sitter.nextOfKin}
+          td
+            a.btn.btn-success(href='##{sitter._id}') Update
+            form(action='/delete' method='POST')
+                input(type='hidden' name='id' value='#{sitter._id}')
+                button.btn.btn-danger(type='submit') Delete
+include footer
+script(src='https://cdn.jsdelivr.net/npm/chart.js')
+script(src='/js/sitterReport.js')
+script(src='/css/bootstrap/js/bootstrap.bundle.js')

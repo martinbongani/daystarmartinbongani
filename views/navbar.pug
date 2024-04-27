@@ -1,0 +1,24 @@
+nav.navbar.bg-body-tertiary.fixed-top
+  .container-fluid
+    a.navbar-brand(href='/index') Daystar Daycare Center
+    button.navbar-toggler(type='button' data-bs-toggle='offcanvas' data-bs-target='#offcanvasNavbar' aria-controls='offcanvasNavbar' aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #offcanvasNavbar.offcanvas.offcanvas-end(tabindex='-1' aria-labelledby='offcanvasNavbarLabel')
+      .offcanvas-header
+        h5#offcanvasNavbarLabel.offcanvas-title Welcome!
+        button.btn-close(type='button' data-bs-dismiss='offcanvas' aria-label='Close')
+      .offcanvas-body
+        ul.navbar-nav.justify-content-end.flex-grow-1.pe-3
+          li.nav-item
+            a.nav-link.active(aria-current='page' href='/index') Home
+          li.nav-item
+            a.nav-link.active(aria-current='page' href='/about') About
+          li.nav-item
+            a.nav-link(href='/gallery') Gallery
+          li.nav-item
+            a.nav-link(href='/dollStall') Doll Stall
+          li.nav-item
+            a.nav-link(href='/login') Login
+        form.d-flex.mt-3(role='search')
+          input.form-control.me-2(type='search' placeholder='Search' aria-label='Search')
+          button.btn.btn-outline-success(type='submit') Search

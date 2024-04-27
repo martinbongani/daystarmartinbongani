@@ -15,6 +15,7 @@ require('dotenv').config();
 // Import register model with user details
 const AdminRegister = require('./models/AdminRegister');
 const BabyRegister = require('./models/BabyRegister');
+const sitterRegister = require('./models/SitterRegister');
 
 // Import routes
 const registrationRoutes = require('./routes/registrationRoutes')
@@ -59,22 +60,6 @@ passport.deserializeUser(AdminRegister.deserializeUser());
 // Use imported routes
 app.use("/", registrationRoutes);
 app.use("/", authenticationRoutes);
-
-// Routes
-// app.get('/', (req, res) => {
-//     res.send ('Welcome to Daystar Daycare Center!');
-// });
-
-// app.get('/about', (req, res) => {
-//     res.send ('This is the About page of Daystar Daycare Center');
-// });
-
-
-
-
-
-
-
 
 // For invalid routes
 app.get('*', (req, res) => {

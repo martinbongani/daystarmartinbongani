@@ -7,31 +7,31 @@ head
   link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   link(rel='stylesheet' href='/css/admin.css')
-div(w3-include-html='/views/navbar.html')
+include navbar
 .container-shop
 header
   nav.dash
     ul
       li
-        a(href='/admin.html') Dashboard
+        a(href='/admin') Dashboard
       li
-        a(href='/adminRegistration.pug') Admin Registration
+        a(href='/adminRegistration') Admin Registration
       li
-        a(href='/babyRegistration.pug') Register Baby
+        a(href='/babyRegistration') Register Baby
       li
-        a(href='/sitterRegistration.pug') Register Sitter
+        a(href='/sitterRegistration') Register Sitter
       li
-        a(href='/babyStatus.pug') Baby Status
+        a(href='/babyStatus') Baby Status
       li
-        a(href='/babyReport.pug') Baby Report
+        a(href='/babyReport') Baby Report
       li
-        a(href='/sittterReport.html') Sitter Report
+        a(href='/sittterReport') Sitter Report
       li
-        a(href='/accounts.pug') Accounts
+        a(href='/accounts') Accounts
       li
-        a(href='/inventory.html') Inventory
+        a(href='/inventory') Inventory
       li
-        a(href='/liveFeed.html') Live Feed
+        a(href='/liveFeed') Live Feed
       button#logoutBtn(href='/logout') Logout
 // Main Content
 main.mainAdmin
@@ -52,7 +52,7 @@ main.mainAdmin
       option(value='line') Line Chart
       option(value='pie') Pie Chart
     canvas#graphical-report-chart
-div(w3-include-html='/views/footer.html')
+include footer
 script(src='https://cdn.jsdelivr.net/npm/chart.js')
 script(src='/js/logout.js')
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
