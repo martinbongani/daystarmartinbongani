@@ -32,6 +32,26 @@ router.get("/babiesList", async (req, res) => {
   }
 });
 
+// Updating baby in the db
+router.get("/babiesUpdate/:id", async(req, res) =>{
+  try {
+    const babyUpdate = await BabyRegister.findOne({_id: req.params.id});
+    res.render("babyUpdate", {baby:babyUpdate});
+  } catch (error) {
+    console.log("Error finding baby", error);
+    res.status(400).send("Unable to find baby in the db");
+  }
+});
+
+router.post("/babiesUpdate", async(req, res) =>{
+  try {
+    await babyUpdate.findOneAndUpdate({_id: req.query.id}, req.body);
+    res.redirect("/babiesList")
+  } catch (error) {
+    res.status(404).send("Unable to update baby in the db");
+  }
+})
+
 // Delete Route
 router.post("/delete", async (req, res) => {
   try {
@@ -69,6 +89,8 @@ router.get("/sittersList", async (req, res) => {
     res.status(400).send("Unable to fetch sitters from the database");
   }
 });
+
+// Updating Sitters in the db
 
 // Delete Route
 router.post("/delete", async (req, res) => {

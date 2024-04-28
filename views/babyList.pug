@@ -2,91 +2,97 @@ doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Baby Status
+  title Baby List
   link(rel='stylesheet' href='/css/style.css')
   link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   link(rel='stylesheet' href='/css/babyStatus.css')
 include navbar
 .container-shop
-  header
-    include userNav
-.container
-  table.table.table-striped
-    thead
-      tr
-        th Baby Name
-        th Baby Number
-        th Date of Birth
-        th Gender
-        th Address
-        th Parent/Guardian 
-        th Contact 
-        th Email
-        th Action
-    tbody#babyTableBody
-      if babies.length 
-        each baby in babies
-          if baby.parentResponsibility === 'father'
-            tr
-              td #{baby.firstName+' '+baby.lastName}
-              td #{baby.babyNumber}
-              td #{baby.dob}
-              td #{baby.gender}
-              td #{baby.address}
-              td #{baby.fatherName}
-              td #{baby.fatherContact}
-              td #{baby.fatherEmail}
-              td
-                a.btn.btn-success(href='##{baby._id}') Update
-                form(action='/delete' method='POST')
-                  input(type='hidden' name='id' value='#{baby._id}')
-                  button.btn.btn-danger(type='submit') Delete
-          else if baby.parentResponsibility === 'mother'
-              tr
-                td #{baby.firstName+' '+ baby.lastName}
-                td #{baby.babyNumber}
-                td #{baby.dob}
-                td #{baby.gender}
-                td #{baby.address}
-                td #{baby.motherName}
-                td #{baby.motherContact}
-                td #{baby.motherEmail}
-                td
-                  a.btn.btn-success(href='##{baby._id}') Update
-                  form(action='/delete' method='POST')
-                    input(type='hidden' name='id' value='#{baby._id}')
-                    button.btn.btn-danger(type='submit') Delete
-          else if baby.parentResponsibility === 'both'
+header
+  include userNav
+main
+  .container
+    table.table.table-striped
+      thead
+        tr
+          th Baby Name
+          th Baby Number
+          th Date of Birth
+          th Gender
+          th Address
+          th Parent/Guardian 
+          th Contact 
+          th Email
+          th Action
+          th
+      tbody#babyTableBody
+        if babies.length 
+          each baby in babies
+            if baby.parentResponsibility === 'father'
               tr
                 td #{baby.firstName+' '+baby.lastName}
                 td #{baby.babyNumber}
                 td #{baby.dob}
                 td #{baby.gender}
                 td #{baby.address}
-                td #{baby.fatherName+', '+ baby.motherName}
-                td #{baby.fatherContact+', '+ baby.motherContact}
-                td #{baby.fatherEmail+', '+ baby.motherEmail}
+                td #{baby.fatherName}
+                td #{baby.fatherContact}
+                td #{baby.fatherEmail}
                 td
-                  a.btn.btn-success(href='##{baby._id}') Update
+                  a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
+                td  
                   form(action='/delete' method='POST')
                     input(type='hidden' name='id' value='#{baby._id}')
                     button.btn.btn-danger(type='submit') Delete
-          else if baby.parentResponsibility === 'others'
-              tr
-                td #{baby.firstName+' '+ baby.lastName}
-                td #{baby.babyNumber}
-                td #{baby.dob}
-                td #{baby.gender}
-                td #{baby.address}
-                td #{baby.guardianName}
-                td #{baby.guardianContact}
-                td #{baby.guardianEmail}
-                td
-                  a.btn.btn-success(href='##{baby._id}') Update
-                  form(action='/delete' method='POST')
-                    input(type='hidden' name='id' value='#{baby._id}')
-                    button.btn.btn-danger(type='submit') Delete
+            else if baby.parentResponsibility === 'mother'
+                tr
+                  td #{baby.firstName+' '+ baby.lastName}
+                  td #{baby.babyNumber}
+                  td #{baby.dob}
+                  td #{baby.gender}
+                  td #{baby.address}
+                  td #{baby.motherName}
+                  td #{baby.motherContact}
+                  td #{baby.motherEmail}
+                  td
+                    a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
+                  td  
+                    form(action='/delete' method='POST')
+                      input(type='hidden' name='id' value='#{baby._id}')
+                      button.btn.btn-danger(type='submit') Delete
+            else if baby.parentResponsibility === 'both'
+                tr
+                  td #{baby.firstName+' '+baby.lastName}
+                  td #{baby.babyNumber}
+                  td #{baby.dob}
+                  td #{baby.gender}
+                  td #{baby.address}
+                  td #{baby.fatherName+', '+ baby.motherName}
+                  td #{baby.fatherContact+', '+ baby.motherContact}
+                  td #{baby.fatherEmail+', '+ baby.motherEmail}
+                  td
+                    a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
+                  td  
+                    form(action='/delete' method='POST')
+                      input(type='hidden' name='id' value='#{baby._id}')
+                      button.btn.btn-danger(type='submit') Delete
+            else if baby.parentResponsibility === 'others'
+                tr
+                  td #{baby.firstName+' '+ baby.lastName}
+                  td #{baby.babyNumber}
+                  td #{baby.dob}
+                  td #{baby.gender}
+                  td #{baby.address}
+                  td #{baby.guardianName}
+                  td #{baby.guardianContact}
+                  td #{baby.guardianEmail}
+                  td
+                    a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
+                  td  
+                    form(action='/delete' method='POST')
+                      input(type='hidden' name='id' value='#{baby._id}')
+                      button.btn.btn-danger(type='submit') Delete
        
 include footer
 script(src='https://cdn.jsdelivr.net/npm/chart.js')
