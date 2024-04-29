@@ -107,12 +107,4 @@ router.get("/adminDash", (req, res) => {
   res.render("admin");
 });
 
-router.get("/babiesList", (req, res) => {
-  res.render("babyList");
-});
-
-router.get("/sittersList", (req, res) => {
-  res.render("sitterList");
-});
-
 module.exports = router;
