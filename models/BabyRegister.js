@@ -76,7 +76,44 @@ const babyRegistrationSchema = new mongoose.Schema({
     parentResponsibility:{
         type:String,
         trim:true
-    }
+    },
+    broughtBy:{
+        type:String,
+        trim:true
+    },
+    arrivalTime:{
+        type:String,
+        trim:true
+    },
+    stayPeriod:{
+        type:String,
+        trim:true
+    },
+    fee:{
+        type:Number,
+        trim:true
+    },
+    sitter:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"SitterRegister"
+    },
+    takenBy:{
+        type:String,
+        trim:true
+    },
+    departureTime:{
+        type:String,
+        trim:true
+    },
+    comment:{
+        type:String,
+        trim:true
+    },
+    status:{
+        type:String,
+        default:"checkIn",
+        enum:["checkIn", "checkOut"],
+    },
 
 });
 

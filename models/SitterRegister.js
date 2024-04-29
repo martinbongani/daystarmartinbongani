@@ -56,8 +56,16 @@ const sitterRegistrationSchema = new mongoose.Schema({
     nextOfKinContact:{
         type:String,
         trim:true
-    }
-
+    },
+    status:{
+        type:String,
+        default:"Available",
+        enum:["Available", "Off"],
+    },
+    assignedBabies:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"BabyRegister"
+    }],
 });
 
 module.exports = mongoose.model("SitterRegister", sitterRegistrationSchema)

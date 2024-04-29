@@ -1,16 +1,17 @@
 const express = require("express");
 const router = express.Router();
+const connectEnsureLogin = require("connect-ensure-login")
 
 // Import model
 const BabyRegister = require("../models/BabyRegister");
 const SitterRegister = require("../models/SitterRegister");
 
-router.get("/registerBaby", (req, res) => {
+router.get("/registerBaby", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   res.render("babyRegistration");
 });
 
 // Installing async function
-router.post("/registerBaby", async (req, res) => {
+router.post("/registerBaby", connectEnsureLogin.ensureLoggedIn(), async (req, res) => {
   try {
     const baby = new BabyRegister(req.body);
     console.log(baby);
@@ -23,7 +24,7 @@ router.post("/registerBaby", async (req, res) => {
 });
 
 // Fetching babies from the db
-router.get("/babiesList", async (req, res) => {
+router.get("/babiesList", connectEnsureLogin.ensureLoggedIn(), async (req, res) => {
   try {
     let babies = await BabyRegister.find();
     res.render("babyList", { babies: babies });
@@ -63,12 +64,58 @@ router.post("/delete", async (req, res) => {
   }
 });
 
-router.get("/registerSitter", (req, res) => {
+// Check-in routes
+router.get("/checkInBaby/:id", async(req, res) =>{
+  if (req.session.user) {
+    try {
+      const checkInBaby = await BabyRegister.findOne({_id: req.params.id});
+      res.render("checkIn", {baby: checkInBaby, currentUser: req.session.user,});
+    } catch (error) {
+      console.log("Error finding baby", error);
+      res.status(400).send("Unable to find baby in the db");
+    }
+  } else {
+    console.log("Can't find session");
+    res.redirect("/login");
+  }
+});
+
+router.post("/checkInBaby", async(req, res) =>{
+  if (req.session.user) {
+    try {
+      await checkInBaby.findOneAndUpdate({_id: req.params.id});
+      res.redirect("/checkInBaby");
+    } catch (error) {
+      console.log("Error checking-in baby", error);
+      res.status(404).send("Unable to check-in baby");
+    }
+  } else {
+    console.log("Can't find session");
+    res.redirect("/login");
+  }
+});
+
+// List of Checked-in babies from the db
+router.get("/babiesCheckedIn", async (req, res) =>{
+  if (req.session.user) {
+    try {
+      const babiesCheckedIn = await BabyRegister.find({ status: "Present" })
+      res.render("babiesPresent", {babies: babiesCheckedIn, currentUser: req.session.user,});
+    } catch (error) {
+      res.status(400).send("Unable to find babies present in the db");
+    }
+  } else {
+    console.log("Can't find session");
+    res.redirect("/login");
+  }
+})
+
+router.get("/registerSitter", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   res.render("sitterRegistration");
 });
 
 // Installing async function
-router.post("/registerSitter", async (req, res) => {
+router.post("/registerSitter", connectEnsureLogin.ensureLoggedIn(), async (req, res) => {
   try {
     const sitter = new SitterRegister(req.body);
     console.log(sitter);
@@ -81,7 +128,7 @@ router.post("/registerSitter", async (req, res) => {
 });
 
 // Fetching sitters from the db
-router.get("/sittersList", async (req, res) => {
+router.get("/sittersList", connectEnsureLogin.ensureLoggedIn(), async (req, res) => {
   try {
     let sitters = await SitterRegister.find();
     res.render("sitterList", { sitters: sitters });
@@ -111,7 +158,7 @@ router.post("/sittersUpdate", async(req, res) =>{
 });
 
 // Delete Sitter Route
-router.post("/delete", async (req, res) => {
+router.post("/delete", connectEnsureLogin.ensureLoggedIn(), async (req, res) => {
   try {
     await SitterRegister.deleteOne({ _id: req.body.id });
     res.redirect("back");
@@ -121,7 +168,7 @@ router.post("/delete", async (req, res) => {
   }
 });
 
-router.get("/adminDash", (req, res) => {
+router.get("/adminDash", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   res.render("admin");
 });
 

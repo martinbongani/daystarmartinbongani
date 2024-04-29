@@ -1,0 +1,60 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Baby Check-in
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet' href='/css/babyRegistration.css')
+include navbar
+.container-shop
+header
+  include userNav
+main
+  .container-babyReg
+    h2.h2-babyReg DayStar Baby Check-in Form
+    form#registrationForm(action='/checkInBaby?id='+baby._id method='POST')
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='firstName') First Name:
+          input#firstName(type='text' name='firstName' value=baby.firstName)
+        div(style='flex-basis: 48%')
+          label(for='lastName') Last Name:
+          input#lastName(type='text' name='lastName' value=baby.lastName)
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='babyNumber') Baby Number:
+          input#babyNumber(type='text' name='babyNumber' value=baby.babyNumber)
+        div(style='flex-basis: 48%')
+          label(for='address') Address:
+          input#address(type='text' name='address' value=baby.address)
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='broughtBy') Brought By:
+          input#broughtBy(type='text' name='broughtBy')
+        div(style='flex-basis: 48%')
+          label(for='stayPeriod') Stay Period:
+          input#stayPeriod(type='text' name='stayPeriod')
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='arrivalTime') Arrival Time:
+          input#arrivalTime(type='time' name='arrivalTime')
+        div(style='flex-basis: 48%')
+          label(for='fee') Fee(UGX):
+          input#fee(type='number' name='fee')
+      .form-row
+          label(for='sitter') Sitter:
+          select#sitter(type='text' name='sitter')
+              if sitters.length
+              each sitter in sitters
+                  option(value=sitter._id) #{sitter.fullName}
+        div(style='flex-basis: 48%')
+          input#status(type='hidden' name='status' value='Present')
+      button.btn-babyReg(type='submit' onclick='registerBaby()')
+        | Check-in Baby
+include footer
+script(src='https://cdn.jsdelivr.net/npm/chart.js')
+script(src='/css/bootstrap/js/bootstrap.bundle.js')
+//- script(src='/js/babyRegistration.js')
+script(src='/js/add.js')

@@ -1,0 +1,52 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Baby Check-out
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet' href='/css/babyRegistration.css')
+include navbar
+.container-shop
+header
+  include userNav
+main
+  .container-babyReg
+    h2.h2-babyReg DayStar Baby Check-out Form
+    form#registrationForm(action='/checkInBaby?id='+baby._id method='POST')
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='firstName') First Name:
+          input#firstName(type='text' name='firstName' value=baby.firstName)
+        div(style='flex-basis: 48%')
+          label(for='lastName') Last Name:
+          input#lastName(type='text' name='lastName' value=baby.lastName)
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='babyNumber') Baby Number:
+          input#babyNumber(type='text' name='babyNumber' value=baby.babyNumber)
+        div(style='flex-basis: 48%')
+          label(for='address') Address:
+          input#address(type='text' name='address' value=baby.address)
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='takenBy') Taken By:
+          input#takenBy(type='text' name='takenBy')
+        div(style='flex-basis: 48%')
+          label(for='departureTime') Departure Time:
+          input#departureTime(type='time' name='departureTime')
+      .form-row
+        div(style='flex-basis: 48%')
+          input#status(type='hidden' name='status' value='Absent')
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='comment') Comment:
+          input#comment(type='text' name='comment')
+      button.btn-babyReg(type='submit')
+        | Check-out Baby
+include footer
+script(src='https://cdn.jsdelivr.net/npm/chart.js')
+script(src='/css/bootstrap/js/bootstrap.bundle.js')
+//- script(src='/js/babyRegistration.js')
+script(src='/js/add.js')

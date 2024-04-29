@@ -40,7 +40,7 @@ main
             td #{sitter.email}
             td #{sitter.nextOfKin}
             td
-              a.btn.btn-success(href='##{sitter._id}') Update
+              a.btn.btn-success(href='sittersUpdate/'+sitter._id) Update
             td  
               form(action='/delete' method='POST')
                   input(type='hidden' name='id' value='#{sitter._id}')
