@@ -1,0 +1,72 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Sitter Update Form
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet' href='/css/sitterRegistration.css')
+include navbar
+.container-shop
+header
+  include userNav  
+main
+  .container-sitterReg
+    h2.h2-sitterReg DayStar Sitter Update Form
+    form#registrationForm(onsubmit='return validateForm()' action='/sittersUpdate?id='+sitter._id method='POST')
+      .form-row
+        div
+          label(for='sitterName') Sitter Name:
+          input#sitterName(type='text' name='sitterName' value=sitter.sitterName)
+      .form-row
+        div
+          label(for='nationalId') National ID Number:
+          input#nationalId(type='text' name='nationalId' value=sitter.nationalId)
+        div
+          label(for='address') Address:
+          input#address(type='text' name='address' value=sitter.address)
+      .form-row
+        div
+          label(for='dob') Date of Birth:
+          input#dob(type='date' name='dob' value=sitter.dob)
+        div
+          label(for='gender') Gender:
+          select#gender(name='gender')
+            option(value='male' selected= sitter.gender=== 'male') Male
+            option(value='female' selected= sitter.gender=== 'male') Female
+      .form-row
+        div
+          label(for='email') Email:
+          input#email(type='text' name='email' value=sitter.email)
+        div
+          label(for='contact') Contact:
+          input#contact(type='text' name='contact' value=sitter.contact)
+      .form-row
+        div
+          label(for='educationLevel') Level of Education:
+          input#educationLevel(type='text' name='educationLevel' value=sitter.educationLevel)
+        div
+          label(for='religion') Religion:
+          input#religion(type='text' name='religion' value=sitter.religion)
+      .form-row
+        div
+          label(for='recommenderName') Recommender&apos;s Name:
+          input#recommenderName(type='text' name='recommenderName' value=sitter.recommenderName)
+        div
+          label(for='recommenderContact') Recommender&apos;s Contact:
+          input#recommenderContact(type='text' name='recommenderContact' value=sitter.recommenderContact)
+      .form-row
+        div
+          label(for='nextOfKin') Next of Kin:
+          input#nextOfKin(type='text' name='nextOfKin' value=sitter.nextOfKin)
+        div
+          label(for='nextOfKinContact') Next Of Kin&apos;s Contact:
+          input#nextOfKinContact(type='text' name='nextOfKinContact' value=sitter.nextOfKinContact)
+      button.btn-sitterReg(type='submit') Update Sitter
+  #popup-sitterReg.popup-sitterReg
+    p#registrationMessage
+    button(onclick='closePopup()') OK
+include footer
+script(src='/css/bootstrap/js/bootstrap.bundle.js')
+script(src='/js/sitterRegistration.js')
