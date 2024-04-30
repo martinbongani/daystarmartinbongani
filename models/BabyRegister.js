@@ -81,11 +81,11 @@ const babyRegistrationSchema = new mongoose.Schema({
         type:String,
         trim:true
     },
-    arrivalTime:{
+    stayPeriod:{
         type:String,
         trim:true
     },
-    stayPeriod:{
+    arrivalTime:{
         type:String,
         trim:true
     },
@@ -94,8 +94,8 @@ const babyRegistrationSchema = new mongoose.Schema({
         trim:true
     },
     sitter:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"SitterRegister"
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "SitterRegister"
     },
     takenBy:{
         type:String,
@@ -111,8 +111,8 @@ const babyRegistrationSchema = new mongoose.Schema({
     },
     status:{
         type:String,
-        default:"checkIn",
-        enum:["checkIn", "checkOut"],
+        default:"Check-in",
+        enum:["Check-in", "Check-out"],
     },
 
 });

@@ -14,21 +14,21 @@ header
 main
   .container-babyReg
     h2.h2-babyReg DayStar Baby Check-out Form
-    form#registrationForm(action='/checkInBaby?id='+baby._id method='POST')
+    form#registrationForm(action='/checkOutBaby?id='+baby._id method='POST')
       .form-row
         div(style='flex-basis: 48%')
           label(for='firstName') First Name:
-          input#firstName(type='text' name='firstName' value=baby.firstName)
+          input#firstName(type='text' name='firstName' value=baby.firstName readonly)
         div(style='flex-basis: 48%')
           label(for='lastName') Last Name:
-          input#lastName(type='text' name='lastName' value=baby.lastName)
+          input#lastName(type='text' name='lastName' value=baby.lastName readonly)
       .form-row
         div(style='flex-basis: 48%')
           label(for='babyNumber') Baby Number:
-          input#babyNumber(type='text' name='babyNumber' value=baby.babyNumber)
+          input#babyNumber(type='text' name='babyNumber' value=baby.babyNumber readonly)
         div(style='flex-basis: 48%')
           label(for='address') Address:
-          input#address(type='text' name='address' value=baby.address)
+          input#address(type='text' name='address' value=baby.address readonly)
       .form-row
         div(style='flex-basis: 48%')
           label(for='takenBy') Taken By:

@@ -24,8 +24,10 @@ main
           th Parent/Guardian 
           th Contact 
           th Email
-          th Action
-          th
+          th Status 
+          th Check-in
+          th Update
+          th Delete
       tbody#babyTableBody
         if babies.length 
           each baby in babies
@@ -39,6 +41,9 @@ main
                 td #{baby.fatherName}
                 td #{baby.fatherContact}
                 td #{baby.fatherEmail}
+                td
+                td
+                  a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
                 td
                   a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
                 td  
@@ -56,6 +61,9 @@ main
                   td #{baby.motherContact}
                   td #{baby.motherEmail}
                   td
+                  td
+                    a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
+                  td
                     a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
                   td  
                     form(action='/delete' method='POST')
@@ -71,6 +79,9 @@ main
                   td #{baby.fatherName+', '+ baby.motherName}
                   td #{baby.fatherContact+', '+ baby.motherContact}
                   td #{baby.fatherEmail+', '+ baby.motherEmail}
+                  td
+                  td
+                    a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
                   td
                     a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
                   td  
@@ -88,15 +99,15 @@ main
                   td #{baby.guardianContact}
                   td #{baby.guardianEmail}
                   td
+                  td
+                    a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
+                  td
                     a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
                   td  
                     form(action='/delete' method='POST')
                       input(type='hidden' name='id' value='#{baby._id}')
                       button.btn.btn-danger(type='submit') Delete
-       
 include footer
 script(src='https://cdn.jsdelivr.net/npm/chart.js')
-script(src='/js/logout.js')
-script(src='/js/babyStatus.js')
+//- script(src='/js/babyStatus.js')
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
-script(src='/js/add.js')

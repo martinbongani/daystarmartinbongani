@@ -18,24 +18,27 @@ main
       .form-row
         div(style='flex-basis: 48%')
           label(for='firstName') First Name:
-          input#firstName(type='text' name='firstName' value=baby.firstName)
+          input#firstName(type='text' name='firstName' value=baby.firstName readonly)
         div(style='flex-basis: 48%')
           label(for='lastName') Last Name:
-          input#lastName(type='text' name='lastName' value=baby.lastName)
+          input#lastName(type='text' name='lastName' value=baby.lastName readonly)
       .form-row
         div(style='flex-basis: 48%')
           label(for='babyNumber') Baby Number:
-          input#babyNumber(type='text' name='babyNumber' value=baby.babyNumber)
+          input#babyNumber(type='text' name='babyNumber' value=baby.babyNumber readonly)
         div(style='flex-basis: 48%')
           label(for='address') Address:
-          input#address(type='text' name='address' value=baby.address)
+          input#address(type='text' name='address' value=baby.address readonly)
       .form-row
         div(style='flex-basis: 48%')
           label(for='broughtBy') Brought By:
           input#broughtBy(type='text' name='broughtBy')
         div(style='flex-basis: 48%')
           label(for='stayPeriod') Stay Period:
-          input#stayPeriod(type='text' name='stayPeriod')
+          select#stayPeriod(name='stayPeriod')
+            option(value='') Select
+            option(value='halfDay') Half Day
+            option(value='fullDay') Full Day
       .form-row
         div(style='flex-basis: 48%')
           label(for='arrivalTime') Arrival Time:
@@ -44,17 +47,17 @@ main
           label(for='fee') Fee(UGX):
           input#fee(type='number' name='fee')
       .form-row
+        div(style='flex-basis: 48%')
           label(for='sitter') Sitter:
           select#sitter(type='text' name='sitter')
               if sitters.length
               each sitter in sitters
-                  option(value=sitter._id) #{sitter.fullName}
-        div(style='flex-basis: 48%')
-          input#status(type='hidden' name='status' value='Present')
-      button.btn-babyReg(type='submit' onclick='registerBaby()')
+                option(value=sitter._id) #{sitter.sitterName}
+          div(style='flex-basis: 48%')
+            input#status(type='hidden' name='status' value='Present')
+      button.btn-babyReg(type='submit')
         | Check-in Baby
 include footer
 script(src='https://cdn.jsdelivr.net/npm/chart.js')
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
 //- script(src='/js/babyRegistration.js')
-script(src='/js/add.js')
