@@ -76,42 +76,37 @@ router.post("/delete", async (req, res) => {
 router.get("/checkInBaby/:id", async (req, res) => {
   try {
     const checkInBaby = await BabyRegister.findOne({ _id: req.params.id });
-    const sitters = await SitterRegister.find();
-    if (!checkInBaby) {
-      return res.status(404).send("Baby not found");
-    }
+    const sitters = await SitterRegister.find()
     res.render("babyCheckIn", {
-      baby: checkInBaby,
-      sitters: sitters,
-      currentUser: req.session.user,
+      baby:checkInBaby,
+      sitters:sitters
     });
   } catch (error) {
     console.log("Error fetching data for check-in", error);
-    res.status(500).send("Internal Server Error");
+    res.status(400).send("Unable to find baby in the db");
   }
 });
 
 router.post("/checkInBaby", async (req, res) => {
   try {
-    await checkInBaby.findOneAndUpdate({ _id: req.params.id });
-    res.redirect("/checkInBaby");
+    await BabyRegister.findOneAndUpdate({ _id: req.params.id }, req.body);
+    res.redirect("/babiesList")
   } catch (error) {
     console.log("Error checking-in baby", error);
-    res.status(404).send("Unable to check-in baby");
+    res.status(404).send("Unable to update baby in the db");
   }
 });
 
 // List of Checked-in babies from the db
-router.get("/babiesCheckedIn", async (req, res) => {
-  try {
-    const babiesCheckedIn = await BabyRegister.find({ status: "Present" });
-    res.render("babiesPresent", {
-      babies: babiesCheckedIn,
-      currentUser: req.session.user,
-    });
-  } catch (error) {
-    res.status(400).send("Unable to find babies present in the db");
-  }
+router.get("/babiesList", async (req, res) => {
+    try {
+      const babiesCheckedIn = await BabyRegister.find({ status: "Present" });
+      res.render("babyList", {
+        babies: babiesCheckedIn
+      });
+    } catch (error) {
+      res.status(400).send("Unable to find babies present in the db");
+  } 
 });
 
 router.get(
