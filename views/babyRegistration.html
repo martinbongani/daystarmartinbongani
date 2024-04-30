@@ -40,7 +40,7 @@
     <main>
       <div class="container-babyReg">
         <h2 class="h2-babyReg">DayStar Baby Registration Form</h2>
-        <form id="registrationForm">
+        <form id="registrationForm" onsubmit="return validateForm()">
           <div class="form-row">
             <div style="flex-basis: 48%">
               <label for="firstName">First Name:</label>
@@ -110,16 +110,16 @@
             </div>
           </div>
 
-          <button class="btn-babyReg" type="button" onclick="registerBaby()">
+          <button class="btn-babyReg" type="submit">
             Register Baby
           </button>
         </form>
       </div>
 
-      <div id="popup-babyReg" class="popup-babyReg">
+      <!-- <div id="popup-babyReg" class="popup-babyReg">
         <p id="registrationMessage"></p>
         <button onclick="closePopup()">OK</button>
-      </div>
+      </div> -->
     </main>
     <div w3-include-html="/views/footer.html"></div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

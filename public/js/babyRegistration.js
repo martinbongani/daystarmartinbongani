@@ -1,6 +1,4 @@
-let babyCount = 0;
-
-function registerBaby() {
+function validateForm() {
     const firstName = document.getElementById('firstName').value;
     const lastName = document.getElementById('lastName').value;
     const dob = document.getElementById('dob').value;
@@ -35,21 +33,6 @@ function registerBaby() {
         return;
     }
 
-    // Increment baby count
-    babyCount++;
-
-    // Display popup with baby registration details
-    const fullName = `${firstName} ${lastName}`;
-    const registrationMessage = `Baby ${fullName} registered successfully with ID: BN00${babyCount}/24!`;
-    document.getElementById('registrationMessage').textContent = registrationMessage;
-    document.getElementById('popup-babyReg').style.display = 'block';
-
-    // Clear form fields
-    document.getElementById('registrationForm').reset();
-}
-
-function closePopup() {
-    document.getElementById('popup-babyReg').style.display = 'none';
 }
 
 function toggleFatherName(checkbox) {
@@ -60,7 +43,7 @@ function toggleFatherName(checkbox) {
     } else {
         fatherNameInput.disabled = false;
     }
-    toggleGuardianField();
+    // toggleGuardianField();
 }
 
 function toggleMotherName(checkbox) {
@@ -71,12 +54,12 @@ function toggleMotherName(checkbox) {
     } else {
         motherNameInput.disabled = false;
     }
-    toggleGuardianField();
+    // toggleGuardianField();
 }
 
-function toggleGuardianField() {
-    const fatherDeceased = document.getElementById('fatherDeceased').checked;
-    const motherDeceased = document.getElementById('motherDeceased').checked;
-    const guardianField = document.getElementById('guardianField');
-    guardianField.classList.toggle('hidden', !(fatherDeceased && motherDeceased));
-}
+// function toggleGuardianField() {
+//     const fatherDeceased = document.getElementById('fatherDeceased').checked;
+//     const motherDeceased = document.getElementById('motherDeceased').checked;
+//     const guardianField = document.getElementById('guardianField');
+//     guardianField.classList.toggle('hidden', !(fatherDeceased && motherDeceased));
+// }

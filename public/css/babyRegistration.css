@@ -60,7 +60,7 @@ input[readonly] {
     background-color: #f9f9f9;
 }
 
-.popup-babyReg {
+/* .popup-babyReg {
     display: none;
     position: fixed;
     left: 50%;
@@ -71,8 +71,10 @@ input[readonly] {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     z-index: 999;
-}
+} */
 
-.hidden {
-    display: none;
+.error-message {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 4px;
 }
