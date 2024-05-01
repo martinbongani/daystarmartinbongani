@@ -1,0 +1,56 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Baby List
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet' href='/css/babyStatus.css')
+include navbar
+header
+  include userNav
+main
+  .container-fluid
+    h3 Babies Checked-in
+    table.table.table-striped
+      thead
+        tr
+          th Baby Name
+          th Baby Number
+          th Address
+          th Brought By
+          th Stay Period
+          th Arrival Time 
+          th Fee (UGX) 
+          th Sitter
+          th Status 
+          th Check-out
+          th Update
+          th Delete
+      tbody#babyTableBody
+        if babies.length 
+          each baby in babies
+            if baby.status === 'Present'
+              tr
+                td #{baby.firstName+' '+baby.lastName}
+                td #{baby.babyNumber}
+                td #{baby.address}
+                td #{baby.broughtBy}
+                td #{baby.stayPeriod}
+                td #{baby.arrivalTime}
+                td #{baby.fee}
+                td #{baby.sitter}
+                td #{baby.status}
+                td
+                  a.btn.btn-secondary(href='/checkOutBaby/'+baby._id) Check-out
+                td
+                  a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
+                td  
+                  form(action='/delete' method='POST')
+                    input(type='hidden' name='id' value='#{baby._id}')
+                    button.btn.btn-danger(type='submit') Delete
+                  
+include footer
+//- script(src='/js/babyStatus.js')
+script(src='/css/bootstrap/js/bootstrap.bundle.js')

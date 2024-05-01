@@ -111,7 +111,7 @@ const babyRegistrationSchema = new mongoose.Schema({
     },
     status:{
         type:String,
-        default:"Absent",
+        default:" ",
         enum:["Present", "Absent"],
     },
 

@@ -54,7 +54,7 @@ router.get("/babiesUpdate/:id", async (req, res) => {
 
 router.post("/babiesUpdate", async (req, res) => {
   try {
-    await babyUpdate.findOneAndUpdate({ _id: req.query.id }, req.body);
+    await BabyRegister.findOneAndUpdate({ _id: req.query.id }, req.body);
     res.redirect("/babiesList");
   } catch (error) {
     res.status(404).send("Unable to update baby in the db");
@@ -72,7 +72,7 @@ router.post("/delete", async (req, res) => {
   }
 });
 
-// Check-in routes
+// Baby check-in routes
 router.get("/checkInBaby/:id", async (req, res) => {
   try {
     const checkInBaby = await BabyRegister.findOne({ _id: req.params.id });
@@ -90,7 +90,7 @@ router.get("/checkInBaby/:id", async (req, res) => {
 router.post("/checkInBaby", async (req, res) => {
   try {
     await BabyRegister.findOneAndUpdate({ _id: req.params.id }, req.body);
-    res.redirect("/babiesList")
+    res.redirect("/checkedInBabies")
   } catch (error) {
     console.log("Error checking-in baby", error);
     res.status(404).send("Unable to update baby in the db");
@@ -98,12 +98,13 @@ router.post("/checkInBaby", async (req, res) => {
 });
 
 // List of Checked-in babies from the db
-router.get("/babiesList", async (req, res) => {
+router.get("/checkedInBabies", async (req, res) => {
     try {
-      const babiesCheckedIn = await BabyRegister.find({ status: "Present" });
-      res.render("babyList", {
+      const babiesCheckedIn = await BabyRegister.find({status: "Present"});
+      res.render("babiesCheckedIn", {
         babies: babiesCheckedIn
       });
+      console.log("Display babies checked-in", babiesCheckedIn);
     } catch (error) {
       res.status(400).send("Unable to find babies present in the db");
   } 
@@ -161,7 +162,7 @@ router.get("/sittersUpdate/:id", async (req, res) => {
 
 router.post("/sittersUpdate", async (req, res) => {
   try {
-    await sitterUpdate.findOneAndUpdate({ _id: req.query.id }, req.body);
+    await SitterRegister.findOneAndUpdate({ _id: req.query.id }, req.body);
     res.redirect("/sittersList");
   } catch (error) {
     res.status(404).send("Unable to update sitter in the db");
@@ -169,10 +170,7 @@ router.post("/sittersUpdate", async (req, res) => {
 });
 
 // Delete Sitter Route
-router.post(
-  "/delete",
-  connectEnsureLogin.ensureLoggedIn(),
-  async (req, res) => {
+router.post("/delete", async (req, res) => {
     try {
       await SitterRegister.deleteOne({ _id: req.body.id });
       res.redirect("back");
@@ -182,6 +180,43 @@ router.post(
     }
   }
 );
+
+// Sitter check-in routes
+router.get("/checkInSitter/:id", async (req, res) => {
+  try {
+    const checkInBaby = await SitterRegister.findOne({ _id: req.params.id });
+    res.render("sitterCheckIn", {
+      sitter:checkInSitter,
+    });
+  } catch (error) {
+    console.log("Error fetching data for check-in", error);
+    res.status(400).send("Unable to find sitter in the db");
+  }
+});
+
+router.post("/checkInSitter", async (req, res) => {
+  try {
+    await sitterRegister.findOneAndUpdate({ _id: req.params.id }, req.body);
+    res.redirect("/sittersList")
+  } catch (error) {
+    console.log("Error checking-in sitter", error);
+    res.status(404).send("Unable to update sitter in the db");
+  }
+});
+
+// List of Checked-in sitters from the db
+router.get("/checkedInSitters", async (req, res) => {
+    try {
+      const sittersCheckedIn = await SitterRegister.find({status: "Present"});
+      res.render("babiesCheckedIn", {
+        sitters: sittersCheckedIn
+      });
+      console.log("Display sitters checked-in", sittersCheckedIn);
+    } catch (error) {
+      res.status(400).send("Unable to find sitters present in the db");
+  } 
+});
+
 
 router.get("/adminDash", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   res.render("admin");
