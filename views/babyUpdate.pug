@@ -66,6 +66,26 @@ main
           input#motherContact(type='text' name='motherContact' value=baby.motherContact)
       label(for='motherOccupation') Mother's Occupation:
       input#motherOccupation(type='text' name='motherOccupation' value=baby.motherOccupation rows='1')
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='guardianName') Guardian&apos;s Name:
+          input#guardianName(type='text' name='guardianName' value=baby.guardianName)
+        div(style='flex-basis: 48%')
+          label(for='guardianContact') Guardian&apos;s Contact:
+          input#guardianContact(type='text' name='guardianContact' value=baby.guardianContact)
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='guardianEmail') Guardian&apos;s Email:
+          input#guardianEmail(type='text' name='guardianEmail' value=baby.guardianEmail)
+        div(style='flex-basis: 48%')
+          label(for='guardianOccupation') Guardian&apos;s Occupation:
+          input#guardianOccupation(type='text' name='guardianOccupation' value=baby.guardianOccupation)
+      label(for='guardianRelationship') Guardian relationship with baby:
+      input#guardianRelationship(type='text' name='guardianRelationship' value=baby.guardianRelationship rows='1')
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='babyNumber') Baby Number:
+          input#babyNumber(type='text' name='babyNumber' value=baby.babyNumber rows='1')
       .form-group
         label Who has parental responsibility?
         .form-check
@@ -80,12 +100,8 @@ main
         .form-check
           input#mother.form-check-input(type='radio' name='parentResponsibility' value='other' checked= baby.parentResponsibility=== 'other')
           label.form-check-label(for='others') Others
-      #guardianField.form-row.hidden
-        div(style='flex-basis: 100%')
-          label(for='guardianName') Guardian&apos;s Name:
-          input#guardianName(type='text' name='guardianName' value=baby.guardianName)
       button.btn-babyReg(type='submit')
         | Update Baby
 include footer
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
-//- script(src='/js/babyRegistration.js')
+script(src='/js/babyRegistration.js')

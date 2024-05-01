@@ -8,34 +8,28 @@ head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   link(rel='stylesheet' href='/css/adminRegistration.css')
 include navbar
-.container-shop
-header
-  include userNav
 main
   .form-container
     h2.h2-adminReg Admin Registration
     form#registrationForm(onsubmit='return validateForm()' action='/registerAdmin' method='POST')
-      .input-group
-        label(for='firstName') First Name:
-        input#firstName(type='text' name='firstName')
-        span#firstNameError.error
-      .input-group
-        label(for='lastName') Last Name:
-        input#lastName(type='text' name='lastName')
-        span#lastNameError.error
-      .input-group
-        label(for='email') Email:
-        input#email(type='email' name='email')
-        span#emailError.error
-      .input-group
-        label(for='password') Password:
-        input#password(type='password' name='password')
-        span#passwordError.error
-      .input-group
-        input(type='text' placeholder='Role' value='Admin' name='role')
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='firstName') First Name:
+          input#firstName(type='text' name='firstName')
+        div(style='flex-basis: 48%')
+          label(for='lastName') Last Name:
+          input#lastName(type='text' name='lastName')
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='email') Email:
+          input#email(type='email' name='email')
+        div(style='flex-basis: 48%')
+          label(for='password') Password:
+          input#password(type='password' name='password')
+      .form-row
+        div(style='flex-basis: 48%')
+          input(type='text' placeholder='Role' value='Admin' name='role')
       button.btn-adminReg(type='submit') Register
-      p#successMessage.success(style='display: none')
-        | Registration successful!
 include footer
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
 

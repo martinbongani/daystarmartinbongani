@@ -1,10 +1,14 @@
+main {
+  padding-top: 70px;
+}
+
 .form-container {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    margin: auto;
+    width: 40%;
+    margin: 20px auto;
   }
 
   .h2-adminReg {
@@ -79,3 +83,10 @@
   button.btn-adminReg:hover {
     background-color: #0056b3;
   }
+
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+

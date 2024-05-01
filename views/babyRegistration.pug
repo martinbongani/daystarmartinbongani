@@ -8,13 +8,12 @@ head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   link(rel='stylesheet' href='/css/babyRegistration.css')
 include navbar
-.container-shop
 header
   include userNav
 main
   .container-babyReg
     h2.h2-babyReg DayStar Baby Registration Form
-    form#registrationForm(action='/registerBaby' method='POST')
+    form#registrationForm(onsubmit='return validateForm()' action='/registerBaby' method='POST')
       .form-row
         div(style='flex-basis: 48%')
           label(for='firstName') First Name:
@@ -47,7 +46,7 @@ main
           label(for='fatherEmail') Father&apos;s Email:
           input#fatherEmail(type='email' name='fatherEmail')
         div(style='flex-basis: 48%')
-          label(for='fatherContact') Father's Contact
+          label(for='fatherContact') Father's Contact:
           input#fatherContact(type='text' name='fatherContact')
       label(for='fatherOccupation') Father's Occupation:
       input#fatherOccupation(type='text' name='fatherOccupation' rows='1')
@@ -64,12 +63,30 @@ main
           label(for='motherEmail') Mother&apos;s Email:
           input#motherEmail(type='email' name='motherEmail')
         div(style='flex-basis: 48%')
-          label(for='motherContact') Mother's Contact
+          label(for='motherContact') Mother's Contact:
           input#motherContact(type='text' name='motherContact')
       label(for='motherOccupation') Mother's Occupation:
       input#motherOccupation(type='text' name='motherOccupation' rows='1')
-      label(for='babyNumber') Baby Number:
-      input#babyNumber(type='text' name='babyNumber' rows='1')
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='guardianName') Guardian&apos;s Name:
+          input#guardianName(type='text' name='guardianName')
+        div(style='flex-basis: 48%')
+          label(for='guardianContact') Guardian&apos;s Contact:
+          input#guardianContact(type='text' name='guardianContact')
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='guardianEmail') Guardian&apos;s Email:
+          input#guardianEmail(type='text' name='guardianEmail')
+        div(style='flex-basis: 48%')
+          label(for='guardianOccupation') Guardian&apos;s Occupation:
+          input#guardianOccupation(type='text' name='guardianOccupation')
+      label(for='guardianRelationship') Guardian relationship with baby:
+      input#guardianRelationship(type='text' name='guardianRelationship' rows='1')
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='babyNumber') Baby Number:
+          input#babyNumber(type='text' name='babyNumber' rows='1')
       .form-group
         label Who has parental responsibility?
         .form-check
@@ -84,17 +101,8 @@ main
         .form-check
           input#mother.form-check-input(type='radio' name='parentResponsibility' value='other')
           label.form-check-label(for='others') Others
-      #guardianField.form-row.hidden
-        div(style='flex-basis: 100%')
-          label(for='guardianName') Guardian&apos;s Name:
-          input#guardianName(type='text' name='guardianName')
-      button.btn-babyReg(type='submit' onclick='registerBaby()')
+      button.btn-babyReg(type='submit')
         | Register Baby
-  #popup-babyReg.popup-babyReg
-    p#registrationMessage
-    button(onclick='closePopup()') OK
 include footer
-script(src='https://cdn.jsdelivr.net/npm/chart.js')
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
-//- script(src='/js/babyRegistration.js')
-script(src='/js/add.js')
+script(src='/js/babyRegistration.js')

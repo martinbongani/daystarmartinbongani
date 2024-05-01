@@ -75,8 +75,8 @@ router.post("/delete", async (req, res) => {
 // Baby check-in routes
 router.get("/checkInBaby/:id", async (req, res) => {
   try {
-    const checkInBaby = await BabyRegister.findOne({ _id: req.params.id });
     const sitters = await SitterRegister.find()
+    const checkInBaby = await BabyRegister.findOne({ _id: req.params.id });
     res.render("babyCheckIn", {
       baby:checkInBaby,
       sitters:sitters
@@ -90,6 +90,7 @@ router.get("/checkInBaby/:id", async (req, res) => {
 router.post("/checkInBaby", async (req, res) => {
   try {
     await BabyRegister.findOneAndUpdate({ _id: req.params.id }, req.body);
+    console.log(req.body)
     res.redirect("/checkedInBabies")
   } catch (error) {
     console.log("Error checking-in baby", error);
@@ -184,7 +185,7 @@ router.post("/delete", async (req, res) => {
 // Sitter check-in routes
 router.get("/checkInSitter/:id", async (req, res) => {
   try {
-    const checkInBaby = await SitterRegister.findOne({ _id: req.params.id });
+    const checkInSitter = await SitterRegister.findOne({ _id: req.params.id });
     res.render("sitterCheckIn", {
       sitter:checkInSitter,
     });

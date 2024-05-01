@@ -24,8 +24,9 @@ main
           th Phone 
           th Email
           th Next of Kin
-          th Action
-          th
+          th Check-in
+          th Update
+          th Delete
       tbody#sitterTableBody
         each sitter in sitters
           tr
@@ -38,6 +39,8 @@ main
             td #{sitter.contact}
             td #{sitter.email}
             td #{sitter.nextOfKin}
+            td 
+              a.btn.btn-secondary(href='/checkInSitter/'+sitter._id) Check-in
             td
               a.btn.btn-success(href='sittersUpdate/'+sitter._id) Update
             td  

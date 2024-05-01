@@ -61,15 +61,27 @@ const babyRegistrationSchema = new mongoose.Schema({
         type:String,
         trim:true
     },
-    babyNumber:{
-        type:String,
-        trim:true
-    },
-    babyNumber:{
-        type:String,
-        trim:true
-    },
     guardianName:{
+        type:String,
+        trim:true
+    },
+    guardianContact:{
+        type:String,
+        trim:true
+    },
+    guardianEmail:{
+        type:String,
+        trim:true
+    },
+    guardianOccupation:{
+        type:String,
+        trim:true
+    },
+    guardianRelationship:{
+        type:String,
+        trim:true
+    },
+    babyNumber:{
         type:String,
         trim:true
     },
@@ -93,10 +105,10 @@ const babyRegistrationSchema = new mongoose.Schema({
         type:Number,
         trim:true
     },
-    sitter:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "SitterRegister"
-    },
+    // sitter:{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "SitterRegister"
+    // },
     takenBy:{
         type:String,
         trim:true
@@ -111,7 +123,8 @@ const babyRegistrationSchema = new mongoose.Schema({
     },
     status:{
         type:String,
-        default:" ",
+        trim:true,
+        default:"Present",
         enum:["Present", "Absent"],
     },
 

@@ -31,7 +31,7 @@ main
       .form-row
         div(style='flex-basis: 48%')
           label(for='broughtBy') Brought By:
-          input#broughtBy(type='text' name='broughtBy')
+          input#broughtBy(type='text' name='broughtBy' value=baby.broughtBy)
         div(style='flex-basis: 48%')
           label(for='stayPeriod') Stay Period:
           select#stayPeriod(name='stayPeriod')
@@ -41,10 +41,10 @@ main
       .form-row
         div(style='flex-basis: 48%')
           label(for='arrivalTime') Arrival Time:
-          input#arrivalTime(type='time' name='arrivalTime')
+          input#arrivalTime(type='time' name='arrivalTime' value=baby.arrivalTime)
         div(style='flex-basis: 48%')
           label(for='fee') Fee(UGX):
-          input#fee(type='number' name='fee')
+          input#fee(type='number' name='fee' value=baby.fee)
       .form-row
         div(style='flex-basis: 48%')
           label(for='sitter') Sitter:
