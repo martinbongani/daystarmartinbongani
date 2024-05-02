@@ -20,6 +20,7 @@ const SitterRegister = require('./models/SitterRegister');
 // Import routes
 const registrationRoutes = require('./routes/registrationRoutes')
 const authenticationRoutes = require('./routes/authenticationRoutes')
+const purchaseRoutes = require('./routes/purchaseRoutes')
 
 // Instantiations
 const app = express();
@@ -60,6 +61,7 @@ passport.deserializeUser(AdminRegister.deserializeUser());
 // Use imported routes
 app.use("/", registrationRoutes);
 app.use("/", authenticationRoutes);
+app.use("/", purchaseRoutes);
 
 // For invalid routes
 app.get('*', (req, res) => {
