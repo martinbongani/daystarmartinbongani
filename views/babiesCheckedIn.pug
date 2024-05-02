@@ -26,8 +26,6 @@ main
           th Sitter
           th Status 
           th Check-out
-          th Update
-          th Delete
       tbody#babyTableBody
         if babies.length 
           each baby in babies
@@ -44,13 +42,5 @@ main
                 td #{baby.status}
                 td
                   a.btn.btn-secondary(href='/checkOutBaby/'+baby._id) Check-out
-                td
-                  a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
-                td  
-                  form(action='/delete' method='POST')
-                    input(type='hidden' name='id' value='#{baby._id}')
-                    button.btn.btn-danger(type='submit') Delete
-                  
 include footer
-//- script(src='/js/babyStatus.js')
 script(src='/css/bootstrap/js/bootstrap.bundle.js')

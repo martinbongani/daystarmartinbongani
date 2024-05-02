@@ -13,7 +13,7 @@ header
 main
   .container-babyReg
     h2.h2-babyReg DayStar Baby Check-in Form
-    form#registrationForm(action='/checkInBaby?id='+baby._id method='POST')
+    form#registrationForm(action='/checkInBaby?id='+baby._id method='POST' onsubmit="return validateForm()")
       .form-row
         div(style='flex-basis: 48%')
           label(for='firstName') First Name:

@@ -197,8 +197,8 @@ router.get("/checkInSitter/:id", async (req, res) => {
 
 router.post("/checkInSitter", async (req, res) => {
   try {
-    await sitterRegister.findOneAndUpdate({ _id: req.params.id }, req.body);
-    res.redirect("/sittersList")
+    await SitterRegister.findOneAndUpdate({ _id: req.params.id }, req.body);
+    res.redirect("/checkedInSitters")
   } catch (error) {
     console.log("Error checking-in sitter", error);
     res.status(404).send("Unable to update sitter in the db");
@@ -208,8 +208,8 @@ router.post("/checkInSitter", async (req, res) => {
 // List of Checked-in sitters from the db
 router.get("/checkedInSitters", async (req, res) => {
     try {
-      const sittersCheckedIn = await SitterRegister.find({status: "Present"});
-      res.render("babiesCheckedIn", {
+      const sittersCheckedIn = await SitterRegister.find({status: "Available"});
+      res.render("sittersCheckedIn", {
         sitters: sittersCheckedIn
       });
       console.log("Display sitters checked-in", sittersCheckedIn);

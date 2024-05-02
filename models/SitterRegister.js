@@ -66,6 +66,10 @@ const sitterRegistrationSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:"BabyRegister"
     }],
+    arrivalTime:{
+        type:String,
+        trim:true
+    },
 });
 
 module.exports = mongoose.model("SitterRegister", sitterRegistrationSchema)

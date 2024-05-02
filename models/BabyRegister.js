@@ -123,7 +123,6 @@ const babyRegistrationSchema = new mongoose.Schema({
     },
     status:{
         type:String,
-        trim:true,
         default:"Present",
         enum:["Present", "Absent"],
     },
