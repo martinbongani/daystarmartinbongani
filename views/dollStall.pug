@@ -3,27 +3,24 @@ head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Doll Stall
-  link(rel='stylesheet' href='/public/css/style.css')
-  link(rel='stylesheet' href='/public/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-  link(rel='stylesheet' href='/public/css/dollStall.css')
-div(w3-include-html='/views/navbar.html')
-.container-shop
+  //- link(rel='stylesheet' href='/css/sitterReport.css')
+include navbar
 header
-  h1 DayStar Daycare Doll Stall
-  button#cartToggleBtn Cart (0)
+  include userNav
 main
-  #itemsContainer.container-dollStall
-  #cart
-    .cart-header
-      h2 Shopping Cart
-      span.cart-close(onclick='toggleCart()') X
-    ul#cartItems
-    p
-      | Total: 
-      span#cartTotal UGX 0
-    button(onclick='checkout()') Checkout
-div(w3-include-html='/views/footer.html')
-script(src='/public/js/dollStall.js')
-script(src='/public/css/bootstrap/js/bootstrap.bundle.js')
-script(src='/public/js/add.js')
+  .container-fluid
+      h3 Doll Stall
+      if dolls.length
+          .row.row-cols-1.row-cols-md-2.g-4
+              each doll in dolls
+                  .col 
+                      .card.card-custom.mx-2.mb-3.img-fluid(style='width: 18rem;')
+                          img.card-img-top.img-fluid(src='/'+doll.imageUpload alt='image')
+                          .card-body
+                              h4.card-title #{doll.dollName}
+                              h6.card-text There are #{doll.quantity} dolls available
+                              p.card-text #{doll.description}
+                              a.btn.btn-primary(href='/sellDoll') Sell Doll

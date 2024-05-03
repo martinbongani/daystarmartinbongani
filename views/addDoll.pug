@@ -1,0 +1,42 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Add Doll
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet' href='/css/sitterRegistration.css')
+include navbar
+header
+  include userNav  
+main
+  .container-sitterReg
+    h2.h2-sitterReg Add Doll
+    form#registrationForm(onsubmit='return validateForm()' action='/dollAdd' method='POST')
+      .form-row
+        div
+          label(for='dollName') Doll Name:
+          input#dollName(type='text' name='dollName')
+        div
+          label(for='quantity') Quantity (Pcs):
+          input#quantity(type='number' name='quantity')
+      .form-row
+        div
+          label(for='rate') Rate (UGX):
+          input#rate(type='number' name='rate')
+        div
+          label(for='amount') Amount (UGX):
+          input#amount(type='number' name='amount')
+      .form-row
+        div
+          label(for='imageUpload') Upload Image:
+          input#imageUpload(type='file' name='imageUpload')
+      .form-row
+        div
+          label(for='description') Description:
+          input#description(type='text' name='description' cols='30', rows='10')
+      button.btn-sitterReg(type='submit') Add Doll
+include footer
+script(src='/css/bootstrap/js/bootstrap.bundle.js')
+//- script(src='/js/sitterRegistration.js')

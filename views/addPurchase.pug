@@ -6,11 +6,13 @@ head
   link(rel='stylesheet' href='/css/style.css')
   link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-  link(rel='stylesheet' href='/css/adminRegistration.css')
+  link(rel='stylesheet' href='/css/addPurchase.css')
 include navbar
+header
+  include userNav
 main
-  .form-container
-    h2.h2-adminReg Add Purchase
+  .container
+    h2 Add Purchase
     form#registrationForm(onsubmit='return validateForm()' action='/purchaseAdd' method='POST')
       .form-row
         div(style='flex-basis: 48%')
@@ -21,19 +23,19 @@ main
             option(value='milk') Milk
             option(value='diapers') Diapers
             option(value='')
-        div(style='flex-basis: 24%')
+        div(style='flex-basis: 12%')
           label(for='unit') Unit:
           input#unit(type='text' name='unit')
-        div(style='flex-basis: 24%')
+        div(style='flex-basis: 12%')
           label(for='quantity') Quantity:
           input#quantity(type='number' name='quantity')
-        div(style='flex-basis: 48%')
+        div(style='flex-basis: 24%')
           label(for='rate') Rate (UGX):
           input#rate(type='number' name='rate')
-        div(style='flex-basis: 48%')
+        div(style='flex-basis: 36%')
           label(for='amount') Amount (UGX):
           input#amount(type='number' name='amount')
-      button.btn.btn-success(type='submit') Add Purchase
+        button.btn.btn-success(type='submit' style='flex-basis: 12%') Add Purchase
 include footer
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
 

@@ -1,44 +1,97 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
 const connectEnsureLogin = require("connect-ensure-login");
 
 // Import model
-const Purchase = require("../models/Purchase");
+const Purchase = require("../models/PurchaseRegister");
+const DollRegister = require("../models/DollRegister");
 
+// Image upload configs
+let storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images/uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+let upload = multer({ storage: storage });
+
+// Purchase form
 router.get("/purchaseAdd", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   res.render("addPurchase");
 });
 
-// // Installing async function
-// router.post(
-//   "/registerBaby",
-//   connectEnsureLogin.ensureLoggedIn(),
-//   async (req, res) => {
-//     try {
-//       const baby = new BabyRegister(req.body);
-//       console.log(baby);
-//       await baby.save();
-//       res.redirect("/registerBaby");
-//     } catch (error) {
-//       res.status(400).send("Sorry, something went wrong");
-//       console.log("Error registering the baby", error);
-//     }
-//   }
-// );
+// Installing async function
+router.post(
+  "/purchaseAdd",
+  connectEnsureLogin.ensureLoggedIn(),
+  async (req, res) => {
+    try {
+      const purchase = new Purchase(req.body);
+      console.log(purchase);
+      await purchase.save();
+      res.redirect("/purchasesList");
+    } catch (error) {
+      res.status(400).send("Sorry, something went wrong");
+      console.log("Error registering the item", error);
+    }
+  }
+);
 
-// // Fetching babies from the db
-// router.get(
-//   "/babiesList",
-//   connectEnsureLogin.ensureLoggedIn(),
-//   async (req, res) => {
-//     try {
-//       let babies = await BabyRegister.find();
-//       res.render("babyList", { babies: babies });
-//     } catch (error) {
-//       res.status(400).send("Unable to fetch babies from the database");
-//     }
-//   }
-// );
+// Fetching purchase from the db
+router.get(
+  "/purchasesList",
+  connectEnsureLogin.ensureLoggedIn(),
+  async (req, res) => {
+    try {
+      let purchases = await Purchase.find();
+      res.render("purchaseList", { purchases: purchases });
+    } catch (error) {
+      res.status(400).send("Unable to fetch purchases from the database");
+    }
+  }
+);
+
+// Doll form
+router.get("/dollAdd", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
+  res.render("addDoll");
+});
+
+// Installing async function
+router.post(
+  "/dollAdd",
+  connectEnsureLogin.ensureLoggedIn(), 
+  upload.single('imageupload'),
+  async (req, res) => {
+    try {
+      const doll = new DollRegister (req.body);
+      doll.imageupload = req.file.path
+      console.log("Doll added", doll);
+      await doll.save();
+      res.redirect("/dollsList");
+    } catch (error) {
+      res.status(400).send("Sorry, something went wrong");
+      console.log("Error adding doll", error);
+    }
+  }
+);
+
+// Fetching doll from the db
+router.get(
+  "/dollsList",
+  connectEnsureLogin.ensureLoggedIn(),
+  async (req, res) => {
+    try {
+      let dolls = await DollRegister.find();
+      res.render("dollStall", { dolls: dolls });
+    } catch (error) {
+      res.status(400).send("Unable to fetch dolls from the database");
+    }
+  }
+);
+
 
 // // Updating baby in the db
 // router.get("/babiesUpdate/:id", async (req, res) => {

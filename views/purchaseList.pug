@@ -1,0 +1,41 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Sitters List
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet' href='/css/sitterReport.css')
+include navbar
+header
+  include userNav
+main
+  .container-fluid
+    h3 Purchased Items
+    table.table.table-striped
+      thead
+        tr
+          th Item
+          th Unit
+          th Quantity
+          th Rate
+          th Amount
+          th Update
+          th Delete
+      tbody#purchaseTableBody
+        each purchase in purchases
+          tr
+            td #{purchase.item}
+            td #{purchase.unit}
+            td #{purchase.quantity}
+            td #{purchase.rate}
+            td #{purchase.amount}
+            td
+              a.btn.btn-success(href='purchaseUpdate/'+purchase._id) Update
+            td  
+              form(action='/delete' method='POST')
+                  input(type='hidden' name='id' value='#{purchase._id}')
+                  button.btn.btn-danger(type='submit') Delete
+include footer
+script(src='/css/bootstrap/js/bootstrap.bundle.js')

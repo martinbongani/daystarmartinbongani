@@ -16,6 +16,8 @@ require('dotenv').config();
 const AdminRegister = require('./models/AdminRegister');
 const BabyRegister = require('./models/BabyRegister');
 const SitterRegister = require('./models/SitterRegister');
+const PurchaseRegister = require('./models/PurchaseRegister');
+const DollRegister = require('./models/DollRegister');
 
 // Import routes
 const registrationRoutes = require('./routes/registrationRoutes')
