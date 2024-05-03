@@ -19,9 +19,8 @@ main
           th Item
           th Unit
           th Quantity
-          th Rate
-          th Amount
-          th Update
+          th Rate (UGX)
+          th Amount (UGX)
           th Delete
       tbody#purchaseTableBody
         each purchase in purchases
@@ -31,8 +30,6 @@ main
             td #{purchase.quantity}
             td #{purchase.rate}
             td #{purchase.amount}
-            td
-              a.btn.btn-success(href='purchaseUpdate/'+purchase._id) Update
             td  
               form(action='/delete' method='POST')
                   input(type='hidden' name='id' value='#{purchase._id}')

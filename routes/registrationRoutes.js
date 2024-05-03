@@ -223,4 +223,60 @@ router.get("/adminDash", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   res.render("admin");
 });
 
+// Admin dash
+router.get(
+  "/adminDash",
+  connectEnsureLogin.ensureLoggedIn(),
+  async (req, res) => {
+    try {
+      let enrolledBabies = await BabyRegister.countDocuments({});
+      let babiesPresent = await BabyRegister.countDocuments({
+        status: "Present",
+      });
+      let babiesAbsent = await BabyRegister.countDocuments({
+        status: "Absent",
+      });
+      let enrolledSitters = await SitterRegister.countDocuments({});
+      let sittersPresent = await SitterRegister.countDocuments({
+        status: "Available",
+      });
+      let sittersAbsent = await SitterRegister.countDocuments({
+        status: "Off",
+      });
+      let dolls = await DollRegister.countDocuments({});
+
+      let totalRevenue = await BabyRegister.aggregate([
+        { $group: { _id: null, totalFees: { $sum: "$fee" } } },
+      ]);
+
+      let totalExpenses = await PurchaseRegister.aggregate([
+        { $group: { _id: null, totalExpenses: { $sum: "$amount" } } },
+      ]);
+
+      let dollExpenses = await DollRegister.aggregate([
+        { $group: { _id: null, totalExpenses: { $sum: "$amount" } } },
+      ]);
+
+      console.log("Revenue", totalRevenue);
+      console.log("Expenses", totalExpenses);
+      res.render("admin", {
+        totalRevenue: totalRevenue[0],
+        totalExpenses: totalExpenses[0],
+        dollExpenses: dollExpenses[0],
+        enrolledBabies,
+        babiesPresent,
+        babiesAbsent,
+        enrolledSitters,
+        sittersPresent,
+        sittersAbsent,
+        dolls,
+      });
+    } catch (error) {
+      res.status(400).send("Unable to find details in the db");
+      console.log("--------------", error);
+    }
+  }
+);
+
+
 module.exports = router;
