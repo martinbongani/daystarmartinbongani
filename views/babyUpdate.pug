@@ -28,8 +28,8 @@ main
         div(style='flex-basis: 48%')
           label(for='gender') Gender:
           select#gender(name='gender')
-            option(value='male' selected= baby.gender=== 'male') Male
-            option(value='female' selected= baby.gender=== 'female') Female
+            option(value='Male' selected= baby.gender=== 'male') Male
+            option(value='Female' selected= baby.gender=== 'female') Female
       label(for='address') Address:
       input#address(type='text' name='address' value=baby.address rows='1')
       .form-row
@@ -90,16 +90,16 @@ main
         label Who has parental responsibility?
         .form-check
           input#father.form-check-input(type='radio' name='parentResponsibility' value='father' checked= baby.parentResponsibility=== 'father')
-          label.form-check-label(for='father') Father
+          label.form-check-label(for='Father') Father
         .form-check
           input#mother.form-check-input(type='radio' name='parentResponsibility' value='mother' checked= baby.parentResponsibility=== 'mother')
-          label.form-check-label(for='mother') Mother
+          label.form-check-label(for='Mother') Mother
         .form-check
           input#father.form-check-input(type='radio' name='parentResponsibility' value='both' checked= baby.parentResponsibility=== 'both')
-          label.form-check-label(for='both') Both
+          label.form-check-label(for='Both') Both
         .form-check
           input#mother.form-check-input(type='radio' name='parentResponsibility' value='other' checked= baby.parentResponsibility=== 'other')
-          label.form-check-label(for='others') Others
+          label.form-check-label(for='Others') Others
       button.btn-babyReg(type='submit')
         | Update Baby
 include footer

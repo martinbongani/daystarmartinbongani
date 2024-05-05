@@ -2,7 +2,7 @@ doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Sitters Available
+  title Sitters Off
   link(rel='stylesheet' href='/css/style.css')
   link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
@@ -12,29 +12,27 @@ header
   include userNav
 main
   .container-fluid
-    h3 Sitters Checked-in
+    h3 Sitters Checked-out
     table.table.table-striped
       thead
         tr
           th Sitter Name
           th Sitter Number
           th Address
-          th Arrival Time 
-          th Assigned Babies
+          th Departure Time 
           th Status 
-          th Check-out
+          th Check-in
       tbody#sitterTableBody
         if sitters.length 
           each sitter in sitters
-            if sitter.status === 'Available'
+            if sitter.status === 'Off'
               tr
                 td #{sitter.sitterName}
                 td #{sitter.sitterNumber}
                 td #{sitter.address}
-                td #{sitter.arrivalTime}
-                td #{sitter.assignedBabies}
+                td #{sitter.departureTime}
                 td #{sitter.status}
                 td
-                  a.btn.btn-secondary(href='/checkOutSitter/'+sitter._id) Check-out
+                  a.btn.btn-secondary(href='/checkInSitter/'+sitter._id) Check-in
 include footer
 script(src='/css/bootstrap/js/bootstrap.bundle.js')

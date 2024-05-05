@@ -2,7 +2,7 @@ doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Babies Present
+  title Babies Absent
   link(rel='stylesheet' href='/css/style.css')
   link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
@@ -12,34 +12,30 @@ header
   include userNav
 main
   .container-fluid
-    h3 Babies Checked-in
+    h3 Babies Checked-out
     table.table.table-striped
       thead
         tr
           th Baby Name
           th Baby Number
           th Address
-          th Brought By
-          th Stay Period
-          th Arrival Time 
-          th Fee (UGX) 
-          th Sitter
+          th Taken By
+          th Departure Time 
+          th Comment 
           th Status 
-          th Check-out
+          th Check-in
       tbody#babyTableBody
           each baby in babies
-            if baby.status === 'Present'
+            if baby.status === 'Absent'
               tr
                 td #{baby.firstName+' '+baby.lastName}
                 td #{baby.babyNumber}
                 td #{baby.address}
-                td #{baby.broughtBy}
-                td #{baby.stayPeriod}
-                td #{baby.arrivalTime}
-                td #{baby.fee}
-                td #{baby.sitter}
+                td #{baby.takenBy}
+                td #{baby.departureTime}
+                td #{baby.comment}
                 td #{baby.status}
                 td
-                  a.btn.btn-secondary(href='/checkOutBaby/'+baby._id) Check-out
+                  a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
 include footer
 script(src='/css/bootstrap/js/bootstrap.bundle.js')

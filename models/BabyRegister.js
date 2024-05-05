@@ -105,10 +105,10 @@ const babyRegistrationSchema = new mongoose.Schema({
         type:Number,
         trim:true
     },
-    // sitter:{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "SitterRegister"
-    // },
+    sitter:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "SitterRegister"
+    }],
     takenBy:{
         type:String,
         trim:true
@@ -123,9 +123,9 @@ const babyRegistrationSchema = new mongoose.Schema({
     },
     status:{
         type:String,
-        default:"Present",
-        enum:["Present", "Absent"],
-    },
+        default:"Absent",
+        enum:["Present", "Absent"]
+    }
 
 });
 

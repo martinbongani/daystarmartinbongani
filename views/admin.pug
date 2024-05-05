@@ -16,7 +16,25 @@ main.mainAdmin
   .container-adminDash
     .section
       h2 Updates
-      #realtime-cards-container.cards-container
+      .cards-container
+        .card-toDo
+          h3 Total Revenue 
+          //- p Shs #{(totalRevenue.totalFees)}
+        .card-toDo 
+          h3 Total Expenses 
+          //- p Shs #{(totalExpenses.totalExpenses)+(dollExpenses.totalExpenses)}  
+        .card-toDo 
+          h3 Babies Enrolled 
+          p #{enrolledBabies}
+        .card-toDo 
+          h3 Babies Present 
+          p #{babiesPresent}
+        .card-toDo 
+          h3 Sitters Enrolled 
+          p #{enrolledSitters}  
+        .card-toDo 
+          h3 Sitters Present 
+          p #{sittersPresent}  
     .section
       h2 To-Do List
       input#taskInput(type='text' placeholder='Add new task...')

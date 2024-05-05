@@ -4,14 +4,14 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     // Simulated real-time updates data
-    const updatesData = [
-      { type: 'Total Revenue', count: 'Shs 55,356,000' },
-      { type: 'Expenses', count: 'Shs 29,635,500' },
-      { type: "Babies Enrolled", count: 165 },
-      { type: "Babies Present", count: 153 },
-      { type: "Sitters Enrolled", count: 65 },
-      { type: "Sitters Present", count: 56 },
-    ];
+    // const updatesData = [
+    //   { type: 'Total Revenue', count: 'Shs 55,356,000' },
+    //   { type: 'Expenses', count: 'Shs 29,635,500' },
+    //   { type: "Babies Enrolled", count: 165 },
+    //   { type: "Babies Present", count: 153 },
+    //   { type: "Sitters Enrolled", count: 65 },
+    //   { type: "Sitters Present", count: 56 },
+    // ];
 
     // Display real-time updates cards
     updatesData.forEach((update) => {

@@ -2,7 +2,7 @@ doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Purchase Add
+  title Purchase Update
   link(rel='stylesheet' href='/css/style.css')
   link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
@@ -12,30 +12,28 @@ header
   include userNav
 main
   .container
-    h2 Add Purchase
-    form#registrationForm(onsubmit='return validateForm()' action='/purchaseAdd' method='POST')
+    h2 Purchase Update Form
+    form#registrationForm(onsubmit='return validateForm()' action='/purchasesUpdate?id='+purchase._id method='POST')
       .form-row
         div(style='flex-basis: 48%')
           label(for='item') Item:
           select#item(name='item')
-            option(value='') Select 
-            option(value='Fruits') Fruits
-            option(value='Milk') Milk
-            option(value='Diapers') Diapers
-            option(value='')
+            option(value='Fruits' selected= purchase.item=== 'fruits') Fruits
+            option(value='Milk' selected= purchase.item=== 'milk') Milk
+            option(value='Diapers' selected= purchase.item=== 'diapers') Diapers
         div(style='flex-basis: 12%')
           label(for='unit') Unit:
-          input#unit(type='text' name='unit')
+          input#unit(type='text' name='unit' value=purchase.unit)
         div(style='flex-basis: 12%')
           label(for='quantity') Quantity:
-          input#quantity(type='number' name='quantity')
+          input#quantity(type='number' name='quantity' value=purchase.quantity)
         div(style='flex-basis: 24%')
           label(for='rate') Rate (UGX):
-          input#rate(type='number' name='rate')
+          input#rate(type='number' name='rate' value=purchase.rate)
         div(style='flex-basis: 36%')
           label(for='amount') Amount (UGX):
-          input#amount(type='number' name='amount')
-        button.btn.btn-success(type='submit' style='flex-basis: 12%') Add Purchase
+          input#amount(type='number' name='amount' value=purchase.amount readonly)
+        button.btn.btn-success(type='submit' style='flex-basis: 12%') Update Purchase
 include footer
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
 script(src='/js/addPurchase.js')

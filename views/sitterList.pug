@@ -20,10 +20,10 @@ main
           th Address
           th Date of Birth
           th Gender
-          th National ID Number
           th Phone 
           th Email
           th Next of Kin
+          th Status
           th Check-in
           th Update
           th Delete
@@ -35,19 +35,18 @@ main
             td #{sitter.address}
             td #{sitter.dob}
             td #{sitter.gender}
-            td #{sitter.nationalId}
             td #{sitter.contact}
             td #{sitter.email}
-            td #{sitter.nextOfKin}
+            td #{sitter.nextOfKin+'-'+ sitter.nextOfKinContact}
+            td #{sitter.status}
             td 
               a.btn.btn-secondary(href='/checkInSitter/'+sitter._id) Check-in
             td
               a.btn.btn-success(href='sittersUpdate/'+sitter._id) Update
             td  
-              form(action='/delete' method='POST')
-                  input(type='hidden' name='id' value='#{sitter._id}')
+              form(action='/deleted' method='POST')
+                  input(type='hidden' name='id' value=sitter._id)
                   button.btn.btn-danger(type='submit') Delete
 include footer
-script(src='https://cdn.jsdelivr.net/npm/chart.js')
 script(src='/js/sitterReport.js')
 script(src='/css/bootstrap/js/bootstrap.bundle.js')

@@ -24,7 +24,7 @@ main
           th Parent/Guardian 
           th Contact 
           th Email
-          //- th Status 
+          th Status 
           th Check-in
           th Update
           th Delete
@@ -41,14 +41,14 @@ main
                 td #{baby.fatherName}
                 td #{baby.fatherContact}
                 td #{baby.fatherEmail}
-                //- td
+                td #{baby.status}
                 td
                   a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
                 td
                   a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
                 td  
                   form(action='/delete' method='POST')
-                    input(type='hidden' name='id' value='#{baby._id}')
+                    input(type='hidden' name='id' value=baby._id)
                     button.btn.btn-danger(type='submit') Delete
             else if baby.parentResponsibility === 'mother'
                 tr
@@ -60,14 +60,14 @@ main
                   td #{baby.motherName}
                   td #{baby.motherContact}
                   td #{baby.motherEmail}
-                  //- td
+                  td #{baby.status}
                   td
                     a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
                   td
                     a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
                   td  
                     form(action='/delete' method='POST')
-                      input(type='hidden' name='id' value='#{baby._id}')
+                      input(type='hidden' name='id' value=baby._id)
                       button.btn.btn-danger(type='submit') Delete
             else if baby.parentResponsibility === 'both'
                 tr
@@ -79,16 +79,16 @@ main
                   td #{baby.fatherName+', '+ baby.motherName}
                   td #{baby.fatherContact+', '+ baby.motherContact}
                   td #{baby.fatherEmail+', '+ baby.motherEmail}
-                  //- td
+                  td #{baby.status}
                   td
                     a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
                   td
                     a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
                   td  
                     form(action='/delete' method='POST')
-                      input(type='hidden' name='id' value='#{baby._id}')
+                      input(type='hidden' name='id' value=baby._id)
                       button.btn.btn-danger(type='submit') Delete
-            else if baby.parentResponsibility === 'others'
+            else if baby.parentResponsibility === 'other'
                 tr
                   td #{baby.firstName+' '+ baby.lastName}
                   td #{baby.babyNumber}
@@ -98,55 +98,15 @@ main
                   td #{baby.guardianName}
                   td #{baby.guardianContact}
                   td #{baby.guardianEmail}
-                  //- td
+                  td #{baby.status}
                   td
                     a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
                   td
                     a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
                   td  
                     form(action='/delete' method='POST')
-                      input(type='hidden' name='id' value='#{baby._id}')
+                      input(type='hidden' name='id' value=baby._id)
                       button.btn.btn-danger(type='submit') Delete
-                      
-    //- h3 Babies Checked-in
-    //- table.table.table-striped
-    //-   thead
-    //-     tr
-    //-       th Baby Name
-    //-       th Baby Number
-    //-       th Address
-    //-       th Brought By
-    //-       th Stay Period
-    //-       th Arrival Time 
-    //-       th Fee (UGX) 
-    //-       th Sitter
-    //-       th Status 
-    //-       th Check-out
-    //-       th Update
-    //-       th Delete
-    //-   tbody#babyTableBody
-    //-     if babies.length 
-    //-       each baby in babies
-    //-         if baby.status === 'Present'
-    //-           tr
-    //-             td #{baby.firstName+' '+baby.lastName}
-    //-             td #{baby.babyNumber}
-    //-             td #{baby.address}
-    //-             td #{baby.broughtBy}
-    //-             td #{baby.stayPeriod}
-    //-             td #{baby.arrivalTime}
-    //-             td #{baby.fee}
-    //-             td #{baby.sitter}
-    //-             td #{baby.status}
-    //-             td
-    //-               a.btn.btn-secondary(href='/checkOutBaby/'+baby._id) Check-out
-    //-             td
-    //-               a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
-    //-             td  
-    //-               form(action='/delete' method='POST')
-    //-                 input(type='hidden' name='id' value='#{baby._id}')
-    //-                 button.btn.btn-danger(type='submit') Delete
-                  
 include footer
 //- script(src='/js/babyStatus.js')
 script(src='/css/bootstrap/js/bootstrap.bundle.js')

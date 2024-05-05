@@ -13,7 +13,7 @@ header
 main
   .container-babyReg
     h2.h2-babyReg DayStar Baby Check-in Form
-    form#registrationForm(action='/checkInBaby?id='+baby._id method='POST' onsubmit="return validateForm()")
+    form#registrationForm(onsubmit='return validateForm()' action='/checkInBaby?id='+baby._id method='POST')
       .form-row
         div(style='flex-basis: 48%')
           label(for='firstName') First Name:
@@ -36,8 +36,8 @@ main
           label(for='stayPeriod') Stay Period:
           select#stayPeriod(name='stayPeriod')
             option(value='') Select
-            option(value='halfDay') Half Day
-            option(value='fullDay') Full Day
+            option(value='Half Day') Half Day
+            option(value='Full Day') Full Day
       .form-row
         div(style='flex-basis: 48%')
           label(for='arrivalTime') Arrival Time:

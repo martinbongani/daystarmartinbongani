@@ -59,7 +59,7 @@ const sitterRegistrationSchema = new mongoose.Schema({
     },
     status:{
         type:String,
-        default:"Available",
+        default:"Off",
         enum:["Available", "Off"],
     },
     assignedBabies:[{
@@ -70,6 +70,10 @@ const sitterRegistrationSchema = new mongoose.Schema({
         type:String,
         trim:true
     },
+    departureTime:{
+        type:String,
+        trim:true
+    }
 });
 
 module.exports = mongoose.model("SitterRegister", sitterRegistrationSchema)

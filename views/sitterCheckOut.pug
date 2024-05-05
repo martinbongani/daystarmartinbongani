@@ -1,0 +1,36 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Sitter Check-out
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet' href='/css/babyRegistration.css')
+include navbar
+header
+  include userNav
+main
+  .container-babyReg
+    h2.h2-babyReg DayStar Sitter Check-out Form
+    form#registrationForm(action='/checkOutSitter?id='+sitter._id method='POST')
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='sitterName') Sitter Name:
+          input#sitterName(type='text' name='sitterName' value=sitter.sitterName readonly)
+        div(style='flex-basis: 48%')
+          label(for='sitterNumber') Sitter Number:
+          input#sitterNumber(type='text' name='sitterNumber' value=sitter.sitterNumber readonly)
+      .form-row
+        div(style='flex-basis: 48%')
+          label(for='address') Address:
+          input#address(type='text' name='address' value=sitter.address readonly)
+        div(style='flex-basis: 48%')
+          label(for='departureTime') Departure Time:
+          input#departureTime(type='time' name='departureTime')
+          div(style='flex-basis: 48%')
+            input#status(type='hidden' name='status' value='Off')
+      button.btn-babyReg(type='submit')
+        | Check-out Sitter
+include footer
+script(src='/css/bootstrap/js/bootstrap.bundle.js')

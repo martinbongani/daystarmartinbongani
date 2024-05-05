@@ -13,7 +13,7 @@ header
 main
   .container-babyReg
     h2.h2-babyReg DayStar Baby Registration Form
-    form#registrationForm(onsubmit='return validateForm()' action='/registerBaby' method='POST')
+    form#registrationForm(action='/registerBaby' method='POST')
       .form-row
         div(style='flex-basis: 48%')
           label(for='firstName') First Name:
@@ -29,8 +29,8 @@ main
           label(for='gender') Gender:
           select#gender(name='gender')
             option(value='') Select
-            option(value='male') Male
-            option(value='female') Female
+            option(value='Male') Male
+            option(value='Female') Female
       label(for='address') Address:
       input#address(type='text' name='address' rows='1')
       .form-row
@@ -91,16 +91,16 @@ main
         label Who has parental responsibility?
         .form-check
           input#father.form-check-input(type='radio' name='parentResponsibility' value='father' checked='')
-          label.form-check-label(for='father') Father
+          label.form-check-label(for='Father') Father
         .form-check
           input#mother.form-check-input(type='radio' name='parentResponsibility' value='mother')
-          label.form-check-label(for='mother') Mother
+          label.form-check-label(for='Mother') Mother
         .form-check
           input#father.form-check-input(type='radio' name='parentResponsibility' value='both')
-          label.form-check-label(for='both') Both
+          label.form-check-label(for='Both') Both
         .form-check
           input#mother.form-check-input(type='radio' name='parentResponsibility' value='other')
-          label.form-check-label(for='others') Others
+          label.form-check-label(for='Others') Others
       button.btn-babyReg(type='submit')
         | Register Baby
 include footer
