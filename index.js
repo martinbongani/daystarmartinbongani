@@ -3,7 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-const passport = require('passport')
+const passport = require('passport');
+const moment = require('moment');
 const expressSession = require("express-session")({
   secret:"secret",
   resave:false,
@@ -40,7 +41,8 @@ mongoose.connect(process.env.DATABASE,{
     .on('error', err => {
       console.error(`Connection error: ${err.message}`);
    });
-  
+
+app.locals.moment = moment;     
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 

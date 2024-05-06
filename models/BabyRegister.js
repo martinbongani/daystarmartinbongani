@@ -125,6 +125,10 @@ const babyRegistrationSchema = new mongoose.Schema({
         type:String,
         default:"Absent",
         enum:["Present", "Absent"]
+    },
+    dateOfPayment:{
+        type:Date,
+        trim:true
     }
 
 });
