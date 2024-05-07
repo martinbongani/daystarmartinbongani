@@ -6,7 +6,7 @@
 
         /* Form Styles */
         #transaction-form {
-            max-width: 800px;
+            width: 50%;
             margin: 0 auto;
             background-color: #fff;
             padding: 20px;
@@ -75,6 +75,6 @@
             #transaction-form label,
             #transaction-form input,
             #transaction-form select {
-                width: 100%; /* Full width on smaller screens */
+                width: 100%;
             }
         }

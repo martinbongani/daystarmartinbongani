@@ -8,31 +8,8 @@ head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   link(rel='stylesheet' href='/css/accounts.css')
 include navbar
-.container-shop
 header
-  nav.dash
-    ul
-      li
-        a(href='/admin') Dashboard
-      li
-        a(href='/adminRegistration') Admin Registration
-      li
-        a(href='/babyRegistration') Register Baby
-      li
-        a(href='/sitterRegistration') Register Sitter
-      li
-        a(href='/babyStatus') Baby Status
-      li
-        a(href='/babyReport') Baby Report
-      li
-        a(href='/sittterReport') Sitter Report
-      li
-        a(href='/accounts') Accounts
-      li
-        a(href='/inventory') Inventory
-      li
-        a(href='/liveFeed') Live Feed
-      button#logoutBtn Logout
+  include userNav
 main
   h2 Accounting Entry Form
   // Transaction Entry Form
@@ -48,20 +25,6 @@ main
     label(for='date') Date:
     input#date(type='date' name='date')
     button(type='submit') Add Transaction
-  // Transaction History Table
-  h3 Transaction History
-  table#transaction-table
-    thead
-      tr
-        th Description
-        th Amount (UGX)
-        th Type
-        th Date
-        th Running Balance (UGX)
-    tbody#history-body
 include footer
-script(src='https://cdn.jsdelivr.net/npm/chart.js')
-script(src='/js/logout.js')
 script(src='/js/accounts.js')
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
-script(src='/js/add.js')

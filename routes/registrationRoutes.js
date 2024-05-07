@@ -36,7 +36,12 @@ router.get(
   connectEnsureLogin.ensureLoggedIn(),
   async (req, res) => {
     try {
-      let babies = await BabyRegister.find();
+      let dateOfBirth = moment().format("DD-MM-YYYY");
+      if (req.query.dateOfBirth) {
+        dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
+        console.log("moment()")
+      }
+        let babies = await BabyRegister.find();
       res.render("babyList", { babies: babies });
     } catch (error) {
       res.status(400).send("Unable to fetch babies from the database");
@@ -47,6 +52,11 @@ router.get(
 // Updating baby in the db
 router.get("/babiesUpdate/:id", async (req, res) => {
   try {
+    let dateOfBirth = moment().format("DD-MM-YYYY");
+    if (req.query.dateOfBirth) {
+      dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
+      console.log("Format date")
+    }
     const babyUpdate = await BabyRegister.findOne({ _id: req.params.id });
     res.render("babyUpdate", { baby: babyUpdate });
   } catch (error) {
@@ -183,6 +193,9 @@ router.get(
   connectEnsureLogin.ensureLoggedIn(),
   async (req, res) => {
     try {
+      let dateOfBirth = moment().format("DD-MM-YYYY");
+      if (req.query.dateOfBirth)
+        dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
       let sitters = await SitterRegister.find();
       res.render("sitterList", { sitters: sitters });
     } catch (error) {
@@ -194,6 +207,9 @@ router.get(
 // Updating Sitters in the db
 router.get("/sittersUpdate/:id", async (req, res) => {
   try {
+    let dateOfBirth = moment().format("DD-MM-YYYY");
+    if (req.query.dateOfBirth)
+      dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
     const sitterUpdate = await SitterRegister.findOne({ _id: req.params.id });
     res.render("sitterUpdate", { sitter: sitterUpdate });
   } catch (error) {
@@ -298,6 +314,14 @@ router.get("/checkedOutSitters", async (req, res) => {
 router.get("/adminDash", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   res.render("admin");
 });
+
+// Accounts
+router.get(
+  "/accountsEntry", (req, res) => {
+    res.render("accounts");
+  }
+);
+
 
 // Admin dash
 router.get(

@@ -4,7 +4,6 @@ const multer = require("multer");
 const connectEnsureLogin = require("connect-ensure-login");
 
 // Import model
-const Purchase = require("../models/PurchaseRegister");
 const DollRegister = require("../models/DollRegister");
 const PurchaseRegister = require("../models/PurchaseRegister");
 
@@ -30,7 +29,7 @@ router.post(
   connectEnsureLogin.ensureLoggedIn(),
   async (req, res) => {
     try {
-      const purchase = new Purchase(req.body);
+      const purchase = new PurchaseRegister(req.body);
       console.log(purchase);
       await purchase.save();
       res.redirect("/purchasesList");
@@ -47,7 +46,7 @@ router.get(
   connectEnsureLogin.ensureLoggedIn(),
   async (req, res) => {
     try {
-      let purchases = await Purchase.find();
+      let purchases = await PurchaseRegister.find();
       res.render("purchaseList", { purchases: purchases });
     } catch (error) {
       res.status(400).send("Unable to fetch purchases from the database");
