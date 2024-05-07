@@ -20,6 +20,10 @@ const purchaseSchema = mongoose.Schema({
     amount:{
         type:Number,
         trim:true
+    },
+    dateOfPurchase:{
+        type:Date,
+        trim:true
     }
 });
 

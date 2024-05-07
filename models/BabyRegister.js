@@ -105,10 +105,10 @@ const babyRegistrationSchema = new mongoose.Schema({
         type:Number,
         trim:true
     },
-    sitter:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "SitterRegister"
-    }],
+    sitter:{
+        type:String,
+        trim:true
+    },
     takenBy:{
         type:String,
         trim:true

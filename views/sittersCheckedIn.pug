@@ -20,7 +20,7 @@ main
           th Sitter Number
           th Address
           th Arrival Time 
-          th Assigned Babies
+          //- th Assigned Babies
           th Status 
           th Check-out
       tbody#sitterTableBody
@@ -32,7 +32,7 @@ main
                 td #{sitter.sitterNumber}
                 td #{sitter.address}
                 td #{sitter.arrivalTime}
-                td #{sitter.assignedBabies}
+                //- td #{sitter.assignedBabies}
                 td #{sitter.status}
                 td
                   a.btn.btn-secondary(href='/checkOutSitter/'+sitter._id) Check-out

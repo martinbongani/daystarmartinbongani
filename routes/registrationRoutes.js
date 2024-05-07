@@ -6,7 +6,8 @@ const connectEnsureLogin = require("connect-ensure-login");
 // Import model
 const BabyRegister = require("../models/BabyRegister");
 const SitterRegister = require("../models/SitterRegister");
-const moment = require("moment");
+const PurchaseRegister = require("../models/PurchaseRegister");
+const DollRegister = require("../models/DollRegister");
 
 router.get("/registerBaby", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   res.render("babyRegistration");
@@ -375,7 +376,7 @@ router.get(
       totalFeesCollection.length > 0 ? totalFeesCollection : 0;
 
       // Set the selected date to match the purchase date
-      let expenseDetails = await PurchaseRegister.aggregate({
+      let expenseDetails = await PurchaseRegister.find({
         dateOfPurchase: selectedDate,
       });
       // Query for total expenses in a day

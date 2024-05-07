@@ -30,6 +30,10 @@ const dollRegistrationSchema = mongoose.Schema({
         default:"Available",
         enum:["Available", "Sold"],
     },
+    dateOfPurchase:{
+        type:Date,
+        trim:true
+    }
 });
 
 module.exports = mongoose.model("DollRegister", dollRegistrationSchema);

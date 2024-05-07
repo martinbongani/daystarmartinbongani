@@ -51,7 +51,7 @@ main
           select#sitter(type='text' name='sitter')
               if sitters.length
               each sitter in sitters
-                option(value=sitter._id) #{sitter.sitterName}
+                option(value=sitter_id) #{sitter.sitterName}
           div(style='flex-basis: 48%')
             input#status(type='hidden' name='status' value='Present')
       button.btn-babyReg(type='submit')

@@ -1,0 +1,85 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Reports
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  //- link(rel='stylesheet' href='/css/sitterReport.css')
+include navbar
+header
+  include userNav
+main
+  .container-fluid
+      h3 Reports
+      br
+
+      br
+      form.search(action='/collection')
+          div.form-row
+              div.col-md-8
+                  input.form-control(type="date" name="searchDate" value=defaultDate)
+              div.col-md-4
+                  input.btn.btn-primary.btn-block(type="submit")
+      br
+      h4.card-title Revenue Report
+      table.table.table-bordered
+          thead
+              tr
+                    th Date of Payment
+                    th Baby's Name
+                    th Amount
+          tbody
+          if collections.length
+              each collection in collections
+                  tr
+                        td #{moment(collection.dateOfPayment).format('DD-MM-YYY')}
+                        td #{collection.babyName}
+                        td #{collection.fee}
+              tr  
+                  th(colspan=2) Total Collections
+                  td #{new Intl.NumberFormat().format(totalFees.totalCollection)}
+
+      br
+      br
+      h4.card-title Expense Report
+      table.table.table-bordered
+          thead
+              tr
+                    th Date of Purchase
+                    th Item
+                    th Amount
+          tbody
+          if expenses.length
+              each expense in expenses
+                  tr
+                        td #{moment(expense.dateOfPurchase).format('DD-MM-YYY')}
+                        td #{expense.item}
+                        td #{expense.amount}
+              tr  
+                  th(colspan=2) Total Expenses
+                  td #{new Intl.NumberFormat().format(totalExpenses.totalGExpenses)}
+
+      br
+      br
+      h4.card-title Doll Expense Report
+      table.table.table-bordered
+          thead
+              tr
+                    th Date of Purchase
+                    th Item
+                    th Amount
+          tbody
+          if dollExpenseDetails.length
+              each dollExpense in dollExpenseDetails
+                  tr
+                        td #{moment(dollExpense.dateOfPurchase).format('DD-MM-YYY')}
+                        td #{dollExpense.item}
+                        td #{dollExpense.amount}
+              tr  
+                  th(colspan=2) Total Doll Expenses
+                  td #{new Intl.NumberFormat().format(dollTotalExpenses.totalDExpenses)}
+           
+include footer
+script(src='/css/bootstrap/js/bootstrap.bundle.js')
