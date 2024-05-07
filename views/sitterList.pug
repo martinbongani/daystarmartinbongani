@@ -18,9 +18,9 @@ main
         tr
           th Sitter Name
           th Sitter Number
-          th Address
-          th Date of Birth
-          th Gender
+          //- th Address
+          //- th Date of Birth
+          //- th Gender
           th Phone 
           th Email
           th Next of Kin
@@ -33,9 +33,9 @@ main
           tr
             td #{sitter.sitterName}
             td #{sitter.sitterNumber}
-            td #{sitter.address}
-            td #{sitter.dob}
-            td #{sitter.gender}
+            //- td #{sitter.address}
+            //- td #{moment(sitter.dob).format('DD-MM-YYYY')}
+            //- td #{sitter.gender}
             td #{sitter.contact}
             td #{sitter.email}
             td #{sitter.nextOfKin+'-'+ sitter.nextOfKinContact}

@@ -8,6 +8,7 @@ const BabyRegister = require("../models/BabyRegister");
 const SitterRegister = require("../models/SitterRegister");
 const PurchaseRegister = require("../models/PurchaseRegister");
 const DollRegister = require("../models/DollRegister");
+const AccountsRegister = require("../models/AccountsRegister");
 
 router.get("/registerBaby", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   res.render("babyRegistration");
@@ -319,6 +320,40 @@ router.get("/adminDash", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
 router.get(
   "/accountsEntry", (req, res) => {
     res.render("accounts");
+  }
+);
+
+// Installing async function
+router.post(
+  "/accountsEntry",
+  connectEnsureLogin.ensureLoggedIn(),
+  async (req, res) => {
+    try {
+      const transaction = new AccountsRegister(req.body);
+      console.log(transaction);
+      await transaction.save();
+      res.redirect("/accountsEntry");
+    } catch (error) {
+      res.status(400).send("Sorry, something went wrong");
+      console.log("Error entering the transaction", error);
+    }
+  }
+);
+
+// Fetching transactions from the db
+router.get(
+  "/financialReport",
+  connectEnsureLogin.ensureLoggedIn(),
+  async (req, res) => {
+    try {
+      // let dateOfBirth = moment().format("DD-MM-YYYY");
+      // if (req.query.dateOfBirth)
+      //   dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
+      let transactions = await AccountsRegister.find();
+      res.render("accountsReport", { transactions: transactions });
+    } catch (error) {
+      res.status(400).send("Unable to fetch transactions from the database");
+    }
   }
 );
 

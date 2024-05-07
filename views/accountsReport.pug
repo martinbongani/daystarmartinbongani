@@ -1,0 +1,72 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Reports
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  //- link(rel='stylesheet' href='/css/sitterReport.css')
+include navbar
+header
+  include userNav
+main
+  .container-fluid
+      h3 Reports
+      br
+      h4.card-title Revenue Report
+      table.table.table-bordered
+          thead
+              tr
+                    th Transaction Date
+                    th Description 
+                    th Amount
+          tbody
+          if transactions.length
+              each transaction in transactions
+                if transaction.catergory === 'income'
+                  tr
+                        td #{moment(income.transactionDate).format('DD-MM-YYY')}
+                        td #{income.description}
+                        td #{income.amount}
+
+      br
+      br
+      h4.card-title Expense Report
+      table.table.table-bordered
+          thead
+              tr
+                    th Transaction Date
+                    th Description
+                    th Amount
+          tbody
+          if transactions.length
+              each transaction in transactions
+                if transaction.catergory === 'expense'
+                  tr
+                        td #{moment(expense.transactionDate).format('DD-MM-YYY')}
+                        td #{expense.description}
+                        td #{expense.amount}
+include footer
+script(src='/css/bootstrap/js/bootstrap.bundle.js')
+
+    //-   br
+    //-   br
+    //-   h4.card-title Doll Expense Report
+    //-   table.table.table-bordered
+    //-       thead
+    //-           tr
+    //-                 th Date of Purchase
+    //-                 th Item
+    //-                 th Amount
+    //-       tbody
+    //-       if dollExpenseDetails.length
+    //-           each dollExpense in dollExpenseDetails
+    //-               tr
+    //-                     td #{moment(dollExpense.dateOfPurchase).format('DD-MM-YYY')}
+    //-                     td #{dollExpense.item}
+    //-                     td #{dollExpense.amount}
+    //-           tr  
+    //-               th(colspan=2) Total Doll Expenses
+    //-               td #{new Intl.NumberFormat().format(dollTotalExpenses.totalDExpenses)}
+           

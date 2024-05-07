@@ -12,19 +12,18 @@ header
   include userNav
 main
   h2 Accounting Entry Form
-  // Transaction Entry Form
-  form#transaction-form
+  form#transaction-form(action='/accountsEntry' method='POST')
     label(for='description') Description:
     input#description(type='text' name='description')
     label(for='amount') Amount (UGX):
     input#amount(type='number' name='amount')
-    label(for='type') Type:
-    select#type
+    label(for='classification') Classification:
+    select#classification(name='classification')
       option(value='expense') Expense
       option(value='income') Income
-    label(for='date') Date:
-    input#date(type='date' name='date')
+    label(for='transactionDate') Transaction Date:
+    input#transactionDate(type='date' name='transactionDate')
     button(type='submit') Add Transaction
 include footer
-script(src='/js/accounts.js')
+//- script(src='/js/accounts.js')
 script(src='/css/bootstrap/js/bootstrap.bundle.js')

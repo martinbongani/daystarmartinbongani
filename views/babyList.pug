@@ -22,10 +22,10 @@ main
           th Gender
           th Address
           th Parent/Guardian 
-          th Contact 
-          th Email
+          th Parent/Guardian Contact(s) 
+          //- th Email
           th Status 
-          th Check-in
+          //- th Check-in
           th Update
           th Delete
       tbody#babyTableBody
@@ -35,15 +35,15 @@ main
               tr
                 td #{baby.firstName+' '+baby.lastName}
                 td #{baby.babyNumber}
-                td #{baby.dob}
+                td #{moment(baby.dob).format('DD-MM-YYYY')}
                 td #{baby.gender}
                 td #{baby.address}
                 td #{baby.fatherName}
                 td #{baby.fatherContact}
-                td #{baby.fatherEmail}
+                //- td #{baby.fatherEmail}
                 td #{baby.status}
-                td
-                  a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
+                //- td
+                //-   a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
                 td
                   a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
                 td  
@@ -54,15 +54,15 @@ main
                 tr
                   td #{baby.firstName+' '+ baby.lastName}
                   td #{baby.babyNumber}
-                  td #{baby.dob}
+                  td #{moment(baby.dob).format('DD-MM-YYYY')}
                   td #{baby.gender}
                   td #{baby.address}
                   td #{baby.motherName}
                   td #{baby.motherContact}
-                  td #{baby.motherEmail}
+                  //- td #{baby.motherEmail}
                   td #{baby.status}
-                  td
-                    a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
+                  //- td
+                  //-   a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
                   td
                     a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
                   td  
@@ -73,15 +73,15 @@ main
                 tr
                   td #{baby.firstName+' '+baby.lastName}
                   td #{baby.babyNumber}
-                  td #{baby.dob}
+                  td #{moment(baby.dob).format('DD-MM-YYYY')}
                   td #{baby.gender}
                   td #{baby.address}
                   td #{baby.fatherName+', '+ baby.motherName}
                   td #{baby.fatherContact+', '+ baby.motherContact}
-                  td #{baby.fatherEmail+', '+ baby.motherEmail}
+                  //- td #{baby.fatherEmail+', '+ baby.motherEmail}
                   td #{baby.status}
-                  td
-                    a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
+                  //- td
+                  //-   a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
                   td
                     a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
                   td  
@@ -92,15 +92,15 @@ main
                 tr
                   td #{baby.firstName+' '+ baby.lastName}
                   td #{baby.babyNumber}
-                  td #{baby.dob}
+                  td #{moment(baby.dob).format('DD-MM-YYYY')}
                   td #{baby.gender}
                   td #{baby.address}
                   td #{baby.guardianName}
                   td #{baby.guardianContact}
-                  td #{baby.guardianEmail}
+                  //- td #{baby.guardianEmail}
                   td #{baby.status}
-                  td
-                    a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
+                  //- td
+                  //-   a.btn.btn-secondary(href='/checkInBaby/'+baby._id) Check-in
                   td
                     a.btn.btn-success(href='babiesUpdate/'+baby._id) Update
                   td  
