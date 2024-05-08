@@ -163,6 +163,7 @@ router.get("/checkedOutBabies", async (req, res) => {
   }
 });
 
+// Sitter routes
 router.get(
   "/registerSitter",
   connectEnsureLogin.ensureLoggedIn(),
@@ -316,7 +317,7 @@ router.get("/adminDash", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   res.render("admin");
 });
 
-// Accounts
+// Accounts routes
 router.get(
   "/accountsEntry", (req, res) => {
     res.render("accounts");
@@ -339,7 +340,6 @@ router.post(
     }
   }
 );
-
 
 // Fetching transactions from the db
 router.get(
@@ -393,6 +393,10 @@ router.post("/deleteTxn", async (req, res) => {
 });
 
 // Admin dash
+router.get("/adminDash", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
+  res.render("admin");
+});
+
 router.get(
   "/adminDash",
   connectEnsureLogin.ensureLoggedIn(),
@@ -409,9 +413,9 @@ router.get(
       let sittersPresent = await SitterRegister.countDocuments({
         status: "Available",
       });
-      let sittersAbsent = await SitterRegister.countDocuments({
-        status: "Off",
-      });
+      // let sittersAbsent = await SitterRegister.countDocuments({
+      //   status: "Off",
+      // });
 
       let totalIncome = await AccountsRegister.aggregate([
         { $group: { _id: null, totalIncome: { $sum: "$income" } } },
@@ -423,6 +427,13 @@ router.get(
 
       console.log("Income", totalIncome);
       console.log("Expenses", totalExpenses);
+      console.log("Enrolled Babies:", enrolledBabies);
+      console.log("Babies Present:", babiesPresent);
+      console.log("Enrolled Sitters:", enrolledSitters);
+      console.log("Sitters Present:", sittersPresent);
+      console.log("Total Income:", totalIncome);
+      console.log("Total Expenses:", totalExpenses);
+  
       res.render("admin", {
         totalIncome: totalIncome[0],
         totalExpenses: totalExpenses[0],
@@ -511,8 +522,5 @@ router.get(
 //   }
 // );
 
-router.get("/adminDash", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
-  res.render("admin");
-});
 
 module.exports = router;

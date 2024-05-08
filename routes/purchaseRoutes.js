@@ -57,7 +57,9 @@ router.get(
 // Updating purchase in the db
 router.get("/purchasesUpdate/:id", async (req, res) => {
   try {
-    const purchaseUpdate = await PurchaseRegister.findOne({ _id: req.params.id });
+    const purchaseUpdate = await PurchaseRegister.findOne({
+      _id: req.params.id,
+    });
     res.render("purchaseUpdate", { purchase: purchaseUpdate });
   } catch (error) {
     console.log("Error finding purchase", error);
@@ -77,7 +79,7 @@ router.post("/purchasesUpdate", async (req, res) => {
 // Delete Purchase Route
 router.post("/deleteItem", async (req, res) => {
   try {
-    await PurchaseRegister.deleteOne({_id:req.body.id});
+    await PurchaseRegister.deleteOne({ _id: req.body.id });
     res.redirect("back");
   } catch (error) {
     res.status(400).send("Unable to delete purchase from the db");
@@ -93,12 +95,12 @@ router.get("/dollAdd", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
 // Installing async function
 router.post(
   "/dollAdd",
-  connectEnsureLogin.ensureLoggedIn(), 
-  upload.single('imageUpload'),
+  connectEnsureLogin.ensureLoggedIn(),
+  upload.single("imageUpload"),
   async (req, res) => {
     try {
-      const doll = new DollRegister (req.body);
-      doll.imageUpload = req.file.path
+      const doll = new DollRegister(req.body);
+      doll.imageUpload = req.file.path;
       console.log("Doll added", doll);
       await doll.save();
       res.redirect("/dollsList");
@@ -122,5 +124,30 @@ router.get(
     }
   }
 );
+
+// Sell Doll Route
+router.post("/sellDoll/:id", async (req, res) => {
+  const dollId = req.params.id;
+
+  try {
+    const doll = await DollRegister.findById(dollId);
+    if (!doll) {
+      return res.status(404).send("Doll not found");
+    }
+
+    // Reduce the quantity (assuming quantity is a number field in your model)
+    if (doll.quantity > 0) {
+      doll.quantity -= 1;
+      await doll.save();
+    } else {
+      return res.status(400).send("No more dolls available to sell");
+    }
+
+    res.redirect("/dollsList"); // Redirect to the dolls list after selling
+  } catch (error) {
+    console.log("Error selling doll", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 module.exports = router;

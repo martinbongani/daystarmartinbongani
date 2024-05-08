@@ -35,6 +35,10 @@ main.mainAdmin
         .card-toDo 
           h3 Sitters Present 
           p #{sittersPresent}  
+include footer
+//- script(src='https://cdn.jsdelivr.net/npm/chart.js')
+script(src='/css/bootstrap/js/bootstrap.bundle.js')
+//- script(src='/js/admin.js')
     .section
       h2 To-Do List
       input#taskInput(type='text' placeholder='Add new task...')
@@ -48,7 +52,3 @@ main.mainAdmin
       option(value='line') Line Chart
       option(value='pie') Pie Chart
     canvas#graphical-report-chart
-include footer
-script(src='https://cdn.jsdelivr.net/npm/chart.js')
-script(src='/css/bootstrap/js/bootstrap.bundle.js')
-script(src='/js/admin.js')
