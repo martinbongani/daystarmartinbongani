@@ -2,7 +2,7 @@ doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Reports
+  title Accounts Report
   link(rel='stylesheet' href='/css/style.css')
   link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
@@ -12,42 +12,33 @@ header
   include userNav
 main
   .container-fluid
-      h3 Reports
-      br
-      h4.card-title Revenue Report
-      table.table.table-bordered
-          thead
-              tr
-                    th Transaction Date
-                    th Description 
-                    th Amount
-          tbody
-          if transactions.length
-              each transaction in transactions
-                if transaction.catergory === 'income'
-                  tr
-                        td #{moment(income.transactionDate).format('DD-MM-YYY')}
-                        td #{income.description}
-                        td #{income.amount}
-
-      br
-      br
-      h4.card-title Expense Report
+      h3.card-title Financial Report
       table.table.table-bordered
           thead
               tr
                     th Transaction Date
                     th Description
-                    th Amount
+                    th Transaction Ref
+                    th Classification
+                    th Amount (UGX)
+                    th Update 
+                    th Delete
           tbody
           if transactions.length
               each transaction in transactions
-                if transaction.catergory === 'expense'
                   tr
-                        td #{moment(expense.transactionDate).format('DD-MM-YYY')}
-                        td #{expense.description}
-                        td #{expense.amount}
-include footer
+                        td #{moment(transaction.transactionDate).format('DD-MM-YYYY')}
+                        td #{transaction.description}
+                        td #{transaction.transactionRef}
+                        td #{transaction.classification}
+                        td #{new Intl.NumberFormat().format(transaction.amount)}
+                        td
+                          a.btn.btn-success(href='transactionUpdate/'+transaction._id) Update
+                        td  
+                          form(action='/deleteTxn' method='POST')
+                            input(type='hidden' name='id' value=transaction._id)
+                            button.btn.btn-danger(type='submit') Delete
+include footer  
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
 
     //-   br
@@ -70,3 +61,22 @@ script(src='/css/bootstrap/js/bootstrap.bundle.js')
     //-               th(colspan=2) Total Doll Expenses
     //-               td #{new Intl.NumberFormat().format(dollTotalExpenses.totalDExpenses)}
            
+
+      //- br
+      //- br
+      //- h4.card-title Expense Report
+      //- table.table.table-bordered
+      //-     thead
+      //-         tr
+      //-               th Transaction Date
+      //-               th Description
+      //-               th Amount
+      //-     tbody
+      //-     if transactions.length
+      //-         each transaction in transactions
+      //-           if transaction.catergory === 'expense'
+      //-             tr
+      //-                   td #{moment(transaction.transactionDate).format('DD-MM-YYYY')}
+      //-                   td #{transaction.description}
+      //-                   td #{transaction.classification}
+      //-                   td #{transaction.amount}

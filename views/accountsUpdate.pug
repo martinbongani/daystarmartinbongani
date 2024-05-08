@@ -2,7 +2,7 @@ doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Accounting Entry Form
+  title Accounta Update Form
   link(rel='stylesheet' href='/css/style.css')
   link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
@@ -11,21 +11,21 @@ include navbar
 header
   include userNav
 main
-  h2 Transaction Entry Form
-  form#transaction-form(action='/accountsEntry' method='POST')
+  h2 Transaction Update Form
+  form#transaction-form(action='/transactionUpdate?id='+transaction._id method='POST')
     label(for='description') Description:
-    input#description(type='text' name='description')
+    input#description(type='text' name='description' value=transaction.description)
     label(for='transactionRef') Transaction Reference:
-    input#transactionRef(type='text' name='transactionRef')
+    input#transactionRef(type='text' name='transactionRef' value=transaction.transactionRef)
     label(for='amount') Amount (UGX):
-    input#amount(type='number' name='amount')
+    input#amount(type='number' name='amount' value=transaction.amount)
     label(for='classification') Classification:
     select#classification(name='classification')
-      option(value='expense') Expense
-      option(value='income') Income
+      option(value='expense' selected= transaction.classification=== 'expense') Expense
+      option(value='income' selected= transaction.classification=== 'income') Income
     label(for='transactionDate') Transaction Date:
-    input#transactionDate(type='date' name='transactionDate')
-    button(type='submit') Add Transaction
+    input#transactionDate(type='date' name='transactionDate' value=transaction.transactionDate)
+    button(type='submit') Update Transaction
 include footer
 //- script(src='/js/accounts.js')
 script(src='/css/bootstrap/js/bootstrap.bundle.js')

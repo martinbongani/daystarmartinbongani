@@ -19,10 +19,10 @@ main.mainAdmin
       .cards-container
         .card-toDo
           h3 Total Revenue 
-          //- p Shs #{(totalRevenue.totalFees)}
+          //- p Shs #{(totalIncome.totalIncome)}
         .card-toDo 
           h3 Total Expenses 
-          //- p Shs #{(totalExpenses.totalExpenses)+(dollExpenses.totalExpenses)}  
+          //- p Shs #{(totalExpenses.totalExpenses)}  
         .card-toDo 
           h3 Babies Enrolled 
           p #{enrolledBabies}
@@ -50,7 +50,5 @@ main.mainAdmin
     canvas#graphical-report-chart
 include footer
 script(src='https://cdn.jsdelivr.net/npm/chart.js')
-script(src='/js/logout.js')
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
-script(src='/js/add.js')
 script(src='/js/admin.js')

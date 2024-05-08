@@ -340,6 +340,7 @@ router.post(
   }
 );
 
+
 // Fetching transactions from the db
 router.get(
   "/financialReport",
@@ -348,7 +349,7 @@ router.get(
     try {
       // let dateOfBirth = moment().format("DD-MM-YYYY");
       // if (req.query.dateOfBirth)
-      //   dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
+        //   dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
       let transactions = await AccountsRegister.find();
       res.render("accountsReport", { transactions: transactions });
     } catch (error) {
@@ -357,6 +358,39 @@ router.get(
   }
 );
 
+// Updating transactions in the db
+router.get("/transactionUpdate/:id", async (req, res) => {
+  try {
+    // let dateOfBirth = moment().format("DD-MM-YYYY");
+    // if (req.query.dateOfBirth)
+    //   dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
+    const transactionUpdate = await AccountsRegister.findOne({ _id: req.params.id });
+    res.render("accountsUpdate", { transaction: transactionUpdate });
+  } catch (error) {
+    console.log("Error finding transaction", error);
+    res.status(400).send("Unable to find transaction in the db");
+  }
+});
+
+router.post("/transactionUpdate", async (req, res) => {
+  try {
+    await SitterRegister.findOneAndUpdate({ _id: req.query.id }, req.body);
+    res.redirect("/financialReport");
+  } catch (error) {
+    res.status(404).send("Unable to update transaction in the db");
+  }
+});
+
+// Delete transaction Route
+router.post("/deleteTxn", async (req, res) => {
+  try {
+    await AccountsRegister.deleteOne({ _id: req.body.id });
+    res.redirect("back");
+  } catch (error) {
+    res.status(400).send("Unable to delete transaction from the db");
+    console.log("Error deleting transaction", error);
+  }
+});
 
 // Admin dash
 router.get(
@@ -378,26 +412,20 @@ router.get(
       let sittersAbsent = await SitterRegister.countDocuments({
         status: "Off",
       });
-      let dolls = await DollRegister.countDocuments({});
 
-      let totalRevenue = await BabyRegister.aggregate([
-        { $group: { _id: null, totalFees: { $sum: "$fee" } } },
+      let totalIncome = await AccountsRegister.aggregate([
+        { $group: { _id: null, totalIncome: { $sum: "$income" } } },
       ]);
 
-      let totalExpenses = await PurchaseRegister.aggregate([
-        { $group: { _id: null, totalExpenses: { $sum: "$amount" } } },
+      let totalExpenses = await AccountsRegister.aggregate([
+        { $group: { _id: null, totalExpenses: { $sum: "$expense" } } },
       ]);
 
-      let dollExpenses = await DollRegister.aggregate([
-        { $group: { _id: null, totalExpenses: { $sum: "$amount" } } },
-      ]);
-
-      console.log("Revenue", totalRevenue);
+      console.log("Income", totalIncome);
       console.log("Expenses", totalExpenses);
       res.render("admin", {
-        totalRevenue: totalRevenue[0],
+        totalIncome: totalIncome[0],
         totalExpenses: totalExpenses[0],
-        dollExpenses: dollExpenses[0],
         enrolledBabies,
         babiesPresent,
         babiesAbsent,
@@ -413,75 +441,75 @@ router.get(
   }
 );
 
-router.get(
-  "/collection",
-  connectEnsureLogin.ensureLoggedIn(),
-  async (req, res) => {
-    try {
-      let selectedDate = moment().format("DD-MM-YYYY");
-      if (req.query.searchdate)
-        selectedDate = moment(req.query.searchdate).format("DD-MM-YYYY");
-      // Set the selected date to match the payment date
-      let collectionDetails = await BabyRegister.find({
-        dateOfPayment: selectedDate,
-      });
-      // Query for total revenue in a day
-      let totalFeesCollection = await BabyRegister.aggregate([
-        { $match: { dateOfPayment: new Date(selectedDate) } },
-        {
-          $group: { _id: "$dateOfPayment", totalCollection: { $sum: "$fee" } },
-        },
-      ]);
-      totalFeesCollection.length > 0 ? totalFeesCollection : 0;
+// router.get(
+//   "/collection",
+//   connectEnsureLogin.ensureLoggedIn(),
+//   async (req, res) => {
+//     try {
+//       let selectedDate = moment().format("DD-MM-YYYY");
+//       if (req.query.searchdate)
+//         selectedDate = moment(req.query.searchdate).format("DD-MM-YYYY");
+//       // Set the selected date to match the payment date
+//       let collectionDetails = await BabyRegister.find({
+//         dateOfPayment: selectedDate,
+//       });
+//       // Query for total revenue in a day
+//       let totalFeesCollection = await BabyRegister.aggregate([
+//         { $match: { dateOfPayment: new Date(selectedDate) } },
+//         {
+//           $group: { _id: "$dateOfPayment", totalCollection: { $sum: "$fee" } },
+//         },
+//       ]);
+//       totalFeesCollection.length > 0 ? totalFeesCollection : 0;
 
-      // Set the selected date to match the purchase date
-      let expenseDetails = await PurchaseRegister.find({
-        dateOfPurchase: selectedDate,
-      });
-      // Query for total expenses in a day
-      let totalExpenses = await PurchaseRegister.aggregate([
-        { $match: { dateOfPurchase: new Date(selectedDate) } },
-        {
-          $group: {
-            _id: "$dateOfPurchase",
-            totalGExpenses: { $sum: "$amount" },
-          },
-        },
-      ]);
-      totalExpenses.length > 0 ? totalExpenses : 0;
+//       // Set the selected date to match the purchase date
+//       let expenseDetails = await PurchaseRegister.find({
+//         dateOfPurchase: selectedDate,
+//       });
+//       // Query for total expenses in a day
+//       let totalExpenses = await PurchaseRegister.aggregate([
+//         { $match: { dateOfPurchase: new Date(selectedDate) } },
+//         {
+//           $group: {
+//             _id: "$dateOfPurchase",
+//             totalGExpenses: { $sum: "$amount" },
+//           },
+//         },
+//       ]);
+//       totalExpenses.length > 0 ? totalExpenses : 0;
 
-      // Set the selected date to match the purchase date
-      let dollExpenseDetails = await DollRegister.find({
-        dateOfPurchase: selectedDate,
-      });
-      // Query for total expenses in a day on dolls
-      let dollTotalExpenses = await DollRegister.aggregate([
-        { $match: { dateOfPurchase: new Date(selectedDate) } },
-        {
-          $group: {
-            _id: "$dateOfPurchase",
-            totalDExpenses: { $sum: "$amount" },
-          },
-        },
-      ]);
-      dollTotalExpenses.length > 0 ? totalExpenses : 0;
+//       // Set the selected date to match the purchase date
+//       let dollExpenseDetails = await DollRegister.find({
+//         dateOfPurchase: selectedDate,
+//       });
+//       // Query for total expenses in a day on dolls
+//       let dollTotalExpenses = await DollRegister.aggregate([
+//         { $match: { dateOfPurchase: new Date(selectedDate) } },
+//         {
+//           $group: {
+//             _id: "$dateOfPurchase",
+//             totalDExpenses: { $sum: "$amount" },
+//           },
+//         },
+//       ]);
+//       dollTotalExpenses.length > 0 ? totalExpenses : 0;
 
-      res.render("revenueReport", {
-        collections: collectionDetails,
-        expenses: expenseDetails,
-        dollExpenseDetails: dollExpenseDetails,
-        totalFees: totalFeesCollection[0],
-        totalExpenses: totalExpenses[0],
-        dollTotalExpenses: dollTotalExpenses[0],
-        defaultDate: selectedDate,
-        title: "Revenue",
-      });
-    } catch (error) {
-      console.log(error);
-      res.send("Failed to retrieve collections details");
-    }
-  }
-);
+//       res.render("revenueReport", {
+//         collections: collectionDetails,
+//         expenses: expenseDetails,
+//         dollExpenseDetails: dollExpenseDetails,
+//         totalFees: totalFeesCollection[0],
+//         totalExpenses: totalExpenses[0],
+//         dollTotalExpenses: dollTotalExpenses[0],
+//         defaultDate: selectedDate,
+//         title: "Revenue",
+//       });
+//     } catch (error) {
+//       console.log(error);
+//       res.send("Failed to retrieve collections details");
+//     }
+//   }
+// );
 
 router.get("/adminDash", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   res.render("admin");

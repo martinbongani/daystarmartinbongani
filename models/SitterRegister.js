@@ -62,10 +62,6 @@ const sitterRegistrationSchema = new mongoose.Schema({
         default:"Off",
         enum:["Available", "Off"],
     },
-    assignedBabies:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"BabyRegister"
-    }],
     arrivalTime:{
         type:String,
         trim:true

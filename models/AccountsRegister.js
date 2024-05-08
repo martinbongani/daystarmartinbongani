@@ -5,6 +5,10 @@ const accountsSchema = new mongoose.Schema({
       type:String,
       trim:true  
     },
+    transactionRef:{
+        type:String,
+        trim:true
+    },
     amount:{
         type:Number,
         trim:true

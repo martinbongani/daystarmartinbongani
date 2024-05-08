@@ -18,21 +18,17 @@ const dollRegistrationSchema = mongoose.Schema({
         trim:true
     },
     imageUpload:{
-        type:Number,
+        type:String,
         trim:true
     },
     description:{
-        type:Number,
+        type:String,
         trim:true
     },
     status:{
         type:String,
         default:"Available",
         enum:["Available", "Sold"],
-    },
-    dateOfPurchase:{
-        type:Date,
-        trim:true
     }
 });
 
