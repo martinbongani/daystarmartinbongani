@@ -105,8 +105,8 @@ router.post(
       await doll.save();
       res.redirect("/dollsList");
     } catch (error) {
-      res.status(400).send("Sorry, something went wrong");
-      console.log("Error adding doll", error);
+      res.status(400).render("addDoll");
+      console.log(error);
     }
   }
 );

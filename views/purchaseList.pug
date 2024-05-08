@@ -29,8 +29,8 @@ main
             td #{purchase.item}
             td #{purchase.unit}
             td #{purchase.quantity}
-            td #{purchase.rate}
-            td #{purchase.amount}
+            td #{new Intl.NumberFormat().format(purchase.rate)}
+            td #{new Intl.NumberFormat().format(purchase.amount)}
             td
               a.btn.btn-success(href='purchasesUpdate/'+purchase._id) Update
             td  

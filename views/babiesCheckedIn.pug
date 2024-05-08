@@ -36,7 +36,7 @@ main
                 td #{baby.broughtBy}
                 td #{baby.stayPeriod}
                 td #{baby.arrivalTime}
-                td #{baby.fee}
+                td #{new Intl.NumberFormat().format(baby.fee)} 
                 td #{baby.sitter}
                 td #{baby.status}
                 td

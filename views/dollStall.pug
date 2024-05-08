@@ -14,15 +14,15 @@ main
   .container-fluid
       h3 Doll Stall
       if dolls.length
-          .row.row-cols-1.row-cols-md-4.g-4
+          .row.row-cols-1.row-cols-md-3.g-4
               each doll in dolls
                   .col 
                       .card.card-custom.mx-2.mb-3.img-fluid(style='width: 18rem;')
                           img.card-img-top.img-fluid(src='/'+doll.imageUpload alt='image')
                           .card-body
                               h4.card-title #{doll.dollName}
-                              h6.card-text There are #{doll.quantity} dolls available
-                              p.card-text #{doll.description}
+                              h6.card-text #{doll.description}
+                              p.card-text #{doll.quantity} dolls in stock
                               a.btn.btn-primary(href='/sellDoll') Sell Doll
 include footer
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
