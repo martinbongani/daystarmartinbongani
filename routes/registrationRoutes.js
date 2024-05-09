@@ -347,9 +347,6 @@ router.get(
   connectEnsureLogin.ensureLoggedIn(),
   async (req, res) => {
     try {
-      // let dateOfBirth = moment().format("DD-MM-YYYY");
-      // if (req.query.dateOfBirth)
-        //   dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
       let transactions = await AccountsRegister.find();
       res.render("accountsReport", { transactions: transactions });
     } catch (error) {
@@ -361,9 +358,6 @@ router.get(
 // Updating transactions in the db
 router.get("/transactionUpdate/:id", async (req, res) => {
   try {
-    // let dateOfBirth = moment().format("DD-MM-YYYY");
-    // if (req.query.dateOfBirth)
-    //   dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
     const transactionUpdate = await AccountsRegister.findOne({ _id: req.params.id });
     res.render("accountsUpdate", { transaction: transactionUpdate });
   } catch (error) {
@@ -374,7 +368,7 @@ router.get("/transactionUpdate/:id", async (req, res) => {
 
 router.post("/transactionUpdate", async (req, res) => {
   try {
-    await SitterRegister.findOneAndUpdate({ _id: req.query.id }, req.body);
+    await AccountsRegister.findOneAndUpdate({ _id: req.query.id }, req.body);
     res.redirect("/financialReport");
   } catch (error) {
     res.status(404).send("Unable to update transaction in the db");

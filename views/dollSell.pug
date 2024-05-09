@@ -1,0 +1,34 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Sell Doll
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet' href='/css/sitterRegistration.css')
+include navbar
+header
+  include userNav  
+main
+  .container-sitterReg
+    h2.h2-sitterReg Sell Doll
+    form#registrationForm(onsubmit='return validateForm()' action='/sellDoll?id='+doll._id method='POST')
+      .form-row
+        div
+          label(for='dollName') Doll Name:
+          input#dollName(type='text' name='dollName' value=doll.dollName readonly)
+        div
+          label(for='description') Description:
+          input#description(type='text' name='description' value=doll.description readonly cols='30', rows='10')
+      .form-row
+        div
+          label(for='quantity') Quantity (Pcs):
+          input#quantity(type='number' name='quantity')
+        div
+          input#id(type='hidden' name='id' value='doll._id')
+          input#status(type='hidden' name='status' value='Sold')
+      button.btn-sitterReg(type='submit') Sell Doll
+include footer
+script(src='/css/bootstrap/js/bootstrap.bundle.js')
+//- script(src='/js/sitterRegistration.js')

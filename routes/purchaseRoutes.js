@@ -126,28 +126,51 @@ router.get(
 );
 
 // Sell Doll Route
-router.post("/sellDoll/:id", async (req, res) => {
-  const dollId = req.params.id;
-
+router.get("/sellDoll/:id", async (req, res) => {
   try {
-    const doll = await DollRegister.findById(dollId);
-    if (!doll) {
-      return res.status(404).send("Doll not found");
-    }
+    const sellDoll = await DollRegister.findOne({ _id: req.params.id });
+    res.render("dollSell", {
+      doll: sellDoll,
+    });
+  } catch (error) {
+    console.log("Error fetching data for sell", error);
+    res.status(400).send("Unable to find doll in the db");
+  }
+});
 
-    // Reduce the quantity (assuming quantity is a number field in your model)
-    if (doll.quantity > 0) {
-      doll.quantity -= 1;
-      await doll.save();
-    } else {
-      return res.status(400).send("No more dolls available to sell");
-    }
-
-    res.redirect("/dollsList"); // Redirect to the dolls list after selling
+router.post("/sellDoll", async (req, res) => {
+  try {
+    const {id, quantity, status} = req.body
+    await DollRegister.findOneAndUpdate(id, { quantity, status });
+    res.redirect("/dollsList");
   } catch (error) {
     console.log("Error selling doll", error);
-    res.status(500).send("Internal Server Error");
+    res.status(404).send("Unable to sell doll in the db");
   }
 });
 
 module.exports = router;
+
+// router.post("/sellDoll/:id", async (req, res) => {
+//   const dollId = req.params.id;
+
+//   try {
+//     const doll = await DollRegister.findById(dollId);
+//     if (!doll) {
+//       return res.status(404).send("Doll not found");
+//     }
+
+//     // Reduce the quantity (assuming quantity is a number field in your model)
+//     if (doll.quantity > 0) {
+//       doll.quantity -= 1;
+//       await doll.save();
+//     } else {
+//       return res.status(400).send("No more dolls available to sell");
+//     }
+
+//     res.redirect("/dollsList"); // Redirect to the dolls list after selling
+//   } catch (error) {
+//     console.log("Error selling doll", error);
+//     res.status(500).send("Internal Server Error");
+//   }
+// });

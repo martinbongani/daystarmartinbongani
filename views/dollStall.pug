@@ -22,7 +22,7 @@ main
                           .card-body
                               h4.card-title #{doll.dollName}
                               h6.card-text #{doll.description}
-                              p.card-text #{doll.quantity} dolls in stock
-                              a.btn.btn-primary(href='/sellDoll') Sell Doll
+                              p.card-text #{doll.quantity} in stock
+                              a.btn.btn-primary(href='/sellDoll/'+doll._id) Sell Doll
 include footer
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
