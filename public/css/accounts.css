@@ -1,9 +1,8 @@
-        /* General Styles */
-        h2, h3 {
-            color: #333;
+        h2 {
             text-align: center;
+            color:#007bff;
         }
-
+        
         /* Form Styles */
         #transaction-form {
             width: 50%;

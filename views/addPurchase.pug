@@ -11,11 +11,10 @@ include navbar
 header
   include userNav
 main
-  .container
-    h2 Add Purchase
     form#registrationForm(onsubmit='return validateForm()' action='/purchaseAdd' method='POST')
+      h2 Add Purchase
       .form-row
-        div(style='flex-basis: 48%')
+        div(style='flex-basis: 36%')
           label(for='item') Item:
           select#item(name='item')
             option(value='') Select 
@@ -35,7 +34,7 @@ main
         div(style='flex-basis: 36%')
           label(for='amount') Amount (UGX):
           input#amount(type='number' name='amount')
-        button.btn.btn-success(type='submit' style='flex-basis: 12%') Add Purchase
+        button.btn.btn-success(type='submit' style='flex-basis: 16%') Add Purchase
 include footer
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
 script(src='/js/addPurchase.js')

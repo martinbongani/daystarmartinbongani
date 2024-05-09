@@ -11,8 +11,8 @@ include navbar
 header
   include userNav
 main
-  h2 Transaction Entry Form
-  form#transaction-form(action='/accountsEntry' method='POST')
+  form#transaction-form(onsubmit='return validateForm()' action='/accountsEntry' method='POST')
+    h2 Transaction Entry Form
     label(for='description') Description:
     input#description(type='text' name='description')
     label(for='transactionRef') Transaction Reference:
@@ -27,5 +27,5 @@ main
     input#transactionDate(type='date' name='transactionDate')
     button(type='submit') Add Transaction
 include footer
-//- script(src='/js/accounts.js')
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
+script(src='/js/accounts.js')

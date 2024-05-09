@@ -12,7 +12,7 @@ header
   include userNav
 main
   h2 Transaction Update Form
-  form#transaction-form(action='/transactionUpdate?id='+transaction._id method='POST')
+  form#transaction-form(onsubmit='return validateForm()' action='/transactionUpdate?id='+transaction._id method='POST')
     label(for='description') Description:
     input#description(type='text' name='description' value=transaction.description)
     label(for='transactionRef') Transaction Reference:
@@ -27,5 +27,5 @@ main
     input#transactionDate(type='date' name='transactionDate' value=transaction.transactionDate)
     button(type='submit') Update Transaction
 include footer
-//- script(src='/js/accounts.js')
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
+script(src='/js/accounts.js')
