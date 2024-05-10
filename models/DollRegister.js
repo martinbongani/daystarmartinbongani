@@ -25,6 +25,10 @@ const dollRegistrationSchema = mongoose.Schema({
         type:String,
         trim:true
     },
+    quantityToSell:{
+        type:Number,
+        trim:true
+    },
     status:{
         type:String,
         default:"Available",

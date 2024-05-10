@@ -14,7 +14,7 @@ main
     form#registrationForm(onsubmit='return validateForm()' action='/purchaseAdd' method='POST')
       h2 Add Purchase
       .form-row
-        div(style='flex-basis: 36%')
+        div(style='flex-basis: 28%')
           label(for='item') Item:
           select#item(name='item')
             option(value='') Select 
@@ -23,15 +23,18 @@ main
             option(value='Diapers') Diapers
             option(value='')
         div(style='flex-basis: 12%')
+          label(for='dateOfPurchase') Date of Purchase:
+          input#dateOfPurchase(type='date' name='dateOfPurchase')
+        div(style='flex-basis: 12%')
           label(for='unit') Unit:
           input#unit(type='text' name='unit')
-        div(style='flex-basis: 12%')
+        div(style='flex-basis: 10%')
           label(for='quantity') Quantity:
           input#quantity(type='number' name='quantity')
-        div(style='flex-basis: 24%')
+        div(style='flex-basis: 16%')
           label(for='rate') Rate (UGX):
           input#rate(type='number' name='rate')
-        div(style='flex-basis: 36%')
+        div(style='flex-basis: 26%')
           label(for='amount') Amount (UGX):
           input#amount(type='number' name='amount')
         button.btn.btn-success(type='submit' style='flex-basis: 16%') Add Purchase

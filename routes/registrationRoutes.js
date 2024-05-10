@@ -37,12 +37,7 @@ router.get(
   connectEnsureLogin.ensureLoggedIn(),
   async (req, res) => {
     try {
-      let dateOfBirth = moment().format("DD-MM-YYYY");
-      if (req.query.dateOfBirth) {
-        dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
-        console.log("moment()")
-      }
-        let babies = await BabyRegister.find();
+      let babies = await BabyRegister.find();
       res.render("babyList", { babies: babies });
     } catch (error) {
       res.status(400).send("Unable to fetch babies from the database");
@@ -53,11 +48,11 @@ router.get(
 // Updating baby in the db
 router.get("/babiesUpdate/:id", async (req, res) => {
   try {
-    let dateOfBirth = moment().format("DD-MM-YYYY");
-    if (req.query.dateOfBirth) {
-      dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
-      console.log("Format date")
-    }
+    // let dateOfBirth = moment().format("DD-MM-YYYY");
+    // if (req.query.dateOfBirth) {
+    //   dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
+    //   console.log("Format date")
+    // }
     const babyUpdate = await BabyRegister.findOne({ _id: req.params.id });
     res.render("babyUpdate", { baby: babyUpdate });
   } catch (error) {
@@ -195,9 +190,9 @@ router.get(
   connectEnsureLogin.ensureLoggedIn(),
   async (req, res) => {
     try {
-      let dateOfBirth = moment().format("DD-MM-YYYY");
-      if (req.query.dateOfBirth)
-        dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
+      // let dateOfBirth = moment().format("DD-MM-YYYY");
+      // if (req.query.dateOfBirth)
+      //   dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
       let sitters = await SitterRegister.find();
       res.render("sitterList", { sitters: sitters });
     } catch (error) {
@@ -209,9 +204,9 @@ router.get(
 // Updating Sitters in the db
 router.get("/sittersUpdate/:id", async (req, res) => {
   try {
-    let dateOfBirth = moment().format("DD-MM-YYYY");
-    if (req.query.dateOfBirth)
-      dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
+    // let dateOfBirth = moment().format("DD-MM-YYYY");
+    // if (req.query.dateOfBirth)
+    //   dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
     const sitterUpdate = await SitterRegister.findOne({ _id: req.params.id });
     res.render("sitterUpdate", { sitter: sitterUpdate });
   } catch (error) {
@@ -427,7 +422,7 @@ router.get(
       console.log("Sitters Present:", sittersPresent);
       console.log("Total Income:", totalIncome);
       console.log("Total Expenses:", totalExpenses);
-  
+      
       res.render("admin", {
         totalIncome: totalIncome[0],
         totalExpenses: totalExpenses[0],
@@ -446,37 +441,95 @@ router.get(
   }
 );
 
+module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let dateOfBirth = moment().format("DD-MM-YYYY");
+// if (req.query.dateOfBirth) {
+//   dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
+//   console.log("moment()")
+// }
+
+
 // router.get(
-//   "/collection",
-//   connectEnsureLogin.ensureLoggedIn(),
-//   async (req, res) => {
-//     try {
-//       let selectedDate = moment().format("DD-MM-YYYY");
-//       if (req.query.searchdate)
-//         selectedDate = moment(req.query.searchdate).format("DD-MM-YYYY");
+  //   "/collection",
+  //   connectEnsureLogin.ensureLoggedIn(),
+  //   async (req, res) => {
+  //     try {
+    //       let selectedDate = moment().format("DD-MM-YYYY");
+    //       if (req.query.searchdate)
+      //         selectedDate = moment(req.query.searchdate).format("DD-MM-YYYY");
 //       // Set the selected date to match the payment date
 //       let collectionDetails = await BabyRegister.find({
-//         dateOfPayment: selectedDate,
+  //         dateOfPayment: selectedDate,
 //       });
 //       // Query for total revenue in a day
 //       let totalFeesCollection = await BabyRegister.aggregate([
-//         { $match: { dateOfPayment: new Date(selectedDate) } },
+  //         { $match: { dateOfPayment: new Date(selectedDate) } },
 //         {
-//           $group: { _id: "$dateOfPayment", totalCollection: { $sum: "$fee" } },
-//         },
-//       ]);
-//       totalFeesCollection.length > 0 ? totalFeesCollection : 0;
+  //           $group: { _id: "$dateOfPayment", totalCollection: { $sum: "$fee" } },
+  //         },
+  //       ]);
+  //       totalFeesCollection.length > 0 ? totalFeesCollection : 0;
 
-//       // Set the selected date to match the purchase date
-//       let expenseDetails = await PurchaseRegister.find({
-//         dateOfPurchase: selectedDate,
-//       });
-//       // Query for total expenses in a day
-//       let totalExpenses = await PurchaseRegister.aggregate([
-//         { $match: { dateOfPurchase: new Date(selectedDate) } },
+  //       // Set the selected date to match the purchase date
+  //       let expenseDetails = await PurchaseRegister.find({
+    //         dateOfPurchase: selectedDate,
+    //       });
+    //       // Query for total expenses in a day
+    //       let totalExpenses = await PurchaseRegister.aggregate([
+      //         { $match: { dateOfPurchase: new Date(selectedDate) } },
 //         {
-//           $group: {
-//             _id: "$dateOfPurchase",
+  //           $group: {
+    //             _id: "$dateOfPurchase",
 //             totalGExpenses: { $sum: "$amount" },
 //           },
 //         },
@@ -515,6 +568,3 @@ router.get(
 //     }
 //   }
 // );
-
-
-module.exports = router;

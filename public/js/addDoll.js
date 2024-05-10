@@ -1,24 +1,38 @@
 function validateForm() {
-    // Retrieve form input values
-    const dollName = document.getElementById('dollName').value.trim();
-    const quantity = document.getElementById('quantity').value.trim();
-    const rate = document.getElementById('rate').value.trim();
-    const amount = document.getElementById('amount').value.trim();
-    const imageUpload = document.getElementById('imageUpload').value.trim();
-    const description = document.getElementById('description').value.trim();
-    
-    // Check if any field is empty
-    if (!dollName || !quantity || !rate || !amount || !imageUpload || !description) {
+  // Get form inputs
+  const dollName = document.getElementById('dollName').value.trim();
+  const quantity = parseInt(document.getElementById('quantity').value);
+  const rate = parseInt(document.getElementById('rate').value);
+  const dateOfPurchase = document.getElementById('dateOfPurchase').value.trim();
+  const description = document.getElementById('description').value.trim();
+
+  // Check if any field is empty
+  if (!dollName || !quantity || !rate || !dateOfPurchase || !description) {
       alert('Please fill out all fields.');
       return false; // Prevent form submission
-    }
-    
-    // Check if quantity, rate, and amount are valid numbers
-    if (isNaN(quantity) || isNaN(rate) || isNaN(amount)) {
-      alert('Quantity, Rate, and Amount must be valid numbers.');
-      return false; // Prevent form submission
-    }
-    
-    // Validation passed, allow form submission
-    return true;
   }
+
+  // Check if quantity and rate are valid numbers
+  if (isNaN(quantity) || isNaN(rate) || quantity <= 0 || rate <= 0) {
+      alert('Please enter valid numbers for Quantity and Rate.');
+      return false; // Prevent form submission
+  }
+
+  return true; // Proceed with form submission
+}
+
+// Function to calculate amount based on quantity and rate
+function calculateAmount() {
+  const quantity = parseInt(document.getElementById('quantity').value);
+  const rate = parseInt(document.getElementById('rate').value);
+
+  // Calculate amount
+  const amount = quantity * rate;
+
+  // Display calculated amount in the amount input field
+  document.getElementById('amount').value = amount;
+}
+
+// Attach calculateAmount function to quantity and rate input fields (on input change)
+document.getElementById('quantity').addEventListener('input', calculateAmount);
+document.getElementById('rate').addEventListener('input', calculateAmount);

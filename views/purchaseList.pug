@@ -17,6 +17,7 @@ main
       thead
         tr
           th Item
+          th Date of Purchase
           th Unit
           th Quantity
           th Rate (UGX)
@@ -27,6 +28,7 @@ main
         each purchase in purchases
           tr
             td #{purchase.item}
+            td #{moment(purchase.dateOfPurchase).format('DD-MM-YYYY')}
             td #{purchase.unit}
             td #{purchase.quantity}
             td #{new Intl.NumberFormat().format(purchase.rate)}

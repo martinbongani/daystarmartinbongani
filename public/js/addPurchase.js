@@ -1,11 +1,12 @@
 function validateForm() {
     const item = document.getElementById('item').value;
+    const dateOfPurchase = document.getElementById('dateOfPurchase').value.trim();
     const unit = document.getElementById('unit').value.trim();
     const quantity = document.getElementById('quantity').value;
     const rate = document.getElementById('rate').value;
 
     // Validate required fields
-    if (!item || !unit || !quantity || !rate) {
+    if (!item || !dateOfPurchase || !unit || !quantity || !rate) {
         alert('Please fill out all required fields.');
         return false;
     }

@@ -2,7 +2,7 @@ doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Add Doll
+  title Doll Update
   link(rel='stylesheet' href='/css/style.css')
   link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
@@ -12,15 +12,15 @@ header
   include userNav  
 main
   .container-addDoll
-    h2.h2-addDoll Add Doll
-    form#registrationForm(onsubmit='return validateForm()' action='/dollAdd' method='POST' enctype='multipart/form-data')
+    h2.h2-addDoll Doll Update
+    form#registrationForm(onsubmit='return validateForm()' action='/dollsUpdate?id='+doll._id method='POST' enctype='multipart/form-data')
       .form-row
         div
           label(for='dollName') Doll Name:
-          input#dollName(type='text' name='dollName')
+          input#dollName(type='text' name='dollName' value=baby.dollName)
         div
           label(for='quantity') Quantity (Pcs):
-          input#quantity(type='number' name='quantity')
+          input#quantity(type='number' name='quantity' value=baby.quantity)
       .form-row
         div
           label(for='rate') Rate (UGX):

@@ -139,38 +139,39 @@ router.get("/sellDoll/:id", async (req, res) => {
 });
 
 router.post("/sellDoll", async (req, res) => {
+  const dollId = req.body.id; // Get the doll ID from the form body
+  const quantityToSell = req.body.quantity; // Get the quantity to sell from the form body
+
   try {
-    const {id, quantity, status} = req.body
-    await DollRegister.findOneAndUpdate(id, { quantity, status });
-    res.redirect("/dollsList");
+    // Find the doll by ID
+    const doll = await DollRegister.findById(dollId);
+
+    if (!doll) {
+      return res.status(404).send("Doll not found");
+    }
+
+    console.log("Current doll quantity:", doll.quantity);
+    console.log("Quantity to sell:", quantityToSell);
+
+    // Reduce the quantity of the doll
+    if (doll.quantity >= quantityToSell && quantityToSell > 0) {
+      doll.quantity -= quantityToSell;
+      if (doll.quantity === 0) {
+        doll.status = "Sold";
+      }
+      await doll.save();
+      res.redirect("/dollsList"); // Redirect to the dolls list after selling
+    } else {
+      console.log("Invalid quantity or insufficient stock");
+      console.log("Available quantity:", doll.quantity);
+      console.log("Requested quantity to sell:", quantityToSell);
+      return res.status(400).send("Invalid quantity or insufficient stock");
+    }
   } catch (error) {
     console.log("Error selling doll", error);
-    res.status(404).send("Unable to sell doll in the db");
+    res.status(404).send("Unable to sell doll");
   }
 });
 
 module.exports = router;
 
-// router.post("/sellDoll/:id", async (req, res) => {
-//   const dollId = req.params.id;
-
-//   try {
-//     const doll = await DollRegister.findById(dollId);
-//     if (!doll) {
-//       return res.status(404).send("Doll not found");
-//     }
-
-//     // Reduce the quantity (assuming quantity is a number field in your model)
-//     if (doll.quantity > 0) {
-//       doll.quantity -= 1;
-//       await doll.save();
-//     } else {
-//       return res.status(400).send("No more dolls available to sell");
-//     }
-
-//     res.redirect("/dollsList"); // Redirect to the dolls list after selling
-//   } catch (error) {
-//     console.log("Error selling doll", error);
-//     res.status(500).send("Internal Server Error");
-//   }
-// });
