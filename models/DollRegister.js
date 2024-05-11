@@ -19,14 +19,9 @@ const dollRegistrationSchema = mongoose.Schema({
     },
     imageUpload:{
         type:String,
-        trim:true
     },
     description:{
         type:String,
-        trim:true
-    },
-    quantityToSell:{
-        type:Number,
         trim:true
     },
     status:{

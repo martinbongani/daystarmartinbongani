@@ -48,11 +48,6 @@ router.get(
 // Updating baby in the db
 router.get("/babiesUpdate/:id", async (req, res) => {
   try {
-    // let dateOfBirth = moment().format("DD-MM-YYYY");
-    // if (req.query.dateOfBirth) {
-    //   dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
-    //   console.log("Format date")
-    // }
     const babyUpdate = await BabyRegister.findOne({ _id: req.params.id });
     res.render("babyUpdate", { baby: babyUpdate });
   } catch (error) {
@@ -190,9 +185,6 @@ router.get(
   connectEnsureLogin.ensureLoggedIn(),
   async (req, res) => {
     try {
-      // let dateOfBirth = moment().format("DD-MM-YYYY");
-      // if (req.query.dateOfBirth)
-      //   dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
       let sitters = await SitterRegister.find();
       res.render("sitterList", { sitters: sitters });
     } catch (error) {
@@ -204,9 +196,6 @@ router.get(
 // Updating Sitters in the db
 router.get("/sittersUpdate/:id", async (req, res) => {
   try {
-    // let dateOfBirth = moment().format("DD-MM-YYYY");
-    // if (req.query.dateOfBirth)
-    //   dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
     const sitterUpdate = await SitterRegister.findOne({ _id: req.params.id });
     res.render("sitterUpdate", { sitter: sitterUpdate });
   } catch (error) {
@@ -386,34 +375,23 @@ router.get("/adminDash", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   res.render("admin");
 });
 
-router.get(
-  "/adminDash",
-  connectEnsureLogin.ensureLoggedIn(),
-  async (req, res) => {
-    try {
-      let enrolledBabies = await BabyRegister.countDocuments({});
-      let babiesPresent = await BabyRegister.countDocuments({
-        status: "Present",
-      });
-      let babiesAbsent = await BabyRegister.countDocuments({
-        status: "Absent",
-      });
-      let enrolledSitters = await SitterRegister.countDocuments({});
-      let sittersPresent = await SitterRegister.countDocuments({
-        status: "Available",
-      });
-      // let sittersAbsent = await SitterRegister.countDocuments({
-      //   status: "Off",
-      // });
+router.get("/adminDash", connectEnsureLogin.ensureLoggedIn(), async (req, res) => {
+  try {
+    const enrolledBabies = await BabyRegister.countDocuments({});
+    const babiesPresent = await BabyRegister.countDocuments({ status: "Present" });
+    const enrolledSitters = await SitterRegister.countDocuments({});
+    const sittersPresent = await SitterRegister.countDocuments({ status: "Available" });
 
-      let totalIncome = await AccountsRegister.aggregate([
-        { $group: { _id: null, totalIncome: { $sum: "$income" } } },
-      ]);
+    const totalIncomeResult = await AccountsRegister.aggregate([
+      { $group: { _id: null, totalIncome: { $sum: "$income" } } }
+    ]);
 
-      let totalExpenses = await AccountsRegister.aggregate([
-        { $group: { _id: null, totalExpenses: { $sum: "$expense" } } },
-      ]);
+    const totalExpensesResult = await AccountsRegister.aggregate([
+      { $group: { _id: null, totalExpenses: { $sum: "$expense" } } }
+    ]);
 
+    const totalIncome = totalIncomeResult.length > 0 ? totalIncomeResult[0].totalIncome : 0;
+    const totalExpenses = totalExpensesResult.length > 0 ? totalExpensesResult[0].totalExpenses : 0;
       console.log("Income", totalIncome);
       console.log("Expenses", totalExpenses);
       console.log("Enrolled Babies:", enrolledBabies);
@@ -422,24 +400,75 @@ router.get(
       console.log("Sitters Present:", sittersPresent);
       console.log("Total Income:", totalIncome);
       console.log("Total Expenses:", totalExpenses);
-      
-      res.render("admin", {
-        totalIncome: totalIncome[0],
-        totalExpenses: totalExpenses[0],
-        enrolledBabies,
-        babiesPresent,
-        babiesAbsent,
-        enrolledSitters,
-        sittersPresent,
-        sittersAbsent,
-        dolls,
-      });
-    } catch (error) {
-      res.status(400).send("Unable to find details in the db");
-      console.log("--------------", error);
-    }
+
+    res.render("admin", {
+      enrolledBabies,
+      babiesPresent,
+      enrolledSitters,
+      sittersPresent,
+      totalIncome,
+      totalExpenses
+    });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).send("Internal Server Error");
   }
-);
+});
+
+// router.get(
+//   "/adminDash",
+//   connectEnsureLogin.ensureLoggedIn(),
+//   async (req, res) => {
+//     try {
+//       let enrolledBabies = await BabyRegister.countDocuments({});
+//       let babiesPresent = await BabyRegister.countDocuments({
+//         status: "Present",
+//       });
+//       let babiesAbsent = await BabyRegister.countDocuments({
+//         status: "Absent",
+//       });
+//       let enrolledSitters = await SitterRegister.countDocuments({});
+//       let sittersPresent = await SitterRegister.countDocuments({
+//         status: "Available",
+//       });
+//       // let sittersAbsent = await SitterRegister.countDocuments({
+//       //   status: "Off",
+//       // });
+
+//       let totalIncome = await AccountsRegister.aggregate([
+//         { $group: { _id: null, totalIncome: { $sum: "$income" } } },
+//       ]);
+
+//       let totalExpenses = await AccountsRegister.aggregate([
+//         { $group: { _id: null, totalExpenses: { $sum: "$expense" } } },
+//       ]);
+
+//       console.log("Income", totalIncome);
+//       console.log("Expenses", totalExpenses);
+//       console.log("Enrolled Babies:", enrolledBabies);
+//       console.log("Babies Present:", babiesPresent);
+//       console.log("Enrolled Sitters:", enrolledSitters);
+//       console.log("Sitters Present:", sittersPresent);
+//       console.log("Total Income:", totalIncome);
+//       console.log("Total Expenses:", totalExpenses);
+      
+//       res.render("admin", {
+//         totalIncome: totalIncome[0],
+//         totalExpenses: totalExpenses[0],
+//         enrolledBabies,
+//         babiesPresent,
+//         babiesAbsent,
+//         enrolledSitters,
+//         sittersPresent,
+//         sittersAbsent,
+//         dolls,
+//       });
+//     } catch (error) {
+//       res.status(400).send("Unable to find details in the db");
+//       console.log("--------------", error);
+//     }
+//   }
+// );
 
 module.exports = router;
 

@@ -100,7 +100,7 @@ router.post(
   async (req, res) => {
     try {
       const doll = new DollRegister(req.body);
-      doll.imageUpload = req.file.path;
+      doll.imageUpload = req.file.path; // Sends image url to db
       console.log("Doll added", doll);
       await doll.save();
       res.redirect("/dollsList");

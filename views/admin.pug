@@ -8,10 +8,9 @@ head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   link(rel='stylesheet' href='/css/admin.css')
 include navbar
-.container-fluid
+//- .container-fluid
 header
   include userNav
-// Main Content
 main.mainAdmin
   .container-adminDash
     .section
@@ -19,10 +18,10 @@ main.mainAdmin
       .cards-container
         .card-toDo
           h3 Total Revenue 
-          //- p Shs #{(totalIncome.totalIncome)}
+          p Shs #{totalIncome}
         .card-toDo 
           h3 Total Expenses 
-          //- p Shs #{(totalExpenses.totalExpenses)}  
+          p Shs #{totalExpenses}  
         .card-toDo 
           h3 Babies Enrolled 
           p #{enrolledBabies}
@@ -35,10 +34,6 @@ main.mainAdmin
         .card-toDo 
           h3 Sitters Present 
           p #{sittersPresent}  
-include footer
-//- script(src='https://cdn.jsdelivr.net/npm/chart.js')
-script(src='/css/bootstrap/js/bootstrap.bundle.js')
-//- script(src='/js/admin.js')
     .section
       h2 To-Do List
       input#taskInput(type='text' placeholder='Add new task...')
@@ -52,3 +47,7 @@ script(src='/css/bootstrap/js/bootstrap.bundle.js')
       option(value='line') Line Chart
       option(value='pie') Pie Chart
     canvas#graphical-report-chart
+include footer
+//- script(src='https://cdn.jsdelivr.net/npm/chart.js')
+script(src='/css/bootstrap/js/bootstrap.bundle.js')
+//- script(src='/js/admin.js')

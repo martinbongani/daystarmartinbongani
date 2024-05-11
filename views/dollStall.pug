@@ -6,7 +6,6 @@ head
   link(rel='stylesheet' href='/css/style.css')
   link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-  //- link(rel='stylesheet' href='/css/sitterReport.css')
 include navbar
 header
   include userNav
@@ -18,7 +17,7 @@ main
               each doll in dolls
                   .col 
                       .card.card-custom.mx-2.mb-3.img-fluid(style='width: 18rem;')
-                          img.card-img-top.img-fluid(src='/'+doll.imageUpload alt='image')
+                          img.card-img-top.img-fluid(src='/'+doll.imageUpload alt='dollImage')
                           .card-body
                               h4.card-title #{doll.dollName}
                               h6.card-text #{doll.description}

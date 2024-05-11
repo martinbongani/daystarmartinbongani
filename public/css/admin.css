@@ -1,7 +1,10 @@
 .mainAdmin {
     margin: auto;
     padding: 20px 70px 20px 70px;
-}
+    background-image: url('https://images.pexels.com/photos/1337387/pexels-photo-1337387.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
   .container-adminDash {
     display: flex;
     gap: 20px;

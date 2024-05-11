@@ -10,7 +10,7 @@ head
   link(rel='stylesheet' href='/css/login.css')
 include navbar
 .container-shop
-main
+main.mainlogin
   .container-login
     h2.h2-login Login
     form#form(action="/login" method="POST")
@@ -22,7 +22,7 @@ main
       button.btn.btn-primary.col-12(type='submit') Login
       br
       br
-      a(href='/registerAdmin' style='text-decoration:none') Register as a new user
+      a(href='/registerAdmin' style='text-decoration:none; color:orange;') Register as a new user
 include footer
 script(src='/js/login.js')
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
