@@ -6,8 +6,6 @@ const connectEnsureLogin = require("connect-ensure-login");
 // Import model
 const BabyRegister = require("../models/BabyRegister");
 const SitterRegister = require("../models/SitterRegister");
-const PurchaseRegister = require("../models/PurchaseRegister");
-const DollRegister = require("../models/DollRegister");
 const AccountsRegister = require("../models/AccountsRegister");
 
 router.get("/registerBaby", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
@@ -371,104 +369,48 @@ router.post("/deleteTxn", async (req, res) => {
 });
 
 // Admin dash
-router.get("/adminDash", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
-  res.render("admin");
-});
-
-router.get("/adminDash", connectEnsureLogin.ensureLoggedIn(), async (req, res) => {
-  try {
-    const enrolledBabies = await BabyRegister.countDocuments({});
-    const babiesPresent = await BabyRegister.countDocuments({ status: "Present" });
-    const enrolledSitters = await SitterRegister.countDocuments({});
-    const sittersPresent = await SitterRegister.countDocuments({ status: "Available" });
-
-    const totalIncomeResult = await AccountsRegister.aggregate([
-      { $group: { _id: null, totalIncome: { $sum: "$income" } } }
-    ]);
-
-    const totalExpensesResult = await AccountsRegister.aggregate([
-      { $group: { _id: null, totalExpenses: { $sum: "$expense" } } }
-    ]);
-
-    const totalIncome = totalIncomeResult.length > 0 ? totalIncomeResult[0].totalIncome : 0;
-    const totalExpenses = totalExpensesResult.length > 0 ? totalExpensesResult[0].totalExpenses : 0;
-      console.log("Income", totalIncome);
-      console.log("Expenses", totalExpenses);
+router.get(
+  "/adminDash",
+  connectEnsureLogin.ensureLoggedIn(),
+  async (req, res) => {
+    try {
+      // let totalIncome = await AccountsRegister.aggregate([
+      //   { $group: { _id: null, totalIncome: { $sum: "$income" } } },
+      // ]);  
+      // let totalExpenses = await AccountsRegister.aggregate([
+      //   { $group: { _id: null, totalExpenses: { $sum: "$expense" } } },
+      // ]);
+      let enrolledBabies = await BabyRegister.countDocuments({});
+      let babiesPresent = await BabyRegister.countDocuments({
+        status: "Present",
+      });
+      let enrolledSitters = await SitterRegister.countDocuments({});
+      let sittersPresent = await SitterRegister.countDocuments({
+        status: "Available",
+      });
+       
+      // console.log("Income", totalIncome);
+      // console.log("Expenses", totalExpenses);
       console.log("Enrolled Babies:", enrolledBabies);
       console.log("Babies Present:", babiesPresent);
       console.log("Enrolled Sitters:", enrolledSitters);
       console.log("Sitters Present:", sittersPresent);
       console.log("Total Income:", totalIncome);
       console.log("Total Expenses:", totalExpenses);
-
-    res.render("admin", {
-      enrolledBabies,
-      babiesPresent,
-      enrolledSitters,
-      sittersPresent,
-      totalIncome,
-      totalExpenses
-    });
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-// router.get(
-//   "/adminDash",
-//   connectEnsureLogin.ensureLoggedIn(),
-//   async (req, res) => {
-//     try {
-//       let enrolledBabies = await BabyRegister.countDocuments({});
-//       let babiesPresent = await BabyRegister.countDocuments({
-//         status: "Present",
-//       });
-//       let babiesAbsent = await BabyRegister.countDocuments({
-//         status: "Absent",
-//       });
-//       let enrolledSitters = await SitterRegister.countDocuments({});
-//       let sittersPresent = await SitterRegister.countDocuments({
-//         status: "Available",
-//       });
-//       // let sittersAbsent = await SitterRegister.countDocuments({
-//       //   status: "Off",
-//       // });
-
-//       let totalIncome = await AccountsRegister.aggregate([
-//         { $group: { _id: null, totalIncome: { $sum: "$income" } } },
-//       ]);
-
-//       let totalExpenses = await AccountsRegister.aggregate([
-//         { $group: { _id: null, totalExpenses: { $sum: "$expense" } } },
-//       ]);
-
-//       console.log("Income", totalIncome);
-//       console.log("Expenses", totalExpenses);
-//       console.log("Enrolled Babies:", enrolledBabies);
-//       console.log("Babies Present:", babiesPresent);
-//       console.log("Enrolled Sitters:", enrolledSitters);
-//       console.log("Sitters Present:", sittersPresent);
-//       console.log("Total Income:", totalIncome);
-//       console.log("Total Expenses:", totalExpenses);
       
-//       res.render("admin", {
-//         totalIncome: totalIncome[0],
-//         totalExpenses: totalExpenses[0],
-//         enrolledBabies,
-//         babiesPresent,
-//         babiesAbsent,
-//         enrolledSitters,
-//         sittersPresent,
-//         sittersAbsent,
-//         dolls,
-//       });
-//     } catch (error) {
-//       res.status(400).send("Unable to find details in the db");
-//       console.log("--------------", error);
-//     }
-//   }
-// );
+      res.render("admin", {
+        // totalIncome: totalIncome[0],
+        // totalExpenses: totalExpenses[0],
+        enrolledBabies,
+        babiesPresent,
+        enrolledSitters,
+        sittersPresent,
+      });
+    } catch (error) {
+      console.error('Error fetching admin dashboard details:', error);
+      res.status(400).send('Unable to fetch details from the database');    }
+  }
+);
 
 module.exports = router;
 

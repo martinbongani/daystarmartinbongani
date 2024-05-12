@@ -20,6 +20,14 @@ const dollRegistrationSchema = mongoose.Schema({
     imageUpload:{
         type:String,
     },
+    dateOfPurchase:{
+        type:Date,
+        trim:true
+    },
+    dateOfSell:{
+        type:Date,
+        trim:true
+    },
     description:{
         type:String,
         trim:true

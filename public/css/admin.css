@@ -1,7 +1,7 @@
 .mainAdmin {
     margin: auto;
     padding: 20px 70px 20px 70px;
-    background-image: url('https://images.pexels.com/photos/1337387/pexels-photo-1337387.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background-image: url('https://images.unsplash.com/photo-1616666428759-679a7d578307?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -38,7 +38,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  .graph-container {
+  /* .graph-container {
     width: 75%;
     margin: 20px auto;
     padding: 20px;
@@ -47,15 +47,15 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
-  }
+  } */
 
-  canvas {
+  /* canvas {
         width: 100% !important;
-        height: 400px !important; /* Set desired height for the chart */
+        height: 400px !important;
         display: block;
         margin: auto;
     }
-
+ */
     #report-type-select {
         width: 20%;
       }

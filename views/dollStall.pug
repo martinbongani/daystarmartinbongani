@@ -20,7 +20,6 @@ main
                           img.card-img-top.img-fluid(src='/'+doll.imageUpload alt='dollImage')
                           .card-body
                               h4.card-title #{doll.dollName}
-                              h6.card-text #{doll.description}
                               p.card-text #{doll.quantity} in stock
                               a.btn.btn-primary(href='/sellDoll/'+doll._id) Sell Doll
 include footer

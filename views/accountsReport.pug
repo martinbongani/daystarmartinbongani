@@ -25,58 +25,19 @@ main
                     th Delete
           tbody
           if transactions.length
-              each transaction in transactions
-                  tr
-                        td #{moment(transaction.transactionDate).format('DD-MM-YYYY')}
-                        td #{transaction.description}
-                        td #{transaction.transactionRef}
-                        td #{transaction.classification}
-                        td #{new Intl.NumberFormat().format(transaction.amount)}
-                        td
-                          a.btn.btn-success(href='transactionUpdate/'+transaction._id) Update
-                        td  
-                          form(action='/deleteTxn' method='POST')
-                            input(type='hidden' name='id' value=transaction._id)
-                            button.btn.btn-danger(type='submit') Delete
+            each transaction in transactions
+                tr
+                  td #{moment(transaction.transactionDate).format('DD-MM-YYYY')}
+                  td #{transaction.description}
+                  td #{transaction.transactionRef}
+                  td #{transaction.classification}
+                  td #{new Intl.NumberFormat().format(transaction.amount)}
+                  td
+                    a.btn.btn-success(href='transactionUpdate/'+transaction._id) Update
+                  td  
+                    form(action='/deleteTxn' method='POST')
+                      input(type='hidden' name='id' value=transaction._id)
+                      button.btn.btn-danger(type='submit') Delete
 include footer  
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
 
-    //-   br
-    //-   br
-    //-   h4.card-title Doll Expense Report
-    //-   table.table.table-bordered
-    //-       thead
-    //-           tr
-    //-                 th Date of Purchase
-    //-                 th Item
-    //-                 th Amount
-    //-       tbody
-    //-       if dollExpenseDetails.length
-    //-           each dollExpense in dollExpenseDetails
-    //-               tr
-    //-                     td #{moment(dollExpense.dateOfPurchase).format('DD-MM-YYY')}
-    //-                     td #{dollExpense.item}
-    //-                     td #{dollExpense.amount}
-    //-           tr  
-    //-               th(colspan=2) Total Doll Expenses
-    //-               td #{new Intl.NumberFormat().format(dollTotalExpenses.totalDExpenses)}
-           
-
-      //- br
-      //- br
-      //- h4.card-title Expense Report
-      //- table.table.table-bordered
-      //-     thead
-      //-         tr
-      //-               th Transaction Date
-      //-               th Description
-      //-               th Amount
-      //-     tbody
-      //-     if transactions.length
-      //-         each transaction in transactions
-      //-           if transaction.catergory === 'expense'
-      //-             tr
-      //-                   td #{moment(transaction.transactionDate).format('DD-MM-YYYY')}
-      //-                   td #{transaction.description}
-      //-                   td #{transaction.classification}
-      //-                   td #{transaction.amount}
