@@ -49,6 +49,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Middleware
 app.use(express.static(path.join(__dirname, "public"))) // Set directory for static files
+app.use('/public/images/uploads', express.static(__dirname +'/public/images/uploads'))
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cors());

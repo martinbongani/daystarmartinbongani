@@ -295,10 +295,6 @@ router.get("/checkedOutSitters", async (req, res) => {
   }
 });
 
-router.get("/adminDash", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
-  res.render("admin");
-});
-
 // Accounts routes
 router.get(
   "/accountsEntry", (req, res) => {
@@ -386,10 +382,10 @@ router.post("/deleteTxn", async (req, res) => {
   }
 });
 
-// Admin dash
+// Admin dash   connectEnsureLogin.ensureLoggedIn(),
+
 router.get(
   "/adminDash",
-  connectEnsureLogin.ensureLoggedIn(),
   async (req, res) => {
     try {
       const transactions = await AccountsRegister.find();
@@ -399,10 +395,12 @@ router.get(
       transactions.forEach(transaction => {
         if (transaction.classification === 'income') {
           totalIncome += transaction.amount;
-        } else if (transaction.classification === 'expense') {
+        } 
+        if (transaction.classification === 'expense') {
           totalExpense += transaction.amount;
         }
-      });
+      }); 
+      console.log("---------------------------", transactions);
       let enrolledBabies = await BabyRegister.countDocuments({});
       let babiesPresent = await BabyRegister.countDocuments({
         status: "Present",
@@ -418,8 +416,6 @@ router.get(
       console.log("Babies Present:", babiesPresent);
       console.log("Enrolled Sitters:", enrolledSitters);
       console.log("Sitters Present:", sittersPresent);
-      console.log("Total Income:", totalIncome);
-      console.log("Total Expenses:", totalExpenses);
       
       res.render("admin", {
         totalIncome: totalIncome, 
