@@ -1,43 +1,62 @@
 doctype html
-head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Accounts Report
-  link(rel='stylesheet' href='/css/style.css')
-  link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
-  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-  //- link(rel='stylesheet' href='/css/sitterReport.css')
-include navbar
-header
-  include userNav
-main
-  .container-fluid
-      h3.card-title Financial Report
-      table.table.table-bordered
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Accounts Report
+    link(rel='stylesheet' href='/css/style.css')
+    link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  include navbar
+  body
+    header
+      include userNav
+    main
+      .container-fluid
+        h3.card-title Financial Report
+        table.table.table-bordered
           thead
-              tr
-                    th Transaction Date
-                    th Description
-                    th Transaction Ref
-                    th Classification
-                    th Amount (UGX)
-                    th Update 
-                    th Delete
+            tr
+              th Transaction Date
+              th Description
+              th Transaction Ref
+              th Income (UGX)
+              th Expense (UGX)
+              th(colspan='2' style='text-align: center;') Action 
           tbody
-          if transactions.length
-            each transaction in transactions
+            if transactions.length
+              each transaction in transactions
                 tr
                   td #{moment(transaction.transactionDate).format('DD-MM-YYYY')}
                   td #{transaction.description}
                   td #{transaction.transactionRef}
-                  td #{transaction.classification}
-                  td #{new Intl.NumberFormat().format(transaction.amount)}
+                  td
+                    if transaction.classification === 'income'
+                      | #{new Intl.NumberFormat().format(transaction.amount)}
+                    else
+                      | -
+                  td
+                    if transaction.classification === 'expense'
+                      | #{new Intl.NumberFormat().format(transaction.amount)}
+                    else
+                      | -
                   td
                     a.btn.btn-success(href='transactionUpdate/'+transaction._id) Update
                   td  
                     form(action='/deleteTxn' method='POST')
                       input(type='hidden' name='id' value=transaction._id)
                       button.btn.btn-danger(type='submit') Delete
-include footer  
-script(src='/css/bootstrap/js/bootstrap.bundle.js')
-
+              tr
+                td(colspan='3') <strong>Total</strong>
+                td <strong>#{new Intl.NumberFormat().format(totalIncome)}</strong>
+                td <strong>#{new Intl.NumberFormat().format(totalExpense)}</strong>
+                td(colspan='2')
+              tr
+                td(colspan='3') <strong>Profit/Loss</strong>
+                td(colspan='2') <strong>#{new Intl.NumberFormat().format(profitOrLoss)}</strong>
+                td(colspan='2')
+            else
+              tr
+                td(colspan='7') No transactions found
+    include footer  
+    script(src='/css/bootstrap/js/bootstrap.bundle.js')

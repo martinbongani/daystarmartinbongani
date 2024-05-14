@@ -329,8 +329,26 @@ router.get(
   connectEnsureLogin.ensureLoggedIn(),
   async (req, res) => {
     try {
-      let transactions = await AccountsRegister.find();
-      res.render("accountsReport", { transactions: transactions });
+      const transactions = await AccountsRegister.find();
+      let totalIncome = 0;
+      let totalExpense = 0;
+
+      transactions.forEach(transaction => {
+        if (transaction.classification === 'income') {
+          totalIncome += transaction.amount;
+        } else if (transaction.classification === 'expense') {
+          totalExpense += transaction.amount;
+        }
+      });
+
+      const profitOrLoss = totalIncome - totalExpense;
+
+      res.render("accountsReport", { 
+        transactions: transactions, 
+        totalIncome: totalIncome, 
+        totalExpense: totalExpense,
+        profitOrLoss: profitOrLoss
+      });
     } catch (error) {
       res.status(400).send("Unable to fetch transactions from the database");
     }
@@ -374,12 +392,17 @@ router.get(
   connectEnsureLogin.ensureLoggedIn(),
   async (req, res) => {
     try {
-      // let totalIncome = await AccountsRegister.aggregate([
-      //   { $group: { _id: null, totalIncome: { $sum: "$income" } } },
-      // ]);  
-      // let totalExpenses = await AccountsRegister.aggregate([
-      //   { $group: { _id: null, totalExpenses: { $sum: "$expense" } } },
-      // ]);
+      const transactions = await AccountsRegister.find();
+      let totalIncome = 0;
+      let totalExpense = 0;
+
+      transactions.forEach(transaction => {
+        if (transaction.classification === 'income') {
+          totalIncome += transaction.amount;
+        } else if (transaction.classification === 'expense') {
+          totalExpense += transaction.amount;
+        }
+      });
       let enrolledBabies = await BabyRegister.countDocuments({});
       let babiesPresent = await BabyRegister.countDocuments({
         status: "Present",
@@ -389,8 +412,8 @@ router.get(
         status: "Available",
       });
        
-      // console.log("Income", totalIncome);
-      // console.log("Expenses", totalExpenses);
+      console.log("Income", totalIncome);
+      console.log("Expenses", totalExpense);
       console.log("Enrolled Babies:", enrolledBabies);
       console.log("Babies Present:", babiesPresent);
       console.log("Enrolled Sitters:", enrolledSitters);
@@ -399,8 +422,8 @@ router.get(
       console.log("Total Expenses:", totalExpenses);
       
       res.render("admin", {
-        // totalIncome: totalIncome[0],
-        // totalExpenses: totalExpenses[0],
+        totalIncome: totalIncome, 
+        totalExpense: totalExpense, 
         enrolledBabies,
         babiesPresent,
         enrolledSitters,

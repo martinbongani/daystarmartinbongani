@@ -15,6 +15,7 @@ const accountsSchema = new mongoose.Schema({
     },
     classification:{
         type:String,
+        enum:['income', 'expense'],
         trim:true
     },
     transactionDate:{

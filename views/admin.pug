@@ -21,10 +21,10 @@ main.mainAdmin
             .cards-container
               .card-toDo
                 h3 Total Revenue 
-                p Shs #{totalIncome}
+                p Shs #{new Intl.NumberFormat().format(totalIncome)}
               .card-toDo 
                 h3 Total Expenses 
-                p Shs #{totalExpenses}  
+                p Shs #{new Intl.NumberFormat().format(totalExpense)}  
               .card-toDo 
                 h3 Babies Enrolled
                 p #{enrolledBabies}
