@@ -10,7 +10,7 @@ head
 include navbar
 header
   include userNav  
-main
+main  
   .container-addDoll
     h2.h2-addDoll Sell Doll
     form#registrationForm(onsubmit='return validateForm()' action='/sellDoll?id='+doll._id method='POST')
