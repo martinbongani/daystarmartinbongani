@@ -6,18 +6,19 @@ head
   link(rel='stylesheet' href='/css/style.css')
   link(rel='stylesheet' href='/css/bootstrap/css/bootstrap.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+
 include navbar
 header
   include userNav
 main
   .container-fluid
-      h3 Doll Stall
+      h3(style='text-align: center;') Doll Stall
       if dolls.length
-          .row.row-cols-1.row-cols-md-3.g-4
+          .row.row-cols-1.row-cols-md-3.g-4(style='padding-left: 60px')
               each doll in dolls
                   .col 
                       .card.card-custom.mx-2.mb-3.img-fluid(style='width: 18rem;')
-                          img.card-img-top.img-fluid(src='/'+doll.imageUpload alt='dollImage')
+                          img.card-img-top.img-fluid(src='/'+doll.imageUpload alt='dollImage' style='height: 200px;')
                           .card-body
                               h4.card-title #{doll.dollName}
                               p.card-text #{doll.quantity} in stock
