@@ -8,6 +8,7 @@
   .container-adminDash {
     display: flex;
     gap: 20px;
+    padding: 20px 0 20px 0;
   }
 
   .section {
@@ -37,28 +38,6 @@
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-
-  /* .graph-container {
-    width: 75%;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-    overflow: hidden;
-  } */
-
-  /* canvas {
-        width: 100% !important;
-        height: 400px !important;
-        display: block;
-        margin: auto;
-    }
- */
-    #report-type-select {
-        width: 20%;
-      }
 
   .tasks-container {
     padding: 10px;
@@ -107,7 +86,6 @@
     color: #777;
   }
 
-  /* To-do List */
   input[type="text"] {
     width: 100%;
     padding: 10px;
@@ -144,3 +122,19 @@
     opacity: 0.5;
   }
 
+  .todo-card {
+    height: 448px; /* Set a fixed height for both cards */
+  }
+
+  #taskList {
+    flex-grow: 1;
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px;
+    margin-top: 10px;
+    max-height: 265px;
+  }
+
+  #taskList li {
+    margin-bottom: 10px;
+  }
+  

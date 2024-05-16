@@ -8,7 +8,6 @@ head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   link(rel='stylesheet' href='/css/admin.css')
 include navbar
-//- .container-fluid
 header
   include userNav
 main.mainAdmin
@@ -38,15 +37,14 @@ main.mainAdmin
                 h5 Sitters Present 
                 p #{sittersPresent}
       .col
-        .card.shadow
+        .card.shadow.todo-card
           .card-body
             h2 To-Do List
             input#taskInput(type='text' placeholder='Add new task...')
-            button.btn-toDo(onclick='addTask()') Add Task
-            button.btn-toDo(onclick='clearList()') Clear List
+            button.btn-toDo#addTaskButton Add Task
+            button.btn-toDo#clearListButton Clear List
             ul#taskList
 include footer
-//- script(src='https://cdn.jsdelivr.net/npm/chart.js')
 script(src='/css/bootstrap/js/bootstrap.bundle.js')
-//- script(src='/js/admin.js')
+script(src='/js/admin.js')
 

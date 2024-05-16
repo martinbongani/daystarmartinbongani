@@ -8,6 +8,7 @@ const BabyRegister = require("../models/BabyRegister");
 const SitterRegister = require("../models/SitterRegister");
 const AccountsRegister = require("../models/AccountsRegister");
 
+// Baby routes
 router.get("/registerBaby", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   res.render("babyRegistration");
 });
@@ -18,12 +19,12 @@ router.post(
   connectEnsureLogin.ensureLoggedIn(),
   async (req, res) => {
     try {
-      const baby = new BabyRegister(req.body);
-      console.log(baby);
-      await baby.save();
-      res.redirect("/registerBaby");
+      const baby = new BabyRegister(req.body); // Create a new baby registration document from the req body
+      console.log(baby); 
+      await baby.save(); // Save baby reg document in db
+      res.redirect("/registerBaby"); // Redirect to registerBaby route upon successful save
     } catch (error) {
-      res.status(400).send("Sorry, something went wrong");
+      res.status(400).send("Sorry, something went wrong"); // Send status code 400 error message if something goes wrong
       console.log("Error registering the baby", error);
     }
   }
@@ -296,11 +297,9 @@ router.get("/checkedOutSitters", async (req, res) => {
 });
 
 // Accounts routes
-router.get(
-  "/accountsEntry", (req, res) => {
-    res.render("accounts");
-  }
-);
+router.get("/accountsEntry", (req, res) => {
+  res.render("accounts");
+});
 
 // Installing async function
 router.post(
@@ -329,21 +328,21 @@ router.get(
       let totalIncome = 0;
       let totalExpense = 0;
 
-      transactions.forEach(transaction => {
-        if (transaction.classification === 'income') {
+      transactions.forEach((transaction) => {
+        if (transaction.classification === "income") {
           totalIncome += transaction.amount;
-        } else if (transaction.classification === 'expense') {
+        } else if (transaction.classification === "expense") {
           totalExpense += transaction.amount;
         }
       });
 
       const profitOrLoss = totalIncome - totalExpense;
 
-      res.render("accountsReport", { 
-        transactions: transactions, 
-        totalIncome: totalIncome, 
+      res.render("accountsReport", {
+        transactions: transactions,
+        totalIncome: totalIncome,
         totalExpense: totalExpense,
-        profitOrLoss: profitOrLoss
+        profitOrLoss: profitOrLoss,
       });
     } catch (error) {
       res.status(400).send("Unable to fetch transactions from the database");
@@ -354,7 +353,9 @@ router.get(
 // Updating transactions in the db
 router.get("/transactionUpdate/:id", async (req, res) => {
   try {
-    const transactionUpdate = await AccountsRegister.findOne({ _id: req.params.id });
+    const transactionUpdate = await AccountsRegister.findOne({
+      _id: req.params.id,
+    });
     res.render("accountsUpdate", { transaction: transactionUpdate });
   } catch (error) {
     console.log("Error finding transaction", error);
@@ -382,179 +383,61 @@ router.post("/deleteTxn", async (req, res) => {
   }
 });
 
-// Admin dash   connectEnsureLogin.ensureLoggedIn(),
+// Admin dash route
+router.get("/adminDash", async (req, res) => {
+  try {
+    const transactions = await AccountsRegister.find();
+    let totalIncome = 0;
+    let totalExpense = 0;
 
-router.get(
-  "/adminDash",
-  async (req, res) => {
-    try {
-      const transactions = await AccountsRegister.find();
-      let totalIncome = 0;
-      let totalExpense = 0;
+    transactions.forEach((transaction) => {
+      if (transaction.classification === "income") {
+        totalIncome += transaction.amount;
+      }
+      if (transaction.classification === "expense") {
+        totalExpense += transaction.amount;
+      }
+    });
+    console.log("---------------------------", transactions);
+    let enrolledBabies = await BabyRegister.countDocuments({});
+    let babiesPresent = await BabyRegister.countDocuments({
+      status: "Present",
+    });
+    let enrolledSitters = await SitterRegister.countDocuments({});
+    let sittersPresent = await SitterRegister.countDocuments({
+      status: "Available",
+    });
 
-      transactions.forEach(transaction => {
-        if (transaction.classification === 'income') {
-          totalIncome += transaction.amount;
-        } 
-        if (transaction.classification === 'expense') {
-          totalExpense += transaction.amount;
-        }
-      }); 
-      console.log("---------------------------", transactions);
-      let enrolledBabies = await BabyRegister.countDocuments({});
-      let babiesPresent = await BabyRegister.countDocuments({
-        status: "Present",
-      });
-      let enrolledSitters = await SitterRegister.countDocuments({});
-      let sittersPresent = await SitterRegister.countDocuments({
-        status: "Available",
-      });
-       
-      console.log("Income", totalIncome);
-      console.log("Expenses", totalExpense);
-      console.log("Enrolled Babies:", enrolledBabies);
-      console.log("Babies Present:", babiesPresent);
-      console.log("Enrolled Sitters:", enrolledSitters);
-      console.log("Sitters Present:", sittersPresent);
-      
-      res.render("admin", {
-        totalIncome: totalIncome, 
-        totalExpense: totalExpense, 
-        enrolledBabies,
-        babiesPresent,
-        enrolledSitters,
-        sittersPresent,
-      });
-    } catch (error) {
-      console.error('Error fetching admin dashboard details:', error);
-      res.status(400).send('Unable to fetch details from the database');    }
+    console.log("Income", totalIncome);
+    console.log("Expenses", totalExpense);
+    console.log("Enrolled Babies:", enrolledBabies);
+    console.log("Babies Present:", babiesPresent);
+    console.log("Enrolled Sitters:", enrolledSitters);
+    console.log("Sitters Present:", sittersPresent);
+
+    res.render("admin", {
+      totalIncome: totalIncome,
+      totalExpense: totalExpense,
+      enrolledBabies,
+      babiesPresent,
+      enrolledSitters,
+      sittersPresent,
+    });
+  } catch (error) {
+    console.error("Error fetching admin dashboard details:", error);
+    res.status(400).send("Unable to fetch details from the database");
   }
-);
+});
+
+// About route
+router.get("/about", (req, res) => {
+  res.render("about");
+});
+
+// Gallery route
+router.get("/gallery", (req, res) => {
+  res.render("gallery");
+});
 
 module.exports = router;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let dateOfBirth = moment().format("DD-MM-YYYY");
-// if (req.query.dateOfBirth) {
-//   dateOfBirth = moment(req.query.dateOfBirth).format("DD-MM-YYYY");
-//   console.log("moment()")
-// }
-
-
-// router.get(
-  //   "/collection",
-  //   connectEnsureLogin.ensureLoggedIn(),
-  //   async (req, res) => {
-  //     try {
-    //       let selectedDate = moment().format("DD-MM-YYYY");
-    //       if (req.query.searchdate)
-      //         selectedDate = moment(req.query.searchdate).format("DD-MM-YYYY");
-//       // Set the selected date to match the payment date
-//       let collectionDetails = await BabyRegister.find({
-  //         dateOfPayment: selectedDate,
-//       });
-//       // Query for total revenue in a day
-//       let totalFeesCollection = await BabyRegister.aggregate([
-  //         { $match: { dateOfPayment: new Date(selectedDate) } },
-//         {
-  //           $group: { _id: "$dateOfPayment", totalCollection: { $sum: "$fee" } },
-  //         },
-  //       ]);
-  //       totalFeesCollection.length > 0 ? totalFeesCollection : 0;
-
-  //       // Set the selected date to match the purchase date
-  //       let expenseDetails = await PurchaseRegister.find({
-    //         dateOfPurchase: selectedDate,
-    //       });
-    //       // Query for total expenses in a day
-    //       let totalExpenses = await PurchaseRegister.aggregate([
-      //         { $match: { dateOfPurchase: new Date(selectedDate) } },
-//         {
-  //           $group: {
-    //             _id: "$dateOfPurchase",
-//             totalGExpenses: { $sum: "$amount" },
-//           },
-//         },
-//       ]);
-//       totalExpenses.length > 0 ? totalExpenses : 0;
-
-//       // Set the selected date to match the purchase date
-//       let dollExpenseDetails = await DollRegister.find({
-//         dateOfPurchase: selectedDate,
-//       });
-//       // Query for total expenses in a day on dolls
-//       let dollTotalExpenses = await DollRegister.aggregate([
-//         { $match: { dateOfPurchase: new Date(selectedDate) } },
-//         {
-//           $group: {
-//             _id: "$dateOfPurchase",
-//             totalDExpenses: { $sum: "$amount" },
-//           },
-//         },
-//       ]);
-//       dollTotalExpenses.length > 0 ? totalExpenses : 0;
-
-//       res.render("revenueReport", {
-//         collections: collectionDetails,
-//         expenses: expenseDetails,
-//         dollExpenseDetails: dollExpenseDetails,
-//         totalFees: totalFeesCollection[0],
-//         totalExpenses: totalExpenses[0],
-//         dollTotalExpenses: dollTotalExpenses[0],
-//         defaultDate: selectedDate,
-//         title: "Revenue",
-//       });
-//     } catch (error) {
-//       console.log(error);
-//       res.send("Failed to retrieve collections details");
-//     }
-//   }
-// );

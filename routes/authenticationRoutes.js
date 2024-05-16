@@ -5,6 +5,7 @@ const passport = require("passport");
 // Import model
 const AdminRegister = require('../models/AdminRegister');
 
+// Admin Registration route
 router.get('/registerAdmin', (req, res) => {
     res.render('adminRegistration');
 });
@@ -23,9 +24,9 @@ router.post('/registerAdmin', async(req, res) => {
         res.status(400).send("User not registered")
         console.log(error)
     }
-})
+});
 
-
+// Login route
 router.get("/login", (req, res) => {
     res.render("login");
 });
@@ -36,6 +37,7 @@ router.post("/login", passport.authenticate("local",{failureRedirect: "/login"})
     res.redirect("/adminDash");
 });
 
+// Logout route
 router.get("/logout", (req,res) => {
     if(req.session){
         req.session.destroy((error) =>{
@@ -46,10 +48,11 @@ router.get("/logout", (req,res) => {
             res.redirect("/")
         })
     }
-})
+});
 
+// Index route
 router.get('/', (req,res) =>{
     res.render('index')
-})
+});
 
 module.exports = router;
