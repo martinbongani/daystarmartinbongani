@@ -5,11 +5,9 @@ function validateForm() {
   const rate = parseInt(document.getElementById('rate').value);
   const dateOfPurchase = document.getElementById('dateOfPurchase').value.trim();
   const description = document.getElementById('description').value.trim();
-  const dateOfSell = document.getElementById('dateOfSell').value.trim();
-
 
   // Check if any field is empty
-  if (!dollName || !quantity || !rate || !dateOfPurchase || !description || !dateOfSell) {
+  if (!dollName || !quantity || !rate || !dateOfPurchase || !description) {
       alert('Please fill out all fields.');
       return false; // Prevent form submission
   }
