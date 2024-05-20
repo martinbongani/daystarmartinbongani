@@ -15,11 +15,6 @@ require('dotenv').config(); // Loads envt varibales from .env file
 
 // Import register model with user details
 const AdminRegister = require('./models/AdminRegister');
-const BabyRegister = require('./models/BabyRegister');
-const SitterRegister = require('./models/SitterRegister');
-const PurchaseRegister = require('./models/PurchaseRegister');
-const DollRegister = require('./models/DollRegister');
-const AccountsRegister = require('./models/AccountsRegister');
 
 // Import routes
 const registrationRoutes = require('./routes/registrationRoutes')
