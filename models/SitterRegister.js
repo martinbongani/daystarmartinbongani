@@ -7,7 +7,7 @@ const sitterRegistrationSchema = new mongoose.Schema({
     },
     sitterNumber:{
         type:String,
-        trim:true
+        unique:true
     },
     nationalId:{
         type:String,

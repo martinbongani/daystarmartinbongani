@@ -83,7 +83,7 @@ const babyRegistrationSchema = new mongoose.Schema({
     },
     babyNumber:{
         type:String,
-        trim:true
+        unique:true
     },
     parentResponsibility:{
         type:String,
@@ -125,12 +125,7 @@ const babyRegistrationSchema = new mongoose.Schema({
         type:String,
         default:"Absent",
         enum:["Present", "Absent"]
-    },
-    dateOfPayment:{
-        type:Date,
-        trim:true
     }
-
 });
 
 module.exports = mongoose.model("BabyRegister", babyRegistrationSchema)

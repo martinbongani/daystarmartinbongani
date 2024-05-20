@@ -7,7 +7,7 @@ const accountsSchema = new mongoose.Schema({
     },
     transactionRef:{
         type:String,
-        trim:true
+        unique:true
     },
     amount:{
         type:Number,
